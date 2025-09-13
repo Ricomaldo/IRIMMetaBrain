@@ -1,30 +1,42 @@
 // src/components/common/IconButton/IconButton.styles.js
 
 import styled from 'styled-components';
-import { flexCenter } from '../../../styles/mixins';
+import { squareButton, woodBg } from '../../../styles/mixins';
 
 export const ButtonContainer = styled.button`
-  ${flexCenter}
-  flex-direction: column;
-  padding: ${props => props.theme.spacing.xs};
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 4px;
-  background: ${props => props.active ? props.theme.colors.accent : 'transparent'};
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background: ${props => props.theme.colors.accent};
-    transform: translateY(-1px);
-  }
+  ${props => squareButton(props.size)}
+  background: ${props => {
+    if (props.active && props.variant === 'tab') {
+      return props.theme.colors.accent;
+    }
+    return props.theme.colors.secondary;
+  }};
+  
+  ${props => props.active && props.variant === 'tab' ? woodBg : ''}
+  
+  ${props => props.variant === 'tab' ? `
+    transition: none;
+    &:hover {
+      transform: none;
+      box-shadow: none;
+      background: ${props.theme.colors.accent};
+    }
+  ` : `
+    &:hover {
+      background: ${props.theme.colors.accent};
+    }
+  `}
 `;
 
 export const IconWrapper = styled.div`
-  font-size: 16px;
-  margin-bottom: 2px;
+  font-size: inherit;
+  line-height: 1;
 `;
 
 export const Label = styled.span`
-  font-size: 10px;
-  color: ${props => props.theme.colors.text.secondary};
+  font-size: 8px;
+  color: ${props => props.theme.colors.text.primary};
+  margin-top: 2px;
+  text-align: center;
+  font-weight: 500;
 `;

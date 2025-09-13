@@ -18,6 +18,7 @@ export const parchmentBg = css`
   background: ${props => props.theme.colors.secondary};
   background-image: url(${textures.parchment});
   background-size: cover;
+  opacity: 0.8;
 `;
 
 export const stoneBg = css`
@@ -25,6 +26,15 @@ export const stoneBg = css`
   background-image: url(${textures.stone}),
                     linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
   background-size: cover, 8px 8px;
+  opacity: 0.8;
+`;
+
+export const woodBg = css`
+  background: ${props => props.theme.colors.secondary};
+  background-image: url(${textures.wood});
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
 `;
 
 export const craftBorderHeavy = css`
@@ -53,4 +63,22 @@ export const craftBorderHeavy = css`
 export const medievalShadow = css`
   filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4))
           drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
+`;
+
+
+export const squareButton = (size = 'medium') => css`
+  width: ${props => props.theme.button[size]};
+  height: ${props => props.theme.button[size]};
+  ${flexCenter}
+  flex-direction: column;
+  border: 2px solid ${props => props.theme.colors.border};
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: ${size === 'small' ? '14px' : size === 'large' ? '20px' : '16px'};
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
 `;

@@ -6,10 +6,10 @@ import { parchmentBg } from '../../../styles/mixins';
 export const NoteContainer = styled.div`
   position: absolute;
   bottom: 16px;
-  right: 16px;
-  width: 25%;
-  min-width: 180px;
-  max-width: 250px;
+  left: 16px;
+  width: 35%;
+  min-width: 220px;
+  max-width: 320px;
   ${parchmentBg}
   border-radius: 8px;
   z-index: 20;
@@ -52,7 +52,7 @@ export const NoteContent = styled.div`
 
 export const NoteTextarea = styled.textarea`
   width: 100%;
-  height: 100px;
+  height: 200px;
   border: 1px solid rgba(139, 69, 19, 0.3);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.8);

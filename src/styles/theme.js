@@ -20,6 +20,12 @@ export const theme = {
     lg: '24px',
     xl: '32px'
   },
+  button: {
+    small: '36px',
+    medium: '48px',
+    large: '60px',
+    xlarge: '80px'
+  },
   fonts: {
     main: '"Cinzel", serif',
     mono: '"Courier New", monospace'

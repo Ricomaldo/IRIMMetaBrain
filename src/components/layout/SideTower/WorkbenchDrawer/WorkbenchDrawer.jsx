@@ -1,24 +1,46 @@
 // src/components/layout/SideTower/WorkbenchDrawer/WorkbenchDrawer.jsx
 
-import React from 'react';
-import { DrawerContainer, ToolGrid } from './WorkbenchDrawer.styles';
+import React, { useState, useMemo } from 'react';
+import { DrawerContainer, TabsHeader, TabButton, TabContent, ItemsGrid, InfoFooter, FooterLine, ItemBadge } from './WorkbenchDrawer.styles';
 import IconButton from '../../../common/IconButton/IconButton';
-import { workbenchButtons } from '../../../../utils/buttonMapping';
+import { drawerTabs, drawerItemsByTab, drawerFooterActions } from '../../../../utils/buttonMapping';
 
 const WorkbenchDrawer = () => {
+  const [activeTab, setActiveTab] = useState('potions');
+  const items = useMemo(() => drawerItemsByTab[activeTab] || [], [activeTab]);
+
   return (
     <DrawerContainer>
-      <div>WorkbenchDrawer</div>
-      <ToolGrid>
-        {workbenchButtons.map(button => (
+      <TabsHeader>
+        {drawerTabs.map(tab => (
           <IconButton
-            key={button.id}
-            icon={button.icon}
-            label={button.label}
-            onClick={button.action}
+            key={tab.id}
+            icon={tab.icon}
+            label=""
+            onClick={() => setActiveTab(tab.id)}
+            size="medium"
+            title={tab.label}
+            active={tab.id === activeTab}
+            variant="tab"
           />
         ))}
-      </ToolGrid>
+      </TabsHeader>
+
+      <TabContent>
+        <ItemsGrid>
+          {items.map(item => (
+            <div key={item.id} style={{ position: 'relative' }} title={item.label}>
+              <IconButton icon={item.icon} label="" onClick={() => {}} size="medium" />
+            </div>
+          ))}
+        </ItemsGrid>
+      </TabContent>
+
+      <InfoFooter>
+        {drawerFooterActions.map(action => (
+          <FooterLine key={action.id}>◊ {action.label}</FooterLine>
+        ))}
+      </InfoFooter>
     </DrawerContainer>
   );
 };
