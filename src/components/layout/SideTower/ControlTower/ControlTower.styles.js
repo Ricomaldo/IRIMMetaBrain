@@ -20,11 +20,14 @@ export const TopRow = styled.div`
   gap: ${props => props.theme.spacing.xs};
   align-items: center;
   height: ${props => props.theme.button.large};
+  padding: ${props => props.theme.spacing.xs};
 `;
 
 export const BottomRow = styled.div`
   display: grid;
   grid-template-columns: 1fr;
+  height: ${props => props.theme.button.large};
+  align-items: center;
 `;
 
 export const LeftSquare = styled.div`
@@ -68,4 +71,5 @@ export const ActionGrid = styled.div`
   place-items: center;
   padding: ${props => props.theme.spacing.xs};
   align-content: center;
+  max-height: ${props => props.theme.button.large};
 `;

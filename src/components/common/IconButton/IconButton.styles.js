@@ -1,21 +1,22 @@
 // src/components/common/IconButton/IconButton.styles.js
 
 import styled from 'styled-components';
-import { squareButton, woodBg, tertiaryLevel } from '../../../styles/mixins';
+import { squareButton, tertiaryLevel } from '../../../styles/mixins';
 
-export const ButtonContainer = styled.button`
+export const ButtonContainer = styled.button.withConfig({
+  shouldForwardProp: (prop) =>
+    !['active', 'variant', 'size'].includes(prop)
+})`
   ${props => squareButton(props.size)}
   background: ${props => {
-    if (props.active && props.variant === 'tab') {
-      return props.theme.colors.accent;
+    if (props.variant === 'tab') {
+      return props.active ? props.theme.colors.secondary : props.theme.colors.primary;
     }
     if (props.variant === 'secondary') {
       return props.theme.colors.stone;
     }
     return props.theme.colors.secondary;
   }};
-
-  ${props => props.active && props.variant === 'tab' ? woodBg : ''}
 
   ${props => {
     if (props.variant === 'tab') {
@@ -26,10 +27,12 @@ export const ButtonContainer = styled.button`
         border-radius: 6px 6px 0 0;
         position: relative;
         z-index: 3;
+        color: ${props.active ? props.theme.colors.text.primary : props.theme.colors.secondary};
         &:hover {
           transform: none;
           box-shadow: none;
           background: ${props.theme.colors.accent};
+          color: ${props.theme.colors.secondary};
         }
       `;
     }

@@ -27,7 +27,10 @@ export const RoomsGrid = styled.div`
   left: 0;
 `;
 
-export const RoomSlot = styled.div`
+export const RoomSlot = styled.div.withConfig({
+  shouldForwardProp: (prop) =>
+    !['roomType', 'roomColors', 'background'].includes(prop)
+})`
   ${craftBorder}
   background: ${props => props.roomColors?.[props.roomType] || '#2F1B14'};
   background-image: ${props => props.background ? `url(${props.background})` : 'none'};
@@ -45,7 +48,7 @@ export const RoomSlot = styled.div`
   margin: 2px;
   border-radius: 6px;
   ${medievalShadow}
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -53,8 +56,8 @@ export const RoomSlot = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: ${props => props.background ? 
-      'linear-gradient(rgba(139,69,19,0.2), rgba(139,69,19,0.4))' : 
+    background: ${props => props.background ?
+      'linear-gradient(rgba(139,69,19,0.2), rgba(139,69,19,0.4))' :
       'none'};
     border-radius: 4px;
     pointer-events: none;

@@ -9,6 +9,7 @@ export const DrawerContainer = styled.div`
   display: grid;
   grid-template-rows: 50px 1fr 100px;
     ${secondaryLevel};
+    ${woodBg};
 `;
 
 export const TabsHeader = styled.div`
@@ -16,21 +17,19 @@ export const TabsHeader = styled.div`
   gap: ${props => props.theme.spacing.xs};
   padding: ${props => props.theme.spacing.xs};
   overflow: hidden;
-  background: ${props => props.theme.colors.secondary};
-  margin-bottom: ${props => props.theme.spacing.xs};
+margin-left: ${props => props.theme.spacing.sm};
   z-index: 2;
   position: relative;
 `;
 
 export const TabButton = styled.button`
   ${craftBorder}
-  ${props => props.active ? woodBg : ''}
-  background: ${props => props.active ? props.theme.colors.accent : props.theme.colors.secondary};
+  background: ${props => props.active ? props.theme.colors.secondary : props.theme.colors.primary};
   padding: 8px 12px;
   border-radius: 6px;
   cursor: pointer;
   white-space: nowrap;
-  color: ${props => props.theme.colors.text.primary};
+  color: ${props => props.active ? props.theme.colors.text.primary : props.theme.colors.secondary};
   font-size: 18px;
   min-width: 50px;
   display: flex;
@@ -39,13 +38,17 @@ export const TabButton = styled.button`
   
   &:hover {
     background: ${props => props.theme.colors.accent};
+    color: ${props => props.theme.colors.secondary};
   }
 `;
 
 export const TabContent = styled.div`
   overflow: auto;
+  margin-left: ${props => props.theme.spacing.sm};
+  margin-right: ${props => props.theme.spacing.sm};
+  border-radius: 0 0 8px 8px;
   padding: ${props => props.theme.spacing.xs};
-  ${woodBg}
+  background: ${props => props.theme.colors.secondary};
 `;
 
 export const ItemsGrid = styled.div`

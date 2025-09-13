@@ -1,7 +1,7 @@
 // src/components/layout/SideTower/WorkbenchDrawer/WorkbenchDrawer.jsx
 
 import React, { useState, useMemo } from 'react';
-import { DrawerContainer, TabsHeader, TabButton, TabContent, ItemsGrid, InfoFooter, FooterLine, ItemBadge } from './WorkbenchDrawer.styles';
+import { DrawerContainer, TabsHeader, TabContent, ItemsGrid, InfoFooter, FooterLine, ItemBadge } from './WorkbenchDrawer.styles';
 import IconButton from '../../../common/IconButton/IconButton';
 import { drawerTabs, drawerItemsByTab, drawerFooterActions } from '../../../../utils/buttonMapping';
 
