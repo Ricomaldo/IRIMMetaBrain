@@ -13,8 +13,10 @@ const RoomCanvas = ({ roomNavHook, roomNotesHook }) => {
   const { currentRoom, navigateToRoom, getAvailableDirections } = roomNavHook;
   const availableDirections = getAvailableDirections();
 
-  const translateX = -currentRoom.x * 100;
-  const translateY = -currentRoom.y * 100;
+  // Calcul pour centrer la pièce courante dans le viewport
+  // Chaque pièce fait 25% de la largeur totale (100%/4) et 33.33% de la hauteur totale (100%/3)
+  const translateX = -currentRoom.x * 25; // 100% / 4 colonnes = 25%
+  const translateY = -currentRoom.y * 33.33; // 100% / 3 rangées = 33.33%
 
   const handleNavigationClick = (direction) => {
     navigateToRoom(direction);

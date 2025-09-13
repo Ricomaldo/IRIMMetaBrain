@@ -1,10 +1,10 @@
 // src/utils/assetMapping.js
 
 export const roomBackgrounds = {
-  chambre: '/assets/rooms/chambre-cozy.jpg',
-  atelier: '/assets/rooms/atelier-workbench.jpg',
-  forge: '/assets/rooms/forge-fire.jpg',
-  boutique: '/assets/rooms/boutique-medieval.jpg'
+  chambre: '/src/assets/images/rooms/chambre-cozy.jpg',
+  atelier: '/src/assets/images/rooms/atelier-workbench.jpg', // Temporaire en attendant un bon asset atelier
+  forge: '/src/assets/images/rooms/forge-fire.jpg',
+  boutique: '/src/assets/images/rooms/boutique-medieval.jpg'
 };
 
 export const roomColors = {
@@ -24,10 +24,10 @@ export const wireframeColors = {
 };
 
 export const textures = {
-  parchment: '/assets/ui/parchment-texture.jpg',
-  stone: '/assets/ui/stone-wall.jpg',
-  wood: '/assets/ui/wood-grain.jpg',
-  metal: '/assets/ui/metal-surface.jpg'
+  parchment: '/src/assets/images/ui/parchment-texture.jpg',
+  stone: '/src/assets/images/ui/stone-wall.jpg',
+  wood: '/src/assets/images/ui/wood-grain.jpg',
+  metal: '/src/assets/images/ui/metal-surface.jpg'
 };
 
 export const icons = {

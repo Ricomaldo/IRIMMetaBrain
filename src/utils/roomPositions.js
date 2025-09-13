@@ -9,10 +9,10 @@ export const roomConfig = [
   { x: 3, y: 0, type: 'empty', name: '', background: null },
   { x: 0, y: 1, type: 'boutique', name: 'Boutique', background: roomBackgrounds.boutique },
   { x: 1, y: 1, type: 'atelier', name: 'Atelier', background: roomBackgrounds.atelier },
-  { x: 2, y: 1, type: 'forge', name: 'Forge', background: roomBackgrounds.forge },
+  { x: 2, y: 1, type: 'empty', name: '', background: null },
   { x: 3, y: 1, type: 'empty', name: '', background: null },
   { x: 0, y: 2, type: 'empty', name: '', background: null },
-  { x: 1, y: 2, type: 'empty', name: '', background: null },
+  { x: 1, y: 2, type: 'forge', name: 'Forge', background: roomBackgrounds.forge },
   { x: 2, y: 2, type: 'empty', name: '', background: null },
   { x: 3, y: 2, type: 'empty', name: '', background: null }
 ];

@@ -26,3 +26,31 @@ export const stoneBg = css`
                     linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
   background-size: cover, 8px 8px;
 `;
+
+export const craftBorderHeavy = css`
+  border: 4px solid #8B4513;
+  border-radius: 8px;
+  box-shadow: 
+    inset 0 0 0 2px #D2B48C,
+    inset 0 0 0 4px #A0522D,
+    0 4px 8px rgba(0,0,0,0.3),
+    0 2px 4px rgba(0,0,0,0.2);
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid #CD853F;
+    border-radius: 10px;
+    pointer-events: none;
+  }
+`;
+
+export const medievalShadow = css`
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4))
+          drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
+`;
