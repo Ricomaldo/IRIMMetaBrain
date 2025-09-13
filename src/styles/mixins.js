@@ -10,7 +10,7 @@ export const flexCenter = css`
 `;
 
 export const craftBorder = css`
-  border: 2px solid ${props => props.theme.colors.border};
+  border: 4px solid ${props => props.theme.colors.border};
   border-radius: 4px;
 `;
 

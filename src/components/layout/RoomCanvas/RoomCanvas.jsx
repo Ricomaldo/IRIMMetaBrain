@@ -45,25 +45,33 @@ const RoomCanvas = ({ roomNavHook, roomNotesHook }) => {
         <NavigationZone
           className="zone-top"
           onClick={() => handleNavigationClick('up')}
-        />
+        >
+          ⬆️
+        </NavigationZone>
       )}
       {availableDirections.down && (
         <NavigationZone
           className="zone-bottom"
           onClick={() => handleNavigationClick('down')}
-        />
+        >
+          ⬇️
+        </NavigationZone>
       )}
       {availableDirections.left && (
         <NavigationZone
           className="zone-left"
           onClick={() => handleNavigationClick('left')}
-        />
+        >
+          ⬅️
+        </NavigationZone>
       )}
       {availableDirections.right && (
         <NavigationZone
           className="zone-right"
           onClick={() => handleNavigationClick('right')}
-        />
+        >
+          ➡️
+        </NavigationZone>
       )}
     </CanvasContainer>
   );

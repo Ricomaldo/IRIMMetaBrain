@@ -1,5 +1,4 @@
 // App.jsx
-import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import StudioHall from './components/layout/StudioHall/StudioHall';

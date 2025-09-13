@@ -11,7 +11,7 @@ export const NoteContainer = styled.div`
   min-width: 120px;
   ${parchmentBg}
   border-radius: 4px;
-  z-index: 5;
+  z-index: 20;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 `;
 
