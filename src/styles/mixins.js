@@ -82,12 +82,17 @@ export const squareButton = (size = 'medium') => css`
   border: 2px solid ${props => props.theme.colors.border};
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   font-size: ${size === 'small' ? '14px' : size === 'large' ? '20px' : '16px'};
 
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  &:active {
+    transform: scale(0.95);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2), inset 0 1px 3px rgba(0,0,0,0.2);
   }
 `;
 

@@ -21,7 +21,7 @@ export const ButtonContainer = styled.button.withConfig({
   ${props => {
     if (props.variant === 'tab') {
       return `
-        transition: none;
+        transition: all 0.1s ease;
         border: 2px solid ${props.theme.colors.border};
         border-bottom: none;
         border-radius: 6px 6px 0 0;
@@ -34,21 +34,35 @@ export const ButtonContainer = styled.button.withConfig({
           background: ${props.theme.colors.accent};
           color: ${props.theme.colors.secondary};
         }
+        &:active {
+          transform: translateY(1px);
+          box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
       `;
     }
     if (props.variant === 'secondary') {
       return `
         ${tertiaryLevel}
         border-color: ${props.theme.colors.text.secondary};
+        transition: all 0.1s ease;
         &:hover {
           background: ${props.theme.colors.text.secondary};
           color: ${props.theme.colors.background};
         }
+        &:active {
+          transform: scale(0.96);
+          box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
       `;
     }
     return `
+      transition: all 0.1s ease;
       &:hover {
         background: ${props.theme.colors.accent};
+      }
+      &:active {
+        transform: scale(0.95);
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
       }
     `;
   }}

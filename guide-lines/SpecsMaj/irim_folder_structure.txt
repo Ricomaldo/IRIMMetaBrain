@@ -30,7 +30,10 @@ src/
 │   │       └── IconButton.styles.js
 │   └── navigation/
 │       └── ArrowButton/
+│           ├── ArrowButton.jsx
+│           └── ArrowButton.styles.js
 ├── hooks/
+│   ├── useRoomNavigation.js
 │   └── useRoomNotes.js
 ├── styles/
 │   ├── theme.js
@@ -38,9 +41,22 @@ src/
 ├── utils/
 │   ├── roomPositions.js
 │   ├── buttonMapping.js
-│   └── assetMapping.js
+│   ├── assetMapping.js
+│   └── debounce.js
 ├── assets/
 │   └── images/
+│       ├── potion-craft-2.jpg
+│       ├── SideTower.jpg
 │       ├── rooms/
+│       │   ├── atelier-workbench.jpg
+│       │   ├── boutique-medieval.jpg
+│       │   ├── chambre-cozy.jpg
+│       │   └── forge-fire.jpg
 │       └── ui/
-└── App.jsx
+│           ├── metal-surface.jpg
+│           ├── parchment-texture.jpg
+│           ├── stone-wall.jpg
+│           └── wood-grain.jpg
+├── App.jsx
+├── main.jsx
+└── index.css
