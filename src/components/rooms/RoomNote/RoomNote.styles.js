@@ -6,7 +6,7 @@ import { parchmentBg } from '../../../styles/mixins';
 export const NoteContainer = styled.div`
   position: absolute;
   bottom: 16px;
-  left: 16px;
+  right: 16px;
   width: 35%;
   min-width: 220px;
   max-width: 320px;
@@ -25,12 +25,12 @@ export const NoteHeader = styled.div`
   text-align: center;
   border-bottom: 2px solid ${props => props.theme.colors.border};
   user-select: none;
-  background: rgba(139, 69, 19, 0.1);
+  background: ${props => `${props.theme.colors.primary}1A`}; /* 10% opacity */
   border-radius: 6px 6px 0 0;
   transition: background 0.2s ease;
   
   &:hover {
-    background: rgba(139, 69, 19, 0.2);
+    background: ${props => `${props.theme.colors.primary}33`}; /* 20% opacity */
   }
 `;
 

@@ -63,7 +63,7 @@ export const RoomSlot = styled.div`
 
 export const NavigationZone = styled.div`
   position: absolute;
-  background: rgba(139, 69, 19, 0.4);
+  background: ${props => `${props.theme.colors.primary}66`}; /* 40% opacity */
   border: 2px solid rgba(210, 180, 140, 0.6);
   border-radius: 8px;
   z-index: 10;
@@ -115,7 +115,7 @@ export const NavigationZone = styled.div`
 
   &:hover {
     opacity: 1;
-    background: rgba(139, 69, 19, 0.6);
+    background: ${props => `${props.theme.colors.primary}99`}; /* 60% opacity */
     border-color: rgba(218, 165, 32, 0.8);
     transform: ${props => 
       props.className?.includes('zone-top') ? 'translateX(-50%) translateY(-2px)' :

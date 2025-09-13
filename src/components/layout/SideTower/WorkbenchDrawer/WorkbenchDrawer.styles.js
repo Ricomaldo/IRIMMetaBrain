@@ -1,13 +1,14 @@
 // src/components/layout/SideTower/WorkbenchDrawer/WorkbenchDrawer.styles.js
 
 import styled from 'styled-components';
-import { craftBorder, craftBorderHeavy, parchmentBg, woodBg } from '../../../../styles/mixins';
+import { craftBorder, craftBorderHeavy, metalBg, woodBg, tertiaryLevel, secondaryLevel } from '../../../../styles/mixins';
 
 export const DrawerContainer = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 50px 1fr 60px;
+  grid-template-rows: 50px 1fr 100px;
+    ${secondaryLevel};
 `;
 
 export const TabsHeader = styled.div`
@@ -15,6 +16,10 @@ export const TabsHeader = styled.div`
   gap: ${props => props.theme.spacing.xs};
   padding: ${props => props.theme.spacing.xs};
   overflow: hidden;
+  background: ${props => props.theme.colors.secondary};
+  margin-bottom: ${props => props.theme.spacing.xs};
+  z-index: 2;
+  position: relative;
 `;
 
 export const TabButton = styled.button`
@@ -50,6 +55,12 @@ export const ItemsGrid = styled.div`
   gap: ${props => props.theme.spacing.xs};
   height: 100%;
   place-items: center;
+
+  > div {
+    ${tertiaryLevel}
+    border-radius: 4px;
+    padding: 2px;
+  }
 `;
 
 export const ItemBadge = styled.span`
@@ -66,7 +77,7 @@ export const ItemBadge = styled.span`
 `;
 
 export const InfoFooter = styled.div`
-  ${parchmentBg}
+  ${metalBg}
   ${craftBorder}
   padding: ${props => props.theme.spacing.xs};
   display: flex;
@@ -76,5 +87,5 @@ export const InfoFooter = styled.div`
 
 export const FooterLine = styled.div`
   font-size: 12px;
-  color: ${props => props.theme.colors.text.primary};
+  color: ${props => props.theme.colors.secondary};
 `;

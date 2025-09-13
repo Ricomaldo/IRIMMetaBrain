@@ -37,6 +37,14 @@ export const woodBg = css`
   opacity: 0.8;
 `;
 
+export const metalBg = css`
+  background: ${props => props.theme.colors.stone};
+  background-image: url(${textures.metal});
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
+`;
+
 export const craftBorderHeavy = css`
   border: 4px solid #8B4513;
   border-radius: 8px;
@@ -76,9 +84,32 @@ export const squareButton = (size = 'medium') => css`
   cursor: pointer;
   transition: all 0.2s ease;
   font-size: ${size === 'small' ? '14px' : size === 'large' ? '20px' : '16px'};
-  
+
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   }
+`;
+
+export const primaryLevel = css`
+  ${craftBorderHeavy}
+  ${medievalShadow}
+  z-index: 3;
+  position: relative;
+`;
+
+export const secondaryLevel = css`
+  ${craftBorder}
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-index: 2;
+  position: relative;
+`;
+
+export const tertiaryLevel = css`
+  border: 2px solid ${props => props.theme.colors.border};
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  z-index: 1;
+  position: relative;
+  opacity: 0.9;
 `;

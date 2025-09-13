@@ -1,7 +1,7 @@
 // src/components/layout/SideTower/ControlTower/ControlTower.styles.js
 
 import styled from 'styled-components';
-import { stoneBg, craftBorderHeavy, flexCenter } from '../../../../styles/mixins';
+import { stoneBg, craftBorderHeavy, flexCenter, primaryLevel } from '../../../../styles/mixins';
 
 export const TowerContainer = styled.div`
   width: 100%;
@@ -9,6 +9,7 @@ export const TowerContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
   ${stoneBg}
+  ${primaryLevel}
   gap: ${props => props.theme.spacing.xs};
   padding: ${props => props.theme.spacing.xs};
 `;
@@ -17,6 +18,8 @@ export const TopRow = styled.div`
   display: grid;
   grid-template-columns: 1.5fr 3fr 1.5fr;
   gap: ${props => props.theme.spacing.xs};
+  align-items: center;
+  height: ${props => props.theme.button.large};
 `;
 
 export const BottomRow = styled.div`
@@ -43,6 +46,8 @@ export const CenterRect = styled.div`
   font-size: 14px;
   gap: ${props => props.theme.spacing.xs};
   height: ${props => props.theme.button.large};
+  padding: ${props => props.theme.spacing.xs};
+  text-align: center;
 `;
 
 export const RightSquare = styled.div`
@@ -61,4 +66,6 @@ export const ActionGrid = styled.div`
   gap: ${props => props.theme.spacing.xs};
   height: 100%;
   place-items: center;
+  padding: ${props => props.theme.spacing.xs};
+  align-content: center;
 `;
