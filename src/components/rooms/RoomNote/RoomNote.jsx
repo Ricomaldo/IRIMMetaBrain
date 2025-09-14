@@ -17,7 +17,11 @@ const RoomNote = ({ roomType }) => {
   return (
     <NoteContainer onClick={(e) => e.stopPropagation()}>
       <NoteHeader onClick={toggleExpanded}>
-        {icons.note} {isExpanded ? icons.collapse : icons.expand}
+        {isExpanded ? (
+          <>{icons.note} {icons.collapse}</>
+        ) : (
+          <>Notes Dev de {roomType} {icons.expand}</>
+        )}
       </NoteHeader>
       {isExpanded && (
         <NoteContent>

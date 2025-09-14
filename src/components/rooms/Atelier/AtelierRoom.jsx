@@ -8,7 +8,6 @@ import {
   RoadmapPanel,
   TodoPanel,
   TitreProjetPanel,
-  RoomNotePanel,
   PanelTitle
 } from './AtelierRoom.styles';
 
@@ -33,9 +32,11 @@ const AtelierRoom = () => {
         <PanelTitle>Roadmap</PanelTitle>
         {project.roadmap?.slice(0, 5).map((item) => (
           <div key={item.id} style={{
-            padding: '4px 0',
-            borderBottom: '1px solid #eee',
-            fontSize: '10px'
+            padding: '8px 0',
+            borderBottom: '1px solid rgba(255,255,255,0.2)',
+            fontSize: '11px',
+            lineHeight: '1.3',
+            opacity: '0.95'
           }}>
             {item.milestone}
           </div>
@@ -47,9 +48,11 @@ const AtelierRoom = () => {
         <PanelTitle>Todo</PanelTitle>
         {project.todo?.filter(t => t.status !== 'completed').slice(0, 6).map((item) => (
           <div key={item.id} style={{
-            padding: '4px 0',
-            borderBottom: '1px solid #eee',
-            fontSize: '10px'
+            padding: '8px 0',
+            borderBottom: '1px solid rgba(255,255,255,0.2)',
+            fontSize: '11px',
+            lineHeight: '1.3',
+            opacity: '0.95'
           }}>
             {item.task}
           </div>
@@ -61,10 +64,8 @@ const AtelierRoom = () => {
         {project.name}
       </TitreProjetPanel>
 
-      {/* RoomNote - Colonne 5, Row 4 */}
-      <RoomNotePanel>
-        <RoomNote roomType="atelier" />
-      </RoomNotePanel>
+      {/* RoomNote - Positionnement absolu */}
+      <RoomNote roomType="atelier" />
     </AtelierGrid>
   );
 };

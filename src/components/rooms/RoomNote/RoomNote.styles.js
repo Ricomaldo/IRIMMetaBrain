@@ -6,7 +6,7 @@ import { parchmentBg } from '../../../styles/mixins';
 export const NoteContainer = styled.div`
   position: absolute;
   bottom: 16px;
-  right: 16px;
+  left: 16px;
   width: 35%;
   min-width: 220px;
   max-width: 320px;

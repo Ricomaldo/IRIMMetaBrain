@@ -24,34 +24,40 @@ const AtelierGrid = styled.div`
 const RoadmapPanel = styled.div`
   grid-column:  4 / 6;
   grid-row: 1 / 4;
-  border: 2px dashed #666;
-  padding: 8px;
+  border: 2px solid ${props => props.theme.colors.border};
+  padding: 12px;
   font-size: 11px;
   display: flex;
   flex-direction: column;
-  background: ${props => props.theme.colors.background};
+  background: ${props => props.theme.colors.accents.cold};
+  color: ${props => props.theme.colors.text.light};
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
   overflow-y: auto;
 `;
 
 const TodoPanel = styled.div`
   grid-column: 1 / 3;
   grid-row: 1 / 4;
-  border: 2px dashed #666;
-  padding: 8px;
+  border: 2px solid ${props => props.theme.colors.border};
+  padding: 12px;
   font-size: 11px;
   display: flex;
   flex-direction: column;
-  background: ${props => props.theme.colors.background};
+  background: ${props => props.theme.colors.accents.success};
+  color: ${props => props.theme.colors.text.light};
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
   overflow-y: auto;
 `;
 
 const TitreProjetPanel = styled.div`
   grid-column: 3 / 4;
   grid-row: 4;
-  border: 2px solid ${props => props.theme.colors.accents.cold};
+  border: 2px solid ${props => props.theme.colors.border};
   background: ${props => props.theme.colors.accents.cold};
   color: ${props => props.theme.colors.text.light};
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 6px 16px;
   display: flex;
   align-items: center;
@@ -59,20 +65,19 @@ const TitreProjetPanel = styled.div`
   font-size: 12px;
   font-weight: bold;
   height: 40px;
-  margin-top:32px;
+  margin-top: 32px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 `;
 
-
-const RoomNotePanel = styled.div`
-  grid-column: 1;
-  grid-row: 4;
-  position: relative;
-`;
 
 const PanelTitle = styled.h3`
-  margin: 0 0 8px 0;
-  font-size: 12px;
+  margin: 0 0 12px 0;
+  font-size: 13px;
   font-weight: bold;
+  text-align: center;
+  opacity: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   color: ${props => props.theme.colors.primary};
 `;
 
@@ -81,6 +86,5 @@ export {
   RoadmapPanel,
   TodoPanel,
   TitreProjetPanel,
-  RoomNotePanel,
   PanelTitle
 };
