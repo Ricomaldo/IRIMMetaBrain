@@ -5,10 +5,13 @@ import { parchmentBg } from '../../../styles/mixins';
 
 export const EditorContainer = styled.div`
   width: 100%;
-  ${parchmentBg}
-  border-radius: 8px;
-  border: 2px solid #A0522D;
+  height: ${props => props.$variant === 'embedded' ? '100%' : 'auto'};
+  ${props => props.$variant === 'embedded' ? 'background: transparent;' : parchmentBg}
+  border-radius: ${props => props.$variant === 'embedded' ? '0' : '8px'};
+  border: ${props => props.$variant === 'embedded' ? 'none' : '2px solid #A0522D'};
   overflow: hidden;
+  display: ${props => props.$variant === 'embedded' ? 'flex' : 'block'};
+  flex-direction: ${props => props.$variant === 'embedded' ? 'column' : 'initial'};
 `;
 
 export const EditorHeader = styled.div`
@@ -38,11 +41,11 @@ export const Tab = styled.button`
   padding: 4px 8px;
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: 4px;
-  background: ${props => props.active
+  background: ${props => props.$active
     ? props.theme.colors.primary
-    : 'rgba(255, 255, 255, 0.8)'
+    : '#FFFFFF'
   };
-  color: ${props => props.active
+  color: ${props => props.$active
     ? '#fff'
     : props.theme.colors.text.primary
   };
@@ -51,7 +54,7 @@ export const Tab = styled.button`
   transition: all 0.2s ease;
 
   &:hover {
-    background: ${props => props.active
+    background: ${props => props.$active
       ? props.theme.colors.primary
       : `${props.theme.colors.primary}33`
     };
@@ -59,8 +62,12 @@ export const Tab = styled.button`
 `;
 
 export const EditorContent = styled.div`
-  padding: 12px;
-  animation: ${props => props.animate ? 'fadeIn 0.2s ease-out' : 'none'};
+  padding: ${props => props.$variant === 'embedded' ? '0' : '12px'};
+  animation: ${props => props.$animate ? 'fadeIn 0.2s ease-out' : 'none'};
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: ${props => props.$variant === 'embedded' ? '100%' : 'auto'};
 
   @keyframes fadeIn {
     from { opacity: 0; }
@@ -70,22 +77,24 @@ export const EditorContent = styled.div`
 
 export const Textarea = styled.textarea`
   width: 100%;
-  height: ${props => props.height || '120px'};
-  border: 1px solid rgba(139, 69, 19, 0.3);
+  height: ${props => props.$height === '100%' ? '100%' : (props.$height || '120px')};
+  flex: ${props => props.$height === '100%' ? '1' : 'none'};
+  border: 1px solid #8B4513;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.8);
-  resize: vertical;
-  font-size: ${props => props.compact ? '11px' : '12px'};
+  background: #FFFFFF;
+  resize: ${props => props.$height === '100%' ? 'none' : 'vertical'};
+  font-size: ${props => props.$compact ? '11px' : '12px'};
   font-family: ${props => props.theme.fonts.main};
   line-height: 1.4;
   padding: 8px;
   color: ${props => props.theme.colors.text.primary};
+  background: #FFFFFF !important;
 
   &:focus {
     outline: none;
-    border-color: ${props => props.theme.colors.border};
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    border-color: ${props => props.theme.colors.primary};
+    background: #FFFFFF !important;
+    box-shadow: 0 0 0 2px ${props => props.theme.colors.secondary};
   }
 
   &::placeholder {
@@ -100,24 +109,25 @@ export const ToolbarContainer = styled.div`
   gap: 4px;
   margin-bottom: 8px;
   padding: 6px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(139, 69, 19, 0.2);
+  background: #F8F8F8;
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 4px;
 `;
 
 export const ToolbarButton = styled.button`
   padding: 4px 6px;
-  border: 1px solid rgba(139, 69, 19, 0.3);
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 3px;
-  background: rgba(255, 255, 255, 0.8);
+  background: #FFFFFF;
   font-size: 10px;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.2s ease;
+  color: ${props => props.theme.colors.text.primary};
 
   &:hover {
-    background: ${props => `${props.theme.colors.primary}33`};
-    border-color: ${props => props.theme.colors.border};
+    background: ${props => props.theme.colors.secondary};
+    border-color: ${props => props.theme.colors.primary};
   }
 
   &:active {

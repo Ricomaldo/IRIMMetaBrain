@@ -37,9 +37,59 @@ export const theme = {
     large: '60px',
     xlarge: '80px'
   },
+  // Ancien système (deprecated)
   fonts: {
     main: '"Cinzel", serif',
     mono: '"Courier New", monospace'
+  },
+
+  // Nouveau système typographique scalable
+  typography: {
+    // Familles de polices spécialisées
+    families: {
+      primary: '"Cinzel", serif',        // Headers, titres nobles/médiévaux
+      secondary: '"Crimson Text", serif', // Corps de texte, lecture longue
+      mono: '"Courier New", monospace',   // Code, données techniques
+      ui: '"Inter", sans-serif'           // UI moderne, labels, boutons
+    },
+
+    // Échelle typographique harmonieuse (ratio 1.25)
+    sizes: {
+      xs: '10px',     // Micro-infos, timestamps, badges
+      sm: '12px',     // Textes secondaires, captions, meta
+      base: '14px',   // Texte principal, contenu standard
+      md: '16px',     // Textes importants, emphasis
+      lg: '20px',     // Sous-titres, section headers
+      xl: '25px',     // Titres de sections
+      '2xl': '31px',  // Titres de pages
+      '3xl': '39px'   // Titres principaux, hero
+    },
+
+    // Poids standardisés
+    weights: {
+      light: 300,
+      normal: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700
+    },
+
+    // Line-heights optimisées par usage
+    lineHeights: {
+      tight: 1.2,    // Titres, headers courts
+      normal: 1.4,   // Texte standard, UI
+      relaxed: 1.6,  // Lecture longue, paragraphes
+      loose: 1.8     // Espacement très aéré
+    },
+
+    // Letter-spacing pour différents contextes
+    letterSpacing: {
+      tight: '-0.025em',
+      normal: '0',
+      wide: '0.025em',
+      wider: '0.05em',
+      widest: '0.1em'
+    }
   },
     zIndex: {
     navigation: 10,

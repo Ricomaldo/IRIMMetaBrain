@@ -23,7 +23,8 @@ const MarkdownEditor = ({
   compact = false,
   showPreview = true,
   toolbar = true,
-  title = 'Notes'
+  title = 'Notes',
+  variant = 'standalone' // 'standalone' | 'embedded'
 }) => {
   const [activeTab, setActiveTab] = useState('edit');
   const textareaRef = useRef(null);
@@ -59,30 +60,32 @@ const MarkdownEditor = ({
   ];
 
   return (
-    <EditorContainer>
-      <EditorHeader>
+    <EditorContainer $variant={variant}>
+      {variant === 'standalone' && (
+        <EditorHeader>
         <EditorTitle>
           {icons.note} {title}
         </EditorTitle>
         {showPreview && (
           <TabsContainer>
             <Tab
-              active={activeTab === 'edit'}
+              $active={activeTab === 'edit'}
               onClick={() => setActiveTab('edit')}
             >
               Éditer
             </Tab>
             <Tab
-              active={activeTab === 'preview'}
+              $active={activeTab === 'preview'}
               onClick={() => setActiveTab('preview')}
             >
               Aperçu
             </Tab>
           </TabsContainer>
         )}
-      </EditorHeader>
+        </EditorHeader>
+      )}
 
-      <EditorContent animate={true}>
+      <EditorContent $animate={true} $variant={variant}>
         {activeTab === 'edit' ? (
           <>
             {toolbar && (
@@ -103,8 +106,8 @@ const MarkdownEditor = ({
               value={value}
               onChange={(e) => onChange(e.target.value)}
               placeholder={placeholder}
-              height={height}
-              compact={compact}
+              $height={height}
+              $compact={compact}
             />
           </>
         ) : (

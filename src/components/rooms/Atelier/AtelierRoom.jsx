@@ -3,17 +3,23 @@
 import React from 'react';
 import useProjectsStore from '../../../stores/useProjectsStore';
 import RoomNote from '../RoomNote/RoomNote';
+import EditablePanel from './EditablePanel/EditablePanel';
+import { usePanelContent } from '../../../hooks/usePanelContent';
 import {
   AtelierGrid,
-  RoadmapPanel,
-  TodoPanel,
-  TitreProjetPanel,
-  PanelTitle
+  TitreProjetPanel
 } from './AtelierRoom.styles';
 
 const AtelierRoom = () => {
   const { getCurrentProject } = useProjectsStore();
   const project = getCurrentProject();
+
+  const {
+    roadmapContent,
+    todoContent,
+    updateRoadmapContent,
+    updateTodoContent
+  } = usePanelContent(project?.id || 'default');
 
   if (!project) {
     return (
@@ -27,37 +33,27 @@ const AtelierRoom = () => {
 
   return (
     <AtelierGrid>
-      {/* Roadmap - Colonnes 1-2, Rows 2-4 */}
-      <RoadmapPanel>
-        <PanelTitle>Roadmap</PanelTitle>
-        {project.roadmap?.slice(0, 5).map((item) => (
-          <div key={item.id} style={{
-            padding: '8px 0',
-            borderBottom: '1px solid rgba(255,255,255,0.2)',
-            fontSize: '11px',
-            lineHeight: '1.3',
-            opacity: '0.95'
-          }}>
-            {item.milestone}
-          </div>
-        ))}
-      </RoadmapPanel>
+      {/* Roadmap - Wrapper parchemin avec style précédent */}
+      <EditablePanel
+        title="Roadmap"
+        value={roadmapContent}
+        onChange={updateRoadmapContent}
+        placeholder="Définissez votre roadmap en markdown..."
+        gridColumn="1 / 3"
+        gridRow="1 / 4"
+        panelType="roadmap"
+      />
 
-      {/* Todo - Colonne 4, Rows 2-4 */}
-      <TodoPanel>
-        <PanelTitle>Todo</PanelTitle>
-        {project.todo?.filter(t => t.status !== 'completed').slice(0, 6).map((item) => (
-          <div key={item.id} style={{
-            padding: '8px 0',
-            borderBottom: '1px solid rgba(255,255,255,0.2)',
-            fontSize: '11px',
-            lineHeight: '1.3',
-            opacity: '0.95'
-          }}>
-            {item.task}
-          </div>
-        ))}
-      </TodoPanel>
+      {/* Todo - Wrapper parchemin avec style précédent */}
+      <EditablePanel
+        title="Todo"
+        value={todoContent}
+        onChange={updateTodoContent}
+        placeholder="Gérez vos tâches en markdown..."
+        gridColumn="4 / 6"
+        gridRow="1 / 4"
+        panelType="todo"
+      />
 
       {/* Titre Projet - Colonnes 2.5-4.5, Row 4 */}
       <TitreProjetPanel>

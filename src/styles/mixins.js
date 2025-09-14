@@ -18,7 +18,7 @@ export const parchmentBg = css`
   background: ${props => props.theme.colors.secondary};
   background-image: url(${textures.parchment});
   background-size: cover;
-  opacity: 0.8;
+  opacity: 1;
 `;
 
 export const stoneBg = css`
@@ -26,7 +26,7 @@ export const stoneBg = css`
   background-image: url(${textures.stone}),
                     linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%);
   background-size: cover, 8px 8px;
-  opacity: 0.8;
+  opacity: 1;
 `;
 
 export const woodBg = css`
@@ -34,7 +34,7 @@ export const woodBg = css`
   background-image: url(${textures.wood});
   background-size: cover;
   background-position: center;
-  opacity: 0.8;
+  opacity: 1;
 `;
 
 export const metalBg = css`
@@ -42,7 +42,7 @@ export const metalBg = css`
   background-image: url(${textures.metal});
   background-size: cover;
   background-position: center;
-  opacity: 0.8;
+  opacity: 1;
 `;
 
 export const craftBorderHeavy = css`
@@ -116,5 +116,5 @@ export const tertiaryLevel = css`
   box-shadow: 0 1px 2px rgba(0,0,0,0.1);
   z-index: 1;
   position: relative;
-  opacity: 0.9;
+  opacity: 1;
 `;

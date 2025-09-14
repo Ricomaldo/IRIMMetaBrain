@@ -20,36 +20,8 @@ const AtelierGrid = styled.div`
   padding: 64px;
 `;
 
-// Styles des composants Atelier
-const RoadmapPanel = styled.div`
-  grid-column:  4 / 6;
-  grid-row: 1 / 4;
-  border: 2px solid ${props => props.theme.colors.border};
-  padding: 12px;
-  font-size: 11px;
-  display: flex;
-  flex-direction: column;
-  background: ${props => props.theme.colors.accents.cold};
-  color: ${props => props.theme.colors.text.light};
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  overflow-y: auto;
-`;
-
-const TodoPanel = styled.div`
-  grid-column: 1 / 3;
-  grid-row: 1 / 4;
-  border: 2px solid ${props => props.theme.colors.border};
-  padding: 12px;
-  font-size: 11px;
-  display: flex;
-  flex-direction: column;
-  background: ${props => props.theme.colors.accents.success};
-  color: ${props => props.theme.colors.text.light};
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  overflow-y: auto;
-`;
+// Styles pour les nouveaux panneaux éditables
+// (Les panneaux utilisent maintenant EditablePanel avec wrappers parchemin)
 
 const TitreProjetPanel = styled.div`
   grid-column: 3 / 4;
@@ -62,8 +34,15 @@ const TitreProjetPanel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
+  ${props => props.theme.typography.families.primary ? `
+    font-family: ${props.theme.typography.families.primary};
+    font-size: ${props.theme.typography.sizes.lg};
+    font-weight: ${props.theme.typography.weights.bold};
+    line-height: ${props.theme.typography.lineHeights.tight};
+  ` : `
+    font-size: 12px;
+    font-weight: bold;
+  `}
   height: 40px;
   margin-top: 32px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
@@ -71,20 +50,25 @@ const TitreProjetPanel = styled.div`
 
 
 const PanelTitle = styled.h3`
+  ${props => props.theme.typography.families.primary ? `
+    font-family: ${props.theme.typography.families.primary};
+    font-size: ${props.theme.typography.sizes.md};
+    font-weight: ${props.theme.typography.weights.bold};
+    letter-spacing: ${props.theme.typography.letterSpacing.wider};
+  ` : `
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  `}
   margin: 0 0 12px 0;
-  font-size: 13px;
-  font-weight: bold;
   text-align: center;
   opacity: 0.95;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: ${props => props.theme.colors.primary};
+  line-height: ${props => props.theme.typography?.lineHeights?.tight || '1.2'};
+  color: inherit;
 `;
 
 export {
   AtelierGrid,
-  RoadmapPanel,
-  TodoPanel,
-  TitreProjetPanel,
-  PanelTitle
+  TitreProjetPanel
 };

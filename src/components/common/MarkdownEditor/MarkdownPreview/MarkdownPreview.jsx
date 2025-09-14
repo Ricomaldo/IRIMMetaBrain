@@ -1,29 +1,9 @@
 // src/components/common/MarkdownEditor/MarkdownPreview/MarkdownPreview.jsx
 
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { PreviewContainer, EmptyPreview } from './MarkdownPreview.styles';
-
-// Simple markdown parser pour éviter une dépendance externe pour le moment
-const parseMarkdown = (text) => {
-  if (!text.trim()) return '';
-
-  return text
-    // Headers
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    // Bold
-    .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-    // Italic
-    .replace(/\*(.*)\*/gim, '<em>$1</em>')
-    // Code inline
-    .replace(/`([^`]*)`/gim, '<code>$1</code>')
-    // Lists
-    .replace(/^\* (.*$)/gim, '<li>$1</li>')
-    .replace(/^- (.*$)/gim, '<li>$1</li>')
-    // Line breaks
-    .replace(/\n/gim, '<br>');
-};
 
 const MarkdownPreview = ({ content, height, compact }) => {
   if (!content || !content.trim()) {
@@ -34,14 +14,57 @@ const MarkdownPreview = ({ content, height, compact }) => {
     );
   }
 
-  const htmlContent = parseMarkdown(content);
-
   return (
-    <PreviewContainer
-      height={height}
-      compact={compact}
-      dangerouslySetInnerHTML={{ __html: htmlContent }}
-    />
+    <PreviewContainer height={height} compact={compact}>
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        components={{
+          // Customisation des composants rendus
+          h1: ({ children }) => <h1 style={{ fontSize: '16px', margin: '8px 0 4px 0' }}>{children}</h1>,
+          h2: ({ children }) => <h2 style={{ fontSize: '14px', margin: '8px 0 4px 0' }}>{children}</h2>,
+          h3: ({ children }) => <h3 style={{ fontSize: '13px', margin: '8px 0 4px 0' }}>{children}</h3>,
+          p: ({ children }) => <p style={{ margin: '4px 0' }}>{children}</p>,
+          li: ({ children }) => <li style={{ margin: '2px 0' }}>{children}</li>,
+          code: ({ children }) => (
+            <code style={{
+              background: '#F5F5DC',
+              border: '1px solid #A0522D',
+              borderRadius: '3px',
+              padding: '1px 3px',
+              fontFamily: 'Courier New, monospace',
+              fontSize: '10px'
+            }}>
+              {children}
+            </code>
+          ),
+          pre: ({ children }) => (
+            <pre style={{
+              background: '#F5F5DC',
+              border: '1px solid #A0522D',
+              borderRadius: '4px',
+              padding: '8px',
+              margin: '8px 0',
+              overflowX: 'auto'
+            }}>
+              {children}
+            </pre>
+          ),
+          // Support des tasklists GitHub
+          input: ({ checked, type }) => (
+            type === 'checkbox' ? (
+              <input
+                type="checkbox"
+                checked={checked}
+                readOnly
+                style={{ marginRight: '6px' }}
+              />
+            ) : null
+          )
+        }}
+      >
+        {content}
+      </ReactMarkdown>
+    </PreviewContainer>
   );
 };
 

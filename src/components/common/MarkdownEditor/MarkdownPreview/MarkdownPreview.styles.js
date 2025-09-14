@@ -6,9 +6,9 @@ export const PreviewContainer = styled.div`
   min-height: ${props => props.height || '120px'};
   max-height: ${props => props.height || '120px'};
   overflow-y: auto;
-  border: 1px solid rgba(139, 69, 19, 0.3);
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.8);
+  background: #FFFFFF;
   padding: 8px;
   font-size: ${props => props.compact ? '11px' : '12px'};
   font-family: ${props => props.theme.fonts.main};
@@ -51,8 +51,8 @@ export const PreviewContainer = styled.div`
   }
 
   code {
-    background: rgba(139, 69, 19, 0.1);
-    border: 1px solid rgba(139, 69, 19, 0.2);
+    background: #F5F5DC;
+    border: 1px solid ${props => props.theme.colors.border};
     border-radius: 3px;
     padding: 1px 3px;
     font-family: 'Courier New', monospace;
@@ -60,8 +60,8 @@ export const PreviewContainer = styled.div`
   }
 
   pre {
-    background: rgba(139, 69, 19, 0.1);
-    border: 1px solid rgba(139, 69, 19, 0.2);
+    background: #F5F5DC;
+    border: 1px solid ${props => props.theme.colors.border};
     border-radius: 4px;
     padding: 8px;
     margin: 8px 0;
@@ -84,7 +84,7 @@ export const PreviewContainer = styled.div`
 
   hr {
     border: none;
-    border-top: 1px solid rgba(139, 69, 19, 0.3);
+    border-top: 1px solid ${props => props.theme.colors.border};
     margin: 12px 0;
   }
 `;
