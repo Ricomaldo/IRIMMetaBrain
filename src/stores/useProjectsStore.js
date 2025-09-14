@@ -17,7 +17,58 @@ const useProjectsStore = create(
           type: "tool",
           status: "dev_actif",
 
-          // Atelier - 4 panneaux centraux
+          // Contenu markdown des panneaux
+          roadmapMarkdown: `# Roadmap
+
+## Phase 1 - Atelier habité ✓
+- [x] Migration **Zustand** + stores
+- [x] Panneaux éditables avec **markdown**
+- [x] Design system avec accents froids
+
+## Phase 2 - Expansion
+- [ ] Autres pièces (Forge, Boutique, Chambre)
+- [ ] **Navigation** entre projets
+- [ ] Import/Export projets
+
+## Phase 3 - Pro Features
+- [ ] **Sync cloud** optionnelle
+- [ ] **Templates** de projets
+- [ ] **Analytics** et métriques
+
+---
+
+> *"Medieval workspace meets modern productivity"* 🏰`,
+
+          todoMarkdown: `# Todo Atelier
+
+## 🔴 **Priorité Haute**
+- [x] Architecture **Zustand** (2 stores)
+- [x] **MarkdownEditor** avec GitHub Flavored
+- [ ] **Performance** et optimisations
+- [ ] **Tests** unitaires composants
+
+## 🟡 **Priorité Moyenne**
+- [ ] **Documentation** technique
+- [ ] **Accessibilité** (WCAG)
+- [ ] **Mobile** responsive design
+
+## 🔵 **Backlog**
+- [ ] **Animations** transitions
+- [ ] **Shortcuts** clavier
+- [ ] **Themes** multiples
+
+---
+
+### Progression
+| Feature | Status | Notes |
+|---------|--------|-------|
+| Store Notes | ✓ Done | Zustand + persist |
+| Store Projects | ✓ Done | Auto-référencement |
+| UI Atelier | 🚧 WIP | Panneaux markdown |
+
+**Next:** Finaliser l'interface Atelier 🚀`,
+
+          // Atelier - 4 panneaux centraux (données structurées - legacy)
           roadmap: [
             {
               id: 1,
@@ -91,6 +142,27 @@ const useProjectsStore = create(
           todo: [],
           idees: [],
           prochaineAction: null,
+          // Contenu markdown par défaut
+          roadmapMarkdown: `# Roadmap
+
+## Phase 1 - Setup
+- [ ] Initialiser le projet
+- [ ] Configurer l'architecture
+
+---
+
+> *Commencez votre roadmap ici* 🚀`,
+          todoMarkdown: `# Todo
+
+## 🔴 **Priorité Haute**
+- [ ] Première tâche importante
+
+## 🟡 **Priorité Moyenne**
+- [ ] Tâche de priorité moyenne
+
+---
+
+**Next:** Définir les prochaines étapes`,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
           ...projectData
@@ -224,6 +296,43 @@ const useProjectsStore = create(
                   ...action,
                   updated_at: new Date().toISOString()
                 },
+                updated_at: new Date().toISOString()
+              }
+            }
+          };
+        });
+      },
+
+      // Actions - Contenu Markdown des panneaux
+      updateRoadmapMarkdown: (projectId, content) => {
+        set((state) => {
+          const project = state.projects[projectId];
+          if (!project) return state;
+
+          return {
+            projects: {
+              ...state.projects,
+              [projectId]: {
+                ...project,
+                roadmapMarkdown: content,
+                updated_at: new Date().toISOString()
+              }
+            }
+          };
+        });
+      },
+
+      updateTodoMarkdown: (projectId, content) => {
+        set((state) => {
+          const project = state.projects[projectId];
+          if (!project) return state;
+
+          return {
+            projects: {
+              ...state.projects,
+              [projectId]: {
+                ...project,
+                todoMarkdown: content,
                 updated_at: new Date().toISOString()
               }
             }

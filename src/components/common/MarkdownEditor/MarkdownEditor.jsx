@@ -8,9 +8,7 @@ import {
   TabsContainer,
   Tab,
   EditorContent,
-  Textarea,
-  ToolbarContainer,
-  ToolbarButton
+  Textarea
 } from './MarkdownEditor.styles';
 import MarkdownPreview from './MarkdownPreview/MarkdownPreview';
 import { icons } from '../../../utils/assetMapping';
@@ -22,42 +20,19 @@ const MarkdownEditor = ({
   height = '120px',
   compact = false,
   showPreview = true,
-  toolbar = true,
   title = 'Notes',
-  variant = 'standalone' // 'standalone' | 'embedded'
+  variant = 'standalone', // 'standalone' | 'embedded'
+  readOnly = false // Nouveau prop pour contrôler le mode depuis l'extérieur
 }) => {
-  const [activeTab, setActiveTab] = useState('edit');
+  const [activeTab, setActiveTab] = useState(readOnly ? 'preview' : 'edit');
   const textareaRef = useRef(null);
 
-  const insertMarkdown = (before, after = '') => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
+  // Synchroniser activeTab avec readOnly
+  React.useEffect(() => {
+    setActiveTab(readOnly ? 'preview' : 'edit');
+  }, [readOnly]);
 
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
-    const selectedText = value.substring(start, end);
-
-    const newValue = value.substring(0, start) + before + selectedText + after + value.substring(end);
-    onChange(newValue);
-
-    // Restaurer le focus et la sélection
-    setTimeout(() => {
-      textarea.focus();
-      textarea.setSelectionRange(
-        start + before.length,
-        start + before.length + selectedText.length
-      );
-    }, 0);
-  };
-
-  const toolbarActions = [
-    { label: 'B', action: () => insertMarkdown('**', '**'), title: 'Gras' },
-    { label: 'I', action: () => insertMarkdown('*', '*'), title: 'Italique' },
-    { label: 'H1', action: () => insertMarkdown('# '), title: 'Titre 1' },
-    { label: 'H2', action: () => insertMarkdown('## '), title: 'Titre 2' },
-    { label: '•', action: () => insertMarkdown('- '), title: 'Liste' },
-    { label: '<>', action: () => insertMarkdown('`', '`'), title: 'Code' }
-  ];
+  // Toolbar supprimée complètement
 
   return (
     <EditorContainer $variant={variant}>
@@ -87,29 +62,14 @@ const MarkdownEditor = ({
 
       <EditorContent $animate={true} $variant={variant}>
         {activeTab === 'edit' ? (
-          <>
-            {toolbar && (
-              <ToolbarContainer>
-                {toolbarActions.map((action, index) => (
-                  <ToolbarButton
-                    key={index}
-                    onClick={action.action}
-                    title={action.title}
-                  >
-                    {action.label}
-                  </ToolbarButton>
-                ))}
-              </ToolbarContainer>
-            )}
-            <Textarea
-              ref={textareaRef}
-              value={value}
-              onChange={(e) => onChange(e.target.value)}
-              placeholder={placeholder}
-              $height={height}
-              $compact={compact}
-            />
-          </>
+          <Textarea
+            ref={textareaRef}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={placeholder}
+            $height={height}
+            $compact={compact}
+          />
         ) : (
           <MarkdownPreview
             content={value}

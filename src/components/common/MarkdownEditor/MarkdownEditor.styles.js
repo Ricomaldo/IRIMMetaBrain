@@ -87,8 +87,9 @@ export const Textarea = styled.textarea`
   font-family: ${props => props.theme.fonts.main};
   line-height: 1.4;
   padding: 8px;
-  color: ${props => props.theme.colors.text.primary};
+  color: #000000;
   background: #FFFFFF !important;
+  text-shadow: none;
 
   &:focus {
     outline: none;
@@ -104,33 +105,4 @@ export const Textarea = styled.textarea`
   }
 `;
 
-export const ToolbarContainer = styled.div`
-  display: flex;
-  gap: 4px;
-  margin-bottom: 8px;
-  padding: 6px;
-  background: #F8F8F8;
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 4px;
-`;
-
-export const ToolbarButton = styled.button`
-  padding: 4px 6px;
-  border: 1px solid ${props => props.theme.colors.border};
-  border-radius: 3px;
-  background: #FFFFFF;
-  font-size: 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  color: ${props => props.theme.colors.text.primary};
-
-  &:hover {
-    background: ${props => props.theme.colors.secondary};
-    border-color: ${props => props.theme.colors.primary};
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-`;
+// Toolbar supprimée complètement

@@ -86,10 +86,10 @@ const EditablePanel = ({
             placeholder={placeholder}
             height="100%"
             compact={true}
-            showPreview={!isEditing}
-            toolbar={isEditing}
+            showPreview={true}
             title={title}
             variant="embedded"
+            readOnly={!isEditing}
           />
         </PanelContent>
       </PanelContainer>

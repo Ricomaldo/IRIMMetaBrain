@@ -1,103 +1,73 @@
 // src/hooks/usePanelContent.js - Hook pour gérer le contenu markdown des panneaux
 
-import { useState, useCallback, useRef } from 'react';
-import { debounce } from '../utils/debounce';
+import { useCallback, useRef } from 'react';
+import useProjectsStore from '../stores/useProjectsStore';
 
 export const usePanelContent = (projectId) => {
-  const storageKey = `irim-panel-content-${projectId}`;
+  const { 
+    getCurrentProject, 
+    updateRoadmapMarkdown, 
+    updateTodoMarkdown 
+  } = useProjectsStore();
 
-  const initialStructure = {
-    roadmap: `# Roadmap
+  const project = getCurrentProject();
+  
+  // Refs pour le debounce
+  const roadmapTimeoutRef = useRef(null);
+  const todoTimeoutRef = useRef(null);
 
-## Phase 1 - Atelier habité ✓
-- [x] Migration **Zustand** + stores
-- [x] Panneaux éditables avec **markdown**
-- [x] Design system avec accents froids
+  // Fallback content si le projet n'existe pas
+  const defaultRoadmapContent = `# Roadmap
 
-## Phase 2 - Expansion
-- [ ] Autres pièces (Forge, Boutique, Chambre)
-- [ ] **Navigation** entre projets
-- [ ] Import/Export projets
-
-## Phase 3 - Pro Features
-- [ ] **Sync cloud** optionnelle
-- [ ] **Templates** de projets
-- [ ] **Analytics** et métriques
+## Phase 1 - Setup
+- [ ] Initialiser le projet
+- [ ] Configurer l'architecture
 
 ---
 
-> *"Medieval workspace meets modern productivity"* 🏰`,
-    todo: `# Todo Atelier
+> *Commencez votre roadmap ici* 🚀`;
+
+  const defaultTodoContent = `# Todo
 
 ## 🔴 **Priorité Haute**
-- [x] Architecture **Zustand** (2 stores)
-- [x] **MarkdownEditor** avec GitHub Flavored
-- [ ] **Performance** et optimisations
-- [ ] **Tests** unitaires composants
+- [ ] Première tâche importante
 
 ## 🟡 **Priorité Moyenne**
-- [ ] **Documentation** technique
-- [ ] **Accessibilité** (WCAG)
-- [ ] **Mobile** responsive design
-
-## 🔵 **Backlog**
-- [ ] **Animations** transitions
-- [ ] **Shortcuts** clavier
-- [ ] **Themes** multiples
+- [ ] Tâche de priorité moyenne
 
 ---
 
-### Progression
-| Feature | Status | Notes |
-|---------|--------|-------|
-| Store Notes | ✓ Done | Zustand + persist |
-| Store Projects | ✓ Done | Auto-référencement |
-| UI Atelier | 🚧 WIP | Panneaux markdown |
+**Next:** Définir les prochaines étapes`;
 
-**Next:** Finaliser l'interface Atelier 🚀`
-  };
-
-  const loadNotesFromStorage = useCallback(() => {
-    try {
-      const saved = localStorage.getItem(storageKey);
-      return saved ? JSON.parse(saved) : initialStructure;
-    } catch (error) {
-      console.warn(`Erreur de chargement des notes (${storageKey}):`, error);
-      return initialStructure;
+  // Debounced save functions
+  const updateRoadmapContent = useCallback((content) => {
+    if (roadmapTimeoutRef.current) {
+      clearTimeout(roadmapTimeoutRef.current);
     }
-  }, [storageKey]);
+    
+    roadmapTimeoutRef.current = setTimeout(() => {
+      if (projectId) {
+        updateRoadmapMarkdown(projectId, content);
+      }
+    }, 500);
+  }, [projectId, updateRoadmapMarkdown]);
 
-  const saveNotesToStorage = useCallback((notes) => {
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(notes));
-    } catch (error) {
-      console.warn(`Erreur de sauvegarde des notes (${storageKey}):`, error);
+  const updateTodoContent = useCallback((content) => {
+    if (todoTimeoutRef.current) {
+      clearTimeout(todoTimeoutRef.current);
     }
-  }, [storageKey]);
-
-  const [notes, setNotes] = useState(loadNotesFromStorage);
-  const notesRef = useRef(notes);
-
-  notesRef.current = notes;
-
-  const debouncedSave = useCallback(
-    debounce((newNotes) => {
-      saveNotesToStorage(newNotes);
-    }, 500),
-    [saveNotesToStorage]
-  );
-
-  const updateNote = useCallback((key, content) => {
-    const newNotes = { ...notesRef.current, [key]: content };
-    setNotes(newNotes);
-    debouncedSave(newNotes);
-  }, [debouncedSave]);
+    
+    todoTimeoutRef.current = setTimeout(() => {
+      if (projectId) {
+        updateTodoMarkdown(projectId, content);
+      }
+    }, 500);
+  }, [projectId, updateTodoMarkdown]);
 
   return {
-    roadmapContent: notes.roadmap || initialStructure.roadmap,
-    todoContent: notes.todo || initialStructure.todo,
-
-    updateRoadmapContent: (content) => updateNote('roadmap', content),
-    updateTodoContent: (content) => updateNote('todo', content)
+    roadmapContent: project?.roadmapMarkdown || defaultRoadmapContent,
+    todoContent: project?.todoMarkdown || defaultTodoContent,
+    updateRoadmapContent,
+    updateTodoContent
   };
 };

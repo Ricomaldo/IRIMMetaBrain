@@ -13,13 +13,15 @@ export const PreviewContainer = styled.div`
   font-size: ${props => props.compact ? '11px' : '12px'};
   font-family: ${props => props.theme.fonts.main};
   line-height: 1.4;
-  color: ${props => props.theme.colors.text.primary};
+  color: #000000;
+  text-shadow: none;
 
   /* Styles Markdown */
   h1, h2, h3, h4, h5, h6 {
     margin: 8px 0 4px 0;
     font-weight: bold;
-    color: ${props => props.theme.colors.primary};
+    color: #000000;
+    text-shadow: none;
   }
 
   h1 { font-size: 16px; }
@@ -33,12 +35,14 @@ export const PreviewContainer = styled.div`
 
   strong {
     font-weight: bold;
-    color: ${props => props.theme.colors.primary};
+    color: #000000;
+    text-shadow: none;
   }
 
   em {
     font-style: italic;
-    color: ${props => props.theme.colors.text.secondary};
+    color: #333333;
+    text-shadow: none;
   }
 
   ul, ol {
