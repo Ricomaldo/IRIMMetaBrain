@@ -1,13 +1,16 @@
 // src/components/layout/SideTower/WorkbenchDrawer/WorkbenchDrawer.jsx
 
 import React, { useState, useMemo } from 'react';
-import { DrawerContainer, TabsHeader, TabContent, ItemsGrid, InfoFooter, FooterLine, ItemBadge } from './WorkbenchDrawer.styles';
+import { DrawerContainer, TabsHeader, TabContent, ItemsGrid } from './WorkbenchDrawer.styles';
 import IconButton from '../../../common/IconButton/IconButton';
-import { drawerTabs, drawerItemsByTab, drawerFooterActions } from '../../../../utils/buttonMapping';
+import SideTowerNotes from '../SideTowerNotes/SideTowerNotes';
+import { useMarkdownNotes } from '../../../../hooks/useMarkdownNotes';
+import { drawerTabs, drawerItemsByTab } from '../../../../utils/buttonMapping';
 
 const WorkbenchDrawer = () => {
   const [activeTab, setActiveTab] = useState('potions');
   const items = useMemo(() => drawerItemsByTab[activeTab] || [], [activeTab]);
+  const sideTowerNotesHook = useMarkdownNotes('irim-side-tower-notes', { general: '' });
 
   return (
     <DrawerContainer>
@@ -36,11 +39,7 @@ const WorkbenchDrawer = () => {
         </ItemsGrid>
       </TabContent>
 
-      <InfoFooter>
-        {drawerFooterActions.map(action => (
-          <FooterLine key={action.id}>◊ {action.label}</FooterLine>
-        ))}
-      </InfoFooter>
+      <SideTowerNotes sideTowerNotesHook={sideTowerNotesHook} />
     </DrawerContainer>
   );
 };

@@ -7,7 +7,7 @@ export const DrawerContainer = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 50px 1fr 100px;
+  grid-template-rows: 50px 1fr 240px;
     ${secondaryLevel};
     ${woodBg};
 `;
