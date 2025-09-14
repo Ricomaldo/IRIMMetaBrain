@@ -4,13 +4,11 @@ import React, { useState, useMemo } from 'react';
 import { DrawerContainer, TabsHeader, TabContent, ItemsGrid } from './WorkbenchDrawer.styles';
 import IconButton from '../../../common/IconButton/IconButton';
 import SideTowerNotes from '../SideTowerNotes/SideTowerNotes';
-import { useMarkdownNotes } from '../../../../hooks/useMarkdownNotes';
 import { drawerTabs, drawerItemsByTab } from '../../../../utils/buttonMapping';
 
 const WorkbenchDrawer = () => {
   const [activeTab, setActiveTab] = useState('potions');
   const items = useMemo(() => drawerItemsByTab[activeTab] || [], [activeTab]);
-  const sideTowerNotesHook = useMarkdownNotes('irim-side-tower-notes', { general: '' });
 
   return (
     <DrawerContainer>
@@ -39,7 +37,7 @@ const WorkbenchDrawer = () => {
         </ItemsGrid>
       </TabContent>
 
-      <SideTowerNotes sideTowerNotesHook={sideTowerNotesHook} />
+      <SideTowerNotes />
     </DrawerContainer>
   );
 };

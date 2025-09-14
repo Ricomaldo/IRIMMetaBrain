@@ -6,10 +6,11 @@ import {
   NavigationZone
 } from './RoomCanvas.styles';
 import RoomNote from '../../rooms/RoomNote/RoomNote';
+import AtelierRoom from '../../rooms/Atelier/AtelierRoom';
 import { roomConfig } from '../../../utils/roomPositions';
 import { wireframeColors } from '../../../utils/assetMapping';
 
-const RoomCanvas = ({ roomNavHook, roomNotesHook }) => {
+const RoomCanvas = ({ roomNavHook }) => {
   const { currentRoom, navigateToRoom, getAvailableDirections } = roomNavHook;
   const availableDirections = getAvailableDirections();
 
@@ -32,12 +33,17 @@ const RoomCanvas = ({ roomNavHook, roomNotesHook }) => {
             background={room.background}
             roomColors={wireframeColors}
           >
-            {room.name}
-            {room.type !== 'empty' && (
-              <RoomNote
-                roomType={room.type}
-                roomNotesHook={roomNotesHook}
-              />
+            {room.type === 'atelier' ? (
+              <AtelierRoom />
+            ) : (
+              <>
+                {room.name}
+                {room.type !== 'empty' && (
+                  <RoomNote
+                    roomType={room.type}
+                  />
+                )}
+              </>
             )}
           </RoomSlot>
         ))}

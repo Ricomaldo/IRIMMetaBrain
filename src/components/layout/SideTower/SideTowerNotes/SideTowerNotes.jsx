@@ -3,10 +3,11 @@
 import React, { useState } from 'react';
 import { NoteContainer } from './SideTowerNotes.styles';
 import MarkdownEditor from '../../../common/MarkdownEditor';
+import useNotesStore from '../../../../stores/useNotesStore';
 
-const SideTowerNotes = ({ sideTowerNotesHook }) => {
+const SideTowerNotes = () => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const { notes, updateSingleNote } = sideTowerNotesHook;
+  const { getSideTowerNote, updateSideTowerNote } = useNotesStore();
 
   if (!isExpanded) {
     return (
@@ -19,8 +20,8 @@ const SideTowerNotes = ({ sideTowerNotesHook }) => {
   return (
     <div onClick={(e) => e.stopPropagation()}>
       <MarkdownEditor
-        value={notes.general || ''}
-        onChange={updateSingleNote}
+        value={getSideTowerNote()}
+        onChange={updateSideTowerNote}
         placeholder="Notes de développement SideTower..."
         height="120px"
         compact={true}
