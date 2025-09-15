@@ -8,12 +8,12 @@ export const PreviewContainer = styled.div`
   height: ${props => props.height === '100%' ? '100%' : 'auto'};
   flex: ${props => props.height === '100%' ? '1' : 'none'};
   overflow-y: auto;
-  border: 1px solid ${props => props.theme.colors.border};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 4px;
   background: #FFFFFF;
   padding: 8px;
   font-size: ${props => props.compact ? '11px' : '12px'};
-  font-family: ${props => props.theme.fonts.main};
+  font-family: ${({ theme }) => theme.typography.families.primary};
   line-height: 1.4;
   color: #000000;
   text-shadow: none;
@@ -58,7 +58,7 @@ export const PreviewContainer = styled.div`
 
   code {
     background: #F5F5DC;
-    border: 1px solid ${props => props.theme.colors.border};
+    border: 1px solid ${({ theme }) => theme.colors.border};
     border-radius: 3px;
     padding: 1px 3px;
     font-family: 'Courier New', monospace;
@@ -67,7 +67,7 @@ export const PreviewContainer = styled.div`
 
   pre {
     background: #F5F5DC;
-    border: 1px solid ${props => props.theme.colors.border};
+    border: 1px solid ${({ theme }) => theme.colors.border};
     border-radius: 4px;
     padding: 8px;
     margin: 8px 0;
@@ -81,16 +81,16 @@ export const PreviewContainer = styled.div`
   }
 
   blockquote {
-    border-left: 3px solid ${props => props.theme.colors.primary};
+    border-left: 3px solid ${({ theme }) => theme.colors.primary};
     padding-left: 8px;
     margin: 8px 0;
     font-style: italic;
-    color: ${props => props.theme.colors.text.secondary};
+    color: ${({ theme }) => theme.colors.text.secondary};
   }
 
   hr {
     border: none;
-    border-top: 1px solid ${props => props.theme.colors.border};
+    border-top: 1px solid ${({ theme }) => theme.colors.border};
     margin: 12px 0;
   }
 `;
@@ -100,7 +100,7 @@ export const EmptyPreview = styled.div`
   align-items: center;
   justify-content: center;
   min-height: ${props => props.height || '120px'};
-  color: ${props => props.theme.colors.text.secondary};
+  color: ${({ theme }) => theme.colors.text.secondary};
   font-style: italic;
   opacity: 0.6;
 `;

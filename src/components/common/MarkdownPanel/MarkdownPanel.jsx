@@ -74,9 +74,9 @@ const MarkdownPanel = ({
           isHeaderAction={true}
           onClick={() => setIsEditing(!isEditing)}
           style={{
-            background: isEditing ? '#FFFFFF' : '#F0F0F0',
-            border: '1px solid #A0522D',
-            borderRadius: '4px',
+            background: isEditing ? 'white' : '#F0F0F0',
+            border: '1px solid currentColor',
+            borderRadius: '6px',
             padding: '4px 8px',
             fontSize: '12px',
             cursor: 'pointer',

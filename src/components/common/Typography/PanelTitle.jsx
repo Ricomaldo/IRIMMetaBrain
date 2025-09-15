@@ -3,12 +3,12 @@
 import styled from 'styled-components';
 
 export const PanelTitle = styled.h3`
-  font-family: ${props => props.theme.typography.families.primary};
-  font-size: ${props => props.theme.typography.sizes.md};
-  font-weight: ${props => props.theme.typography.weights.bold};
-  line-height: ${props => props.theme.typography.lineHeights.tight};
+  font-family: ${({ theme }) => theme.typography.families.primary};
+  font-size: ${({ theme }) => theme.typography.sizes.md};
+  font-weight: ${({ theme }) => theme.typography.weights.bold};
+  line-height: ${({ theme }) => theme.typography.lineHeights.tight};
   text-transform: uppercase;
-  letter-spacing: ${props => props.theme.typography.letterSpacing.wider};
+  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
   text-align: center;
   margin: 0 0 12px 0;
   opacity: 0.95;

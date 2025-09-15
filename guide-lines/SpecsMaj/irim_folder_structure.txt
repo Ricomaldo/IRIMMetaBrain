@@ -13,28 +13,103 @@ src/
 │   │       ├── ControlTower/
 │   │       │   ├── ControlTower.jsx
 │   │       │   └── ControlTower.styles.js
-│   │       └── WorkbenchDrawer/
-│   │           ├── WorkbenchDrawer.jsx
-│   │           └── WorkbenchDrawer.styles.js
+│   │       ├── WorkbenchDrawer/
+│   │       │   ├── WorkbenchDrawer.jsx
+│   │       │   └── WorkbenchDrawer.styles.js
+│   │       └── SideTowerNotes/
+│   │           ├── SideTowerNotes.jsx
+│   │           └── SideTowerNotes.styles.js
 │   ├── rooms/
-│   │   ├── RoomNote/
-│   │   │   ├── RoomNote.jsx
-│   │   │   └── RoomNote.styles.js
+│   │   ├── shared/
+│   │   │   ├── BaseRoom/
+│   │   │   │   ├── BaseRoom.jsx
+│   │   │   │   ├── BaseRoom.styles.js
+│   │   │   │   └── index.js
+│   │   │   └── RoomNote/
+│   │   │       ├── RoomNote.jsx
+│   │   │       ├── RoomNote.styles.js
+│   │   │       └── index.js
 │   │   ├── Atelier/
+│   │   │   ├── AtelierRoom.jsx
+│   │   │   ├── AtelierRoom.styles.js
+│   │   │   ├── AtelierPanels/
+│   │   │   │   ├── AtelierPanels.jsx
+│   │   │   │   └── AtelierPanels.styles.js
+│   │   │   ├── EditablePanel/
+│   │   │   │   ├── EditablePanel.jsx
+│   │   │   │   └── EditablePanel.styles.js
+│   │   │   └── IdeasCollapse/
+│   │   │       └── IdeasCollapse.jsx
+│   │   ├── Sanctuaire/
+│   │   │   ├── SanctuaireRoom.jsx
+│   │   │   └── SanctuaireRoom.styles.js
 │   │   ├── Chambre/
+│   │   │   ├── ChambreRoom.jsx
+│   │   │   ├── ChambreRoom.styles.js
+│   │   │   └── index.js
+│   │   ├── Cuisine/
+│   │   │   ├── CuisineRoom.jsx
+│   │   │   └── CuisineRoom.styles.js
+│   │   ├── Comptoir/
+│   │   │   ├── ComptoirRoom.jsx
+│   │   │   ├── ComptoirRoom.styles.js
+│   │   │   └── index.js
+│   │   ├── Jardin/
+│   │   │   ├── JardinRoom.jsx
+│   │   │   └── JardinRoom.styles.js
 │   │   ├── Forge/
-│   │   └── Boutique/
+│   │   │   ├── ForgeRoom.jsx
+│   │   │   ├── ForgeRoom.styles.js
+│   │   │   └── index.js
+│   │   ├── Boutique/
+│   │   │   ├── BoutiqueRoom.jsx
+│   │   │   ├── BoutiqueRoom.styles.js
+│   │   │   └── index.js
+│   │   ├── Scriptorium/
+│   │   │   ├── ScriptoriumRoom.jsx
+│   │   │   ├── ScriptoriumRoom.styles.js
+│   │   │   └── index.js
+│   │   ├── Bibliotheque/
+│   │   │   ├── BibliothequeRoom.jsx
+│   │   │   ├── BibliothequeRoom.styles.js
+│   │   │   └── index.js
+│   │   └── Cave/
+│   │       ├── CaveRoom.jsx
+│   │       ├── CaveRoom.styles.js
+│   │       └── index.js
 │   ├── common/
-│   │   └── IconButton/
-│   │       ├── IconButton.jsx
-│   │       └── IconButton.styles.js
+│   │   ├── IconButton/
+│   │   │   ├── IconButton.jsx
+│   │   │   └── IconButton.styles.js
+│   │   ├── MarkdownEditor/
+│   │   │   ├── MarkdownEditor.jsx
+│   │   │   ├── MarkdownEditor.styles.js
+│   │   │   ├── index.js
+│   │   │   └── MarkdownPreview/
+│   │   │       ├── MarkdownPreview.jsx
+│   │   │       └── MarkdownPreview.styles.js
+│   │   ├── MarkdownPanel/
+│   │   │   ├── MarkdownPanel.jsx
+│   │   │   └── index.js
+│   │   ├── Panel/
+│   │   │   ├── Panel.jsx
+│   │   │   ├── Panel.styles.js
+│   │   │   └── index.js
+│   │   └── Typography/
+│   │       ├── Typography.jsx
+│   │       ├── PanelTitle.jsx
+│   │       └── index.js
 │   └── navigation/
 │       └── ArrowButton/
 │           ├── ArrowButton.jsx
 │           └── ArrowButton.styles.js
 ├── hooks/
 │   ├── useRoomNavigation.js
-│   └── useRoomNotes.js
+│   ├── usePanelContent.js
+│   └── useTypography.js
+├── stores/
+│   ├── useNotesStore.js
+│   └── useProjectsStore.js
 ├── styles/
 │   ├── theme.js
 │   └── mixins.js

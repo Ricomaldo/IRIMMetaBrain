@@ -8,7 +8,7 @@ export const EditorContainer = styled.div`
   height: ${props => props.$variant === 'embedded' ? '100%' : 'auto'};
   ${props => props.$variant === 'embedded' ? 'background: transparent;' : parchmentBg}
   border-radius: ${props => props.$variant === 'embedded' ? '0' : '8px'};
-  border: ${props => props.$variant === 'embedded' ? 'none' : '2px solid #A0522D'};
+  border: ${props => props.$variant === 'embedded' ? 'none' : ({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
   overflow: hidden;
   display: ${props => props.$variant === 'embedded' ? 'flex' : 'block'};
   flex-direction: ${props => props.$variant === 'embedded' ? 'column' : 'initial'};
@@ -22,7 +22,7 @@ export const EditorHeader = styled.div`
   align-items: center;
   padding: 8px 12px;
   background: ${props => `${props.theme.colors.primary}1A`};
-  border-bottom: 2px solid ${props => props.theme.colors.border};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.border};
   font-size: 12px;
   font-weight: bold;
 `;
@@ -41,7 +41,7 @@ export const TabsContainer = styled.div`
 
 export const Tab = styled.button`
   padding: 4px 8px;
-  border: 1px solid ${props => props.theme.colors.border};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 4px;
   background: ${props => props.$active
     ? props.theme.colors.primary
@@ -89,7 +89,7 @@ export const Textarea = styled.textarea`
   background: #FFFFFF;
   resize: ${props => props.$height === '100%' ? 'none' : 'vertical'};
   font-size: ${props => props.$compact ? '11px' : '12px'};
-  font-family: ${props => props.theme.fonts.main};
+  font-family: ${({ theme }) => theme.typography.families.primary};
   line-height: 1.4;
   padding: 8px;
   color: #000000;
@@ -98,13 +98,13 @@ export const Textarea = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: ${props => props.theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.primary};
     background: #FFFFFF !important;
-    box-shadow: 0 0 0 2px ${props => props.theme.colors.secondary};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.secondary};
   }
 
   &::placeholder {
-    color: ${props => props.theme.colors.text.secondary};
+    color: ${({ theme }) => theme.colors.text.secondary};
     opacity: 0.6;
     font-style: italic;
   }

@@ -8,8 +8,8 @@ export const TowerContainer = styled.div`
   height: 100%;
   display: grid;
    grid-template-rows: 1fr 5fr;
-  gap: ${props => props.theme.spacing.sm};
+  gap: ${({ theme }) => theme.spacing.sm};
   ${craftBorder}
   ${stoneBg}
-  padding: ${props => props.theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing.sm};
 `;

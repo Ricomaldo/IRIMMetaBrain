@@ -37,6 +37,33 @@ export const theme = {
     large: '60px',
     xlarge: '80px'
   },
+  surfaces: {
+    base: '#FFFFFF',
+    muted: '#F7F4EF',
+    overlay: 'rgba(0,0,0,0.3)'
+  },
+  radii: {
+    xs: '3px',
+    sm: '4px',
+    md: '6px',
+    lg: '8px',
+    xl: '12px'
+  },
+  borders: {
+    thin: '1px',
+    base: '2px',
+    thick: '3px',
+    heavy: '4px'
+  },
+  shadows: {
+    sm: '0 1px 2px rgba(0,0,0,0.1)',
+    md: '0 2px 4px rgba(0,0,0,0.2)',
+    lg: '0 4px 8px rgba(0,0,0,0.3)'
+  },
+  motion: {
+    durations: { fast: '120ms', base: '180ms', slow: '240ms' },
+    easings: { standard: 'ease', emphasized: 'cubic-bezier(.2,.8,.2,1)' }
+  },
   // Ancien système (deprecated)
   fonts: {
     main: '"Cinzel", serif',
@@ -91,7 +118,11 @@ export const theme = {
       widest: '0.1em'
     }
   },
-    zIndex: {
+  zIndex: {
+    base: 0,
+    level1: 1,
+    level2: 2,
+    level3: 3,
     navigation: 10,
     overlay: 20,
     modal: 30

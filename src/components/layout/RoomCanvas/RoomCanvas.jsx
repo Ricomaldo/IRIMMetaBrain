@@ -3,7 +3,6 @@ import {
   CanvasContainer,
   RoomsGrid,
   RoomSlot,
-  RoomTitleOverlay,
   NavigationZone
 } from './RoomCanvas.styles';
 import RoomNote from '../../rooms/shared/RoomNote/RoomNote';
@@ -24,11 +23,6 @@ import { roomColors } from '../../../utils/assetMapping';
 const RoomCanvas = ({ roomNavHook }) => {
   const { currentRoom, navigateToRoom, getAvailableDirections } = roomNavHook;
   const availableDirections = getAvailableDirections();
-  
-  // Trouver la room actuelle pour afficher son titre
-  const currentRoomData = roomConfig.find(room => 
-    room.x === currentRoom.x && room.y === currentRoom.y
-  );
 
   // Calcul pour centrer la pièce courante dans le viewport
   // Chaque pièce fait 25% de la largeur totale (100%/4) et 33.33% de la hauteur totale (100%/3)
@@ -127,13 +121,6 @@ const RoomCanvas = ({ roomNavHook }) => {
           </RoomSlot>
         ))}
       </RoomsGrid>
-
-      {/* Titre de la pièce actuelle */}
-      {currentRoomData && (
-        <RoomTitleOverlay>
-          {currentRoomData.name}
-        </RoomTitleOverlay>
-      )}
 
       {availableDirections.up && (
         <NavigationZone

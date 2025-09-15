@@ -10,23 +10,23 @@ export const TowerContainer = styled.div`
   grid-template-rows: 1fr 1fr;
   ${stoneBg}
   ${primaryLevel}
-  gap: ${props => props.theme.spacing.xs};
-  padding: ${props => props.theme.spacing.xs};
+  gap: ${({ theme }) => theme.spacing.xs};
+  padding: ${({ theme }) => theme.spacing.xs};
 `;
 
 export const TopRow = styled.div`
   display: grid;
   grid-template-columns: 1.5fr 3fr 1.5fr;
-  gap: ${props => props.theme.spacing.xs};
+  gap: ${({ theme }) => theme.spacing.xs};
   align-items: center;
-  height: ${props => props.theme.button.large};
-  padding: ${props => props.theme.spacing.xs};
+  height: ${({ theme }) => theme.button.large};
+  padding: ${({ theme }) => theme.spacing.xs};
 `;
 
 export const BottomRow = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  height: ${props => props.theme.button.large};
+  height: ${({ theme }) => theme.button.large};
   align-items: center;
 `;
 
@@ -34,8 +34,8 @@ export const LeftSquare = styled.div`
   ${craftBorderHeavy}
   ${flexCenter}
   flex-direction: column;
-  background: ${props => props.theme.colors.secondary};
-  color: ${props => props.theme.colors.text.primary};
+  background: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.text.primary};
   font-weight: bold;
   text-align: center;
 `;
@@ -44,12 +44,12 @@ export const CenterRect = styled.div`
   ${craftBorderHeavy}
   ${flexCenter}
   flex-direction: column;
-  background: ${props => props.theme.colors.secondary};
-  color: ${props => props.theme.colors.text.primary};
+  background: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.text.primary};
   font-size: 14px;
-  gap: ${props => props.theme.spacing.xs};
-  height: ${props => props.theme.button.large};
-  padding: ${props => props.theme.spacing.xs};
+  gap: ${({ theme }) => theme.spacing.xs};
+  height: ${({ theme }) => theme.button.large};
+  padding: ${({ theme }) => theme.spacing.xs};
   text-align: center;
 `;
 
@@ -57,8 +57,8 @@ export const RightSquare = styled.div`
   ${craftBorderHeavy}
   ${flexCenter}
   flex-direction: column;
-  background: ${props => props.theme.colors.secondary};
-  color: ${props => props.theme.colors.text.primary};
+  background: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.text.primary};
   font-weight: bold;
   text-align: center;
 `;
@@ -66,10 +66,10 @@ export const RightSquare = styled.div`
 export const ActionGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: ${props => props.theme.spacing.xs};
+  gap: ${({ theme }) => theme.spacing.xs};
   height: 100%;
   place-items: center;
-  padding: ${props => props.theme.spacing.xs};
+  padding: ${({ theme }) => theme.spacing.xs};
   align-content: center;
-  max-height: ${props => props.theme.button.large};
+  max-height: ${({ theme }) => theme.button.large};
 `;

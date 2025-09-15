@@ -1,7 +1,7 @@
 // src/components/rooms/shared/RoomNote/RoomNote.jsx
 
 import React, { useState } from 'react';
-import { NoteContainer, NoteHeader, NoteContent } from './RoomNote.styles';
+import { NoteContainer, NoteHeader, NoteContent, RoomTitle } from './RoomNote.styles';
 import MarkdownEditor from '../../../common/MarkdownEditor';
 import useNotesStore from '../../../../stores/useNotesStore';
 import { icons } from '../../../../utils/assetMapping';
@@ -14,29 +14,33 @@ const RoomNote = ({ roomType }) => {
     setIsExpanded(!isExpanded);
   };
 
+  // Capitaliser le nom de la pièce
+  const capitalizedRoomType = roomType.charAt(0).toUpperCase() + roomType.slice(1);
+
   return (
     <NoteContainer onClick={(e) => e.stopPropagation()}>
       <NoteHeader onClick={toggleExpanded}>
+        <RoomTitle>{capitalizedRoomType}</RoomTitle>
         {isExpanded ? (
           <>{icons.note} {icons.collapse}</>
         ) : (
           <>Notes Dev de {roomType} {icons.expand}</>
         )}
       </NoteHeader>
-      {isExpanded && (
-        <NoteContent>
-          <MarkdownEditor
-            value={getRoomNote(roomType)}
-            onChange={(content) => updateRoomNote(roomType, content)}
-            placeholder={`Notes ${roomType}...`}
-            height="200px"
-            compact={false}
-            showPreview={true}
-            title={`Notes ${roomType}`}
-            variant="standalone"
-          />
-        </NoteContent>
-      )}
+        {isExpanded && (
+          <NoteContent>
+            <MarkdownEditor
+              value={getRoomNote(roomType)}
+              onChange={(content) => updateRoomNote(roomType, content)}
+              placeholder={`Notes ${roomType}...`}
+              height="200px"
+              compact={false}
+              showPreview={true}
+              title={`Notes ${roomType}`}
+              variant="standalone"
+            />
+          </NoteContent>
+        )}
     </NoteContainer>
   );
 };

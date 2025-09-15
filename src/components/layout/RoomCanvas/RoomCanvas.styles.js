@@ -2,6 +2,7 @@
 
 import styled from 'styled-components';
 import { craftBorder, craftBorderHeavy, parchmentBg, medievalShadow } from '../../../styles/mixins';
+import { alpha } from '../../../styles/color';
 
 export const CanvasContainer = styled.div`
   width: 100%;
@@ -11,7 +12,7 @@ export const CanvasContainer = styled.div`
   ${craftBorderHeavy}
   ${parchmentBg}
   cursor: crosshair;
-  padding: ${props => props.theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.md};
   box-sizing: border-box;
 `;
 
@@ -32,21 +33,21 @@ export const RoomSlot = styled.div.withConfig({
     !['roomType', 'roomColors', 'background'].includes(prop)
 })`
   ${craftBorder}
-  background: ${props => props.roomColors?.[props.roomType] || '#2F1B14'};
+  background: ${({ roomColors, roomType, theme }) => roomColors?.[roomType] || theme.colors.text.primary};
   background-image: ${props => props.background ? `url(${props.background})` : 'none'};
   background-size: cover;
   background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${props => props.theme.spacing.lg};
+  font-size: ${({ theme }) => theme.spacing.lg};
   font-weight: bold;
-  font-family: ${props => props.theme.fonts.main};
-  color: ${props => props.theme.colors.text.primary};
+  font-family: ${({ theme }) => theme.typography.families.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
   position: relative;
   margin: 2px;
-  border-radius: 6px;
+  border-radius: ${({ theme }) => theme.radii.md};
   ${medievalShadow}
 
   &::before {
@@ -56,10 +57,10 @@ export const RoomSlot = styled.div.withConfig({
     left: 0;
     right: 0;
     bottom: 0;
-    background: ${props => props.background ?
-      'linear-gradient(rgba(139,69,19,0.2), rgba(139,69,19,0.4))' :
-      'none'};
-    border-radius: 4px;
+    background: ${({ background, theme }) => background
+      ? `linear-gradient(${alpha(theme.colors.primary, 0.2)}, ${alpha(theme.colors.primary, 0.4)})`
+      : 'none'};
+    border-radius: ${({ theme }) => theme.radii.sm};
     pointer-events: none;
   }
 `;
@@ -69,42 +70,42 @@ export const RoomTitleOverlay = styled.div`
   top: 80px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 15;
+  z-index: ${({ theme }) => theme.zIndex.overlay || 15};
   
-  font-family: ${props => props.theme.typography.families.primary};
-  font-size: ${props => props.theme.typography.sizes.xl};
-  font-weight: ${props => props.theme.typography.weights.bold};
-  color: ${props => props.theme.colors.text.primary};
+  font-family: ${({ theme }) => theme.typography.families.primary};
+  font-size: ${({ theme }) => theme.typography.sizes.xl};
+  font-weight: ${({ theme }) => theme.typography.weights.bold};
+  color: ${({ theme }) => theme.colors.text.primary};
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: ${props => props.theme.typography.letterSpacing.wider};
+  letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
   text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
   user-select: none;
   
-  background: rgba(0, 0, 0, 0.3);
-  padding: 8px 16px;
-  border-radius: 8px;
+  background: ${() => alpha('#000000', 0.3)};
+  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
+  border-radius: ${({ theme }) => theme.radii.lg};
   backdrop-filter: blur(4px);
 `;
 
 export const NavigationZone = styled.div`
   position: absolute;
-  background: ${props => `${props.theme.colors.primary}66`}; /* 40% opacity */
-  border: 2px solid rgba(210, 180, 140, 0.6);
-  border-radius: 8px;
-  z-index: 10;
+  background: ${({ theme }) => alpha(theme.colors.primary, 0.4)}; /* 40% opacity */
+  border: ${({ theme }) => `${theme.borders.base} solid ${alpha(theme.colors.secondary, 0.6)}`};
+  border-radius: ${({ theme }) => theme.radii.lg};
+  z-index: ${({ theme }) => theme.zIndex.navigation};
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #F4E4BC;
+  color: ${({ theme }) => theme.colors.text.light};
   font-size: 24px;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
   opacity: 0.7;
-  transition: all 0.3s ease;
+  transition: ${({ theme }) => `all ${theme.motion.durations.base} ${theme.motion.easings.standard}`};
   ${medievalShadow}
 
   &.zone-top {
-    top: ${props => props.theme.spacing.md};
+    top: ${({ theme }) => theme.spacing.md};
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
@@ -113,7 +114,7 @@ export const NavigationZone = styled.div`
   }
 
   &.zone-bottom {
-    bottom: ${props => props.theme.spacing.md};
+    bottom: ${({ theme }) => theme.spacing.md};
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
@@ -124,7 +125,7 @@ export const NavigationZone = styled.div`
   &.zone-left {
     top: 50%;
     transform: translateY(-50%);
-    left: ${props => props.theme.spacing.md};
+    left: ${({ theme }) => theme.spacing.md};
     width: 40px;
     height: 60px;
     cursor: w-resize;
@@ -133,7 +134,7 @@ export const NavigationZone = styled.div`
   &.zone-right {
     top: 50%;
     transform: translateY(-50%);
-    right: ${props => props.theme.spacing.md};
+    right: ${({ theme }) => theme.spacing.md};
     width: 40px;
     height: 60px;
     cursor: e-resize;
@@ -141,8 +142,8 @@ export const NavigationZone = styled.div`
 
   &:hover {
     opacity: 1;
-    background: ${props => `${props.theme.colors.primary}99`}; /* 60% opacity */
-    border-color: rgba(218, 165, 32, 0.8);
+    background: ${({ theme }) => alpha(theme.colors.primary, 0.6)}; /* 60% opacity */
+    border-color: ${({ theme }) => alpha(theme.colors.accent, 0.8)};
     transform: ${props => 
       props.className?.includes('zone-top') ? 'translateX(-50%) translateY(-2px)' :
       props.className?.includes('zone-bottom') ? 'translateX(-50%) translateY(2px)' :

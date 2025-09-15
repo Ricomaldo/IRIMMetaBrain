@@ -21,12 +21,12 @@ export const ButtonContainer = styled.button.withConfig({
   ${props => {
     if (props.variant === 'tab') {
       return `
-        transition: all 0.1s ease;
-        border: 2px solid ${props.theme.colors.border};
+        transition: all ${props.theme.motion.durations.fast} ${props.theme.motion.easings.standard};
+        border: ${props.theme.borders.base} solid ${props.theme.colors.border};
         border-bottom: none;
-        border-radius: 6px 6px 0 0;
+        border-radius: ${props.theme.radii.md} ${props.theme.radii.md} 0 0;
         position: relative;
-        z-index: 3;
+        z-index: ${props.theme.zIndex.level3};
         color: ${props.active ? props.theme.colors.text.primary : props.theme.colors.secondary};
         &:hover {
           transform: none;
@@ -44,7 +44,7 @@ export const ButtonContainer = styled.button.withConfig({
       return `
         ${tertiaryLevel}
         border-color: ${props.theme.colors.text.secondary};
-        transition: all 0.1s ease;
+        transition: all ${props.theme.motion.durations.fast} ${props.theme.motion.easings.standard};
         &:hover {
           background: ${props.theme.colors.text.secondary};
           color: ${props.theme.colors.background};
@@ -56,7 +56,7 @@ export const ButtonContainer = styled.button.withConfig({
       `;
     }
     return `
-      transition: all 0.1s ease;
+      transition: all ${props.theme.motion.durations.fast} ${props.theme.motion.easings.standard};
       &:hover {
         background: ${props.theme.colors.accent};
       }
@@ -75,7 +75,7 @@ export const IconWrapper = styled.div`
 
 export const Label = styled.span`
   font-size: 8px;
-  color: ${props => props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
   margin-top: 2px;
   text-align: center;
   font-weight: 500;

@@ -6,9 +6,9 @@ import { parchmentBg } from '../../../../styles/mixins';
 export const NoteContainer = styled.div`
   width: 100%;
   ${parchmentBg}
-  border-radius: 8px;
-  border: 2px solid #A0522D;
-  margin-top: 8px;
+  border-radius: ${({ theme }) => theme.radii.lg};
+  border: ${({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
+  margin-top: ${({ theme }) => theme.spacing.sm};
 `;
 
 export const NoteHeader = styled.div`
@@ -17,14 +17,14 @@ export const NoteHeader = styled.div`
   font-size: 12px;
   font-weight: bold;
   text-align: center;
-  border-bottom: ${props => props.expanded ? `2px solid ${props.theme.colors.border}` : 'none'};
+  border-bottom: ${({ expanded, theme }) => expanded ? `${theme.borders.base} solid ${theme.colors.border}` : 'none'};
   user-select: none;
-  background: ${props => `${props.theme.colors.primary}1A`}; /* 10% opacity */
+  background: ${({ theme }) => `${theme.colors.primary}1A`}; /* 10% opacity */
   border-radius: 6px;
   transition: background 0.2s ease;
 
   &:hover {
-    background: ${props => `${props.theme.colors.primary}33`}; /* 20% opacity */
+    background: ${({ theme }) => `${theme.colors.primary}33`}; /* 20% opacity */
   }
 `;
 
@@ -47,25 +47,25 @@ export const NoteContent = styled.div`
 export const NoteTextarea = styled.textarea`
   width: 100%;
   height: 120px;
-  border: 1px solid rgba(139, 69, 19, 0.3);
+  border: ${({ theme }) => `1px solid rgba(139, 69, 19, 0.3)`};
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.8);
   resize: none;
   font-size: 11px;
-  font-family: ${props => props.theme.fonts.main};
+  font-family: ${({ theme }) => theme.typography.families.primary};
   line-height: 1.4;
   padding: 8px;
-  color: ${props => props.theme.colors.text.primary};
+  color: ${({ theme }) => theme.colors.text.primary};
 
   &:focus {
     outline: none;
-    border-color: ${props => props.theme.colors.border};
+    border-color: ${({ theme }) => theme.colors.border};
     background: rgba(255, 255, 255, 0.95);
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
   }
 
   &::placeholder {
-    color: ${props => props.theme.colors.text.secondary};
+    color: ${({ theme }) => theme.colors.text.secondary};
     opacity: 0.6;
     font-style: italic;
   }
