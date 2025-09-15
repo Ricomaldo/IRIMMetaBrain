@@ -1,7 +1,7 @@
-// src/components/rooms/RoomNote/RoomNote.styles.js
+// src/components/rooms/shared/RoomNote/RoomNote.styles.js
 
 import styled from 'styled-components';
-import { parchmentBg } from '../../../styles/mixins';
+import { parchmentBg } from '../../../../styles/mixins';
 
 export const NoteContainer = styled.div`
   position: absolute;

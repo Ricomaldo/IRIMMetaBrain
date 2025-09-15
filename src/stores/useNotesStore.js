@@ -7,12 +7,25 @@ import { debounce } from '../utils/debounce';
 const useNotesStore = create(
   persist(
     (set, get) => ({
-      // État des notes
+      // État des notes - Architecture 4x3 complète
       roomNotes: {
+        // Ligne 0: [Sanctuaire] [Chambre] [Cuisine] [Comptoir]
+        sanctuaire: '',
         chambre: '',
+        cuisine: '',
+        comptoir: '',
+
+        // Ligne 1: [Jardin] [ATELIER] [Forge] [Boutique]
+        jardin: '',
         atelier: '',
         forge: '',
-        boutique: ''
+        boutique: '',
+
+        // Ligne 2: [Scriptorium] [Bibliothèque] [Cave]
+        scriptorium: '',
+        bibliotheque: '',
+        cave: ''
+        // 'undefined' volontairement omis - pas de notes pour "À définir"
       },
       sideTowerNotes: {
         general: ''
@@ -50,7 +63,11 @@ const useNotesStore = create(
       // Actions de maintenance
       clearAllNotes: () => {
         set({
-          roomNotes: { chambre: '', atelier: '', forge: '', boutique: '' },
+          roomNotes: {
+            sanctuaire: '', chambre: '', cuisine: '', comptoir: '',
+            jardin: '', atelier: '', forge: '', boutique: '',
+            scriptorium: '', bibliotheque: '', cave: ''
+          },
           sideTowerNotes: { general: '' }
         });
       },
@@ -83,7 +100,30 @@ const useNotesStore = create(
       version: 1,
       // Migration des anciennes données si nécessaire
       migrate: (persistedState, version) => {
-        // Migration future si structure change
+        if (version === 0) {
+          // Migration depuis l'ancien format (4 pièces seulement)
+          const oldRoomNotes = persistedState.roomNotes || {};
+
+          return {
+            ...persistedState,
+            roomNotes: {
+              // Préserver les anciennes notes
+              chambre: oldRoomNotes.chambre || '',
+              atelier: oldRoomNotes.atelier || '',
+              forge: oldRoomNotes.forge || '',
+              boutique: oldRoomNotes.boutique || '',
+
+              // Ajouter les nouvelles pièces vides
+              sanctuaire: '',
+              cuisine: '',
+              comptoir: '',
+              jardin: '',
+              scriptorium: '',
+              bibliotheque: '',
+              cave: ''
+            }
+          };
+        }
         return persistedState;
       }
     }

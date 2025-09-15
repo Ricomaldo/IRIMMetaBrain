@@ -2,12 +2,12 @@
 
 import React from 'react';
 import useProjectsStore from '../../../stores/useProjectsStore';
-import RoomNote from '../RoomNote/RoomNote';
+import BaseRoom from '../shared/BaseRoom';
 import MarkdownPanel from '../../common/MarkdownPanel';
 import { usePanelContent } from '../../../hooks/usePanelContent';
 import {
   AtelierGrid,
-  TitreProjetPanel
+  ProjetNameBar
 } from './AtelierRoom.styles';
 
 const AtelierRoom = () => {
@@ -23,54 +23,55 @@ const AtelierRoom = () => {
 
   if (!project) {
     return (
-      <AtelierGrid>
-        <TitreProjetPanel>
-          Aucun projet sélectionné
-        </TitreProjetPanel>
-      </AtelierGrid>
+      <BaseRoom roomType="atelier" layoutType="grid">
+        <AtelierGrid>
+          <ProjetNameBar>
+            Aucun projet sélectionné
+          </ProjetNameBar>
+        </AtelierGrid>
+      </BaseRoom>
     );
   }
 
   return (
-    <AtelierGrid>
-      {/* Roadmap */}
-      <MarkdownPanel
-        title="Roadmap"
-        icon="🗺️"
-        variant="roadmap"
-        value={roadmapContent}
-        onChange={updateRoadmapContent}
-        placeholder="Définissez votre roadmap en markdown..."
-        gridColumn="1 / 3"
-        gridRow="1 / 4"
-        showMetrics={true}
-        editable={true}
-        showPreview={true}
-      />
+    <BaseRoom roomType="atelier" layoutType="grid">
+      <AtelierGrid>
+        {/* Roadmap */}
+        <MarkdownPanel
+          title="Roadmap"
+          icon="🗺️"
+          variant="roadmap"
+          value={roadmapContent}
+          onChange={updateRoadmapContent}
+          placeholder="Définissez votre roadmap en markdown..."
+          gridColumn="1 / 3"
+          gridRow="2 / 5"
+          showMetrics={true}
+          editable={true}
+          showPreview={true}
+        />
 
-      {/* Todo */}
-      <MarkdownPanel
-        title="Todo"
-        icon="✅"
-        variant="todo"
-        value={todoContent}
-        onChange={updateTodoContent}
-        placeholder="Gérez vos tâches en markdown..."
-        gridColumn="4 / 6"
-        gridRow="1 / 4"
-        showMetrics={true}
-        editable={true}
-        showPreview={true}
-      />
+        {/* Todo */}
+        <MarkdownPanel
+          title="Todo"
+          icon="✅"
+          variant="todo"
+          value={todoContent}
+          onChange={updateTodoContent}
+          placeholder="Gérez vos tâches en markdown..."
+          gridColumn="4 / 6"
+          gridRow="2 / 5"
+          showMetrics={true}
+          editable={true}
+          showPreview={true}
+        />
 
-      {/* Titre Projet - Colonnes 2.5-4.5, Row 4 */}
-      <TitreProjetPanel>
-        {project.name}
-      </TitreProjetPanel>
-
-      {/* RoomNote - Positionnement absolu */}
-      <RoomNote roomType="atelier" />
-    </AtelierGrid>
+        {/* Nom du projet - Discret en haut */}
+        <ProjetNameBar>
+          {project.name}
+        </ProjetNameBar>
+      </AtelierGrid>
+    </BaseRoom>
   );
 };
 

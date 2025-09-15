@@ -10,42 +10,32 @@ import styled from 'styled-components';
 // [   ][TitreProjet][   ][RoomNote]
 
 const AtelierGrid = styled.div`
-  position: relative;
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 8px;
-  padding: 64px;
 `;
 
 // Styles pour les nouveaux panneaux éditables
 // (Les panneaux utilisent maintenant EditablePanel avec wrappers parchemin)
 
-const TitreProjetPanel = styled.div`
-  grid-column: 3 / 4;
-  grid-row: 4;
-  border: 2px solid ${props => props.theme.colors.border};
-  background: ${props => props.theme.colors.accents.cold};
-  color: ${props => props.theme.colors.text.light};
-  border-radius: 8px;
-  padding: 6px 16px;
+const ProjetNameBar = styled.div`
+  grid-column: 1 / -1;
+  grid-row: 1;
+  background: rgba(0, 0, 0, 0.1);
+  color: ${props => props.theme.colors.text.secondary};
+  border-radius: 4px;
+  padding: 4px 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  ${props => props.theme.typography.families.primary ? `
-    font-family: ${props.theme.typography.families.primary};
-    font-size: ${props.theme.typography.sizes.lg};
-    font-weight: ${props.theme.typography.weights.bold};
-    line-height: ${props.theme.typography.lineHeights.tight};
-  ` : `
-    font-size: 12px;
-    font-weight: bold;
-  `}
-  height: 40px;
-  margin-top: 32px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  font-size: ${props => props.theme.typography.sizes.sm};
+  font-weight: ${props => props.theme.typography.weights.medium};
+  opacity: 0.8;
+  height: 24px;
+  z-index: 1;
 `;
 
 
@@ -70,5 +60,5 @@ const PanelTitle = styled.h3`
 
 export {
   AtelierGrid,
-  TitreProjetPanel
+  ProjetNameBar
 };

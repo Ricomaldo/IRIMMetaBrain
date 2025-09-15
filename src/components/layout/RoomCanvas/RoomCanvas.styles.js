@@ -64,6 +64,29 @@ export const RoomSlot = styled.div.withConfig({
   }
 `;
 
+export const RoomTitleOverlay = styled.div`
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  
+  font-family: ${props => props.theme.typography.families.primary};
+  font-size: ${props => props.theme.typography.sizes.xl};
+  font-weight: ${props => props.theme.typography.weights.bold};
+  color: ${props => props.theme.colors.text.primary};
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: ${props => props.theme.typography.letterSpacing.wider};
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  user-select: none;
+  
+  background: rgba(0, 0, 0, 0.3);
+  padding: 8px 16px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+`;
+
 export const NavigationZone = styled.div`
   position: absolute;
   background: ${props => `${props.theme.colors.primary}66`}; /* 40% opacity */

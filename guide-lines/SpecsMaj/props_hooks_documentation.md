@@ -53,7 +53,7 @@
 {
   roomType: string,           // 'chambre'|'atelier'|'forge'|'boutique'|'empty'
   background: string|null,    // URL asset ou null
-  roomColors: object          // Palette couleurs (wireframeColors|roomColors)
+  roomColors: object          // Palette couleurs spécifiques par pièce
 }
 ```
 
@@ -180,13 +180,10 @@ roomBackgrounds: {
   // ...
 }
 
-roomColors: {          // Mode coloré
-  chambre: '#FFE4B5',
-  // ...
-}
-
-wireframeColors: {     // Mode B&W
-  chambre: '#FFFFFF',
+roomColors: {          // Couleurs spécifiques par pièce
+  chambre: '#FFE4B5',    // Beige moelleux
+  atelier: '#DEB887',    // Bois buriné
+  cuisine: '#F0E68C',    // Jaune chaleureux
   // ...
 }
 
@@ -208,11 +205,7 @@ icons: {
 
 **Dans RoomCanvas.jsx:**
 ```js
-// Mode wireframe B&W
-import { wireframeColors } from '../../../utils/assetMapping';
-roomColors={wireframeColors}
-
-// Mode craft coloré
+// Utilisation des couleurs spécifiques par pièce
 import { roomColors } from '../../../utils/assetMapping';
 roomColors={roomColors}
 ```

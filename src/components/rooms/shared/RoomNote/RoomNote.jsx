@@ -1,10 +1,10 @@
-// src/components/rooms/RoomNote/RoomNote.jsx
+// src/components/rooms/shared/RoomNote/RoomNote.jsx
 
 import React, { useState } from 'react';
 import { NoteContainer, NoteHeader, NoteContent } from './RoomNote.styles';
-import MarkdownEditor from '../../common/MarkdownEditor';
-import useNotesStore from '../../../stores/useNotesStore';
-import { icons } from '../../../utils/assetMapping';
+import MarkdownEditor from '../../../common/MarkdownEditor';
+import useNotesStore from '../../../../stores/useNotesStore';
+import { icons } from '../../../../utils/assetMapping';
 
 const RoomNote = ({ roomType }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -32,8 +32,8 @@ const RoomNote = ({ roomType }) => {
             height="200px"
             compact={false}
             showPreview={true}
-            toolbar={true}
             title={`Notes ${roomType}`}
+            variant="standalone"
           />
         </NoteContent>
       )}
