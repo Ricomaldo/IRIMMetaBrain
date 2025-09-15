@@ -218,3 +218,87 @@ roomColors={roomColors}
 ```
 
 **Effet:** Change couleurs de base des pièces sans affecter backgrounds d'assets.
+
+---
+
+## Composants: Panel & MarkdownPanel (Factorisation)
+
+### Composant: Panel (Base)
+
+**Fichier:** `components/common/Panel/Panel.jsx`
+
+**Props:**
+```js
+{
+  // CONTENU
+  title: string,              // Titre du panneau
+  icon: string,               // Emoji d'icône
+  children: ReactNode,        // Contenu du panneau
+
+  // APPARENCE
+  variant: string = "default", // "default"|"roadmap"|"todo"|"notes"
+  maxHeight: string = "500px", // Hauteur maximale
+
+  // LAYOUT
+  gridColumn: string,         // Position CSS Grid
+  gridRow: string,            // Position CSS Grid
+
+  // COMPORTEMENT
+  collapsible: boolean = true,     // Peut être réduit
+  defaultCollapsed: boolean = false, // État initial
+  badge: string|number,       // Badge de notification
+}
+```
+
+**Usage:** Panneau de base réutilisable avec header, collapse et styles parchemin.
+
+---
+
+### Composant: MarkdownPanel
+
+**Fichier:** `components/common/MarkdownPanel/MarkdownPanel.jsx`
+
+**Props:**
+```js
+{
+  // HÉRITE DE PANEL
+  ...panelProps,              // Toutes les props de Panel
+
+  // MARKDOWN
+  value: string = "",         // Contenu Markdown
+  onChange: function,         // Callback de changement
+  placeholder: string,        // Texte placeholder
+
+  // ÉDITION
+  editable: boolean = true,        // Mode édition activé
+  showPreview: boolean = true,     // Afficher l'aperçu
+  showMetrics: boolean = false,    // Afficher métriques (TODO/checkboxes)
+}
+```
+
+**Usage:** Panel spécialisé pour contenu Markdown avec édition/preview et métriques.
+
+**Exemples d'usage:**
+```js
+// Atelier - Roadmap
+<MarkdownPanel
+  title="Roadmap"
+  icon="🗺️"
+  variant="roadmap"
+  value={roadmapContent}
+  onChange={updateRoadmap}
+  showMetrics={true}
+  gridColumn="1 / 3"
+  gridRow="1 / 4"
+/>
+
+// Salon - Notes
+<MarkdownPanel
+  title="Notes Salon"
+  icon="🛋️"
+  variant="notes"
+  value={salonNotes}
+  onChange={updateSalonNotes}
+  maxHeight="350px"
+/>
+```

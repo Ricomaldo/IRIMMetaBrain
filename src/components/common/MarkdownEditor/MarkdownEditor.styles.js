@@ -12,6 +12,8 @@ export const EditorContainer = styled.div`
   overflow: hidden;
   display: ${props => props.$variant === 'embedded' ? 'flex' : 'block'};
   flex-direction: ${props => props.$variant === 'embedded' ? 'column' : 'initial'};
+  flex: ${props => props.$variant === 'embedded' ? '1' : 'none'};
+  min-height: 0;
 `;
 
 export const EditorHeader = styled.div`
@@ -62,12 +64,13 @@ export const Tab = styled.button`
 `;
 
 export const EditorContent = styled.div`
-  padding: ${props => props.$variant === 'embedded' ? '0' : '12px'};
+  padding: 0;
   animation: ${props => props.$animate ? 'fadeIn 0.2s ease-out' : 'none'};
   flex: 1;
   display: flex;
   flex-direction: column;
   height: ${props => props.$variant === 'embedded' ? '100%' : 'auto'};
+  min-height: 0;
 
   @keyframes fadeIn {
     from { opacity: 0; }
@@ -78,6 +81,8 @@ export const EditorContent = styled.div`
 export const Textarea = styled.textarea`
   width: 100%;
   height: ${props => props.$height === '100%' ? '100%' : (props.$height || '120px')};
+  min-height: ${props => props.$height === '100%' ? '200px' : 'auto'};
+  max-height: ${props => props.$height === '100%' ? 'none' : 'none'};
   flex: ${props => props.$height === '100%' ? '1' : 'none'};
   border: 1px solid #8B4513;
   border-radius: 4px;

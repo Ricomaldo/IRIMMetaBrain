@@ -22,6 +22,7 @@ const EditablePanel = ({
   panelType
 }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   // Calculer les métriques du contenu
   const metrics = useMemo(() => {
@@ -70,28 +71,40 @@ const EditablePanel = ({
             )}
           </HeaderContent>
           
-          <ToggleButton 
-            onClick={() => setIsEditing(!isEditing)}
-            $active={isEditing}
-            title={isEditing ? 'Mode lecture' : 'Mode édition'}
-          >
-            {isEditing ? '👁️' : '✏️'}
-          </ToggleButton>
+          <div style={{ display: 'flex', gap: '4px' }}>
+            <ToggleButton
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              $active={false}
+              title={isCollapsed ? 'Développer' : 'Réduire'}
+            >
+              {isCollapsed ? '📂' : '📁'}
+            </ToggleButton>
+
+            <ToggleButton
+              onClick={() => setIsEditing(!isEditing)}
+              $active={isEditing}
+              title={isEditing ? 'Mode lecture' : 'Mode édition'}
+            >
+              {isEditing ? '👁️' : '✏️'}
+            </ToggleButton>
+          </div>
         </PanelHeader>
 
-        <PanelContent $panelType={panelType}>
-          <MarkdownEditor
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
-            height="100%"
-            compact={true}
-            showPreview={true}
-            title={title}
-            variant="embedded"
-            readOnly={!isEditing}
-          />
-        </PanelContent>
+        {!isCollapsed && (
+          <PanelContent $panelType={panelType}>
+            <MarkdownEditor
+              value={value}
+              onChange={onChange}
+              placeholder={placeholder}
+              height="100%"
+              compact={true}
+              showPreview={true}
+              title={title}
+              variant="embedded"
+              readOnly={!isEditing}
+            />
+          </PanelContent>
+        )}
       </PanelContainer>
     </PanelWrapper>
   );

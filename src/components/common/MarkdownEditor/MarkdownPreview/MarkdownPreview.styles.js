@@ -3,8 +3,10 @@
 import styled from 'styled-components';
 
 export const PreviewContainer = styled.div`
-  min-height: ${props => props.height || '120px'};
-  max-height: ${props => props.height || '120px'};
+  min-height: ${props => props.height === '100%' ? '200px' : (props.height || '120px')};
+  max-height: ${props => props.height === '100%' ? 'none' : (props.height || '120px')};
+  height: ${props => props.height === '100%' ? '100%' : 'auto'};
+  flex: ${props => props.height === '100%' ? '1' : 'none'};
   overflow-y: auto;
   border: 1px solid ${props => props.theme.colors.border};
   border-radius: 4px;

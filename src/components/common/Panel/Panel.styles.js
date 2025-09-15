@@ -1,7 +1,7 @@
-// src/components/rooms/Atelier/EditablePanel/EditablePanel.styles.js
+// src/components/common/Panel/Panel.styles.js
 
 import styled from 'styled-components';
-import { parchmentBg } from '../../../../styles/mixins';
+import { parchmentBg } from '../../../styles/mixins';
 
 export const PanelWrapper = styled.div`
   grid-column: ${props => props.$gridColumn};
@@ -11,8 +11,8 @@ export const PanelWrapper = styled.div`
 
 export const PanelContainer = styled.div`
   width: 100%;
-  height: 100%;
-  max-height: 500px; /* Limite la hauteur du panneau entier */
+  height: ${props => props.$collapsed ? 'auto' : '100%'};
+  max-height: ${props => props.$collapsed ? 'none' : props.$maxHeight};
   ${parchmentBg}
   border-radius: 12px;
   border: 3px solid ${props => props.theme.colors.border};
@@ -24,6 +24,7 @@ export const PanelContainer = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  transition: height 0.3s ease, max-height 0.3s ease;
 
   // Effet parchemin authentique
   &::before {
@@ -56,8 +57,9 @@ export const PanelHeader = styled.div`
   justify-content: space-between;
   user-select: none;
   background: ${props => {
-    if (props.$panelType === 'roadmap') return props.theme.colors.accents.cold;
-    if (props.$panelType === 'todo') return props.theme.colors.accents.success;
+    if (props.$variant === 'roadmap') return props.theme.colors.accents.cold;
+    if (props.$variant === 'todo') return props.theme.colors.accents.success;
+    if (props.$variant === 'notes') return props.theme.colors.accents.warm;
     return props.theme.colors.accents.cold;
   }};
   color: ${props => props.theme.colors.text.light};
@@ -114,8 +116,9 @@ export const ToggleButton = styled.button`
 export const PanelContent = styled.div`
   flex: 1;
   background: ${props => {
-    if (props.$panelType === 'roadmap') return props.theme.colors.accents.cold;
-    if (props.$panelType === 'todo') return props.theme.colors.accents.success;
+    if (props.$variant === 'roadmap') return props.theme.colors.accents.cold;
+    if (props.$variant === 'todo') return props.theme.colors.accents.success;
+    if (props.$variant === 'notes') return props.theme.colors.accents.warm;
     return props.theme.colors.accents.cold;
   }};
   border-radius: 0 0 6px 6px;

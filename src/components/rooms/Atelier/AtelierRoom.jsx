@@ -3,7 +3,7 @@
 import React from 'react';
 import useProjectsStore from '../../../stores/useProjectsStore';
 import RoomNote from '../RoomNote/RoomNote';
-import EditablePanel from './EditablePanel/EditablePanel';
+import MarkdownPanel from '../../common/MarkdownPanel';
 import { usePanelContent } from '../../../hooks/usePanelContent';
 import {
   AtelierGrid,
@@ -33,26 +33,34 @@ const AtelierRoom = () => {
 
   return (
     <AtelierGrid>
-      {/* Roadmap - Wrapper parchemin avec style précédent */}
-      <EditablePanel
+      {/* Roadmap */}
+      <MarkdownPanel
         title="Roadmap"
+        icon="🗺️"
+        variant="roadmap"
         value={roadmapContent}
         onChange={updateRoadmapContent}
         placeholder="Définissez votre roadmap en markdown..."
         gridColumn="1 / 3"
         gridRow="1 / 4"
-        panelType="roadmap"
+        showMetrics={true}
+        editable={true}
+        showPreview={true}
       />
 
-      {/* Todo - Wrapper parchemin avec style précédent */}
-      <EditablePanel
+      {/* Todo */}
+      <MarkdownPanel
         title="Todo"
+        icon="✅"
+        variant="todo"
         value={todoContent}
         onChange={updateTodoContent}
         placeholder="Gérez vos tâches en markdown..."
         gridColumn="4 / 6"
         gridRow="1 / 4"
-        panelType="todo"
+        showMetrics={true}
+        editable={true}
+        showPreview={true}
       />
 
       {/* Titre Projet - Colonnes 2.5-4.5, Row 4 */}
