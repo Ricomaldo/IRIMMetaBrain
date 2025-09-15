@@ -3,6 +3,12 @@
 import styled from 'styled-components';
 import { parchmentBg } from '../../../styles/mixins';
 
+// Helper pour calculer la taille avec zoom
+const getZoomedSize = (baseSize, zoomLevel) => {
+  const zoomMultiplier = 1 + (zoomLevel * 0.15); // 15% par niveau
+  return `calc(${baseSize} * ${zoomMultiplier})`;
+};
+
 export const EditorContainer = styled.div`
   width: 100%;
   height: ${props => props.$variant === 'embedded' ? '100%' : 'auto'};
@@ -23,7 +29,7 @@ export const EditorHeader = styled.div`
   padding: 8px 12px;
   background: ${props => `${props.theme.colors.primary}1A`};
   border-bottom: 2px solid ${({ theme }) => theme.colors.border};
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
   font-weight: bold;
 `;
 
@@ -51,15 +57,20 @@ export const Tab = styled.button`
     ? '#fff'
     : props.theme.colors.text.primary
   };
-  font-size: 10px;
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
   cursor: pointer;
   transition: all 0.2s ease;
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: ${props => props.$active
       ? props.theme.colors.primary
       : `${props.theme.colors.primary}33`
     };
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 `;
 
@@ -88,7 +99,14 @@ export const Textarea = styled.textarea`
   border-radius: 4px;
   background: #FFFFFF;
   resize: ${props => props.$height === '100%' ? 'none' : 'vertical'};
-  font-size: ${props => props.$compact ? '11px' : '12px'};
+  font-size: ${({ theme, $compact }) => $compact ? theme.typography.sizes.xs : theme.typography.sizes.sm};
+
+  /* Zoom global avec transform */
+  transform: ${({ $zoomLevel = 0 }) => {
+    const scale = 1 + ($zoomLevel * 0.15); // 15% par niveau
+    return `scale(${scale})`;
+  }};
+  transform-origin: top left;
   font-family: ${({ theme }) => theme.typography.families.primary};
   line-height: 1.4;
   padding: 8px;

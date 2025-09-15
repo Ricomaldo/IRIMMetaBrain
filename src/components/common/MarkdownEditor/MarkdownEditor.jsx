@@ -22,12 +22,19 @@ const MarkdownEditor = ({
   showPreview = true,
   title = 'Notes',
   variant = 'standalone', // 'standalone' | 'embedded'
-  readOnly = false // Nouveau prop pour contrôler le mode depuis l'extérieur
+  readOnly = false, // Nouveau prop pour contrôler le mode depuis l'extérieur
+  zoomLevel: externalZoomLevel = null, // Prop externe pour mode embedded
+  accentColor = null // Couleur d'accent pour les titres/gras
 }) => {
   const [activeTab, setActiveTab] = useState(readOnly ? 'preview' : 'edit');
   const textareaRef = useRef(null);
   const [localValue, setLocalValue] = useState(value);
   const cursorPositionRef = useRef(0);
+  const [internalZoomLevel, setInternalZoomLevel] = useState(0); // -2, -1, 0, 1, 2
+
+  // Utiliser le zoom externe si fourni (mode embedded), sinon interne (mode standalone)
+  const zoomLevel = externalZoomLevel !== null ? externalZoomLevel : internalZoomLevel;
+  const setZoomLevel = externalZoomLevel !== null ? (() => {}) : setInternalZoomLevel;
 
   // Synchroniser activeTab avec readOnly
   React.useEffect(() => {
@@ -59,11 +66,20 @@ const MarkdownEditor = ({
     const newValue = e.target.value;
     setLocalValue(newValue);
     saveCursorPosition();
-    
+
     // Appeler onChange avec un léger délai pour éviter les conflits
     setTimeout(() => {
       onChange(newValue);
     }, 0);
+  };
+
+  // Gestion du zoom
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 1, 2));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 1, -2));
   };
 
   // Toolbar supprimée complètement
@@ -75,22 +91,42 @@ const MarkdownEditor = ({
         <EditorTitle>
           {icons.note} {title}
         </EditorTitle>
-        {showPreview && (
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          {/* Boutons zoom */}
           <TabsContainer>
             <Tab
-              $active={activeTab === 'edit'}
-              onClick={() => setActiveTab('edit')}
+              onClick={handleZoomOut}
+              disabled={zoomLevel <= -2}
+              title="Réduire la taille du texte"
             >
-              Éditer
+              🔍︎-
             </Tab>
             <Tab
-              $active={activeTab === 'preview'}
-              onClick={() => setActiveTab('preview')}
+              onClick={handleZoomIn}
+              disabled={zoomLevel >= 2}
+              title="Augmenter la taille du texte"
             >
-              Aperçu
+              🔍︎+
             </Tab>
           </TabsContainer>
-        )}
+          {/* Onglets edit/preview */}
+          {showPreview && (
+            <TabsContainer>
+              <Tab
+                $active={activeTab === 'edit'}
+                onClick={() => setActiveTab('edit')}
+              >
+                Éditer
+              </Tab>
+              <Tab
+                $active={activeTab === 'preview'}
+                onClick={() => setActiveTab('preview')}
+              >
+                Aperçu
+              </Tab>
+            </TabsContainer>
+          )}
+        </div>
         </EditorHeader>
       )}
 
@@ -105,12 +141,15 @@ const MarkdownEditor = ({
             placeholder={placeholder}
             $height={height}
             $compact={compact}
+            $zoomLevel={zoomLevel}
           />
         ) : (
           <MarkdownPreview
             content={localValue}
             height={height}
             compact={compact}
+            zoomLevel={zoomLevel}
+            accentColor={accentColor}
           />
         )}
       </EditorContent>

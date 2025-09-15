@@ -53,13 +53,49 @@ transition: ${({ theme }) => `all ${theme.motion.durations.base} ${theme.motion.
 ```js
 z-index: ${({ theme }) => theme.zIndex.navigation};
 ```
+- **Typographie (font-size uniquement):**
+```js
+font-size: ${({ theme }) => theme.typography.sizes.base};
+```
+
+## Typographie - Usage spécifique
+
+**IMPORTANT:** Pour la typographie, utiliser **UNIQUEMENT** `theme.typography.sizes.*` pour les `font-size`.
+
+Les autres propriétés typographiques (font-family, font-weight, line-height, etc.) doivent utiliser les **mixins** du hook `useTypography()` :
+
+```js
+import { useTypography } from '../../hooks/useTypography';
+
+const StyledText = styled.p`
+  ${({ theme }) => {
+    const typo = useTypography();
+    return typo.mixins.bodyText; // Inclut font-family, font-weight, line-height
+  }}
+
+  // Seule la taille peut être surchargée si nécessaire
+  font-size: ${({ theme }) => theme.typography.sizes.lg};
+`;
+```
+
+**Échelle des tailles disponibles:**
+- `xs`: 10px (metadata, code)
+- `sm`: 12px (panneaux compacts, labels)
+- `base`: 14px (texte standard)
+- `md`: 16px (texte important)
+- `lg`: 18px (sous-titres)
+- `xl`: 20px (titres sections)
+- `2xl`: 24px (titres pages)
+- `3xl`: 32px (titres hero)
 
 ## Checklist PR
 
 - Pas de `#[0-9A-Fa-f]{6}` hors `theme.js`.
 - Pas de `z-index: \d+`.
 - Pas de `:\s*\d+px` pour padding/margin/gap/border-radius.
-- Pas d’usage de `theme.fonts.*`.
+- Pas d'usage de `theme.fonts.*`.
+- **Typographie:** Pas de `font-size: \d+px` → utiliser `theme.typography.sizes.*`.
+- **Typographie:** Préférer les mixins `useTypography()` pour font-family/weight/line-height.
 
 ## Migration
 

@@ -1,6 +1,7 @@
 // src/components/common/MarkdownPanel/MarkdownPanel.jsx
 
 import React, { useState, useMemo } from 'react';
+import { useTheme } from 'styled-components';
 import Panel from '../Panel';
 import MarkdownEditor from '../MarkdownEditor';
 
@@ -28,8 +29,20 @@ const MarkdownPanel = ({
   // ÉVÉNEMENTS
   onClick
 }) => {
+  const theme = useTheme();
   const [isEditing, setIsEditing] = useState(!showPreview);
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
+  const [zoomLevel, setZoomLevel] = useState(0); // -2, -1, 0, 1, 2
+
+  // Obtenir la couleur d'accent basée sur le variant
+  const getVariantColor = () => {
+    if (variant === 'roadmap') return theme.colors.accents.cold;
+    if (variant === 'todo') return theme.colors.accents.success;
+    if (variant === 'notes') return theme.colors.accents.warm;
+    return theme.colors.accents.cold; // Default
+  };
+
+  const accentColor = getVariantColor();
 
   // Calculer les métriques du contenu pour badge
   const metrics = useMemo(() => {
@@ -54,6 +67,15 @@ const MarkdownPanel = ({
     return metrics.total; // Total des éléments
   };
 
+  // Gestion du zoom
+  const handleZoomIn = () => {
+    setZoomLevel(prev => Math.min(prev + 1, 2));
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel(prev => Math.max(prev - 1, -2));
+  };
+
   return (
     <Panel
       title={title}
@@ -68,26 +90,67 @@ const MarkdownPanel = ({
       badge={getBadgeCount()}
       onClick={onClick}
     >
-      {/* Bouton d'édition dans le header */}
-      {editable && showPreview && (
+      {/* Actions dans le header */}
+      <div isHeaderAction={true} style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+        {/* Boutons zoom */}
         <button
-          isHeaderAction={true}
-          onClick={() => setIsEditing(!isEditing)}
+          onClick={handleZoomOut}
+          disabled={zoomLevel <= -2}
           style={{
-            background: isEditing ? 'white' : '#F0F0F0',
+            background: '#F0F0F0',
             border: '1px solid currentColor',
             borderRadius: '6px',
             padding: '4px 8px',
             fontSize: '12px',
-            cursor: 'pointer',
+            cursor: zoomLevel <= -2 ? 'not-allowed' : 'pointer',
             minWidth: '32px',
-            height: '24px'
+            height: '24px',
+            opacity: zoomLevel <= -2 ? 0.4 : 1
           }}
-          title={isEditing ? 'Mode lecture' : 'Mode édition'}
+          title="Réduire la taille du texte"
         >
-          {isEditing ? '👁️' : '✏️'}
+          🔍︎-
         </button>
-      )}
+        <button
+          onClick={handleZoomIn}
+          disabled={zoomLevel >= 2}
+          style={{
+            background: '#F0F0F0',
+            border: '1px solid currentColor',
+            borderRadius: '6px',
+            padding: '4px 8px',
+            fontSize: '12px',
+            cursor: zoomLevel >= 2 ? 'not-allowed' : 'pointer',
+            minWidth: '32px',
+            height: '24px',
+            opacity: zoomLevel >= 2 ? 0.4 : 1
+          }}
+          title="Augmenter la taille du texte"
+        >
+          🔍︎+
+        </button>
+
+        {/* Bouton d'édition */}
+        {editable && showPreview && (
+          <button
+            onClick={() => setIsEditing(!isEditing)}
+            style={{
+              background: isEditing ? 'white' : '#F0F0F0',
+              border: '1px solid currentColor',
+              borderRadius: '6px',
+              padding: '4px 8px',
+              fontSize: '12px',
+              cursor: 'pointer',
+              minWidth: '32px',
+              height: '24px',
+              marginLeft: '4px'
+            }}
+            title={isEditing ? 'Mode lecture' : 'Mode édition'}
+          >
+            {isEditing ? '👁️' : '✏️'}
+          </button>
+        )}
+      </div>
 
       {/* Contenu principal */}
       <MarkdownEditor
@@ -100,6 +163,8 @@ const MarkdownPanel = ({
         title={title}
         variant="embedded"
         readOnly={!isEditing}
+        zoomLevel={zoomLevel}
+        accentColor={accentColor}
       />
     </Panel>
   );

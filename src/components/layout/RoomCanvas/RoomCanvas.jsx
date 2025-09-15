@@ -5,18 +5,7 @@ import {
   RoomSlot,
   NavigationZone
 } from './RoomCanvas.styles';
-import RoomNote from '../../rooms/shared/RoomNote/RoomNote';
-import AtelierRoom from '../../rooms/Atelier/AtelierRoom';
-import SanctuaireRoom from '../../rooms/Sanctuaire/SanctuaireRoom';
-import CuisineRoom from '../../rooms/Cuisine/CuisineRoom';
-import JardinRoom from '../../rooms/Jardin/JardinRoom';
-import BoutiqueRoom from '../../rooms/Boutique/BoutiqueRoom';
-import ChambreRoom from '../../rooms/Chambre/ChambreRoom';
-import ComptoirRoom from '../../rooms/Comptoir/ComptoirRoom';
-import ForgeRoom from '../../rooms/Forge/ForgeRoom';
-import ScriptoriumRoom from '../../rooms/Scriptorium/ScriptoriumRoom';
-import BibliothequeRoom from '../../rooms/Bibliotheque/BibliothequeRoom';
-import CaveRoom from '../../rooms/Cave/CaveRoom';
+import { getRoomComponent, DefaultRoomRenderer } from '../../../utils/RoomRegistry';
 import { roomConfig } from '../../../utils/roomPositions';
 import { roomColors } from '../../../utils/assetMapping';
 
@@ -83,40 +72,16 @@ const RoomCanvas = ({ roomNavHook }) => {
             background={room.background}
             roomColors={roomColors}
           >
-            {(() => {
-              switch(room.type) {
-                case 'sanctuaire':
-                  return <SanctuaireRoom />;
-                case 'chambre':
-                  return <ChambreRoom />;
-                case 'cuisine':
-                  return <CuisineRoom />;
-                case 'comptoir':
-                  return <ComptoirRoom />;
-                case 'jardin':
-                  return <JardinRoom />;
-                case 'atelier':
-                  return <AtelierRoom />;
-                case 'forge':
-                  return <ForgeRoom />;
-                case 'boutique':
-                  return <BoutiqueRoom />;
-                case 'scriptorium':
-                  return <ScriptoriumRoom />;
-                case 'bibliotheque':
-                  return <BibliothequeRoom />;
-                case 'cave':
-                  return <CaveRoom />;
-                default:
-                  return (
-                    <>
-                      {room.name}
-                      {room.type !== 'empty' && room.type !== 'undefined' && (
-                        <RoomNote roomType={room.type} />
-                      )}
-                    </>
-                  );
+{(() => {
+              const RoomComponent = getRoomComponent(room.type);
+
+              // Si c'est le composant par défaut, passer les props room
+              if (RoomComponent === DefaultRoomRenderer) {
+                return <RoomComponent room={room} />;
               }
+
+              // Sinon, c'est un vrai composant Room
+              return <RoomComponent />;
             })()}
           </RoomSlot>
         ))}

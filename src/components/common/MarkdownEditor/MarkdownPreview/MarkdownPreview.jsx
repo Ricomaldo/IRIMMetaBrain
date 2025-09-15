@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { PreviewContainer, EmptyPreview } from './MarkdownPreview.styles';
 
-const MarkdownPreview = ({ content, height, compact }) => {
+const MarkdownPreview = ({ content, height, compact, zoomLevel = 0, accentColor }) => {
   if (!content || !content.trim()) {
     return (
       <EmptyPreview height={height}>
@@ -15,7 +15,7 @@ const MarkdownPreview = ({ content, height, compact }) => {
   }
 
   return (
-    <PreviewContainer height={height} compact={compact}>
+    <PreviewContainer height={height} compact={compact} zoomLevel={zoomLevel} accentColor={accentColor}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{

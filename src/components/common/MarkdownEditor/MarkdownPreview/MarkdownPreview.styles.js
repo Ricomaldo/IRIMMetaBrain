@@ -2,6 +2,12 @@
 
 import styled from 'styled-components';
 
+// Helper pour calculer la taille avec zoom
+const getZoomedSize = (baseSize, zoomLevel) => {
+  const zoomMultiplier = 1 + (zoomLevel * 0.15); // 15% par niveau
+  return `calc(${baseSize} * ${zoomMultiplier})`;
+};
+
 export const PreviewContainer = styled.div`
   min-height: ${props => props.height === '100%' ? '200px' : (props.height || '120px')};
   max-height: ${props => props.height === '100%' ? 'none' : (props.height || '120px')};
@@ -12,24 +18,34 @@ export const PreviewContainer = styled.div`
   border-radius: 4px;
   background: #FFFFFF;
   padding: 8px;
-  font-size: ${props => props.compact ? '11px' : '12px'};
+  font-size: ${({ theme, compact }) => compact ? theme.typography.sizes.xs : theme.typography.sizes.sm};
   font-family: ${({ theme }) => theme.typography.families.primary};
   line-height: 1.4;
   color: #000000;
   text-shadow: none;
 
+  /* Zoom global avec transform au lieu de font-size */
+  transform: ${({ zoomLevel = 0 }) => {
+    const scale = 1 + (zoomLevel * 0.15); // 15% par niveau
+    return `scale(${scale})`;
+  }};
+  transform-origin: top left;
+  ${({ zoomLevel = 0 }) => zoomLevel !== 0 ? `
+    width: ${100 / (1 + (zoomLevel * 0.15))}%;
+  ` : ''}
+
   /* Styles Markdown */
   h1, h2, h3, h4, h5, h6 {
     margin: 8px 0 4px 0;
     font-weight: bold;
-    color: #000000;
+    color: ${props => props.accentColor || '#000000'};
     text-shadow: none;
   }
 
-  h1 { font-size: 16px; }
-  h2 { font-size: 14px; }
-  h3 { font-size: 13px; }
-  h4, h5, h6 { font-size: 12px; }
+  h1 { font-size: ${({ theme }) => theme.typography.sizes.lg}; }
+  h2 { font-size: ${({ theme }) => theme.typography.sizes.md}; }
+  h3 { font-size: ${({ theme }) => theme.typography.sizes.base}; }
+  h4, h5, h6 { font-size: ${({ theme }) => theme.typography.sizes.sm}; }
 
   p {
     margin: 4px 0;
@@ -37,8 +53,9 @@ export const PreviewContainer = styled.div`
 
   strong {
     font-weight: bold;
-    color: #000000;
+    color: ${props => props.accentColor || '#000000'};
     text-shadow: none;
+    font-size: inherit; /* Hérite du parent (p, li, etc.) */
   }
 
   em {
@@ -62,7 +79,7 @@ export const PreviewContainer = styled.div`
     border-radius: 3px;
     padding: 1px 3px;
     font-family: 'Courier New', monospace;
-    font-size: 10px;
+    font-size: ${({ theme }) => theme.typography.sizes.xs};
   }
 
   pre {
