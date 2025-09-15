@@ -7,9 +7,9 @@ export const DrawerContainer = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: 50px 1fr 240px;
-    ${secondaryLevel};
-    ${woodBg};
+  grid-template-rows: 50px 1fr 320px;
+  ${secondaryLevel};
+  ${woodBg};
 `;
 
 export const TabsHeader = styled.div`

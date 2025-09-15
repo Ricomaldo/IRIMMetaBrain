@@ -14,7 +14,9 @@ export const theme = {
     accents: {
       cold: '#4A5568',         // Bleu ardoise - liens/boutons actifs
       success: '#68752C',      // Vert olive - validations/succès
-      danger: '#8B3A3A'        // Rouge terre - alertes/erreurs
+      danger: '#8B3A3A',       // Rouge terre - alertes/erreurs
+      warm: '#B8860B',         // Or brun - RoomNotes
+      neutral: '#6B7280'       // Gris - SideTowerNotes
     },
 
     text: {

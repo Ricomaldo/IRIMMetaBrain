@@ -21,20 +21,31 @@ const MarkdownEditor = ({
   compact = false,
   showPreview = true,
   title = 'Notes',
-  variant = 'standalone', // 'standalone' | 'embedded'
-  readOnly = false, // Nouveau prop pour contrôler le mode depuis l'extérieur
-  zoomLevel: externalZoomLevel = null, // Prop externe pour mode embedded
-  accentColor = null // Couleur d'accent pour les titres/gras
+  variant = 'embedded', // 'embedded' par défaut maintenant
+  readOnly = false,
+  zoomLevel = 0,
+  accentColor = null
 }) => {
   const [activeTab, setActiveTab] = useState(readOnly ? 'preview' : 'edit');
+  const [internalZoomLevel, setInternalZoomLevel] = useState(0);
   const textareaRef = useRef(null);
   const [localValue, setLocalValue] = useState(value);
   const cursorPositionRef = useRef(0);
-  const [internalZoomLevel, setInternalZoomLevel] = useState(0); // -2, -1, 0, 1, 2
 
-  // Utiliser le zoom externe si fourni (mode embedded), sinon interne (mode standalone)
-  const zoomLevel = externalZoomLevel !== null ? externalZoomLevel : internalZoomLevel;
-  const setZoomLevel = externalZoomLevel !== null ? (() => {}) : setInternalZoomLevel;
+  // Gestion du zoom pour mode standalone uniquement
+  const currentZoomLevel = variant === 'standalone' ? internalZoomLevel : zoomLevel;
+
+  const handleZoomIn = () => {
+    if (variant === 'standalone') {
+      setInternalZoomLevel(prev => Math.min(prev + 1, 2));
+    }
+  };
+
+  const handleZoomOut = () => {
+    if (variant === 'standalone') {
+      setInternalZoomLevel(prev => Math.max(prev - 1, -2));
+    }
+  };
 
   // Synchroniser activeTab avec readOnly
   React.useEffect(() => {
@@ -73,64 +84,101 @@ const MarkdownEditor = ({
     }, 0);
   };
 
-  // Gestion du zoom
-  const handleZoomIn = () => {
-    setZoomLevel(prev => Math.min(prev + 1, 2));
-  };
-
-  const handleZoomOut = () => {
-    setZoomLevel(prev => Math.max(prev - 1, -2));
-  };
-
-  // Toolbar supprimée complètement
+  // Plus de gestion de zoom interne - tout est externe
 
   return (
-    <EditorContainer $variant={variant}>
+    <EditorContainer>
+      {/* Header uniquement en mode standalone */}
       {variant === 'standalone' && (
-        <EditorHeader>
-        <EditorTitle>
-          {icons.note} {title}
-        </EditorTitle>
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-          {/* Boutons zoom */}
-          <TabsContainer>
-            <Tab
+        <div style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: '8px 12px',
+          background: `${accentColor}33`,
+          borderBottom: '1px solid #ccc',
+          fontSize: '12px',
+          fontWeight: 'bold'
+        }}>
+          <span>{icons.note} {title}</span>
+          <div style={{ display: 'flex', gap: '4px' }}>
+            <button
               onClick={handleZoomOut}
-              disabled={zoomLevel <= -2}
+              disabled={currentZoomLevel <= -2}
+              style={{
+                background: '#F0F0F0',
+                border: '1px solid currentColor',
+                borderRadius: '6px',
+                padding: '4px 8px',
+                fontSize: '12px',
+                cursor: currentZoomLevel <= -2 ? 'not-allowed' : 'pointer',
+                minWidth: '32px',
+                height: '24px',
+                opacity: currentZoomLevel <= -2 ? 0.4 : 1
+              }}
               title="Réduire la taille du texte"
             >
-              🔍︎-
-            </Tab>
-            <Tab
+              −
+            </button>
+            <button
               onClick={handleZoomIn}
-              disabled={zoomLevel >= 2}
+              disabled={currentZoomLevel >= 2}
+              style={{
+                background: '#F0F0F0',
+                border: '1px solid currentColor',
+                borderRadius: '6px',
+                padding: '4px 8px',
+                fontSize: '12px',
+                cursor: currentZoomLevel >= 2 ? 'not-allowed' : 'pointer',
+                minWidth: '32px',
+                height: '24px',
+                opacity: currentZoomLevel >= 2 ? 0.4 : 1
+              }}
               title="Augmenter la taille du texte"
             >
-              🔍︎+
-            </Tab>
-          </TabsContainer>
-          {/* Onglets edit/preview */}
-          {showPreview && (
-            <TabsContainer>
-              <Tab
-                $active={activeTab === 'edit'}
-                onClick={() => setActiveTab('edit')}
-              >
-                Éditer
-              </Tab>
-              <Tab
-                $active={activeTab === 'preview'}
-                onClick={() => setActiveTab('preview')}
-              >
-                Aperçu
-              </Tab>
-            </TabsContainer>
-          )}
+              +
+            </button>
+            {showPreview && (
+              <>
+                <button
+                  onClick={() => setActiveTab('edit')}
+                  style={{
+                    background: activeTab === 'edit' ? 'white' : '#F0F0F0',
+                    border: '1px solid currentColor',
+                    borderRadius: '6px',
+                    padding: '4px 8px',
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    minWidth: '32px',
+                    height: '24px'
+                  }}
+                  title="Mode édition"
+                >
+                  ✏️
+                </button>
+                <button
+                  onClick={() => setActiveTab('preview')}
+                  style={{
+                    background: activeTab === 'preview' ? 'white' : '#F0F0F0',
+                    border: '1px solid currentColor',
+                    borderRadius: '6px',
+                    padding: '4px 8px',
+                    fontSize: '12px',
+                    cursor: 'pointer',
+                    minWidth: '32px',
+                    height: '24px'
+                  }}
+                  title="Mode aperçu"
+                >
+                  👁️
+                </button>
+              </>
+            )}
+          </div>
         </div>
-        </EditorHeader>
       )}
 
-      <EditorContent $animate={true} $variant={variant}>
+      <EditorContent $animate={true}>
         {activeTab === 'edit' ? (
           <Textarea
             ref={textareaRef}
@@ -141,14 +189,14 @@ const MarkdownEditor = ({
             placeholder={placeholder}
             $height={height}
             $compact={compact}
-            $zoomLevel={zoomLevel}
+            $zoomLevel={currentZoomLevel}
           />
         ) : (
           <MarkdownPreview
             content={localValue}
             height={height}
             compact={compact}
-            zoomLevel={zoomLevel}
+            zoomLevel={currentZoomLevel}
             accentColor={accentColor}
           />
         )}

@@ -20,9 +20,9 @@ const MarkdownPreview = ({ content, height, compact, zoomLevel = 0, accentColor 
         remarkPlugins={[remarkGfm]}
         components={{
           // Customisation des composants rendus
-          h1: ({ children }) => <h1 style={{ fontSize: '16px', margin: '8px 0 4px 0' }}>{children}</h1>,
-          h2: ({ children }) => <h2 style={{ fontSize: '14px', margin: '8px 0 4px 0' }}>{children}</h2>,
-          h3: ({ children }) => <h3 style={{ fontSize: '13px', margin: '8px 0 4px 0' }}>{children}</h3>,
+          h1: ({ children }) => <h1 style={{ margin: '8px 0 4px 0' }}>{children}</h1>,
+          h2: ({ children }) => <h2 style={{ margin: '8px 0 4px 0' }}>{children}</h2>,
+          h3: ({ children }) => <h3 style={{ margin: '8px 0 4px 0' }}>{children}</h3>,
           p: ({ children }) => <p style={{ margin: '4px 0' }}>{children}</p>,
           li: ({ children }) => <li style={{ margin: '2px 0' }}>{children}</li>,
           code: ({ children }) => (
@@ -31,8 +31,8 @@ const MarkdownPreview = ({ content, height, compact, zoomLevel = 0, accentColor 
               border: '1px solid #A0522D',
               borderRadius: '3px',
               padding: '1px 3px',
-              fontFamily: 'Courier New, monospace',
-              fontSize: '10px'
+              fontFamily: 'Courier New, monospace'
+              // fontSize supprimé - utilise le CSS
             }}>
               {children}
             </code>

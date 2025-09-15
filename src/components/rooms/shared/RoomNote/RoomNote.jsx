@@ -1,14 +1,19 @@
 // src/components/rooms/shared/RoomNote/RoomNote.jsx
 
 import React, { useState } from 'react';
+import { useTheme } from 'styled-components';
 import { NoteContainer, NoteHeader, NoteContent, RoomTitle } from './RoomNote.styles';
 import MarkdownEditor from '../../../common/MarkdownEditor';
 import useNotesStore from '../../../../stores/useNotesStore';
 import { icons } from '../../../../utils/assetMapping';
 
 const RoomNote = ({ roomType }) => {
+  const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);
   const { getRoomNote, updateRoomNote } = useNotesStore();
+
+  // Couleur d'accent pour RoomNote
+  const accentColor = theme.colors.accents.warm;
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
@@ -38,6 +43,8 @@ const RoomNote = ({ roomType }) => {
               showPreview={true}
               title={`Notes ${roomType}`}
               variant="standalone"
+              readOnly={true}
+              accentColor={accentColor}
             />
           </NoteContent>
         )}

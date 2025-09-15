@@ -5,10 +5,15 @@ import { parchmentBg } from '../../../../styles/mixins';
 
 export const NoteContainer = styled.div`
   width: 100%;
+  height: 100%;
   ${parchmentBg}
   border-radius: ${({ theme }) => theme.radii.lg};
   border: ${({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
-  margin-top: ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing.sm};
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* Reset du centrage */
+  box-sizing: border-box; /* Empêche le dépassement */
 `;
 
 export const NoteHeader = styled.div`

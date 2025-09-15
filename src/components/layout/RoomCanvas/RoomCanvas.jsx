@@ -5,7 +5,7 @@ import {
   RoomSlot,
   NavigationZone
 } from './RoomCanvas.styles';
-import { getRoomComponent, DefaultRoomRenderer } from '../../../utils/RoomRegistry';
+import { getRoomComponent, DefaultRoomRenderer } from '../../../utils/RoomRegistry.jsx';
 import { roomConfig } from '../../../utils/roomPositions';
 import { roomColors } from '../../../utils/assetMapping';
 

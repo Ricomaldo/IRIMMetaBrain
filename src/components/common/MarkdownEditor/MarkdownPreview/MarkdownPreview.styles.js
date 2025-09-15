@@ -18,21 +18,17 @@ export const PreviewContainer = styled.div`
   border-radius: 4px;
   background: #FFFFFF;
   padding: 8px;
-  font-size: ${({ theme, compact }) => compact ? theme.typography.sizes.xs : theme.typography.sizes.sm};
+  /* Font-size de base avec zoom - tous les enfants vont hériter */
+  font-size: ${({ theme, compact, zoomLevel = 0 }) => {
+    const baseSize = compact ? theme.typography.sizes.xs : theme.typography.sizes.sm;
+    const scale = 1 + (zoomLevel * 0.15); // 15% par niveau
+    return `calc(${baseSize} * ${scale})`;
+  }};
   font-family: ${({ theme }) => theme.typography.families.primary};
+  font-weight: normal; /* S'assurer que le texte standard n'est pas en gras */
   line-height: 1.4;
   color: #000000;
   text-shadow: none;
-
-  /* Zoom global avec transform au lieu de font-size */
-  transform: ${({ zoomLevel = 0 }) => {
-    const scale = 1 + (zoomLevel * 0.15); // 15% par niveau
-    return `scale(${scale})`;
-  }};
-  transform-origin: top left;
-  ${({ zoomLevel = 0 }) => zoomLevel !== 0 ? `
-    width: ${100 / (1 + (zoomLevel * 0.15))}%;
-  ` : ''}
 
   /* Styles Markdown */
   h1, h2, h3, h4, h5, h6 {
@@ -42,10 +38,10 @@ export const PreviewContainer = styled.div`
     text-shadow: none;
   }
 
-  h1 { font-size: ${({ theme }) => theme.typography.sizes.lg}; }
-  h2 { font-size: ${({ theme }) => theme.typography.sizes.md}; }
-  h3 { font-size: ${({ theme }) => theme.typography.sizes.base}; }
-  h4, h5, h6 { font-size: ${({ theme }) => theme.typography.sizes.sm}; }
+  h1 { font-size: 1.5em; }  /* 150% du base */
+  h2 { font-size: 1.33em; } /* 133% du base */
+  h3 { font-size: 1.17em; } /* 117% du base */
+  h4, h5, h6 { font-size: 1em; } /* 100% du base */
 
   p {
     margin: 4px 0;
@@ -79,7 +75,7 @@ export const PreviewContainer = styled.div`
     border-radius: 3px;
     padding: 1px 3px;
     font-family: 'Courier New', monospace;
-    font-size: ${({ theme }) => theme.typography.sizes.xs};
+    font-size: 0.85em; /* 85% du base */
   }
 
   pre {

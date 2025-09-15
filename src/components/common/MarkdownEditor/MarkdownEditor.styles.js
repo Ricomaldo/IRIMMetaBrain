@@ -11,14 +11,13 @@ const getZoomedSize = (baseSize, zoomLevel) => {
 
 export const EditorContainer = styled.div`
   width: 100%;
-  height: ${props => props.$variant === 'embedded' ? '100%' : 'auto'};
-  ${props => props.$variant === 'embedded' ? 'background: transparent;' : parchmentBg}
-  border-radius: ${props => props.$variant === 'embedded' ? '0' : '8px'};
-  border: ${props => props.$variant === 'embedded' ? 'none' : ({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
+  height: 100%;
+  background: transparent;
+  border: none;
   overflow: hidden;
-  display: ${props => props.$variant === 'embedded' ? 'flex' : 'block'};
-  flex-direction: ${props => props.$variant === 'embedded' ? 'column' : 'initial'};
-  flex: ${props => props.$variant === 'embedded' ? '1' : 'none'};
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   min-height: 0;
 `;
 
@@ -80,7 +79,7 @@ export const EditorContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: ${props => props.$variant === 'embedded' ? '100%' : 'auto'};
+  height: 100%;
   min-height: 0;
 
   @keyframes fadeIn {
@@ -99,14 +98,11 @@ export const Textarea = styled.textarea`
   border-radius: 4px;
   background: #FFFFFF;
   resize: ${props => props.$height === '100%' ? 'none' : 'vertical'};
-  font-size: ${({ theme, $compact }) => $compact ? theme.typography.sizes.xs : theme.typography.sizes.sm};
-
-  /* Zoom global avec transform */
-  transform: ${({ $zoomLevel = 0 }) => {
+  font-size: ${({ theme, $compact, $zoomLevel = 0 }) => {
+    const baseSize = $compact ? theme.typography.sizes.xs : theme.typography.sizes.sm;
     const scale = 1 + ($zoomLevel * 0.15); // 15% par niveau
-    return `scale(${scale})`;
+    return `calc(${baseSize} * ${scale})`;
   }};
-  transform-origin: top left;
   font-family: ${({ theme }) => theme.typography.families.primary};
   line-height: 1.4;
   padding: 8px;
