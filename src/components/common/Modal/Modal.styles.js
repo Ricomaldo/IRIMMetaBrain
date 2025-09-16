@@ -1,6 +1,6 @@
 // src/components/common/Modal/Modal.styles.js - Styles pour le système de modales
 
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { alpha } from '../../../styles/color';
 import { metalBg, primaryLevel } from '../../../styles/mixins';
 
@@ -34,10 +34,10 @@ export const ModalOverlay = styled.div`
   align-items: center;
   justify-content: center;
 
-  ${({ variant, theme }) => {
-    if (variant === 'roomCanvas') {
+  ${({ $variant, theme }) => {
+    if ($variant === 'roomCanvas') {
       // Positionné exactement sur RoomCanvas (4fr = 80% de la largeur)
-      return `
+      return css`
         top: ${theme.spacing.sm};
         left: ${theme.spacing.sm};
         width: calc(80% - ${theme.spacing.sm});
@@ -45,9 +45,9 @@ export const ModalOverlay = styled.div`
         background: ${theme.colors.black}; /* Fond opaque pour cacher RoomCanvas */
         border-radius: ${theme.radii.xl};
       `;
-    } else if (variant === 'baseFloorTower') {
+    } else if ($variant === 'baseFloorTower') {
       // Positionné sur l'étage de base de SideTower (320px de hauteur)
-      return `
+      return css`
         bottom: ${theme.spacing.sm};
         right: ${theme.spacing.sm};
         width: calc(20% - ${theme.spacing.sm}); /* 1fr de la grid */
@@ -57,7 +57,7 @@ export const ModalOverlay = styled.div`
       `;
     } else {
       // Mode overlay classique (plein écran)
-      return `
+      return css`
         top: 0;
         left: 0;
         right: 0;
@@ -77,10 +77,10 @@ export const ModalContainer = styled.div`
   flex-direction: column;
   overflow: hidden;
 
-  ${({ variant, theme, size }) => {
-    if (variant === 'roomCanvas') {
+  ${({ $variant, theme, $size }) => {
+    if ($variant === 'roomCanvas') {
       // Version qui remplace complètement RoomCanvas
-      return `
+      return css`
         ${metalBg}
         ${primaryLevel}
         width: 100%;
@@ -88,9 +88,9 @@ export const ModalContainer = styled.div`
         background-blend-mode: multiply;
         animation: ${fadeIn} 0.3s ease-out; /* Pas de slide, juste fadeIn */
       `;
-    } else if (variant === 'baseFloorTower') {
+    } else if ($variant === 'baseFloorTower') {
       // Version qui remplace l'étage de base (BottomTowerFloor)
-      return `
+      return css`
         ${metalBg}
         ${primaryLevel}
         width: 100%;
@@ -100,14 +100,14 @@ export const ModalContainer = styled.div`
       `;
     } else {
       // Version modale classique
-      return `
+      return css`
         ${metalBg}
         ${primaryLevel}
         background-blend-mode: multiply;
         animation: ${slideUp} 0.3s ease-out;
 
         width: ${(() => {
-          switch (size) {
+          switch ($size) {
             case 'small': return '400px';
             case 'large': return '80%';
             case 'fullscreen': return '95%';

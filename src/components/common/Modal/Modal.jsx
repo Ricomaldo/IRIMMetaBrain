@@ -70,8 +70,8 @@ const Modal = ({
 
   // Render dans un portal pour sortir du flux DOM normal
   return createPortal(
-    <ModalOverlay onClick={handleOverlayClick} variant={variant}>
-      <ModalContainer size={size} variant={variant}>
+    <ModalOverlay onClick={handleOverlayClick} $variant={variant}>
+      <ModalContainer $size={size} $variant={variant}>
         {title && (
           <ModalHeader>
             <ModalTitle>{title}</ModalTitle>
