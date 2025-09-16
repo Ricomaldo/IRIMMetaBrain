@@ -22,7 +22,9 @@ const NavigationArrows = ({
   availableDirections = {},
   onNavigate,
   size = '60px',
-  className = ''
+  className = '',
+  isNavigating = false,
+  activeDirection = null
 }) => {
   const handleNavigationClick = (direction) => {
     if (onNavigate && availableDirections[direction]) {
@@ -39,6 +41,8 @@ const NavigationArrows = ({
           onClick={() => handleNavigationClick('up')}
           size={size}
           title="Aller vers le Nord"
+          isNavigating={isNavigating}
+          isActive={activeDirection === 'up'}
         />
       )}
 
@@ -49,6 +53,8 @@ const NavigationArrows = ({
           onClick={() => handleNavigationClick('down')}
           size={size}
           title="Aller vers le Sud"
+          isNavigating={isNavigating}
+          isActive={activeDirection === 'down'}
         />
       )}
 
@@ -59,6 +65,8 @@ const NavigationArrows = ({
           onClick={() => handleNavigationClick('left')}
           size={size}
           title="Aller vers l'Ouest"
+          isNavigating={isNavigating}
+          isActive={activeDirection === 'left'}
         />
       )}
 
@@ -69,6 +77,8 @@ const NavigationArrows = ({
           onClick={() => handleNavigationClick('right')}
           size={size}
           title="Aller vers l'Est"
+          isNavigating={isNavigating}
+          isActive={activeDirection === 'right'}
         />
       )}
     </ArrowsContainer>

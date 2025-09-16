@@ -31,8 +31,15 @@ const ArrowContainer = styled.button`
   justify-content: center;
   position: relative;
 
-  /* Animation de base */
-  transition: all 0.3s ease;
+  /* Animation de base + opacité pendant navigation */
+  transition: all 0.3s ease, opacity 0.2s ease;
+
+  /* Gestion de l'opacité pendant la navigation */
+  opacity: ${({ $isNavigating, $isActive }) => {
+    if (!$isNavigating) return '1';
+    if ($isActive) return '0.5'; // La flèche active reste plus visible
+    return '0.2'; // Les autres flèches s'estompent
+  }};
 
   /* Rotation selon la direction */
   img {
@@ -176,13 +183,17 @@ const ArrowButton = ({
   size = '60px',
   variant = null,
   className = '',
-  title = ''
+  title = '',
+  isNavigating = false,
+  isActive = false
 }) => {
   return (
     <ArrowContainer
       $direction={direction}
       $size={size}
       $variant={variant}
+      $isNavigating={isNavigating}
+      $isActive={isActive}
       onClick={onClick}
       disabled={disabled}
       className={className}

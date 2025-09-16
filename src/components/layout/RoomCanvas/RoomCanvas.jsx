@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CanvasContainer,
   RoomsGrid,
@@ -13,10 +13,29 @@ const RoomCanvas = ({ roomNavHook }) => {
   const { currentRoom, navigateToRoom, getAvailableDirections } = roomNavHook;
   const availableDirections = getAvailableDirections();
 
+  // État pour tracker la navigation
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [activeDirection, setActiveDirection] = useState(null);
+
   // Calcul pour centrer la pièce courante dans le viewport
   // Chaque pièce fait 25% de la largeur totale (100%/4) et 33.33% de la hauteur totale (100%/3)
   const translateX = -currentRoom.x * 25; // 100% / 4 colonnes = 25%
   const translateY = -currentRoom.y * 33.33; // 100% / 3 rangées = 33.33%
+
+  // Fonction pour gérer la navigation avec animation
+  const handleNavigation = (direction) => {
+    if (!isNavigating && availableDirections[direction]) {
+      setIsNavigating(true);
+      setActiveDirection(direction);
+      navigateToRoom(direction);
+
+      // Reset après la durée de transition (400ms de la grille + 100ms de marge)
+      setTimeout(() => {
+        setIsNavigating(false);
+        setActiveDirection(null);
+      }, 500);
+    }
+  };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -27,24 +46,16 @@ const RoomCanvas = ({ roomNavHook }) => {
 
       switch (event.key) {
         case 'ArrowUp':
-          if (availableDirections.up) {
-            navigateToRoom('up');
-          }
+          handleNavigation('up');
           break;
         case 'ArrowDown':
-          if (availableDirections.down) {
-            navigateToRoom('down');
-          }
+          handleNavigation('down');
           break;
         case 'ArrowLeft':
-          if (availableDirections.left) {
-            navigateToRoom('left');
-          }
+          handleNavigation('left');
           break;
         case 'ArrowRight':
-          if (availableDirections.right) {
-            navigateToRoom('right');
-          }
+          handleNavigation('right');
           break;
         default:
           break;
@@ -56,7 +67,7 @@ const RoomCanvas = ({ roomNavHook }) => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [availableDirections, navigateToRoom]);
+  }, [availableDirections, isNavigating]); // Ajout de isNavigating dans les dépendances
 
   return (
     <CanvasContainer id="room-canvas-container">
@@ -86,8 +97,10 @@ const RoomCanvas = ({ roomNavHook }) => {
       {/* Flèches de navigation dorées */}
       <NavigationArrows
         availableDirections={availableDirections}
-        onNavigate={navigateToRoom}
+        onNavigate={handleNavigation}
         size="50px"
+        isNavigating={isNavigating}
+        activeDirection={activeDirection}
       />
     </CanvasContainer>
   );
