@@ -49,6 +49,10 @@ export const RoomSlot = styled.div.withConfig({
   margin: 2px;
   border-radius: ${({ theme }) => theme.radii.md};
   ${medievalShadow}
+  /* Clip et laisser l'enfant scroller, ne pas pousser la grille */
+  overflow: hidden;
+  min-width: 0;
+  min-height: 0;
 
   &::before {
     content: '';

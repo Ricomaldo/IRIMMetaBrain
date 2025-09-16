@@ -7,6 +7,9 @@ export const PanelWrapper = styled.div`
   grid-column: ${props => props.$gridColumn};
   grid-row: ${props => props.$gridRow};
   position: relative;
+  /* Important en Grid: autoriser l'enfant à rétrécir et scroller */
+  min-width: 0;
+  min-height: 0;
 `;
 
 export const PanelContainer = styled.div`
@@ -95,7 +98,8 @@ export const PanelContent = styled.div`
   flex: 1;
   background: ${props => props.$accentColor || props.theme.colors.accents.cold};
   border-radius: 0 0 ${({ theme }) => theme.radii.sm} ${({ theme }) => theme.radii.sm};
-  overflow: hidden;
+  /* Autoriser le scroll interne du contenu */
+  overflow: auto;
   display: flex;
   flex-direction: column;
   position: relative;

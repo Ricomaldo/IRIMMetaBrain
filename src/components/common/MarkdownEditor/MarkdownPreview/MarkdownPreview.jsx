@@ -15,7 +15,7 @@ const MarkdownPreview = ({ content, height, compact, zoomLevel = 0, accentColor 
   }
 
   return (
-    <PreviewContainer height={height} compact={compact} zoomLevel={zoomLevel} accentColor={accentColor}>
+    <PreviewContainer $height={height} compact={compact} zoomLevel={zoomLevel} accentColor={accentColor}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{

@@ -5,14 +5,15 @@ import styled from 'styled-components';
 // Helper pour calculer la taille avec zoom
 
 export const PreviewContainer = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['compact', 'zoomLevel', 'accentColor'].includes(prop)
+  shouldForwardProp: (prop) => !['compact', 'zoomLevel', 'accentColor', 'height', '$height'].includes(prop)
 })`
   width: 100%;
-  height: 240px !important; /* Hauteur BRUTALEMENT fixe */
-  max-height: 400px !important; /* Force absolue */
-  overflow-y: auto !important; /* Scroll OBLIGATOIRE */
+  /* Hauteur dynamique: 100% => prend tout l'espace disponible, sinon valeur fixe */
+  height: ${props => (props.$height && props.$height !== '100%') ? props.$height : 'auto'};
+  flex: ${props => (props.$height === '100%') ? 1 : 'none'};
+  min-height: 0;
+  overflow-y: auto;
   overflow-x: hidden;
-  flex: none; /* Pas de flex qui pète tout */
 
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 4px;

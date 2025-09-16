@@ -12,4 +12,7 @@ export const BaseRoomContainer = styled.div.withConfig({
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  /* Important pour éviter que les enfants grid ne poussent hors du viewport */
+  min-height: 0;
+  min-width: 0;
 `;

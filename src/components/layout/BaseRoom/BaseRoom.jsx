@@ -13,7 +13,7 @@ const BaseRoom = ({
   return (
     <BaseRoomContainer layoutType={layoutType} className={className}>
       {children}
-      {/* <RoomNote roomType={roomType} /> */}
+      <RoomNote roomType={roomType} />
     </BaseRoomContainer>
   );
 };
