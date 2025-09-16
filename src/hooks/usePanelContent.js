@@ -1,7 +1,17 @@
-// src/hooks/usePanelContent.js - Hook pour gérer le contenu markdown des panneaux
+// src/hooks/usePanelContent.js - Hook simplifié pour contenu markdown
 
-import { useState, useCallback, useRef, useEffect } from 'react';
+import { useCallback } from 'react';
 import useProjectsStore from '../stores/useProjectsStore';
+import { debounce } from '../utils/debounce';
+
+// Debounced functions centralisées
+const debouncedUpdateRoadmap = debounce((projectId, content, updateFn) => {
+  updateFn(projectId, content);
+}, 1000);
+
+const debouncedUpdateTodo = debounce((projectId, content, updateFn) => {
+  updateFn(projectId, content);
+}, 1000);
 
 export const usePanelContent = (projectId) => {
   const { 
@@ -11,16 +21,9 @@ export const usePanelContent = (projectId) => {
   } = useProjectsStore();
 
   const project = getCurrentProject();
-  
-  // Refs pour le debounce
-  const roadmapTimeoutRef = useRef(null);
-  const todoTimeoutRef = useRef(null);
-  
-  // Refs pour éviter les boucles infinies
-  const isUpdatingFromStoreRef = useRef(false);
 
-  // Fallback content si le projet n'existe pas
-  const defaultRoadmapContent = `# Roadmap
+  // Contenu direct du store (plus d'état local)
+  const roadmapContent = project?.roadmapMarkdown || `# Roadmap
 
 ## Phase 1 - Setup
 - [ ] Initialiser le projet
@@ -30,7 +33,7 @@ export const usePanelContent = (projectId) => {
 
 > *Commencez votre roadmap ici* 🚀`;
 
-  const defaultTodoContent = `# Todo
+  const todoContent = project?.todoMarkdown || `# Todo
 
 ## 🔴 **Priorité Haute**
 - [ ] Première tâche importante
@@ -42,82 +45,22 @@ export const usePanelContent = (projectId) => {
 
 **Next:** Définir les prochaines étapes`;
 
-  // État local pour éviter les re-rendus pendant la frappe
-  const [localRoadmapContent, setLocalRoadmapContent] = useState(
-    project?.roadmapMarkdown || defaultRoadmapContent
-  );
-  const [localTodoContent, setLocalTodoContent] = useState(
-    project?.todoMarkdown || defaultTodoContent
-  );
-
-  // Synchroniser l'état local avec le store (uniquement au chargement initial)
-  useEffect(() => {
-    if (!isUpdatingFromStoreRef.current && project) {
-      setLocalRoadmapContent(project.roadmapMarkdown || defaultRoadmapContent);
-      setLocalTodoContent(project.todoMarkdown || defaultTodoContent);
-    }
-  }, [project, defaultRoadmapContent, defaultTodoContent]); // Seulement quand le projet change
-
-  // Debounced save functions qui mettent à jour le store
+  // Handlers avec debounce
   const updateRoadmapContent = useCallback((content) => {
-    // Mettre à jour l'état local immédiatement (pas de re-rendu du store)
-    setLocalRoadmapContent(content);
-    
-    // Annuler le timeout précédent
-    if (roadmapTimeoutRef.current) {
-      clearTimeout(roadmapTimeoutRef.current);
+    if (projectId) {
+      debouncedUpdateRoadmap(projectId, content, updateRoadmapMarkdown);
     }
-    
-    // Sauvegarder dans le store après un délai
-    roadmapTimeoutRef.current = setTimeout(() => {
-      if (projectId) {
-        isUpdatingFromStoreRef.current = true;
-        updateRoadmapMarkdown(projectId, content);
-        // Reset le flag après un court délai
-        setTimeout(() => {
-          isUpdatingFromStoreRef.current = false;
-        }, 100);
-      }
-    }, 1000); // Délai plus long pour éviter les sauvegardes excessives
   }, [projectId, updateRoadmapMarkdown]);
 
   const updateTodoContent = useCallback((content) => {
-    // Mettre à jour l'état local immédiatement
-    setLocalTodoContent(content);
-    
-    // Annuler le timeout précédent
-    if (todoTimeoutRef.current) {
-      clearTimeout(todoTimeoutRef.current);
+    if (projectId) {
+      debouncedUpdateTodo(projectId, content, updateTodoMarkdown);
     }
-    
-    // Sauvegarder dans le store après un délai
-    todoTimeoutRef.current = setTimeout(() => {
-      if (projectId) {
-        isUpdatingFromStoreRef.current = true;
-        updateTodoMarkdown(projectId, content);
-        // Reset le flag après un court délai
-        setTimeout(() => {
-          isUpdatingFromStoreRef.current = false;
-        }, 100);
-      }
-    }, 1000);
   }, [projectId, updateTodoMarkdown]);
 
-  // Cleanup des timeouts
-  useEffect(() => {
-    return () => {
-      if (roadmapTimeoutRef.current) {
-        clearTimeout(roadmapTimeoutRef.current);
-      }
-      if (todoTimeoutRef.current) {
-        clearTimeout(todoTimeoutRef.current);
-      }
-    };
-  }, []);
-
   return {
-    roadmapContent: localRoadmapContent,
-    todoContent: localTodoContent,
+    roadmapContent,
+    todoContent,
     updateRoadmapContent,
     updateTodoContent
   };

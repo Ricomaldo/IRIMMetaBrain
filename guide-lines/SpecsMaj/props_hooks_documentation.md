@@ -1,222 +1,8 @@
 # Documentation Props & Hooks - IRIM StudioLab
 
-## Hook: useRoomNotes
+## Architecture Panel (Refactorisation 2024)
 
-**Fichier:** `hooks/useRoomNotes.js`
-
-**Retourne:**
-```js
-{
-  notes: {
-    chambre: string,
-    atelier: string, 
-    forge: string,
-    boutique: string
-  },
-  updateNote: (roomType: string, content: string) => void
-}
-```
-
-**Usage:** Persistance notes par pièce pendant navigation
-
----
-
-## Composant: StudioHall
-
-**Fichier:** `components/layout/StudioHall/StudioHall.jsx`
-
-**State interne:**
-- `currentRoom: { x: number, y: number }` - Position dans grille 4x3
-- `roomNotesHook` - Instance hook useRoomNotes
-
-**Props transmises:**
-- `RoomCanvas`: currentRoom, onNavigate, roomNotesHook
-- `SideTower`: aucune
-
----
-
-## Composant: RoomCanvas
-
-**Fichier:** `components/layout/RoomCanvas/RoomCanvas.jsx`
-
-**Props reçues:**
-```js
-{
-  currentRoom: { x: number, y: number },
-  onNavigate: (newPos) => void,
-  roomNotesHook: { notes, updateNote }
-}
-```
-
-**Props transmises à RoomSlot:**
-```js
-{
-  roomType: string,           // 'chambre'|'atelier'|'forge'|'boutique'|'empty'
-  background: string|null,    // URL asset ou null
-  roomColors: object          // Palette couleurs spécifiques par pièce
-}
-```
-
-**Props transmises à RoomNote:**
-```js
-{
-  roomType: string,
-  roomNotesHook: object
-}
-```
-
----
-
-## Composant: RoomSlot (styled-component)
-
-**Fichier:** `components/layout/RoomCanvas/RoomCanvas.styles.js`
-
-**Props utilisées:**
-```js
-{
-  roomType: string,     // Détermine couleur de base
-  background: string,   // URL image background
-  roomColors: object    // { chambre: '#fff', atelier: '#fff', ... }
-}
-```
-
-**Logique rendu:**
-1. Couleur base: `roomColors[roomType]`
-2. Image par-dessus si `background` fourni
-3. Text color depuis theme
-
----
-
-## Composant: RoomNote
-
-**Fichier:** `components/rooms/RoomNote/RoomNote.jsx`
-
-**Props reçues:**
-```js
-{
-  roomType: string,              // 'chambre'|'atelier'|'forge'|'boutique'
-  roomNotesHook: {
-    notes: object,
-    updateNote: function
-  }
-}
-```
-
-**State interne:**
-- `isExpanded: boolean` - Toggle collapse/expand
-
-**Comportement:**
-- Lecture: `notes[roomType]`
-- Écriture: `updateNote(roomType, newValue)`
-- Icons depuis `assetMapping.icons`
-
----
-
-## Composant: ControlTower
-
-**Fichier:** `components/layout/SideTower/ControlTower/ControlTower.jsx`
-
-**Props:** Aucune
-
-**Dépendances:**
-- `controlButtons` depuis `utils/buttonMapping.js`
-- Transmet à IconButton: `{ icon, label, onClick }`
-
----
-
-## Composant: WorkbenchDrawer
-
-**Fichier:** `components/layout/SideTower/WorkbenchDrawer/WorkbenchDrawer.jsx`
-
-**Props:** Aucune
-
-**Dépendances:**
-- `workbenchButtons` depuis `utils/buttonMapping.js`
-- Transmet à IconButton: `{ icon, label, onClick }`
-
----
-
-## Composant: IconButton
-
-**Fichier:** `components/common/IconButton/IconButton.jsx`
-
-**Props:**
-```js
-{
-  icon: string,           // Emoji ou caractère
-  label: string,          // Text sous icône
-  onClick: function,      // Handler clic
-  active?: boolean        // État actif (optionnel)
-}
-```
-
----
-
-## Configuration: roomConfig
-
-**Fichier:** `utils/roomPositions.js`
-
-**Structure item:**
-```js
-{
-  x: number,              // Position grille (0-3)
-  y: number,              // Position grille (0-2)
-  type: string,           // 'chambre'|'atelier'|'forge'|'boutique'|'empty'
-  name: string,           // Nom affiché
-  background: string      // URL depuis assetMapping.roomBackgrounds
-}
-```
-
----
-
-## Configuration: assetMapping
-
-**Fichier:** `utils/assetMapping.js`
-
-**Exports:**
-```js
-roomBackgrounds: {
-  chambre: '/assets/rooms/chambre-cozy.jpg',
-  // ...
-}
-
-roomColors: {          // Couleurs spécifiques par pièce
-  chambre: '#FFE4B5',    // Beige moelleux
-  atelier: '#DEB887',    // Bois buriné
-  cuisine: '#F0E68C',    // Jaune chaleureux
-  // ...
-}
-
-textures: {
-  parchment: '/assets/ui/parchment-texture.jpg',
-  // ...
-}
-
-icons: {
-  note: '📝',
-  expand: '➡️',
-  collapse: '⬇️'
-}
-```
-
----
-
-## Switch Palettes Couleurs
-
-**Dans RoomCanvas.jsx:**
-```js
-// Utilisation des couleurs spécifiques par pièce
-import { roomColors } from '../../../utils/assetMapping';
-roomColors={roomColors}
-```
-
-**Effet:** Change couleurs de base des pièces sans affecter backgrounds d'assets.
-
----
-
-## Composants: Panel & MarkdownPanel (Factorisation)
-
-### Composant: Panel (Base)
+### Composant: Panel (Composant Atomique)
 
 **Fichier:** `components/common/Panel/Panel.jsx`
 
@@ -229,69 +15,238 @@ roomColors={roomColors}
   children: ReactNode,        // Contenu du panneau
 
   // APPARENCE
-  variant: string = "default", // "default"|"roadmap"|"todo"|"notes"
-  maxHeight: string = "500px", // Hauteur maximale
+  texture: string,            // 'parchment'|'metal'|'wood'|'stone'
+  accentColor: string,        // Couleur d'accentuation
+  maxHeight: string,          // Hauteur maximale
 
   // LAYOUT
   gridColumn: string,         // Position CSS Grid
   gridRow: string,            // Position CSS Grid
 
   // COMPORTEMENT
-  collapsible: boolean = true,     // Peut être réduit
-  defaultCollapsed: boolean = false, // État initial
+  collapsible: boolean,       // Peut être réduit
+  collapsed: boolean,         // État externe (contrôlé)
+  defaultCollapsed: boolean,  // État initial (non contrôlé)
+  onToggleCollapse: function, // Callback collapse
   badge: string|number,       // Badge de notification
+  contentType: string,        // Type de contenu ('markdown'|'default')
+
+  // ÉVÉNEMENTS
+  onClick: function           // Handler clic sur le panel
 }
 ```
 
-**Usage:** Panneau de base réutilisable avec header, collapse et styles parchemin.
+**Context:** Utilise `PanelContext` pour la gestion d'état
+
+**Usage:** Composant atomique de base pour tous les panneaux de l'application
 
 ---
 
-### Composant: MarkdownPanel
+### PanelContext
 
-**Fichier:** `components/common/MarkdownPanel/MarkdownPanel.jsx`
+**Fichier:** `components/common/Panel/PanelContext.jsx`
+
+**État fourni:**
+```js
+{
+  // États
+  zoom: number,              // Niveau de zoom (-2 à +2)
+  editing: boolean,          // Mode édition actif
+  contentType: string,       // Type de contenu du panel
+
+  // Actions
+  handleZoomIn: function,    // Augmenter zoom
+  handleZoomOut: function,   // Réduire zoom
+  handleToggleEdit: function // Basculer édition
+}
+```
+
+**Usage:** Context automatiquement fourni par Panel, consommé par MarkdownEditor
+
+---
+
+### Composant: MarkdownEditor
+
+**Fichier:** `components/common/MarkdownEditor/MarkdownEditor.jsx`
 
 **Props:**
 ```js
 {
-  // HÉRITE DE PANEL
-  ...panelProps,              // Toutes les props de Panel
-
-  // MARKDOWN
-  value: string = "",         // Contenu Markdown
+  // CONTENU
+  value: string,              // Contenu Markdown
   onChange: function,         // Callback de changement
   placeholder: string,        // Texte placeholder
 
-  // ÉDITION
-  editable: boolean = true,        // Mode édition activé
-  showPreview: boolean = true,     // Afficher l'aperçu
-  showMetrics: boolean = false,    // Afficher métriques (TODO/checkboxes)
+  // APPARENCE
+  height: string,             // Hauteur de l'éditeur
+  compact: boolean,           // Mode compact
+  accentColor: string,        // Couleur d'accentuation
+
+  // COMPORTEMENT
+  variant: string,            // 'embedded'|'standalone'
+  showPreview: boolean,       // Afficher l'aperçu
+  readOnly: boolean,          // Mode lecture seule
+  zoomLevel: number          // Niveau de zoom (fallback si pas de context)
 }
 ```
 
-**Usage:** Panel spécialisé pour contenu Markdown avec édition/preview et métriques.
+**Context:** Consomme `PanelContext` si disponible, sinon gestion interne
 
-**Exemples d'usage:**
+**Usage:** S'intègre dans Panel pour l'édition Markdown avec zoom et preview
+
+---
+
+### Composant: MarkdownToolbar
+
+**Fichier:** `components/common/MarkdownToolbar/MarkdownToolbar.jsx`
+
+**Props:**
 ```js
-// Atelier - Roadmap
-<MarkdownPanel
+{
+  zoomLevel: number,         // Niveau de zoom actuel
+  onZoomIn: function,        // Augmenter zoom
+  onZoomOut: function,       // Réduire zoom
+  isEditing: boolean,        // État édition
+  onToggleEdit: function,    // Basculer édition
+  showEditButton: boolean    // Afficher bouton d'édition
+}
+```
+
+**Usage:** Toolbar intégrée automatiquement dans Panel quand contentType="markdown"
+
+---
+
+## Pattern d'Usage Panel + MarkdownEditor
+
+**Architecture simplifiée:**
+
+```jsx
+// Exemple: AtelierRoom - Roadmap Panel
+<Panel
+  gridColumn="1 / 4"
+  gridRow="3 / 6"
   title="Roadmap"
   icon="🗺️"
-  variant="roadmap"
-  value={roadmapContent}
-  onChange={updateRoadmap}
-  showMetrics={true}
-  gridColumn="1 / 3"
-  gridRow="1 / 4"
-/>
+  texture="parchment"
+  accentColor={theme.colors.accents.cold}
+  contentType="markdown"              // Active MarkdownToolbar
+  collapsible={true}
+  collapsed={roadmapState.collapsed}
+  onToggleCollapse={(newCollapsed) => updateModuleState(project.id, 'roadmap', { collapsed: newCollapsed })}
+>
+  <MarkdownEditor
+    value={roadmapContent}
+    onChange={updateRoadmapContent}
+    placeholder="Définissez votre roadmap..."
+    height="100%"
+    variant="embedded"                // S'adapte au PanelContext
+    accentColor={theme.colors.accents.cold}
+  />
+</Panel>
+```
 
-// Salon - Notes
+**Flux:**
+1. Panel fournit PanelContext
+2. Panel détecte contentType="markdown" → affiche MarkdownToolbar
+3. MarkdownEditor consomme PanelContext pour zoom/editing
+4. MarkdownToolbar contrôle les actions via PanelContext
+
+---
+
+## Hooks de Persistance
+
+### Hook: usePanelContent
+
+**Fichier:** `hooks/usePanelContent.js`
+
+**Retourne:**
+```js
+{
+  roadmapContent: string,
+  todoContent: string,
+  updateRoadmapContent: function,
+  updateTodoContent: function
+}
+```
+
+**Usage:** Persistance contenu Markdown des panels par projet
+
+---
+
+## Stores et État Global
+
+### Store: useProjectsStore
+
+**Fonctions de gestion des modules:**
+```js
+{
+  getModuleState: (projectId, moduleType) => { collapsed: boolean },
+  updateModuleState: (projectId, moduleType, newState) => void
+}
+```
+
+**Usage:** Persistance état collapsed des panels par projet
+
+---
+
+## Composants Layout
+
+### PanelGrid
+
+**Fichier:** `components/layout/PanelGrid/PanelGrid.jsx`
+
+**Props:**
+```js
+{
+  columns: number,           // Nombre de colonnes CSS Grid
+  rows: number,             // Nombre de lignes CSS Grid
+  children: ReactNode       // Panels enfants
+}
+```
+
+**Usage:** Container CSS Grid pour organiser les Panel
+
+### BaseRoom
+
+**Props utilisées:**
+```js
+{
+  roomType: string,         // Type de pièce
+  layoutType: string,       // 'grid'|'flex'|'absolute'
+  children: ReactNode       // Contenu (généralement PanelGrid + Panel)
+}
+```
+
+---
+
+## Migration depuis MarkdownPanel
+
+**Ancien pattern (supprimé):**
+```jsx
 <MarkdownPanel
-  title="Notes Salon"
-  icon="🛋️"
-  variant="notes"
-  value={salonNotes}
-  onChange={updateSalonNotes}
-  maxHeight="350px"
+  title="Roadmap"
+  value={content}
+  onChange={updateContent}
 />
 ```
+
+**Nouveau pattern:**
+```jsx
+<Panel
+  title="Roadmap"
+  contentType="markdown"
+>
+  <MarkdownEditor
+    value={content}
+    onChange={updateContent}
+    variant="embedded"
+  />
+</Panel>
+```
+
+**Avantages:**
+- Panel devient le composant atomique réutilisable
+- MarkdownEditor focalisé sur l'édition uniquement  
+- Context centralisé pour zoom/editing
+- Toolbar automatique selon contentType
+- Architecture plus modulaire et extensible

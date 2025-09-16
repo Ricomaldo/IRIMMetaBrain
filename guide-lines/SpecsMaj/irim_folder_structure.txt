@@ -7,6 +7,9 @@ src/
 │   │   ├── RoomCanvas/
 │   │   │   ├── RoomCanvas.jsx
 │   │   │   └── RoomCanvas.styles.js
+│   │   ├── PanelGrid/
+│   │   │   ├── PanelGrid.jsx
+│   │   │   └── PanelGrid.styles.js
 │   │   └── SideTower/
 │   │       ├── SideTower.jsx
 │   │       ├── SideTower.styles.js
@@ -31,15 +34,7 @@ src/
 │   │   │       └── index.js
 │   │   ├── Atelier/
 │   │   │   ├── AtelierRoom.jsx
-│   │   │   ├── AtelierRoom.styles.js
-│   │   │   ├── AtelierPanels/
-│   │   │   │   ├── AtelierPanels.jsx
-│   │   │   │   └── AtelierPanels.styles.js
-│   │   │   ├── EditablePanel/
-│   │   │   │   ├── EditablePanel.jsx
-│   │   │   │   └── EditablePanel.styles.js
-│   │   │   └── IdeasCollapse/
-│   │   │       └── IdeasCollapse.jsx
+│   │   │   └── AtelierRoom.styles.js
 │   │   ├── Sanctuaire/
 │   │   │   ├── SanctuaireRoom.jsx
 │   │   │   └── SanctuaireRoom.styles.js
@@ -88,12 +83,12 @@ src/
 │   │   │   └── MarkdownPreview/
 │   │   │       ├── MarkdownPreview.jsx
 │   │   │       └── MarkdownPreview.styles.js
-│   │   ├── MarkdownPanel/
-│   │   │   ├── MarkdownPanel.jsx
-│   │   │   └── index.js
+│   │   ├── MarkdownToolbar/
+│   │   │   └── MarkdownToolbar.jsx
 │   │   ├── Panel/
 │   │   │   ├── Panel.jsx
 │   │   │   ├── Panel.styles.js
+│   │   │   ├── PanelContext.jsx
 │   │   │   └── index.js
 │   │   └── Typography/
 │   │       ├── Typography.jsx

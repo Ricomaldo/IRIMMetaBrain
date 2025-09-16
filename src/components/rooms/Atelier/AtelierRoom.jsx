@@ -6,7 +6,6 @@ import useProjectsStore from '../../../stores/useProjectsStore';
 import BaseRoom from '../../layout/BaseRoom';
 import Panel from '../../common/Panel';
 import MarkdownEditor from '../../common/MarkdownEditor';
-import MarkdownToolbar from '../../common/MarkdownToolbar';
 import { usePanelContent } from '../../../hooks/usePanelContent';
 import PanelGrid from '../../layout/PanelGrid';
 import {
@@ -35,11 +34,19 @@ const AtelierRoom = () => {
   if (!project) {
     return (
       <BaseRoom roomType="atelier" layoutType="grid">
-        <AtelierGrid>
-          <PanelTitle>
-            Aucun projet sélectionné
-          </PanelTitle>
-        </AtelierGrid>
+        <PanelGrid columns={1} rows={1}>
+          <Panel
+            gridColumn="1"
+            gridRow="1"
+            title="Aucun projet"
+            icon="⚠️"
+            collapsible={false}
+          >
+            <div style={{ padding: '20px', textAlign: 'center' }}>
+              Aucun projet sélectionné
+            </div>
+          </Panel>
+        </PanelGrid>
       </BaseRoom>
     );
   }
