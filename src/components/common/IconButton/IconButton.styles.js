@@ -23,7 +23,15 @@ export const ButtonContainer = styled.button.withConfig({
     if (props.variant === 'tab') {
       return `
         transition: all ${props.theme.motion.durations.fast} ${props.theme.motion.easings.standard};
-        border: ${props.theme.borders.base} solid ${props.theme.colors.border};
+        /* TEST-MEDIEVAL-UI: Bordure dorée pour tab actif */
+        ${props.$active ? `
+          border: 2px solid transparent;
+          background:
+            linear-gradient(${props.theme.colors.secondary}, ${props.theme.colors.secondary}) padding-box,
+            ${props.theme.gradients.uiKitGold} border-box;
+        ` : `
+          border: ${props.theme.borders.base} solid ${props.theme.colors.border};
+        `}
         border-bottom: none;
         border-radius: ${props.theme.radii.md} ${props.theme.radii.md} 0 0;
         position: relative;

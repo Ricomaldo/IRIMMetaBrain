@@ -139,5 +139,16 @@ export const theme = {
     navigation: 10,
     overlay: 20,
     modal: 30
+  },
+  // Gradients UI Kit pour enrichissement visuel
+  gradients: {
+    // Or premium (flèches navigation, bordures spéciales)
+    uiKitGold: 'linear-gradient(135deg, #f0deba 0%, #b1845a 100%)',
+
+    // Bleu nuit profond (backgrounds premium, Sanctuaire)
+    uiKitBlue: 'linear-gradient(135deg, #19253f 0%, #111629 100%)',
+
+    // Effet brillance or (animations, hover states)
+    goldShine: 'linear-gradient(90deg, #b1845a 0%, #f0deba 50%, #b1845a 100%)'
   }
 };

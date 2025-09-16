@@ -91,6 +91,11 @@ export const ModalContainer = styled.div`
         height: 100%;
         background-blend-mode: multiply;
         animation: ${fadeIn} 0.3s ease-out; /* Pas de slide, juste fadeIn */
+        /* TEST-MEDIEVAL-UI: Bordure dorée subtile pour modales roomCanvas */
+        border: 3px solid transparent;
+        background:
+          ${metalBg} padding-box,
+          ${theme.gradients.uiKitGold} border-box;
       `;
     } else if ($variant === 'baseFloorTower') {
       // Version qui remplace l'étage de base (BottomTowerFloor)

@@ -27,6 +27,17 @@ export const NoteContainer = styled.div`
   z-index: ${({ theme }) => theme.zIndex.overlay};
   box-shadow: 0 4px 8px ${({ theme }) => alpha(theme.colors.black, 0.3)};
   border: ${({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
+  transition: all 0.3s ease;
+
+  /* TEST-MEDIEVAL-UI: Effet glow doré au hover */
+  &:hover {
+    box-shadow:
+      0 4px 8px ${({ theme }) => alpha(theme.colors.black, 0.3)},
+      0 0 20px ${({ theme }) => alpha('#f0deba', 0.3)},
+      inset 0 0 15px ${({ theme }) => alpha('#b1845a', 0.1)};
+    border-color: ${({ theme }) => '#b1845a'};
+    transform: translateY(-2px);
+  }
 `;
 
 export const NoteHeader = styled.div`

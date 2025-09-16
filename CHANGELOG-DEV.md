@@ -1,0 +1,115 @@
+# CHANGELOG-DEV - IRIMStudioHall / IRIMMetaBrain
+
+> Journal de développement technique - Décisions, réalisations et apprentissages
+
+---
+
+## 📅 Session 2024-09-16 - Architecture Complète
+
+### 🎯 Réalisations principales
+
+#### Phase 1: Harmonisation Design System
+- ✅ **Audit complet du thème** : Suppression de TOUS les hardcoded values
+  - 20 valeurs px remplacées par theme.spacing
+  - 18 couleurs hex remplacées par theme.colors
+  - Enrichissement du thème (spacing 3xs→3xl, couleurs système)
+- ✅ **Principe DRY appliqué** : 100% des styles utilisent maintenant le thème
+
+#### Phase 2: Système AsyncStorage GitHub
+- ✅ **SyncManager complet** avec chiffrement AES-256
+  - PBKDF2 10k iterations pour dérivation de clé
+  - GitHub Gist comme backend
+  - Singleton pattern pour le service
+- ✅ **Modal de synchronisation** avec UI complète
+
+#### Phase 3: Système de Modales Centralisé
+- ✅ **Architecture modulaire** avec 3 variantes :
+  - `overlay` : Modale classique plein écran
+  - `roomCanvas` : Remplace exactement la zone RoomCanvas (80%)
+  - `baseFloorTower` : Remplace la zone SideTowerNotes (320px)
+- ✅ **React Portals** : Render intelligent dans le bon container
+- ✅ **Centralisation des actions** dans `buttonMapping.js`
+- ✅ **ModalManager** : Gestion centralisée, une seule modale active
+
+#### Phase 4: Navigation Dorée Premium
+- ✅ **Flèches dorées** remplaçant les emojis
+  - Une seule image, 4 rotations CSS (0°, 90°, 180°, 270°)
+  - Animations hover (scale + glow doré)
+  - Structure modulaire dans `/navigation/`
+- ✅ **Fade UX pendant navigation**
+  - État `isNavigating` + `activeDirection`
+  - Opacity dynamique (0.2 inactive, 0.5 active, 1 au repos)
+  - Timing parfait avec la transition de grille (500ms)
+
+### 🏗️ Décisions Architecturales (ADR)
+
+#### ADR-001: React Portals pour Modales
+- **Contexte** : Besoin de render des modales dans différentes zones
+- **Décision** : Utiliser createPortal avec IDs spécifiques
+- **Conséquences** : Flexibilité maximale, performance optimale
+
+#### ADR-002: Une Image pour 4 Directions
+- **Contexte** : 4 flèches de navigation nécessaires
+- **Décision** : Une seule image + rotations CSS
+- **Conséquences** : -75% de requêtes réseau, maintenance simplifiée
+
+#### ADR-003: Centralisation Actions dans buttonMapping
+- **Contexte** : Actions dispersées dans plusieurs composants
+- **Décision** : Centraliser avec système de handlers
+- **Conséquences** : Source unique de vérité, évite la duplication
+
+### 🔥 Leçons Apprises
+
+1. **Piège Styled-Components** : Les variantes override TOUT le transform
+   - Solution : Gérer les transforms dans chaque variante
+
+2. **Transient Props** : `$variant` vs `variant`
+   - Les props sans $ sont passées au DOM → erreurs console
+
+3. **Keyframes en v4** : Ne plus wrapper avec `` css`${keyframe}` ``
+   - Utiliser directement : `animation: ${fadeIn} 0.3s`
+
+4. **useEffect Dependencies** : État dans handler = closure stale
+   - Solution : useRef ou déplacer le handler dans useEffect
+
+### 📊 Métriques de Session
+- **Commits** : 8 commits atomiques bien documentés
+- **Fichiers touchés** : 23 fichiers
+- **Lignes ajoutées** : ~1500
+- **Nouveaux composants** : 10
+- **Patterns établis** : 4 (Portal, Singleton, Centralisation, Fade UX)
+
+### 🎯 Prochaines étapes
+- [ ] SystemOverview.jsx avec introspection
+- [ ] Storybook léger intégré
+- [ ] Tests visuels automatisés
+- [ ] Documentation ADR complète
+
+---
+
+## 📝 Template pour futures sessions
+
+```markdown
+## 📅 Session YYYY-MM-DD - [Titre]
+
+### 🎯 Réalisations principales
+- ✅
+
+### 🏗️ Décisions Architecturales
+- **ADR-XXX**: [Titre]
+  - Contexte:
+  - Décision:
+  - Conséquences:
+
+### 🔥 Leçons Apprises
+-
+
+### 📊 Métriques
+- Commits:
+- Fichiers:
+- Lignes:
+```
+
+---
+
+*Ce document est maintenu pour tracer l'évolution technique du projet IRIMStudioHall / IRIMMetaBrain*
