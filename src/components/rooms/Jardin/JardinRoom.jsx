@@ -1,7 +1,7 @@
 // src/components/rooms/Jardin/JardinRoom.jsx
 
 import React from 'react';
-import BaseRoom from '../shared/BaseRoom';
+import BaseRoom from '../../layout/BaseRoom';
 import { JardinGrid } from './JardinRoom.styles';
 
 const JardinRoom = () => {

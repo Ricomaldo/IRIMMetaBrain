@@ -3,17 +3,17 @@
 import styled from 'styled-components';
 
 // Helper pour calculer la taille avec zoom
-const getZoomedSize = (baseSize, zoomLevel) => {
-  const zoomMultiplier = 1 + (zoomLevel * 0.15); // 15% par niveau
-  return `calc(${baseSize} * ${zoomMultiplier})`;
-};
 
-export const PreviewContainer = styled.div`
-  min-height: ${props => props.height === '100%' ? '200px' : (props.height || '120px')};
-  max-height: ${props => props.height === '100%' ? 'none' : (props.height || '120px')};
-  height: ${props => props.height === '100%' ? '100%' : 'auto'};
-  flex: ${props => props.height === '100%' ? '1' : 'none'};
-  overflow-y: auto;
+export const PreviewContainer = styled.div.withConfig({
+  shouldForwardProp: (prop) => !['compact', 'zoomLevel', 'accentColor'].includes(prop)
+})`
+  width: 100%;
+  height: 240px !important; /* Hauteur BRUTALEMENT fixe */
+  max-height: 400px !important; /* Force absolue */
+  overflow-y: auto !important; /* Scroll OBLIGATOIRE */
+  overflow-x: hidden;
+  flex: none; /* Pas de flex qui pète tout */
+
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 4px;
   background: #FFFFFF;

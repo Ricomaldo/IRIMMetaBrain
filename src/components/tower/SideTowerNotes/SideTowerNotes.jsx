@@ -1,17 +1,18 @@
-// src/components/layout/SideTower/SideTowerNotes/SideTowerNotes.jsx
+// src/components/tower/SideTowerNotes/SideTowerNotes.jsx
 
 import React, { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { NoteContainer } from './SideTowerNotes.styles';
-import MarkdownEditor from '../../../common/MarkdownEditor';
-import MarkdownToolbar from '../../../common/MarkdownToolbar';
-import useNotesStore from '../../../../stores/useNotesStore';
+import MarkdownEditor from '../../common/MarkdownEditor';
+import MarkdownToolbar from '../../common/MarkdownToolbar';
+import useNotesStore from '../../../stores/useNotesStore';
 
 const SideTowerNotes = () => {
   const theme = useTheme();
   const { getSideTowerNote, updateSideTowerNote } = useNotesStore();
   const [isEditing, setIsEditing] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Couleur d'accent pour SideTowerNotes
   const accentColor = theme.colors.accents.neutral;
@@ -24,6 +25,21 @@ const SideTowerNotes = () => {
   const handleZoomOut = () => {
     setZoomLevel(prev => Math.max(prev - 1, -2));
   };
+
+  if (!isExpanded) {
+    return (
+      <NoteContainer style={{
+        padding: '12px',
+        cursor: 'pointer',
+        textAlign: 'center',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }} onClick={() => setIsExpanded(true)}>
+        📝 Notes SideTower ➡️
+      </NoteContainer>
+    );
+  }
 
   return (
     <NoteContainer>
@@ -52,7 +68,11 @@ const SideTowerNotes = () => {
       </div>
 
       {/* MarkdownEditor sans header */}
-      <div style={{ flex: 1 }}>
+      <div style={{ 
+        flex: 1, 
+        overflow: 'hidden',
+        minHeight: 0 /* Permet au flex child de rétrécir */
+      }}>
         <MarkdownEditor
           value={getSideTowerNote()}
           onChange={updateSideTowerNote}
@@ -64,6 +84,17 @@ const SideTowerNotes = () => {
           zoomLevel={zoomLevel}
           accentColor={accentColor}
         />
+      </div>
+
+      {/* Bouton fermer */}
+      <div style={{
+        padding: '8px',
+        textAlign: 'center',
+        borderTop: '1px solid #ccc',
+        cursor: 'pointer',
+        fontSize: '10px'
+      }} onClick={() => setIsExpanded(false)}>
+        ⬇️ Fermer
       </div>
     </NoteContainer>
   );

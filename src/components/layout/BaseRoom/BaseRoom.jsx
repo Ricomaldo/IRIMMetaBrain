@@ -1,7 +1,7 @@
 // src/components/rooms/shared/BaseRoom/BaseRoom.jsx
 
 import React from 'react';
-import RoomNote from '../RoomNote/RoomNote';
+import RoomNote from '../../rooms/shared/RoomNote/RoomNote';
 import { BaseRoomContainer } from './BaseRoom.styles';
 
 const BaseRoom = ({ 
@@ -13,7 +13,7 @@ const BaseRoom = ({
   return (
     <BaseRoomContainer layoutType={layoutType} className={className}>
       {children}
-      <RoomNote roomType={roomType} />
+      {/* <RoomNote roomType={roomType} /> */}
     </BaseRoomContainer>
   );
 };

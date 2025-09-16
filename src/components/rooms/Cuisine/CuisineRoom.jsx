@@ -1,7 +1,7 @@
 // src/components/rooms/Cuisine/CuisineRoom.jsx
 
 import React from 'react';
-import BaseRoom from '../shared/BaseRoom';
+import BaseRoom from '../../layout/BaseRoom';
 import { CuisineGrid } from './CuisineRoom.styles';
 
 const CuisineRoom = () => {

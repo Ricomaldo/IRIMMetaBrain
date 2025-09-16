@@ -2,7 +2,6 @@
 
 import { css } from 'styled-components';
 import { textures } from '../utils/assetMapping';
-import { alpha } from './color';
 
 export const flexCenter = css`
   display: flex;
@@ -118,4 +117,45 @@ export const tertiaryLevel = css`
   z-index: ${({ theme }) => theme.zIndex.level1};
   position: relative;
   opacity: 1;
+`;
+
+// --- Tabs system helpers ---
+export const tabBase = css`
+  position: relative;
+  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
+  border-radius: ${({ theme }) => `${theme.radii.md} ${theme.radii.md} 0 0`};
+  border: ${({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${({ theme }) => theme.typography.sizes.md};
+  min-width: 60px;
+`;
+
+export const tabInactive = css`
+  background: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.text.light};
+  margin-top: 3px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.accent};
+  }
+`;
+
+export const tabActive = css`
+  background: ${({ theme }) => theme.colors.secondary};
+  color: ${({ theme }) => theme.colors.text.primary};
+  border-bottom: none !important;
+  margin-bottom: -2px;
+  z-index: 3;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+`;
+
+export const tabContentPanel = css`
+  background: ${({ theme }) => theme.colors.secondary};
+  border: ${({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
+  border-radius: ${({ theme }) => `${theme.radii.md}`};
 `;

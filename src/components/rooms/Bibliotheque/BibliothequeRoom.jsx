@@ -1,7 +1,7 @@
 // src/components/rooms/Bibliotheque/BibliothequeRoom.jsx
 
 import React from 'react';
-import BaseRoom from '../shared/BaseRoom';
+import BaseRoom from '../../layout/BaseRoom';
 import { BibliothequeGrid } from './BibliothequeRoom.styles';
 
 const BibliothequeRoom = () => {

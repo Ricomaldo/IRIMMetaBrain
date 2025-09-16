@@ -2,12 +2,10 @@
 
 // ---- ControlTower: ligne du haut (calendrier + infos + timer) + ligne du bas (actions rapides) ----
 export const controlButtons = [
-  { id: 'calendar', type: 'action', icon: '📅', label: 'Calendrier', action: () => console.log('Calendar') },
-  { id: 'level', type: 'stat', icon: '🎖️', label: 'Niveau', value: 34 },
-  { id: 'gold', type: 'stat', icon: '💰', label: 'Or', value: 3223 },
+  { id: 'calendar', type: 'action', icon: '📅', label: 'Calendrier', action: () => {} },
   { id: 'stars', type: 'stat', icon: '⭐', label: 'Étoiles', value: '11/100' },
   { id: 'xp', type: 'stat', icon: '🔮', label: 'XP', value: 29 },
-  { id: 'timer', type: 'action', icon: '⏱️', label: 'Timer', action: () => console.log('Timer') },
+  { id: 'timer', type: 'action', icon: '⏱️', label: 'Timer', action: () => {} },
 ];
 
 export const quickActions = [
@@ -15,16 +13,15 @@ export const quickActions = [
   { id: 'book', icon: '📖', label: 'Grimoire', onClick: () => {} },
   { id: 'help', icon: '❓', label: 'Aide', onClick: () => {} },
   { id: 'map', icon: '🗺️', label: 'Carte', onClick: () => {} },
-  { id: 'craft', icon: '🔨', label: 'Atelier', onClick: () => {} },
   { id: 'config', icon: '⚙️', label: 'Paramètres', onClick: () => {} },
 ];
 
 // Deprecated - keeping for compatibility
 export const workbenchButtons = [
   { id: 'github', icon: '🐙', label: 'GitHub', action: () => window.open('https://github.com') },
-  { id: 'vscode', icon: '💻', label: 'VS Code', action: () => console.log('VS Code') },
-  { id: 'arc', icon: '🌐', label: 'Arc', action: () => console.log('Arc') },
-  { id: 'cursor', icon: '🎯', label: 'Cursor', action: () => console.log('Cursor') }
+  { id: 'vscode', icon: '💻', label: 'VS Code', action: () => {} },
+  { id: 'arc', icon: '🌐', label: 'Arc', action: () => {} },
+  { id: 'cursor', icon: '🎯', label: 'Cursor', action: () => {} }
 ];
 
 // ---- WorkbenchDrawer: onglets, items, footer ----

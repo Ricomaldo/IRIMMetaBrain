@@ -1,10 +1,9 @@
-// src/components/layout/SideTower/WorkbenchDrawer/WorkbenchDrawer.jsx
+// src/components/tower/WorkbenchDrawer/WorkbenchDrawer.jsx
 
 import React, { useState, useMemo } from 'react';
-import { DrawerContainer, TabsHeader, TabContent, ItemsGrid } from './WorkbenchDrawer.styles';
-import IconButton from '../../../common/IconButton/IconButton';
-import SideTowerNotes from '../SideTowerNotes/SideTowerNotes';
-import { drawerTabs, drawerItemsByTab } from '../../../../utils/buttonMapping';
+import { DrawerContainer, TabsHeader, TabButton, TabContent, ItemsGrid } from './WorkbenchDrawer.styles';
+import IconButton from '../../common/IconButton/IconButton';
+import { drawerTabs, drawerItemsByTab } from '../../../utils/buttonMapping';
 
 const WorkbenchDrawer = () => {
   const [activeTab, setActiveTab] = useState('potions');
@@ -14,16 +13,24 @@ const WorkbenchDrawer = () => {
     <DrawerContainer>
       <TabsHeader>
         {drawerTabs.map(tab => (
-          <IconButton
+          <TabButton
             key={tab.id}
-            icon={tab.icon}
-            label=""
+            $active={tab.id === activeTab}
             onClick={() => setActiveTab(tab.id)}
-            size="medium"
             title={tab.label}
-            active={tab.id === activeTab}
-            variant="tab"
-          />
+          >
+            <span style={{ fontSize: '20px' }}>{tab.icon}</span>
+            {tab.id === activeTab && (
+              <span style={{ 
+                position: 'absolute',
+                bottom: '-1px', 
+                left: '0', 
+                right: '0', 
+                height: '3px',
+                background: 'transparent' 
+              }} />
+            )}
+          </TabButton>
         ))}
       </TabsHeader>
 
@@ -37,7 +44,6 @@ const WorkbenchDrawer = () => {
         </ItemsGrid>
       </TabContent>
 
-      <SideTowerNotes />
     </DrawerContainer>
   );
 };

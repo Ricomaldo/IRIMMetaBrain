@@ -1,7 +1,7 @@
 // src/components/rooms/Boutique/BoutiqueRoom.jsx
 
 import React from 'react';
-import BaseRoom from '../shared/BaseRoom';
+import BaseRoom from '../../layout/BaseRoom';
 import { BoutiqueGrid } from './BoutiqueRoom.styles';
 
 const BoutiqueRoom = () => {

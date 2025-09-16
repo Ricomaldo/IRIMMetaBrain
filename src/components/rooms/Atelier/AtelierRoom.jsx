@@ -1,18 +1,24 @@
 // src/components/rooms/Atelier/AtelierRoom.jsx
 
 import React from 'react';
+import { useTheme } from 'styled-components';
 import useProjectsStore from '../../../stores/useProjectsStore';
-import BaseRoom from '../shared/BaseRoom';
-import MarkdownPanel from '../../common/MarkdownPanel';
+import BaseRoom from '../../layout/BaseRoom';
+import Panel from '../../common/Panel';
+import MarkdownEditor from '../../common/MarkdownEditor';
+import MarkdownToolbar from '../../common/MarkdownToolbar';
 import { usePanelContent } from '../../../hooks/usePanelContent';
+import PanelGrid from '../../layout/PanelGrid';
 import {
-  AtelierGrid,
   PanelTitle
 } from './AtelierRoom.styles';
 
 const AtelierRoom = () => {
-  const { getCurrentProject } = useProjectsStore();
+  const { getCurrentProject, updateModuleState, getModuleState } = useProjectsStore();
   const project = getCurrentProject();
+  const theme = useTheme();
+
+
 
   const {
     roadmapContent,
@@ -20,6 +26,11 @@ const AtelierRoom = () => {
     updateRoadmapContent,
     updateTodoContent
   } = usePanelContent(project?.id || 'default');
+
+  // États collapse des modules
+  const roadmapState = getModuleState(project?.id, 'roadmap');
+  const todoState = getModuleState(project?.id, 'todo');
+  const screentvState = getModuleState(project?.id, 'screentv');
 
   if (!project) {
     return (
@@ -35,44 +46,79 @@ const AtelierRoom = () => {
 
       return (
         <BaseRoom roomType="atelier" layoutType="grid">
-          <AtelierGrid>
             {/* Nom du projet - En haut */}
             <PanelTitle>
               Projet à l'affiche : {project.name}
             </PanelTitle>
+          <PanelGrid columns={5} rows={5}>
+
 
             {/* Roadmap */}
-            <MarkdownPanel
+            <Panel
+              gridColumn="1 / 4"
+              gridRow="3 / 6"
               title="Roadmap"
               icon="🗺️"
-              variant="roadmap"
-              value={roadmapContent}
-              onChange={updateRoadmapContent}
-              placeholder="Définissez votre roadmap en markdown..."
-              gridColumn="1 / 4"
-              gridRow="1 / 4"
-              showMetrics={true}
-              editable={true}
-              showPreview={true}
-              defaultCollapsed={true}
-            />
+              texture="parchment"
+              accentColor={theme.colors.accents.cold}
+              contentType="markdown"
+              collapsible={true}
+              collapsed={roadmapState.collapsed ?? true}
+              onToggleCollapse={(newCollapsed) => updateModuleState(project.id, 'roadmap', { collapsed: newCollapsed })}
+            >
+              <MarkdownEditor
+                value={roadmapContent}
+                onChange={updateRoadmapContent}
+                placeholder="Définissez votre roadmap en markdown..."
+                height="100%"
+                compact={true}
+                variant="embedded"
+                accentColor={theme.colors.accents.cold}
+              />
+            </Panel>
 
             {/* Todo */}
-            <MarkdownPanel
+            <Panel
+              gridColumn="4 / 6"
+              gridRow="1 / 4"
               title="Todo"
               icon="✅"
-              variant="todo"
-              value={todoContent}
-              onChange={updateTodoContent}
-              placeholder="Gérez vos tâches en markdown..."
-              gridColumn="4 / 7"
-              gridRow="1 / 4"
-              showMetrics={true}
-              editable={true}
-              showPreview={true}
-              defaultCollapsed={true}
-            />
-          </AtelierGrid>
+              texture="parchment"
+              accentColor={theme.colors.accents.success}
+              contentType="markdown"
+              collapsible={true}
+              collapsed={todoState.collapsed ?? true}
+              onToggleCollapse={(newCollapsed) => updateModuleState(project.id, 'todo', { collapsed: newCollapsed })}
+            >
+              <MarkdownEditor
+                value={todoContent}
+                onChange={updateTodoContent}
+                placeholder="Gérez vos tâches en markdown..."
+                height="100%"
+                compact={true}
+                variant="embedded"
+                accentColor={theme.colors.accents.success}
+              />
+            </Panel>
+
+            {/* ScreenTV */}
+            <Panel
+              gridColumn="1 / 3"
+              gridRow="1 / 3"
+              title="ScreenTV"
+              icon="📺"
+              texture="metal"
+              accentColor={theme.colors.accents.cold}
+              collapsible={true}
+              collapsed={screentvState.collapsed ?? true}
+              onToggleCollapse={(newCollapsed) => updateModuleState(project.id, 'screentv', { collapsed: newCollapsed })}
+            >
+              <div style={{ padding: '8px', textAlign: 'center' }}>
+                📺 Upload screenshots here
+              </div>
+            </Panel>
+
+          </PanelGrid>
         </BaseRoom>
       );
 };

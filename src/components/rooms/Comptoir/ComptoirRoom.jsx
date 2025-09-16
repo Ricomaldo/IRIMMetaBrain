@@ -1,7 +1,7 @@
 // src/components/rooms/Comptoir/ComptoirRoom.jsx
 
 import React from 'react';
-import BaseRoom from '../shared/BaseRoom';
+import BaseRoom from '../../layout/BaseRoom';
 import { ComptoirGrid } from './ComptoirRoom.styles';
 
 const ComptoirRoom = () => {

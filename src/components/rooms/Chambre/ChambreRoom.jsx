@@ -1,7 +1,7 @@
 // src/components/rooms/Chambre/ChambreRoom.jsx
 
 import React from 'react';
-import BaseRoom from '../shared/BaseRoom';
+import BaseRoom from '../../layout/BaseRoom';
 import { ChambreGrid } from './ChambreRoom.styles';
 
 const ChambreRoom = () => {

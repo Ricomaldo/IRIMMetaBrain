@@ -5,12 +5,12 @@ import { squareButton, tertiaryLevel } from '../../../styles/mixins';
 
 export const ButtonContainer = styled.button.withConfig({
   shouldForwardProp: (prop) =>
-    !['active', 'variant', 'size'].includes(prop)
+    !['active', '$active', 'variant', 'size'].includes(prop)
 })`
   ${props => squareButton(props.size)}
   background: ${props => {
     if (props.variant === 'tab') {
-      return props.active ? props.theme.colors.secondary : props.theme.colors.primary;
+      return props.$active ? props.theme.colors.secondary : props.theme.colors.primary;
     }
     if (props.variant === 'secondary') {
       return props.theme.colors.stone;
@@ -27,7 +27,7 @@ export const ButtonContainer = styled.button.withConfig({
         border-radius: ${props.theme.radii.md} ${props.theme.radii.md} 0 0;
         position: relative;
         z-index: ${props.theme.zIndex.level3};
-        color: ${props.active ? props.theme.colors.text.primary : props.theme.colors.secondary};
+        color: ${props.$active ? props.theme.colors.text.primary : props.theme.colors.secondary};
         &:hover {
           transform: none;
           box-shadow: none;

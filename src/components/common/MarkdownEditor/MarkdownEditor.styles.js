@@ -1,17 +1,13 @@
 // src/components/common/MarkdownEditor/MarkdownEditor.styles.js
 
 import styled from 'styled-components';
-import { parchmentBg } from '../../../styles/mixins';
 
 // Helper pour calculer la taille avec zoom
-const getZoomedSize = (baseSize, zoomLevel) => {
-  const zoomMultiplier = 1 + (zoomLevel * 0.15); // 15% par niveau
-  return `calc(${baseSize} * ${zoomMultiplier})`;
-};
 
 export const EditorContainer = styled.div`
   width: 100%;
   height: 100%;
+  max-height: 100%; /* Respecte le parent */
   background: transparent;
   border: none;
   overflow: hidden;
@@ -19,6 +15,8 @@ export const EditorContainer = styled.div`
   flex-direction: column;
   flex: 1;
   min-height: 0;
+  box-sizing: border-box; /* Empêche dépassement */
+
 `;
 
 export const EditorHeader = styled.div`
@@ -92,7 +90,7 @@ export const Textarea = styled.textarea`
   width: 100%;
   height: ${props => props.$height === '100%' ? '100%' : (props.$height || '120px')};
   min-height: ${props => props.$height === '100%' ? '200px' : 'auto'};
-  max-height: ${props => props.$height === '100%' ? 'none' : 'none'};
+  max-height: 100%; /* Respecte toujours le parent */
   flex: ${props => props.$height === '100%' ? '1' : 'none'};
   border: 1px solid #8B4513;
   border-radius: 4px;

@@ -68,6 +68,19 @@ const useProjectsStore = create(
 
 **Next:** Finaliser l'interface Atelier 🚀`,
 
+          // État des modules Atelier
+          atelierModules: {
+            roadmap: { collapsed: true },
+            todo: { collapsed: true },
+            mindlog: { collapsed: true, mood: '😐', note: '' },
+            actions: { collapsed: true, items: [
+              { id: 1, text: 'Action prioritaire', completed: false },
+              { id: 2, text: 'Tâche en cours', completed: false },
+              { id: 3, text: 'À démarrer', completed: false }
+            ]},
+            screentv: { collapsed: true, screenshots: [] }
+          },
+
           // Atelier - 4 panneaux centraux (données structurées - legacy)
           roadmap: [
             {
@@ -129,6 +142,129 @@ const useProjectsStore = create(
             local: "localhost:5173"
           },
 
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        },
+
+        moodcycle: {
+          id: "moodcycle",
+          name: "MoodCycle",
+          type: "wellness",
+          status: "dev_actif",
+          roadmapMarkdown: `# MoodCycle - Cycle des Humeurs
+
+## Phase 1 - Tracking
+- [ ] Suivi quotidien des émotions
+- [ ] Graphiques de tendances
+- [ ] Notifications rappels
+
+## Phase 2 - Analyse
+- [ ] Patterns recognition
+- [ ] Conseils personnalisés
+- [ ] Export données wellness`,
+          todoMarkdown: `# Todo MoodCycle
+
+## 🔴 **Priorité Haute**
+- [ ] Interface de saisie rapide
+- [ ] Base de données émotions
+- [ ] Système de notifications
+
+## 🟡 **Priorité Moyenne**
+- [ ] Analytics et graphiques
+- [ ] Export CSV/JSON`,
+          atelierModules: {
+            roadmap: { collapsed: true },
+            todo: { collapsed: true },
+            mindlog: { collapsed: true, mood: '🌈', note: 'Projet bien-être et suivi humeurs' },
+            actions: { collapsed: true, items: [
+              { id: 1, text: 'Design mood picker', completed: false },
+              { id: 2, text: 'Créer DB schema', completed: false },
+              { id: 3, text: 'Interface analytics', completed: false }
+            ]},
+            screentv: { collapsed: true, screenshots: [] }
+          },
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        },
+
+        pepetteszub: {
+          id: "pepetteszub",
+          name: "PepettesZub",
+          type: "finance",
+          status: "concept",
+          roadmapMarkdown: `# PepettesZub - Gestionnaire Finance
+
+## Phase 1 - Base
+- [ ] Comptes et catégories
+- [ ] Transactions import
+- [ ] Budgets mensuels
+
+## Phase 2 - Smart
+- [ ] Prédictions IA
+- [ ] Alertes automatiques
+- [ ] Optimisations conseils`,
+          todoMarkdown: `# Todo PepettesZub
+
+## 🔴 **Priorité Haute**
+- [ ] Architecture compte/transaction
+- [ ] Import bank statements
+- [ ] Dashboard principal
+
+## 🟡 **Priorité Moyenne**
+- [ ] Mobile app companion
+- [ ] Notifications push`,
+          atelierModules: {
+            roadmap: { collapsed: true },
+            todo: { collapsed: true },
+            mindlog: { collapsed: true, mood: '💰', note: 'Focus économies et investissements' },
+            actions: { collapsed: true, items: [
+              { id: 1, text: 'Setup base données', completed: false },
+              { id: 2, text: 'Interface transactions', completed: false },
+              { id: 3, text: 'Algorithme budgets', completed: false }
+            ]},
+            screentv: { collapsed: true, screenshots: [] }
+          },
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        },
+
+        echodesreves: {
+          id: "echodesreves",
+          name: "EchoDesReves",
+          type: "creative",
+          status: "vision",
+          roadmapMarkdown: `# EchoDesReves - Journal Créatif
+
+## Phase 1 - Capture
+- [ ] Journal de rêves
+- [ ] Tags et catégories
+- [ ] Recherche full-text
+
+## Phase 2 - Analyse
+- [ ] Patterns récurrents
+- [ ] Visualisations créatives
+- [ ] Export artistique`,
+          todoMarkdown: `# Todo EchoDesReves
+
+## 🔴 **Priorité Haute**
+- [ ] Interface journal simple
+- [ ] Système de tags
+- [ ] Recherche rapide
+
+## 🟡 **Priorité Moyenne**
+- [ ] Templates entries
+- [ ] Backup automatique`,
+          atelierModules: {
+            roadmap: { collapsed: true },
+            todo: { collapsed: true },
+            mindlog: { collapsed: true, mood: '✨', note: 'Inspiration et créativité nocturne' },
+            actions: { collapsed: true, items: [
+              { id: 1, text: 'Design journal interface', completed: false },
+              { id: 2, text: 'Système tags', completed: false },
+              { id: 3, text: 'Moteur recherche', completed: false }
+            ]},
+            screentv: { collapsed: true, screenshots: [] }
+          },
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         }
@@ -338,6 +474,50 @@ const useProjectsStore = create(
             }
           };
         });
+      },
+
+      // Actions - Modules Atelier
+      updateModuleState: (projectId, moduleName, stateUpdate) => {
+        set((state) => {
+          const project = state.projects[projectId];
+          if (!project) {
+            return state;
+          }
+
+          const newState = {
+            projects: {
+              ...state.projects,
+              [projectId]: {
+                ...project,
+                atelierModules: {
+                  ...(project.atelierModules || {}),
+                  [moduleName]: {
+                    ...(project.atelierModules?.[moduleName] || {}),
+                    ...stateUpdate
+                  }
+                },
+                updated_at: new Date().toISOString()
+              }
+            }
+          };
+          return newState;
+        });
+      },
+
+      getModuleState: (projectId, moduleName) => {
+        const project = get().projects[projectId];
+        if (!project?.atelierModules?.[moduleName]) {
+          // Créer le module s'il n'existe pas
+          const defaultModules = {
+            roadmap: { collapsed: true },
+            todo: { collapsed: true },
+            mindlog: { collapsed: true, mood: '😐', note: '' },
+            actions: { collapsed: true, items: [] },
+            screentv: { collapsed: true, screenshots: [] }
+          };
+          return defaultModules[moduleName] || { collapsed: true };
+        }
+        return project.atelierModules[moduleName];
       },
 
       // Helpers

@@ -1,7 +1,7 @@
 // src/components/rooms/Scriptorium/ScriptoriumRoom.jsx
 
 import React from 'react';
-import BaseRoom from '../shared/BaseRoom';
+import BaseRoom from '../../layout/BaseRoom';
 import { ScriptoriumGrid } from './ScriptoriumRoom.styles';
 
 const ScriptoriumRoom = () => {

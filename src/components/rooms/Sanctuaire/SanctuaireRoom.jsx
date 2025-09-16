@@ -1,7 +1,7 @@
 // src/components/rooms/Sanctuaire/SanctuaireRoom.jsx
 
 import React from 'react';
-import BaseRoom from '../shared/BaseRoom';
+import BaseRoom from '../../layout/BaseRoom';
 import { SanctuaireGrid } from './SanctuaireRoom.styles';
 
 const SanctuaireRoom = () => {

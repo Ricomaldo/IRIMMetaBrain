@@ -7,7 +7,7 @@ export const TowerContainer = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-   grid-template-rows: 1fr 5fr;
+  grid-template-rows: auto 3fr 320px;
   gap: ${({ theme }) => theme.spacing.sm};
   ${craftBorder}
   ${stoneBg}

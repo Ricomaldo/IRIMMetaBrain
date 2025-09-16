@@ -12,6 +12,7 @@ import {
 } from './MarkdownEditor.styles';
 import MarkdownPreview from './MarkdownPreview/MarkdownPreview';
 import { icons } from '../../../utils/assetMapping';
+import { usePanelContext } from '../Panel/PanelContext';
 
 const MarkdownEditor = ({
   value = '',
@@ -26,14 +27,23 @@ const MarkdownEditor = ({
   zoomLevel = 0,
   accentColor = null
 }) => {
+  // Essayer d'utiliser le context, fallback si pas disponible
+  let panelContext = null;
+  try {
+    panelContext = usePanelContext();
+  } catch (e) {
+    // Pas dans un PanelProvider, mode standalone
+  }
+
   const [activeTab, setActiveTab] = useState(readOnly ? 'preview' : 'edit');
   const [internalZoomLevel, setInternalZoomLevel] = useState(0);
   const textareaRef = useRef(null);
   const [localValue, setLocalValue] = useState(value);
   const cursorPositionRef = useRef(0);
 
-  // Gestion du zoom pour mode standalone uniquement
-  const currentZoomLevel = variant === 'standalone' ? internalZoomLevel : zoomLevel;
+  // Utiliser context si disponible, sinon gestion interne
+  const currentZoomLevel = panelContext ? panelContext.zoom : (variant === 'standalone' ? internalZoomLevel : zoomLevel);
+  const currentEditing = panelContext ? panelContext.editing : !readOnly;
 
   const handleZoomIn = () => {
     if (variant === 'standalone') {
@@ -47,10 +57,11 @@ const MarkdownEditor = ({
     }
   };
 
-  // Synchroniser activeTab avec readOnly
+  // Synchroniser activeTab avec état d'édition (context ou readOnly)
   React.useEffect(() => {
-    setActiveTab(readOnly ? 'preview' : 'edit');
-  }, [readOnly]);
+    const shouldEdit = panelContext ? panelContext.editing : !readOnly;
+    setActiveTab(shouldEdit ? 'edit' : 'preview');
+  }, [panelContext?.editing, readOnly]);
 
   // Synchroniser localValue avec value (seulement quand value change de l'extérieur)
   React.useEffect(() => {
@@ -178,7 +189,7 @@ const MarkdownEditor = ({
         </div>
       )}
 
-      <EditorContent $animate={true}>
+      <EditorContent>
         {activeTab === 'edit' ? (
           <Textarea
             ref={textareaRef}

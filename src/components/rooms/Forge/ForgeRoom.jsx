@@ -1,7 +1,7 @@
 // src/components/rooms/Forge/ForgeRoom.jsx
 
 import React from 'react';
-import BaseRoom from '../shared/BaseRoom';
+import BaseRoom from '../../layout/BaseRoom';
 import { ForgeGrid } from './ForgeRoom.styles';
 
 const ForgeRoom = () => {

@@ -1,19 +1,21 @@
-// src/components/layout/SideTower/SideTowerNotes/SideTowerNotes.styles.js
+// src/components/tower/SideTowerNotes/SideTowerNotes.styles.js
 
 import styled from 'styled-components';
-import { parchmentBg } from '../../../../styles/mixins';
+import { woodBg } from '../../../styles/mixins';
 
 export const NoteContainer = styled.div`
   width: 100%;
   height: 100%;
-  ${parchmentBg}
+  max-height: 100%; /* Force la contrainte de hauteur */
+  ${woodBg}
   border-radius: ${({ theme }) => theme.radii.lg};
   border: ${({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
   padding: ${({ theme }) => theme.spacing.sm};
   display: flex;
   flex-direction: column;
-  text-align: left; /* Reset du centrage */
-  box-sizing: border-box; /* Empêche le dépassement */
+  text-align: left;
+  box-sizing: border-box;
+  overflow: hidden; /* Empêche le débordement */
 `;
 
 export const NoteHeader = styled.div`
@@ -52,7 +54,7 @@ export const NoteContent = styled.div`
 export const NoteTextarea = styled.textarea`
   width: 100%;
   height: 120px;
-  border: ${({ theme }) => `1px solid rgba(139, 69, 19, 0.3)`};
+  border: 1px solid rgba(139, 69, 19, 0.3);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.8);
   resize: none;

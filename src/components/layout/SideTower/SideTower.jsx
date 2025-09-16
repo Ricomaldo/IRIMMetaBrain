@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { TowerContainer } from './SideTower.styles';
-import ControlTower from './ControlTower/ControlTower';
-import WorkbenchDrawer from './WorkbenchDrawer/WorkbenchDrawer';
+import { ControlTower, WorkbenchDrawer, SideTowerNotes } from '../../tower';
 
 const SideTower = () => {
   return (
     <TowerContainer>
       <ControlTower />
       <WorkbenchDrawer />
+      <SideTowerNotes />
     </TowerContainer>
   );
 };
