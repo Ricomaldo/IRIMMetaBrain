@@ -4,7 +4,7 @@ Ce document définit les règles d’usage du `theme`, les échelles (spacing, r
 
 ## Échelles disponibles
 
-- Spacing: `xs, sm, md, lg, xl`
+- Spacing: `3xs, 2xs, xs, sm, md, lg, xl, 2xl, 3xl`
 - Radii: `xs, sm, md, lg, xl`
 - Borders: `thin, base, thick, heavy`
 - Shadows: `sm, md, lg`
@@ -83,19 +83,44 @@ const StyledText = styled.p`
 - `sm`: 12px (panneaux compacts, labels)
 - `base`: 14px (texte standard)
 - `md`: 16px (texte important)
-- `lg`: 18px (sous-titres)
-- `xl`: 20px (titres sections)
-- `2xl`: 24px (titres pages)
-- `3xl`: 32px (titres hero)
+- `lg`: 20px (sous-titres)
+- `xl`: 25px (titres sections)
+- `2xl`: 31px (titres pages)
+- `3xl`: 39px (titres hero)
+
+**Échelle des espacements (spacing):**
+- `3xs`: 2px (micro-espacements, padding code)
+- `2xs`: 4px (très petit)
+- `xs`: 6px (Cave, espacements serrés)
+- `sm`: 8px (standard small)
+- `md`: 12px (standard medium)
+- `lg`: 16px (standard large)
+- `xl`: 24px (large)
+- `2xl`: 32px (extra large)
+- `3xl`: 40px (Sanctuaire, sections hero)
+
+## Nouvelles couleurs système
+
+```js
+colors: {
+  // Neutres système
+  white: '#FFFFFF',
+  black: '#000000',
+  gray: '#333333',
+  beige: '#F5F5DC',
+  // ... reste des couleurs existantes
+}
+```
 
 ## Checklist PR
 
-- Pas de `#[0-9A-Fa-f]{6}` hors `theme.js`.
-- Pas de `z-index: \d+`.
-- Pas de `:\s*\d+px` pour padding/margin/gap/border-radius.
-- Pas d'usage de `theme.fonts.*`.
-- **Typographie:** Pas de `font-size: \d+px` → utiliser `theme.typography.sizes.*`.
-- **Typographie:** Préférer les mixins `useTypography()` pour font-family/weight/line-height.
+- ✅ Pas de `#[0-9A-Fa-f]{6}` hors `theme.js` (utiliser `theme.colors.*`).
+- ✅ Pas de `z-index: \d+` (utiliser `theme.zIndex.*`).
+- ✅ Pas de `:\s*\d+px` pour padding/margin/gap/border-radius (utiliser `theme.spacing.*` et `theme.radii.*`).
+- ✅ Pas d'usage de `theme.fonts.*` (deprecated, utiliser `theme.typography.families.*`).
+- ✅ **Typographie:** Pas de `font-size: \d+px` → utiliser `theme.typography.sizes.*`.
+- ✅ **RGBA:** Utiliser `alpha(color, opacity)` au lieu de `rgba()` hardcodé.
+- ✅ **Typographie:** Préférer les composants Typography ou les mixins `useTypography()`.
 
 ## Migration
 

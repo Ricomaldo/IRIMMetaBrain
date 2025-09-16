@@ -8,5 +8,5 @@ export const CaveGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: repeat(3, 1fr);
-  gap: 6px;
+  gap: ${({ theme }) => theme.spacing.xs};
 `;

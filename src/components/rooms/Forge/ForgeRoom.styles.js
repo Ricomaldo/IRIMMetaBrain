@@ -8,5 +8,5 @@ export const ForgeGrid = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: repeat(3, 1fr);
-  gap: 10px;
+  gap: ${({ theme }) => theme.spacing.sm};
 `;

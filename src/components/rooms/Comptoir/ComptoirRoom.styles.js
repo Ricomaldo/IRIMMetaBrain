@@ -8,5 +8,5 @@ export const ComptoirGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 16px;
+  gap: ${({ theme }) => theme.spacing.lg};
 `;

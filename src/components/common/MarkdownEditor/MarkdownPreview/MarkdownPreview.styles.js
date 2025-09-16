@@ -17,8 +17,8 @@ export const PreviewContainer = styled.div.withConfig({
 
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 4px;
-  background: #FFFFFF;
-  padding: 8px;
+  background: ${({ theme }) => theme.colors.white};
+  padding: ${({ theme }) => theme.spacing.sm};
   /* Font-size de base avec zoom - tous les enfants vont hériter */
   font-size: ${({ theme, compact, zoomLevel = 0 }) => {
     const baseSize = compact ? theme.typography.sizes.xs : theme.typography.sizes.sm;
@@ -28,14 +28,14 @@ export const PreviewContainer = styled.div.withConfig({
   font-family: ${({ theme }) => theme.typography.families.primary};
   font-weight: normal; /* S'assurer que le texte standard n'est pas en gras */
   line-height: 1.4;
-  color: #000000;
+  color: ${({ theme }) => theme.colors.black};
   text-shadow: none;
 
   /* Styles Markdown */
   h1, h2, h3, h4, h5, h6 {
     margin: 8px 0 4px 0;
     font-weight: bold;
-    color: ${props => props.accentColor || '#000000'};
+    color: ${props => props.accentColor || props.theme.colors.black};
     text-shadow: none;
   }
 
@@ -50,14 +50,14 @@ export const PreviewContainer = styled.div.withConfig({
 
   strong {
     font-weight: bold;
-    color: ${props => props.accentColor || '#000000'};
+    color: ${props => props.accentColor || props.theme.colors.black};
     text-shadow: none;
     font-size: inherit; /* Hérite du parent (p, li, etc.) */
   }
 
   em {
     font-style: italic;
-    color: #333333;
+    color: ${({ theme }) => theme.colors.gray};
     text-shadow: none;
   }
 
@@ -71,7 +71,7 @@ export const PreviewContainer = styled.div.withConfig({
   }
 
   code {
-    background: #F5F5DC;
+    background: ${({ theme }) => theme.colors.beige};
     border: 1px solid ${({ theme }) => theme.colors.border};
     border-radius: 3px;
     padding: 1px 3px;
@@ -80,10 +80,10 @@ export const PreviewContainer = styled.div.withConfig({
   }
 
   pre {
-    background: #F5F5DC;
+    background: ${({ theme }) => theme.colors.beige};
     border: 1px solid ${({ theme }) => theme.colors.border};
     border-radius: 4px;
-    padding: 8px;
+    padding: ${({ theme }) => theme.spacing.sm};
     margin: 8px 0;
     overflow-x: auto;
 

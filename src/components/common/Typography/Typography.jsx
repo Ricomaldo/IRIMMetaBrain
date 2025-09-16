@@ -1,6 +1,7 @@
 // src/components/common/Typography/Typography.jsx - Composants typographiques réutilisables
 
 import styled from 'styled-components';
+import { alpha } from '../../../styles/color';
 
 // ===== TITRES HIÉRARCHIQUES =====
 
@@ -100,9 +101,9 @@ export const CodeText = styled.code`
   font-size: ${({ theme }) => theme.typography.sizes.sm};
   font-weight: ${({ theme }) => theme.typography.weights.normal};
   line-height: ${({ theme }) => theme.typography.lineHeights.normal};
-  background: rgba(0,0,0,0.1);
-  padding: 2px 4px;
-  border-radius: 3px;
+  background: ${({ theme }) => alpha(theme.colors.black, 0.1)};
+  padding: ${({ theme }) => `${theme.spacing['3xs']} ${theme.spacing['2xs']}`};
+  border-radius: ${({ theme }) => theme.radii.xs};
   color: ${props => props.color || props.theme.colors.text.primary};
 `;
 
@@ -116,7 +117,7 @@ export const PanelTitle = styled.h3`
   text-transform: uppercase;
   letter-spacing: ${({ theme }) => theme.typography.letterSpacing.wider};
   text-align: center;
-  margin: 0 0 12px 0;
+  margin: ${({ theme }) => `0 0 ${theme.spacing.md} 0`};
   opacity: 0.95;
   color: ${props => props.color || 'inherit'};
 `;

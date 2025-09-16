@@ -8,5 +8,5 @@ export const CuisineGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr 2fr;
-  gap: 15px;
+  gap: ${({ theme }) => theme.spacing.lg};
 `;

@@ -33,13 +33,13 @@ export const EditorHeader = styled.div`
 export const EditorTitle = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: ${({ theme }) => theme.spacing.xs};
   user-select: none;
 `;
 
 export const TabsContainer = styled.div`
   display: flex;
-  gap: 4px;
+  gap: ${({ theme }) => theme.spacing['2xs']};
 `;
 
 export const Tab = styled.button`
@@ -48,10 +48,10 @@ export const Tab = styled.button`
   border-radius: 4px;
   background: ${props => props.$active
     ? props.theme.colors.primary
-    : '#FFFFFF'
+    : props.theme.colors.white
   };
   color: ${props => props.$active
-    ? '#fff'
+    ? props.theme.colors.white
     : props.theme.colors.text.primary
   };
   font-size: ${({ theme }) => theme.typography.sizes.xs};
@@ -92,9 +92,9 @@ export const Textarea = styled.textarea`
   min-height: ${props => props.$height === '100%' ? '200px' : 'auto'};
   max-height: 100%; /* Respecte toujours le parent */
   flex: ${props => props.$height === '100%' ? '1' : 'none'};
-  border: 1px solid #8B4513;
+  border: ${({ theme }) => `${theme.borders.thin} solid ${theme.colors.primary}`};
   border-radius: 4px;
-  background: #FFFFFF;
+  background: ${({ theme }) => theme.colors.white};
   resize: ${props => props.$height === '100%' ? 'none' : 'vertical'};
   font-size: ${({ theme, $compact, $zoomLevel = 0 }) => {
     const baseSize = $compact ? theme.typography.sizes.xs : theme.typography.sizes.sm;
@@ -104,14 +104,14 @@ export const Textarea = styled.textarea`
   font-family: ${({ theme }) => theme.typography.families.primary};
   line-height: 1.4;
   padding: 8px;
-  color: #000000;
-  background: #FFFFFF !important;
+  color: ${({ theme }) => theme.colors.black};
+  background: ${({ theme }) => theme.colors.white} !important;
   text-shadow: none;
 
   &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.colors.primary};
-    background: #FFFFFF !important;
+    background: ${({ theme }) => theme.colors.white} !important;
     box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.secondary};
   }
 

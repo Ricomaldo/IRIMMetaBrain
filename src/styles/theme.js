@@ -2,6 +2,12 @@
 
 export const theme = {
   colors: {
+    // Neutres système
+    white: '#FFFFFF',
+    black: '#000000',
+    gray: '#333333',     // Pour textes secondaires
+    beige: '#F5F5DC',    // Pour blockquotes/code
+
     // Base existante (tons chauds)
     primary: '#8B4513',
     secondary: '#D2B48C',
@@ -27,11 +33,15 @@ export const theme = {
     }
   },
   spacing: {
-    xs: '4px',
-    sm: '8px',
-    md: '16px',
-    lg: '24px',
-    xl: '32px'
+    '3xs': '2px',    // Micro-espacements (padding code, etc.)
+    '2xs': '4px',    // Très petit (était xs)
+    xs: '6px',       // Cave et espacements serrés
+    sm: '8px',       // Standard small
+    md: '12px',      // Ajusté pour remplacer les 12px hardcodés
+    lg: '16px',      // Standard (était md)
+    xl: '24px',      // Large (était lg)
+    '2xl': '32px',   // Extra large (était xl)
+    '3xl': '40px'    // Sanctuaire et sections hero
   },
   button: {
     small: '36px',

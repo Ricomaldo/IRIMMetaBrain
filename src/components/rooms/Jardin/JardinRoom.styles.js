@@ -8,5 +8,5 @@ export const JardinGrid = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 2fr;
   grid-template-rows: repeat(4, 1fr);
-  gap: 18px;
+  gap: ${({ theme }) => theme.spacing.xl};
 `;

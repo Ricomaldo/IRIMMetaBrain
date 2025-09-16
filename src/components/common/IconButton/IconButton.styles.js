@@ -2,6 +2,7 @@
 
 import styled from 'styled-components';
 import { squareButton, tertiaryLevel } from '../../../styles/mixins';
+import { alpha } from '../../../styles/color';
 
 export const ButtonContainer = styled.button.withConfig({
   shouldForwardProp: (prop) =>
@@ -36,7 +37,7 @@ export const ButtonContainer = styled.button.withConfig({
         }
         &:active {
           transform: translateY(1px);
-          box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+          box-shadow: inset 0 2px 4px ${alpha(props.theme.colors.black, 0.2)};
         }
       `;
     }
@@ -51,7 +52,7 @@ export const ButtonContainer = styled.button.withConfig({
         }
         &:active {
           transform: scale(0.96);
-          box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+          box-shadow: inset 0 2px 4px ${alpha(props.theme.colors.black, 0.2)};
         }
       `;
     }
@@ -62,7 +63,7 @@ export const ButtonContainer = styled.button.withConfig({
       }
       &:active {
         transform: scale(0.95);
-        box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        box-shadow: inset 0 2px 4px ${alpha(props.theme.colors.black, 0.3)};
       }
     `;
   }}
@@ -74,9 +75,9 @@ export const IconWrapper = styled.div`
 `;
 
 export const Label = styled.span`
-  font-size: 8px;
+  font-size: ${({ theme }) => theme.spacing.sm};
   color: ${({ theme }) => theme.colors.text.primary};
-  margin-top: 2px;
+  margin-top: ${({ theme }) => theme.spacing['3xs']};
   text-align: center;
   font-weight: 500;
 `;

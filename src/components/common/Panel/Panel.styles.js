@@ -2,6 +2,7 @@
 
 import styled from 'styled-components';
 import { textures } from '../../../utils/assetMapping';
+import { alpha } from '../../../styles/color';
 
 export const PanelWrapper = styled.div`
   grid-column: ${props => props.$gridColumn};
@@ -30,7 +31,7 @@ export const PanelContainer = styled.div`
 `;
 
 export const PanelHeader = styled.div`
-  padding: 8px 12px;
+  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
   font-family: ${({ theme }) => theme.typography.families.primary};
   font-size: ${({ theme }) => theme.typography.sizes.sm};
   font-weight: ${({ theme }) => theme.typography.weights.bold};
@@ -56,7 +57,7 @@ export const HeaderContent = styled.div`
 export const PanelBadge = styled.span`
   background: ${({ theme }) => theme.surfaces.base};
   color: ${({ theme }) => theme.colors.text.primary};
-  padding: 2px 8px;
+  padding: ${({ theme }) => `${theme.spacing['3xs']} ${theme.spacing.sm}`};
   border-radius: ${({ theme }) => theme.radii.xl};
   font-size: ${({ theme }) => theme.typography.sizes.xs};
   font-weight: ${({ theme }) => theme.typography.weights.bold};
@@ -68,12 +69,12 @@ export const PanelBadge = styled.span`
 export const ToggleButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !['active'].includes(prop)
 })`
-  background: ${props => props.$active ? '#FFFFFF' : 'rgba(255, 255, 255, 0.9)'};
+  background: ${props => props.$active ? props.theme.colors.white : `${props.theme.colors.white}E6`}; /* E6 = 90% opacity */
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: ${({ theme }) => theme.radii.sm};
   color: ${({ theme }) => theme.colors.text.primary};
   padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.typography.sizes.sm};
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
@@ -81,12 +82,12 @@ export const ToggleButton = styled.button.withConfig({
   justify-content: center;
   min-width: 32px;
   height: 24px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px ${({ theme }) => alpha(theme.colors.black, 0.2)};
 
   &:hover {
-    background: #FFFFFF;
+    background: ${props => props.theme.colors.white};
     transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 6px ${({ theme }) => alpha(theme.colors.black, 0.3)};
   }
 
   &:active {

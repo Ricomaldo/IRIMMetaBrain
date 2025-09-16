@@ -8,5 +8,5 @@ export const BibliothequeGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(4, 1fr);
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing.sm};
 `;
