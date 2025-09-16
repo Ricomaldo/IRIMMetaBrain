@@ -17,6 +17,7 @@ const ControlTower = () => {
           icon={calendarBtn?.icon}
           size="large"
           title={calendarBtn?.label}
+          onClick={calendarBtn?.action}
         />
         <CenterRect>
           {stats.map(stat => (
@@ -29,9 +30,10 @@ const ControlTower = () => {
           icon={timerBtn?.icon}
           size="large"
           title={timerBtn?.label}
+          onClick={timerBtn?.action}
         />
       </TopRow>
-      
+
       <BottomRow>
         {quickActions.map(action => (
           <IconButton
@@ -39,6 +41,7 @@ const ControlTower = () => {
             icon={action.icon}
             size="medium"
             title={action.label}
+            onClick={action.onClick}
           />
         ))}
       </BottomRow>

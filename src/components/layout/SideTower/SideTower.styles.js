@@ -13,3 +13,32 @@ export const TowerContainer = styled.div`
   ${stoneBg}
   padding: ${({ theme }) => theme.spacing.sm};
 `;
+
+// Wrapper pour l'étage supérieur (ControlTower)
+export const TopTowerFloor = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+`;
+
+// Wrapper pour l'étage du milieu (WorkbenchDrawer)
+export const MiddleTowerFloor = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+`;
+
+// Wrapper pour l'étage inférieur (SideTowerNotes)
+export const BottomTowerFloor = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+`;

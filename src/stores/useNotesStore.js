@@ -93,6 +93,14 @@ const useNotesStore = create(
             sideTowerNotes: { ...state.sideTowerNotes, ...data.sideTowerNotes }
           }));
         }
+      },
+
+      // Import complet pour synchronisation (remplace tout)
+      importData: (data) => {
+        set({
+          roomNotes: data.roomNotes || {},
+          sideTowerNotes: data.sideTowerNotes || {}
+        });
       }
     }),
     {

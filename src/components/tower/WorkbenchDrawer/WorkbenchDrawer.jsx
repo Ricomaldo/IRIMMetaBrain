@@ -38,7 +38,12 @@ const WorkbenchDrawer = () => {
         <ItemsGrid>
           {items.map(item => (
             <div key={item.id} style={{ position: 'relative' }} title={item.label}>
-              <IconButton icon={item.icon} label="" onClick={() => {}} size="medium" />
+              <IconButton
+                icon={item.icon}
+                label=""
+                onClick={item.action || item.onClick || (() => {})}
+                size="medium"
+              />
             </div>
           ))}
         </ItemsGrid>

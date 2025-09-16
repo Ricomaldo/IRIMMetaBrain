@@ -1,15 +1,28 @@
 // src/components/layout/SideTower/SideTower.jsx
 
 import React from 'react';
-import { TowerContainer } from './SideTower.styles';
+import {
+  TowerContainer,
+  TopTowerFloor,
+  MiddleTowerFloor,
+  BottomTowerFloor
+} from './SideTower.styles';
 import { ControlTower, WorkbenchDrawer, SideTowerNotes } from '../../tower';
 
 const SideTower = () => {
   return (
     <TowerContainer>
-      <ControlTower />
-      <WorkbenchDrawer />
-      <SideTowerNotes />
+      <TopTowerFloor id="control-tower-floor">
+        <ControlTower />
+      </TopTowerFloor>
+
+      <MiddleTowerFloor id="workbench-floor">
+        <WorkbenchDrawer />
+      </MiddleTowerFloor>
+
+      <BottomTowerFloor id="notes-floor">
+        <SideTowerNotes />
+      </BottomTowerFloor>
     </TowerContainer>
   );
 };

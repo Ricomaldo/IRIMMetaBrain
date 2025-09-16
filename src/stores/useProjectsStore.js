@@ -537,6 +537,14 @@ const useProjectsStore = create(
           roadmapItems: project.roadmap.length,
           hasNextAction: !!project.prochaineAction
         };
+      },
+
+      // Import complet pour synchronisation (remplace tout)
+      importData: (data) => {
+        set({
+          projects: data.projects || {},
+          selectedProject: data.currentProjectId || 'irimstudiohall'
+        });
       }
     }),
     {
