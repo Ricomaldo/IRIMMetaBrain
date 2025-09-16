@@ -7,22 +7,25 @@ import styled from 'styled-components';
 const TestContent = styled.div`
   padding: ${({ theme }) => theme.spacing.xl};
   color: ${({ theme }) => theme.colors.text.light};
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 
   h3 {
     color: ${({ theme }) => theme.colors.accents.primary};
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
-  }
-
-  p {
-    line-height: 1.6;
     margin-bottom: ${({ theme }) => theme.spacing.md};
   }
 
-  .test-info {
+  .test-badge {
+    display: inline-block;
+    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
     background: ${({ theme }) => theme.colors.stone};
-    padding: ${({ theme }) => theme.spacing.lg};
-    border-radius: ${({ theme }) => theme.radii.md};
-    margin-top: ${({ theme }) => theme.spacing.xl};
+    border-radius: ${({ theme }) => theme.radii.sm};
+    font-size: ${({ theme }) => theme.typography.sizes.sm};
+    margin-top: ${({ theme }) => theme.spacing.lg};
   }
 `;
 
@@ -38,19 +41,8 @@ const SleepPotionModal = ({ isOpen, onClose }) => {
       closeButtonText="Fermer la modale"
     >
       <TestContent>
-        <h3>Test Modal - Variant: roomCanvas</h3>
-        <p>Cette modale utilise la variante "roomCanvas".</p>
-        <p>Elle remplace complètement la zone RoomCanvas (80% de la largeur).</p>
-
-        <div className="test-info">
-          <h4>Propriétés de la potion:</h4>
-          <p>
-            Effets: Induit un sommeil profond pendant 8 heures<br />
-            Ingrédients: Pétales de pavot, Poudre de lune<br />
-            Temps de préparation: 45 secondes<br />
-            Avertissement: Ne pas utiliser avant de conduire
-          </p>
-        </div>
+        <h3>Modal RoomCanvas Test</h3>
+        <div className="test-badge">🧪 Fonction expérimentale UI</div>
       </TestContent>
     </Modal>
   );

@@ -1,6 +1,6 @@
 // src/components/modals/ModalManager.jsx
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { registerModalHandler } from '../../utils/buttonMapping';
 import { HealingPotionModal, SleepPotionModal, StrengthPotionModal } from './PotionModals';
 import SyncModal from './SyncModal/SyncModal';
@@ -14,30 +14,34 @@ const ModalManager = () => {
     'sync': false,
   });
 
-  // Fonction générique pour ouvrir une modale (ferme les autres)
-  const openModal = (modalId) => {
-    // Ferme toutes les modales puis ouvre celle demandée
-    setModalStates(prev => {
-      const newState = {};
-      Object.keys(prev).forEach(key => {
-        newState[key] = false;
-      });
-      newState[modalId] = true;
-      return newState;
-    });
-  };
+  // Utiliser une ref pour stocker la fonction de setState
+  const modalStatesRef = useRef(modalStates);
+  modalStatesRef.current = modalStates;
 
   // Fonction générique pour fermer une modale
   const closeModal = (modalId) => {
     setModalStates(prev => ({ ...prev, [modalId]: false }));
   };
 
-  // Enregistrer les handlers au montage
+  // Enregistrer les handlers au montage (une seule fois)
   useEffect(() => {
+    // Fonction stable qui utilise setModalStates
+    const openModal = (modalId) => {
+      setModalStates(() => {
+        // Créer un nouvel état avec toutes les modales fermées sauf celle demandée
+        const newState = {};
+        Object.keys(modalStatesRef.current).forEach(key => {
+          newState[key] = key === modalId;
+        });
+        return newState;
+      });
+    };
+
+    // Enregistrer les handlers
     Object.keys(modalStates).forEach(modalId => {
       registerModalHandler(modalId, () => openModal(modalId));
     });
-  }, []);
+  }, []); // Vide pour ne s'exécuter qu'une fois
 
   return (
     <>

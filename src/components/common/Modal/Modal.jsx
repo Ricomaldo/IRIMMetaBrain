@@ -87,9 +87,9 @@ const Modal = ({
   return createPortal(
     <ModalOverlay onClick={handleOverlayClick} $variant={variant}>
       <ModalContainer $size={size} $variant={variant}>
-        {title && (
+        {(title || showCloseButton) && (
           <ModalHeader>
-            <ModalTitle>{title}</ModalTitle>
+            {title && <ModalTitle>{title}</ModalTitle>}
             {showCloseButton && (
               <ModalCloseButton onClick={onClose} title="Fermer (Esc)">
                 ✕

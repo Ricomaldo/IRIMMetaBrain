@@ -7,15 +7,20 @@ import styled from 'styled-components';
 const TestContent = styled.div`
   padding: ${({ theme }) => theme.spacing.xl};
   color: ${({ theme }) => theme.colors.text.light};
+  text-align: center;
 
   h3 {
     color: ${({ theme }) => theme.colors.accents.success};
-    margin-bottom: ${({ theme }) => theme.spacing.lg};
+    margin-bottom: ${({ theme }) => theme.spacing.md};
   }
 
-  p {
-    line-height: 1.6;
-    margin-bottom: ${({ theme }) => theme.spacing.md};
+  .test-badge {
+    display: inline-block;
+    padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+    background: ${({ theme }) => theme.colors.stone};
+    border-radius: ${({ theme }) => theme.radii.sm};
+    font-size: ${({ theme }) => theme.typography.sizes.sm};
+    margin-top: ${({ theme }) => theme.spacing.lg};
   }
 `;
 
@@ -30,14 +35,8 @@ const HealingPotionModal = ({ isOpen, onClose }) => {
       showFooterCloseButton={true}
     >
       <TestContent>
-        <h3>Test Modal - Variant: overlay</h3>
-        <p>Cette modale utilise la variante "overlay" classique.</p>
-        <p>Elle apparaît au centre de l'écran avec un fond semi-transparent.</p>
-        <p>
-          Effets: Restaure 50 points de vie<br />
-          Ingrédients: Feuille de sauge, Racine de mandragore<br />
-          Temps de préparation: 30 secondes
-        </p>
+        <h3>Modal Overlay Test</h3>
+        <div className="test-badge">🧪 Fonction expérimentale UI</div>
       </TestContent>
     </Modal>
   );

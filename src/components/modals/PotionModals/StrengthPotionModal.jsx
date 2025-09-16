@@ -7,22 +7,25 @@ import styled from 'styled-components';
 const TestContent = styled.div`
   padding: ${({ theme }) => theme.spacing.lg};
   color: ${({ theme }) => theme.colors.text.light};
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 
   h3 {
     color: ${({ theme }) => theme.colors.accents.danger};
-    margin-bottom: ${({ theme }) => theme.spacing.md};
-  }
-
-  p {
-    line-height: 1.5;
     margin-bottom: ${({ theme }) => theme.spacing.sm};
-    font-size: ${({ theme }) => theme.typography.sizes.sm};
+    font-size: ${({ theme }) => theme.typography.sizes.lg};
   }
 
-  .compact-info {
+  .test-badge {
+    display: inline-block;
+    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
     background: ${({ theme }) => theme.colors.secondary};
-    padding: ${({ theme }) => theme.spacing.md};
     border-radius: ${({ theme }) => theme.radii.sm};
+    font-size: ${({ theme }) => theme.typography.sizes.xs};
     margin-top: ${({ theme }) => theme.spacing.md};
   }
 `;
@@ -38,15 +41,8 @@ const StrengthPotionModal = ({ isOpen, onClose }) => {
       closeButtonText="OK"
     >
       <TestContent>
-        <h3>Test Modal - Variant: baseFloorTower</h3>
-        <p>Cette modale remplace la zone SideTowerNotes.</p>
-        <p>Elle occupe exactement l'espace du BottomTowerFloor (320px).</p>
-
-        <div className="compact-info">
-          <p>Force: +10</p>
-          <p>Durée: 5 minutes</p>
-          <p>Ingrédients: Racine de ginseng</p>
-        </div>
+        <h3>Modal Tower Test</h3>
+        <div className="test-badge">🧪 UI Test</div>
       </TestContent>
     </Modal>
   );

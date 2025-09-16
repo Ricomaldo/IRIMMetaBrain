@@ -112,10 +112,10 @@ export const ModalContainer = styled.div`
 
         width: ${(() => {
           switch ($size) {
-            case 'small': return '400px';
-            case 'large': return '80%';
+            case 'small': return '500px';
+            case 'large': return '85%';
             case 'fullscreen': return '95%';
-            default: return '600px'; // medium
+            default: return '750px'; // medium
           }
         })()};
 
@@ -131,9 +131,9 @@ export const ModalHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme }) => alpha(theme.colors.primary, 0.3)};
-  border-bottom: ${({ theme }) => `${theme.borders.thick} solid ${theme.colors.border}`};
+  padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.lg}`};
+  background: ${({ theme }) => alpha(theme.colors.primary, 0.2)};
+  border-bottom: ${({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
   backdrop-filter: blur(4px);
 `;
 
