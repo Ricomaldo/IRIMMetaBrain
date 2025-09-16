@@ -1,7 +1,7 @@
 // src/components/layout/RoomCanvas/RoomCanvas.styles.js
 
 import styled from 'styled-components';
-import { craftBorder, craftBorderHeavy, parchmentBg, medievalShadow } from '../../../styles/mixins';
+import { craftBorderHeavy, parchmentBg, medievalShadow, craftBorder } from '../../../styles/mixins';
 import { alpha } from '../../../styles/color';
 
 export const CanvasContainer = styled.div`

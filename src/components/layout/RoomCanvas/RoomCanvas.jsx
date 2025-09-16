@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import {
   CanvasContainer,
   RoomsGrid,
-  RoomSlot,
-  NavigationZone
+  RoomSlot
 } from './RoomCanvas.styles';
 import { getRoomComponent, DefaultRoomRenderer } from '../../../utils/RoomRegistry.jsx';
 import { roomConfig } from '../../../utils/roomPositions';
 import { roomColors } from '../../../utils/assetMapping';
+import NavigationArrows from '../../navigation/NavigationArrows';
 
 const RoomCanvas = ({ roomNavHook }) => {
   const { currentRoom, navigateToRoom, getAvailableDirections } = roomNavHook;
@@ -17,10 +17,6 @@ const RoomCanvas = ({ roomNavHook }) => {
   // Chaque pièce fait 25% de la largeur totale (100%/4) et 33.33% de la hauteur totale (100%/3)
   const translateX = -currentRoom.x * 25; // 100% / 4 colonnes = 25%
   const translateY = -currentRoom.y * 33.33; // 100% / 3 rangées = 33.33%
-
-  const handleNavigationClick = (direction) => {
-    navigateToRoom(direction);
-  };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -87,38 +83,12 @@ const RoomCanvas = ({ roomNavHook }) => {
         ))}
       </RoomsGrid>
 
-      {availableDirections.up && (
-        <NavigationZone
-          className="zone-top"
-          onClick={() => handleNavigationClick('up')}
-        >
-          ⬆️
-        </NavigationZone>
-      )}
-      {availableDirections.down && (
-        <NavigationZone
-          className="zone-bottom"
-          onClick={() => handleNavigationClick('down')}
-        >
-          ⬇️
-        </NavigationZone>
-      )}
-      {availableDirections.left && (
-        <NavigationZone
-          className="zone-left"
-          onClick={() => handleNavigationClick('left')}
-        >
-          ⬅️
-        </NavigationZone>
-      )}
-      {availableDirections.right && (
-        <NavigationZone
-          className="zone-right"
-          onClick={() => handleNavigationClick('right')}
-        >
-          ➡️
-        </NavigationZone>
-      )}
+      {/* Flèches de navigation dorées */}
+      <NavigationArrows
+        availableDirections={availableDirections}
+        onNavigate={navigateToRoom}
+        size="50px"
+      />
     </CanvasContainer>
   );
 };
