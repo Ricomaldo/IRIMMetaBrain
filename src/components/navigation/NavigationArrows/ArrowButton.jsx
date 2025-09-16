@@ -6,6 +6,7 @@ import arrowLeft from '../../../assets/images/ui/navigation/navigation-arrow-lef
 import { alpha } from '../../../styles/color';
 
 // Définition des rotations pour chaque direction
+// La flèche de base pointe vers la GAUCHE
 const directionRotations = {
   left: '0deg',
   up: '90deg',
@@ -64,7 +65,7 @@ const ArrowContainer = styled.button`
 
   /* États interactifs */
   &:hover {
-    transform: scale(1.1);
+    /* Le transform est géré par les variantes pour conserver les positions */
 
     &::before {
       opacity: 1;
@@ -78,7 +79,7 @@ const ArrowContainer = styled.button`
   }
 
   &:active {
-    transform: scale(0.95);
+    /* Le transform est géré par les variantes */
   }
 
   /* Désactivé */
@@ -108,6 +109,14 @@ const ArrowContainer = styled.button`
           top: ${({ theme }) => theme.spacing.lg};
           left: 50%;
           transform: translateX(-50%);
+
+          &:hover {
+            transform: translateX(-50%) scale(1.1) translateY(-2px);
+          }
+
+          &:active {
+            transform: translateX(-50%) scale(0.95);
+          }
         `;
       case 'room-bottom':
         return css`
@@ -115,6 +124,14 @@ const ArrowContainer = styled.button`
           bottom: ${({ theme }) => theme.spacing.lg};
           left: 50%;
           transform: translateX(-50%);
+
+          &:hover {
+            transform: translateX(-50%) scale(1.1) translateY(2px);
+          }
+
+          &:active {
+            transform: translateX(-50%) scale(0.95);
+          }
         `;
       case 'room-left':
         return css`
@@ -122,6 +139,14 @@ const ArrowContainer = styled.button`
           left: ${({ theme }) => theme.spacing.lg};
           top: 50%;
           transform: translateY(-50%);
+
+          &:hover {
+            transform: translateY(-50%) scale(1.1) translateX(-2px);
+          }
+
+          &:active {
+            transform: translateY(-50%) scale(0.95);
+          }
         `;
       case 'room-right':
         return css`
@@ -129,6 +154,14 @@ const ArrowContainer = styled.button`
           right: ${({ theme }) => theme.spacing.lg};
           top: 50%;
           transform: translateY(-50%);
+
+          &:hover {
+            transform: translateY(-50%) scale(1.1) translateX(2px);
+          }
+
+          &:active {
+            transform: translateY(-50%) scale(0.95);
+          }
         `;
       default:
         return '';
