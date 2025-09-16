@@ -63,7 +63,7 @@ const RoomCanvas = ({ roomNavHook }) => {
   }, [availableDirections, navigateToRoom]);
 
   return (
-    <CanvasContainer>
+    <CanvasContainer id="room-canvas-container">
       <RoomsGrid style={{ transform: `translate(${translateX}%, ${translateY}%)` }}>
         {roomConfig.map((room, index) => (
           <RoomSlot

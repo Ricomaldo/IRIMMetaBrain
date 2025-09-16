@@ -27,6 +27,7 @@ const HealingPotionModal = ({ isOpen, onClose }) => {
       title="💚 Potion de Soin"
       variant="overlay" // Test avec overlay classique
       size="medium"
+      showFooterCloseButton={true}
     >
       <TestContent>
         <h3>Test Modal - Variant: overlay</h3>

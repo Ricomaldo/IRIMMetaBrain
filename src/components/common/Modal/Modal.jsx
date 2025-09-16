@@ -9,7 +9,8 @@ import {
   ModalTitle,
   ModalCloseButton,
   ModalContent,
-  ModalFooter
+  ModalFooter,
+  ModalActionButton
 } from './Modal.styles';
 
 /**
@@ -31,7 +32,9 @@ const Modal = ({
   variant = 'overlay', // 'overlay', 'roomCanvas' ou 'baseFloorTower'
   closeOnOverlay = true,
   closeOnEscape = true,
-  showCloseButton = true
+  showCloseButton = true,
+  showFooterCloseButton = false, // Option pour afficher un bouton de fermeture dans le footer
+  closeButtonText = 'Fermer' // Texte personnalisable du bouton
 }) => {
   // Gestion de la touche Escape
   useEffect(() => {
@@ -68,7 +71,19 @@ const Modal = ({
     }
   };
 
-  // Render dans un portal pour sortir du flux DOM normal
+  // Détermine où rendre la modale en fonction de la variante
+  const getPortalContainer = () => {
+    if (variant === 'roomCanvas') {
+      const el = document.getElementById('room-canvas-container');
+      return el || document.body;
+    } else if (variant === 'baseFloorTower') {
+      const el = document.getElementById('notes-floor');
+      return el || document.body;
+    }
+    return document.body;
+  };
+
+  // Render dans un portal au bon endroit
   return createPortal(
     <ModalOverlay onClick={handleOverlayClick} $variant={variant}>
       <ModalContainer $size={size} $variant={variant}>
@@ -87,14 +102,19 @@ const Modal = ({
           {children}
         </ModalContent>
 
-        {footer && (
+        {(footer || showFooterCloseButton) && (
           <ModalFooter>
             {footer}
+            {showFooterCloseButton && (
+              <ModalActionButton onClick={onClose} $variant="primary">
+                {closeButtonText}
+              </ModalActionButton>
+            )}
           </ModalFooter>
         )}
       </ModalContainer>
     </ModalOverlay>,
-    document.body
+    getPortalContainer()
   );
 };
 

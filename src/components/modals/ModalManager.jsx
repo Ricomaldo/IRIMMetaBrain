@@ -14,9 +14,17 @@ const ModalManager = () => {
     'sync': false,
   });
 
-  // Fonction générique pour ouvrir une modale
+  // Fonction générique pour ouvrir une modale (ferme les autres)
   const openModal = (modalId) => {
-    setModalStates(prev => ({ ...prev, [modalId]: true }));
+    // Ferme toutes les modales puis ouvre celle demandée
+    setModalStates(prev => {
+      const newState = {};
+      Object.keys(prev).forEach(key => {
+        newState[key] = false;
+      });
+      newState[modalId] = true;
+      return newState;
+    });
   };
 
   // Fonction générique pour fermer une modale

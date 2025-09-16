@@ -34,6 +34,8 @@ const SleepPotionModal = ({ isOpen, onClose }) => {
       title="💤 Potion de Sommeil"
       variant="roomCanvas" // Test avec roomCanvas
       size="large"
+      showFooterCloseButton={true}
+      closeButtonText="Fermer la modale"
     >
       <TestContent>
         <h3>Test Modal - Variant: roomCanvas</h3>

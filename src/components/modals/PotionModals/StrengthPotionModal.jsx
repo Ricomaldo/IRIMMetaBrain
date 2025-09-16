@@ -34,6 +34,8 @@ const StrengthPotionModal = ({ isOpen, onClose }) => {
       onClose={onClose}
       title="💪 Potion de Force"
       variant="baseFloorTower" // Test avec baseFloorTower
+      showFooterCloseButton={true}
+      closeButtonText="OK"
     >
       <TestContent>
         <h3>Test Modal - Variant: baseFloorTower</h3>

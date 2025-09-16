@@ -35,7 +35,7 @@ export const MiddleTowerFloor = styled.div`
 
 // Wrapper pour l'étage inférieur (SideTowerNotes)
 export const BottomTowerFloor = styled.div`
-  position: relative;
+  position: relative; /* Important pour que les modales positionnées dedans fonctionnent */
   width: 100%;
   height: 100%;
   display: flex;

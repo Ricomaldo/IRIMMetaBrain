@@ -16,12 +16,12 @@ const fadeIn = keyframes`
 
 const slideUp = keyframes`
   from {
-    transform: translate(-50%, -45%);
     opacity: 0;
+    transform: scale(0.95);
   }
   to {
-    transform: translate(-50%, -50%);
     opacity: 1;
+    transform: scale(1);
   }
 `;
 
@@ -36,24 +36,28 @@ export const ModalOverlay = styled.div`
 
   ${({ $variant, theme }) => {
     if ($variant === 'roomCanvas') {
-      // Positionné exactement sur RoomCanvas (4fr = 80% de la largeur)
+      // Positionné exactement sur RoomCanvas
       return css`
-        top: ${theme.spacing.sm};
-        left: ${theme.spacing.sm};
-        width: calc(80% - ${theme.spacing.sm});
-        height: calc(100vh - ${theme.spacing.lg});
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background: ${theme.colors.black}; /* Fond opaque pour cacher RoomCanvas */
         border-radius: ${theme.radii.xl};
+        z-index: 100; /* Au-dessus du contenu mais sous les autres modales */
       `;
     } else if ($variant === 'baseFloorTower') {
-      // Positionné sur l'étage de base de SideTower (320px de hauteur)
+      // Positionné sur l'étage de base de SideTower
       return css`
-        bottom: ${theme.spacing.sm};
-        right: ${theme.spacing.sm};
-        width: calc(20% - ${theme.spacing.sm}); /* 1fr de la grid */
-        height: 320px; /* Hauteur fixe du BottomTowerFloor */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
         background: ${theme.colors.black}; /* Fond opaque */
         border-radius: ${theme.radii.xl};
+        z-index: 100;
       `;
     } else {
       // Mode overlay classique (plein écran)
@@ -104,7 +108,7 @@ export const ModalContainer = styled.div`
         ${metalBg}
         ${primaryLevel}
         background-blend-mode: multiply;
-        animation: ${slideUp} 0.3s ease-out;
+        animation: ${fadeIn} 0.3s ease-out;
 
         width: ${(() => {
           switch ($size) {
@@ -207,4 +211,29 @@ export const ModalFooter = styled.div`
   padding: ${({ theme }) => theme.spacing.lg};
   background: ${({ theme }) => alpha(theme.colors.primary, 0.2)};
   border-top: ${({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
+`;
+
+// Bouton de fermeture intégré au contenu
+export const ModalActionButton = styled.button`
+  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
+  background: ${({ theme, $variant }) =>
+    $variant === 'primary' ? theme.colors.accents.primary :
+    $variant === 'danger' ? theme.colors.accents.danger :
+    theme.colors.stone
+  };
+  color: ${({ theme }) => theme.colors.text.light};
+  border: ${({ theme }) => `${theme.borders.base} solid ${theme.colors.border}`};
+  border-radius: ${({ theme }) => theme.radii.md};
+  cursor: pointer;
+  font-weight: ${({ theme }) => theme.typography.weights.bold};
+  transition: ${({ theme }) => `all ${theme.motion.durations.base} ${theme.motion.easings.standard}`};
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px ${({ theme }) => alpha(theme.colors.black, 0.3)};
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 `;
