@@ -3,7 +3,6 @@
 
 import React, { useState } from 'react';
 import { useTheme } from 'styled-components';
-import BaseRoom from '../../layout/BaseRoom';
 import Panel from '../../common/Panel';
 import PanelGrid from '../../layout/PanelGrid';
 import { alpha } from '../../../styles/color';
@@ -51,7 +50,7 @@ const UndefinedRoom = () => {
   const panelPosition = getPanelPosition();
 
   return (
-    <BaseRoom roomType="undefined" layoutType="flex">
+    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
       <SandboxContainer>
         {/* Barre de contrôle */}
         <ControlBar>
@@ -143,7 +142,7 @@ const UndefinedRoom = () => {
           </PanelGrid>
         </TestArea>
       </SandboxContainer>
-    </BaseRoom>
+    </div>
   );
 };
 
