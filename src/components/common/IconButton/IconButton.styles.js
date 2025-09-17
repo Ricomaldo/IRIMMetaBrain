@@ -23,20 +23,19 @@ export const ButtonContainer = styled.button.withConfig({
     if (props.variant === 'tab') {
       return `
         transition: all ${props.theme.motion.durations.fast} ${props.theme.motion.easings.standard};
-        /* TEST-MEDIEVAL-UI: Bordure dorée pour tab actif */
-        ${props.$active ? `
-          border: 2px solid transparent;
-          background:
-            linear-gradient(${props.theme.colors.secondary}, ${props.theme.colors.secondary}) padding-box,
-            ${props.theme.gradients.uiKitGold} border-box;
-        ` : `
-          border: ${props.theme.borders.base} solid ${props.theme.colors.border};
-        `}
+        border: ${props.theme.borders.base} solid ${props.theme.colors.border};
         border-bottom: none;
         border-radius: ${props.theme.radii.md} ${props.theme.radii.md} 0 0;
         position: relative;
         z-index: ${props.theme.zIndex.level3};
         color: ${props.$active ? props.theme.colors.text.primary : props.theme.colors.secondary};
+        /* TEST-MEDIEVAL-UI: Outline doré pour tab actif (au lieu de border qui se fait recouvrir) */
+        ${props.$active ? `
+          box-shadow:
+            inset 0 0 0 2px ${props.theme.colors.secondary},
+            inset 0 0 0 4px #b1845a,
+            0 0 10px rgba(240, 222, 186, 0.3);
+        ` : ''}
         &:hover {
           transform: none;
           box-shadow: none;

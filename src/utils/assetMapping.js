@@ -5,23 +5,23 @@ export const roomBackgrounds = {
   sanctuaire: '/src/assets/images/rooms/sanctuaire-mystique.jpg',
   chambre: '/src/assets/images/rooms/chambre-cozy.jpg',
   cuisine: '/src/assets/images/rooms/cuisine-medieval.jpg',
-  comptoir: '/src/assets/images/rooms/comptoir-commerce.jpg',
+  comptoir: '/src/assets/images/rooms/bureau_tresor.jpg',
 
   // Ligne 1
-  jardin: '/src/assets/images/rooms/jardin-verdoyant.jpg',
+  jardin: '/src/assets/images/rooms/jardin.png',
   atelier: '/src/assets/images/rooms/atelier-workbench.jpg',
   forge: '/src/assets/images/rooms/forge-fire.jpg',
   boutique: '/src/assets/images/rooms/boutique-medieval.jpg',
 
   // Ligne 2
-  scriptorium: '/src/assets/images/rooms/scriptorium-manuscrits.jpg',
-  bibliotheque: '/src/assets/images/rooms/bibliotheque-ancienne.jpg',
-  cave: '/src/assets/images/rooms/cave-souterraine.jpg'
+  scriptorium: '/src/assets/images/rooms/scriptorium_magique.jpg',
+  bibliotheque: '/src/assets/images/rooms/bibliotheque_3.jpg',
+  cave: '/src/assets/images/rooms/donjon.jpg'
 };
 
 export const roomColors = {
   // Ligne 0
-  sanctuaire: '#E6E6FA', // Lavande mystique
+  sanctuaire: 'black', // Lavande mystique
   chambre: '#FFE4B5',    // Beige moelleux
   cuisine: '#F0E68C',    // Jaune chaleureux
   comptoir: '#DDA0DD',   // Prune commerce

@@ -2,14 +2,16 @@
 
 import React from 'react';
 import BaseRoom from '../../layout/BaseRoom';
-import { SanctuaireGrid } from './SanctuaireRoom.styles';
+import { SanctuaireWrapper, SanctuaireGrid } from './SanctuaireRoom.styles';
 
 const SanctuaireRoom = () => {
   return (
     <BaseRoom roomType="sanctuaire" layoutType="grid">
-      <SanctuaireGrid>
-        {/* Contenu du sanctuaire à développer */}
-      </SanctuaireGrid>
+      <SanctuaireWrapper>
+        <SanctuaireGrid>
+          {/* Contenu du sanctuaire à développer */}
+        </SanctuaireGrid>
+      </SanctuaireWrapper>
     </BaseRoom>
   );
 };
