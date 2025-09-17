@@ -9,15 +9,16 @@ export const CatalogContainer = styled.div`
 `;
 
 export const Sidebar = styled.div`
-  width: 280px;
+  width: 240px;
   background: rgba(0, 0, 0, 0.3);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem;
+  padding: 1rem;
   overflow-y: auto;
+  max-height: 100%;
 
   h2 {
-    margin: 0 0 2rem 0;
-    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
     color: #ffd700;
   }
 `;
@@ -91,25 +92,23 @@ export const Tab = styled.button`
 
 export const PreviewArea = styled.div`
   flex: 1;
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(
-    circle at center,
-    rgba(255, 215, 0, 0.02) 0%,
-    transparent 70%
-  );
+  background: transparent;
+  overflow: auto;
 `;
 
 export const ControlPanel = styled.div`
   flex: 1;
-  padding: 2rem;
+  padding: 1.5rem;
   overflow-y: auto;
 
   h3 {
     color: #ffd700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
   }
 `;
 

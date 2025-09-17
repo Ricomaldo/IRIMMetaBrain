@@ -20,22 +20,27 @@ export const GraphArea = styled.div`
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 215, 0, 0.2);
   border-radius: 12px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
   position: relative;
+  min-height: 400px;
 
   svg {
     width: 100%;
-    height: 100%;
+    height: auto;
   }
 `;
 
 export const Node = styled.g`
   cursor: pointer;
-  transition: transform 0.3s ease;
 
-  &:hover {
-    transform: scale(1.1);
+  circle {
+    transition: opacity 0.3s ease, r 0.3s ease;
+  }
+
+  &:hover circle {
+    opacity: 1;
+    r: 30;
   }
 `;
 
@@ -44,22 +49,21 @@ export const Connection = styled.line`
 `;
 
 export const StatsCard = styled.div`
-  flex: 1;
   background: rgba(255, 215, 0, 0.1);
   border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: 1rem;
   text-align: center;
 
   h3 {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.25rem 0;
   }
 
   .value {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: #ffd700;
   }
@@ -95,8 +99,9 @@ export const InfoPanel = styled.div`
 export const Legend = styled.div`
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
 `;
 
 export const LegendItem = styled.div`

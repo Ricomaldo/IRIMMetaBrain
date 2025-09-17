@@ -3,8 +3,6 @@ import {
   OverviewContainer,
   GraphArea,
   InfoPanel,
-  Node,
-  Connection,
   StatsCard,
   Legend,
   LegendItem
@@ -113,14 +111,18 @@ const TreeNode = ({ node, x, y, onHover }) => {
 
   return (
     <>
-      <Node
-        x={x}
-        y={y}
-        color={getNodeColor(node.type)}
+      <g
         onMouseEnter={() => onHover(node)}
         onMouseLeave={() => onHover(null)}
+        style={{ cursor: 'pointer' }}
       >
-        <circle cx={x} cy={y} r="25" fill={getNodeColor(node.type)} opacity="0.8"/>
+        <circle
+          cx={x}
+          cy={y}
+          r="25"
+          fill={getNodeColor(node.type)}
+          opacity="0.8"
+        />
         <text
           x={x}
           y={y}
@@ -132,7 +134,7 @@ const TreeNode = ({ node, x, y, onHover }) => {
         >
           {node.name.substring(0, 8)}
         </text>
-      </Node>
+      </g>
 
       {node.children && node.children.map((child, index) => {
         const childX = x + (index - node.children.length / 2) * 120;
@@ -140,7 +142,7 @@ const TreeNode = ({ node, x, y, onHover }) => {
 
         return (
           <g key={`${node.name}-${child.name}`}>
-            <Connection
+            <line
               x1={x}
               y1={y + 25}
               x2={childX}
@@ -148,6 +150,7 @@ const TreeNode = ({ node, x, y, onHover }) => {
               stroke={getNodeColor(node.type)}
               strokeWidth="2"
               opacity="0.3"
+              style={{ pointerEvents: 'none' }}
             />
             <TreeNode
               node={child}
@@ -170,7 +173,7 @@ const SystemOverview = () => {
     <OverviewContainer>
       <h1>🔍 System Overview</h1>
 
-      <div style={{ display: 'flex', gap: '2rem', marginBottom: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem', marginBottom: '1rem' }}>
         <StatsCard>
           <h3>Composants</h3>
           <div className="value">{stats.totalComponents}</div>
@@ -190,7 +193,7 @@ const SystemOverview = () => {
       </div>
 
       <GraphArea>
-        <svg width="100%" height="500" viewBox="0 0 800 500">
+        <svg width="100%" height="400" viewBox="0 0 800 400" style={{ display: 'block' }}>
           {componentTree && (
             <TreeNode
               node={componentTree}
@@ -200,20 +203,20 @@ const SystemOverview = () => {
             />
           )}
         </svg>
-      </GraphArea>
 
-      {hoveredNode && (
-        <InfoPanel>
-          <h3>{hoveredNode.name}</h3>
-          <p><strong>Type:</strong> {hoveredNode.type}</p>
-          {hoveredNode.props && hoveredNode.props.length > 0 && (
-            <p><strong>Props:</strong> {hoveredNode.props.join(', ')}</p>
-          )}
-          {hoveredNode.store && (
-            <p><strong>Store:</strong> {hoveredNode.store}</p>
-          )}
-        </InfoPanel>
-      )}
+        {hoveredNode && (
+          <InfoPanel>
+            <h3>{hoveredNode.name}</h3>
+            <p><strong>Type:</strong> {hoveredNode.type}</p>
+            {hoveredNode.props && hoveredNode.props.length > 0 && (
+              <p><strong>Props:</strong> {hoveredNode.props.join(', ')}</p>
+            )}
+            {hoveredNode.store && (
+              <p><strong>Store:</strong> {hoveredNode.store}</p>
+            )}
+          </InfoPanel>
+        )}
+      </GraphArea>
 
       <Legend>
         <LegendItem color="#ffd700">Root</LegendItem>
