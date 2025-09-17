@@ -40,23 +40,23 @@ export const TabContainer = styled.div`
 
 export const TabButton = styled.button`
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme, active }) =>
-    active ? alpha(theme.colors.primary, 0.2) : 'transparent'};
-  color: ${({ theme, active }) =>
-    active ? theme.colors.primary : theme.colors.text};
-  border: ${({ theme, active }) =>
-    active ? `${theme.borders.base} solid ${theme.colors.primary}` : `${theme.borders.thin} solid ${alpha(theme.colors.border, 0.5)}`};
+  background: ${({ theme, $active }) =>
+    $active ? alpha(theme.colors.primary, 0.2) : 'transparent'};
+  color: ${({ theme, $active }) =>
+    $active ? theme.colors.primary : theme.colors.text};
+  border: ${({ theme, $active }) =>
+    $active ? `${theme.borders.base} solid ${theme.colors.primary}` : `${theme.borders.thin} solid ${alpha(theme.colors.border, 0.5)}`};
   border-radius: ${({ theme }) => theme.radii.md};
   cursor: pointer;
   transition: ${({ theme }) =>
     `all ${theme.motion.durations.base} ${theme.motion.easings.standard}`};
   font-family: ${({ theme }) => theme.typography.families.ui};
   font-size: ${({ theme }) => theme.typography.sizes.sm};
-  font-weight: ${({ theme, active }) => active ? '600' : '400'};
+  font-weight: ${({ theme, $active }) => $active ? '600' : '400'};
 
   &:hover {
-    background: ${({ theme, active }) =>
-      active ? alpha(theme.colors.primary, 0.3) : alpha(theme.colors.primary, 0.1)};
+    background: ${({ theme, $active }) =>
+      $active ? alpha(theme.colors.primary, 0.3) : alpha(theme.colors.primary, 0.1)};
     border-color: ${({ theme }) => theme.colors.primary};
     transform: translateY(-1px);
   }

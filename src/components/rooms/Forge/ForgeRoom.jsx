@@ -77,19 +77,19 @@ const ForgeRoom = () => {
         >
           <TabContainer>
             <TabButton
-              active={activeTab === 'overview'}
+              $active={activeTab === 'overview'}
               onClick={() => setActiveTab('overview')}
             >
               🗺️ System Overview
             </TabButton>
             <TabButton
-              active={activeTab === 'catalog'}
+              $active={activeTab === 'catalog'}
               onClick={() => setActiveTab('catalog')}
             >
               📚 Component Catalog
             </TabButton>
             <TabButton
-              active={activeTab === 'captures'}
+              $active={activeTab === 'captures'}
               onClick={() => setActiveTab('captures')}
             >
               📸 Capture Viewer
