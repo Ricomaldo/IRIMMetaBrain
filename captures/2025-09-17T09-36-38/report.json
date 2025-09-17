@@ -1,0 +1,16 @@
+{
+  "id": "2025-09-17T09-36-38",
+  "timestamp": "2025-09-17T09:37:13.874Z",
+  "summary": {
+    "roomsCaptured": 12,
+    "storesFound": 2,
+    "totalFiles": 105,
+    "components": 11
+  },
+  "captures": {
+    "state": "state.json",
+    "rooms": "rooms.json",
+    "metrics": "metrics.json",
+    "screenshots": "screenshots/"
+  }
+}

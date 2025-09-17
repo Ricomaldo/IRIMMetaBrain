@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Check Real Data</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #1a1a2e;
+            color: #ffd700;
+            padding: 2rem;
+        }
+        pre {
+            background: #0f0f1e;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        button {
+            background: #ffd700;
+            color: #1a1a2e;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 1rem;
+        }
+        .section {
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Vérification des données réelles</h1>
+
+    <div class="section">
+        <h2>Instructions :</h2>
+        <ol>
+            <li>Ouvre cette page dans le MÊME navigateur où tu utilises l'app</li>
+            <li>Les boutons ci-dessous vont récupérer tes vraies données</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <button onclick="checkLocalStorage()">📦 Voir localStorage</button>
+        <button onclick="checkStores()">🏪 Voir Stores (si app ouverte)</button>
+        <button onclick="exportData()">💾 Exporter tout</button>
+    </div>
+
+    <div class="section">
+        <h2>Résultats :</h2>
+        <pre id="output">Clique sur un bouton pour voir les données...</pre>
+    </div>
+
+    <script>
+        function checkLocalStorage() {
+            const output = document.getElementById('output');
+            const data = {};
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                try {
+                    data[key] = JSON.parse(localStorage.getItem(key));
+                } catch {
+                    data[key] = localStorage.getItem(key);
+                }
+            }
+
+            // Focus sur les stores Zustand
+            const zustandData = {};
+            Object.keys(data).forEach(key => {
+                if (key.includes('irim')) {
+                    zustandData[key] = data[key];
+                }
+            });
+
+            output.textContent = '=== LOCALSTORAGE ZUSTAND ===\n\n';
+
+            // Vérifier spécifiquement les notes
+            const notesStore = zustandData['irim-notes-store'];
+            if (notesStore) {
+                output.textContent += '✅ NOTES STORE TROUVÉ!\n';
+                output.textContent += 'Structure: ' + JSON.stringify(notesStore, null, 2).substring(0, 500) + '...\n\n';
+
+                if (notesStore.state?.roomNotes) {
+                    const notesWithContent = Object.entries(notesStore.state.roomNotes)
+                        .filter(([room, content]) => content && content.trim() !== '');
+
+                    output.textContent += `📝 NOTES AVEC CONTENU (${notesWithContent.length}):\n`;
+                    notesWithContent.forEach(([room, content]) => {
+                        output.textContent += `  - ${room}: "${content.substring(0, 50)}..."\n`;
+                    });
+                }
+            } else {
+                output.textContent += '❌ PAS DE NOTES STORE DANS LOCALSTORAGE\n';
+            }
+
+            output.textContent += '\n\n=== TOUTES LES CLÉS ===\n';
+            output.textContent += Object.keys(data).join('\n');
+        }
+
+        function checkStores() {
+            // Ouvre un nouvel onglet avec l'app et vérifie
+            const win = window.open('http://localhost:5173', '_blank');
+
+            setTimeout(() => {
+                alert('L\'app devrait être ouverte. Regarde la console du navigateur et tape: window.__ZUSTAND_STORES__');
+            }, 3000);
+        }
+
+        function exportData() {
+            const data = {};
+
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                try {
+                    data[key] = JSON.parse(localStorage.getItem(key));
+                } catch {
+                    data[key] = localStorage.getItem(key);
+                }
+            }
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'localStorage-backup.json';
+            a.click();
+
+            document.getElementById('output').textContent = '✅ Données exportées dans localStorage-backup.json';
+        }
+    </script>
+</body>
+</html>

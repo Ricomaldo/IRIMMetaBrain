@@ -2,15 +2,37 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { defaultProjectsData } from './defaultData';
+
+// Vérifier si c'est la première utilisation (même flag que NotesStore)
+const isFirstRun = () => {
+  const initialized = localStorage.getItem('irim-initialized');
+  return !initialized;
+};
+
+// Récupérer les données initiales
+const getInitialProjectsData = () => {
+  if (isFirstRun()) {
+    // Première utilisation : données de démo riches
+    return defaultProjectsData;
+  }
+  // Utilisations suivantes : structure minimale (les vraies données viendront du localStorage)
+  return {
+    selectedProject: 'irimstudiohall',
+    projects: {}
+  };
+};
+
+const initialData = getInitialProjectsData();
 
 const useProjectsStore = create(
   persist(
     (set, get) => ({
       // Projet actuel sélectionné
-      selectedProject: 'irimstudiohall',
+      selectedProject: initialData.selectedProject,
 
       // Base de données des projets
-      projects: {
+      projects: initialData.projects || {
         irimstudiohall: {
           id: "irimstudiohall",
           name: "IRIMStudioHall",

@@ -1,0 +1,314 @@
+{
+  "room1": {
+    "screenshot": "screenshots/room1.png",
+    "position": "(0,0)",
+    "data": {
+      "position": {
+        "x": 0,
+        "y": 0
+      },
+      "id": "room1",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:36:52.459Z"
+    }
+  },
+  "room2": {
+    "screenshot": "screenshots/room2.png",
+    "position": "(1,0)",
+    "data": {
+      "position": {
+        "x": 1,
+        "y": 0
+      },
+      "id": "room2",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:36:55.048Z"
+    }
+  },
+  "room3": {
+    "screenshot": "screenshots/room3.png",
+    "position": "(2,0)",
+    "data": {
+      "position": {
+        "x": 2,
+        "y": 0
+      },
+      "id": "room3",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:36:56.404Z"
+    }
+  },
+  "room4": {
+    "screenshot": "screenshots/room4.png",
+    "position": "(3,0)",
+    "data": {
+      "position": {
+        "x": 3,
+        "y": 0
+      },
+      "id": "room4",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:36:58.502Z"
+    }
+  },
+  "room8": {
+    "screenshot": "screenshots/room8.png",
+    "position": "(3,1)",
+    "data": {
+      "position": {
+        "x": 3,
+        "y": 1
+      },
+      "id": "room8",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:37:00.427Z"
+    }
+  },
+  "room7": {
+    "screenshot": "screenshots/room7.png",
+    "position": "(2,1)",
+    "data": {
+      "position": {
+        "x": 2,
+        "y": 1
+      },
+      "id": "room7",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:37:02.704Z"
+    }
+  },
+  "room6": {
+    "screenshot": "screenshots/room6.png",
+    "position": "(1,1)",
+    "data": {
+      "position": {
+        "x": 1,
+        "y": 1
+      },
+      "id": "room6",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:37:04.607Z"
+    }
+  },
+  "room5": {
+    "screenshot": "screenshots/room5.png",
+    "position": "(0,1)",
+    "data": {
+      "position": {
+        "x": 0,
+        "y": 1
+      },
+      "id": "room5",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:37:06.584Z"
+    }
+  },
+  "room9": {
+    "screenshot": "screenshots/room9.png",
+    "position": "(0,2)",
+    "data": {
+      "position": {
+        "x": 0,
+        "y": 2
+      },
+      "id": "room9",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:37:07.684Z"
+    }
+  },
+  "room10": {
+    "screenshot": "screenshots/room10.png",
+    "position": "(1,2)",
+    "data": {
+      "position": {
+        "x": 1,
+        "y": 2
+      },
+      "id": "room10",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:37:09.512Z"
+    }
+  },
+  "room11": {
+    "screenshot": "screenshots/room11.png",
+    "position": "(2,2)",
+    "data": {
+      "position": {
+        "x": 2,
+        "y": 2
+      },
+      "id": "room11",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:37:11.824Z"
+    }
+  },
+  "room12": {
+    "screenshot": "screenshots/room12.png",
+    "position": "(3,2)",
+    "data": {
+      "position": {
+        "x": 3,
+        "y": 2
+      },
+      "id": "room12",
+      "detectedName": "Roadmap",
+      "notes": {
+        "sanctuaire": "# 🕊️ Sanctuaire - Espace de méditation\n\n## Vision\nCentre spirituel du projet, lieu de recul et de contemplation sur l'architecture globale.\n\n## Notes\n- Architecture 4x3 validée\n- Métaphore médiévale/fantasy comme fil conducteur\n- Chaque pièce = un aspect du workflow dev",
+        "chambre": "# 🛏️ Chambre - Espace personnel\n\n## État d'esprit\nLieu de repos et de réflexion personnelle. Journal intime du développeur.\n\n## Mood actuel\nFocus intense sur l'architecture des stores 🎯",
+        "cuisine": "# 🍳 Cuisine - Préparation des idées\n\n## Recettes en cours\n- Mix Zustand + Persist\n- Sauce Redux trop lourde, abandonée\n- Marinade localStorage en cours\n\n## Ingrédients\n- React 18\n- Vite\n- Styled-components",
+        "comptoir": "# 🍺 Comptoir - Discussions et échanges\n\n## Conversations\n- Discussion avec Claude sur l'architecture\n- Feedback utilisateurs à intégrer\n- Idées de la communauté",
+        "jardin": "# 🌿 Jardin - Croissance des idées\n\n## Plantations\n- Graine : Système de capture d'état\n- Pousse : Component Catalog\n- Fleur : Navigation spatiale\n\n## À arroser\n- Tests unitaires\n- Documentation",
+        "atelier": "# 🔨 Atelier - Centre de production\n\n## Workspace principal\nC'est ici que tout se construit ! Les panneaux Roadmap et Todo sont synchronisés avec le store Projects.\n\n## Outils disponibles\n- Éditeur Markdown intégré\n- Roadmap visuelle\n- Todo avec priorités\n- Export/Import Gist\n\n## Session actuelle\nFocus sur l'harmonisation des stores et le système de capture",
+        "forge": "# ⚒️ Forge - Hardcoding intensif\n\n## Fonderie de composants\n- NavigationArrows ✅\n- MarkdownEditor ✅\n- RoomCanvas ✅\n- ModalManager ✅\n\n## En cours de forge\n- SystemOverview component\n- ComponentCatalog\n- Capture system with Puppeteer",
+        "boutique": "# 🏪 Boutique - Présentation et démo\n\n## Vitrine\nEspace pour présenter les features terminées et les démos interactives.\n\n## Catalogue\n- Dark theme médiéval\n- Navigation immersive\n- Panneaux éditables\n- Persistance complète",
+        "scriptorium": "# 📜 Scriptorium - Documentation\n\n## Manuscrits\n- Architecture.md\n- ComponentGuide.md\n- StorePattern.md\n\n## À documenter\n- Système de navigation\n- Pattern des stores\n- Workflow de capture",
+        "bibliotheque": "# 📚 Bibliothèque - Références et ressources\n\n## Livres consultés\n- React Patterns\n- Zustand Deep Dive\n- Medieval UI Design (inspiration)\n\n## Références\n- [Zustand Docs](https://zustand.docs.pmnd.rs/)\n- [Styled Components](https://styled-components.com/)\n- [Vite Guide](https://vitejs.dev/)",
+        "cave": "# 🕯️ Cave - Secrets et debug\n\n## Zones sombres\n- Performance de rendu dans RoomCanvas\n- Memory leak potentiel dans les listeners\n- Race condition sur le localStorage\n\n## Outils de debug\n- React DevTools ✅\n- Zustand DevTools ✅\n- Console logs stratégiques"
+      },
+      "timestamp": "2025-09-17T09:37:13.850Z"
+    }
+  }
+}

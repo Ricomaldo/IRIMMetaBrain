@@ -3,33 +3,50 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { debounce } from '../utils/debounce';
+import { defaultNotesData } from './defaultData';
+
+// Vérifier si c'est la première utilisation
+const isFirstRun = () => {
+  const initialized = localStorage.getItem('irim-initialized');
+  return !initialized;
+};
+
+// Récupérer les données initiales
+const getInitialData = () => {
+  if (isFirstRun()) {
+    // Première utilisation : données de démo riches
+    localStorage.setItem('irim-initialized', 'true');
+    return defaultNotesData;
+  }
+  // Utilisations suivantes : chaînes vides (les vraies données viendront du localStorage)
+  return {
+    roomNotes: {
+      sanctuaire: '',
+      chambre: '',
+      cuisine: '',
+      comptoir: '',
+      jardin: '',
+      atelier: '',
+      forge: '',
+      boutique: '',
+      scriptorium: '',
+      bibliotheque: '',
+      cave: ''
+    },
+    sideTowerNotes: {
+      general: ''
+    }
+  };
+};
+
+const initialData = getInitialData();
 
 const useNotesStore = create(
   persist(
     (set, get) => ({
-      // État des notes - Architecture 4x3 complète
-      roomNotes: {
-        // Ligne 0: [Sanctuaire] [Chambre] [Cuisine] [Comptoir]
-        sanctuaire: '',
-        chambre: '',
-        cuisine: '',
-        comptoir: '',
-
-        // Ligne 1: [Jardin] [ATELIER] [Forge] [Boutique]
-        jardin: '',
-        atelier: '',
-        forge: '',
-        boutique: '',
-
-        // Ligne 2: [Scriptorium] [Bibliothèque] [Cave]
-        scriptorium: '',
-        bibliotheque: '',
-        cave: ''
-        // 'undefined' volontairement omis - pas de notes pour "À définir"
-      },
-      sideTowerNotes: {
-        general: ''
-      },
+      // État des notes avec données initiales
+      roomNotes: initialData.roomNotes,
+      sideTowerNotes: initialData.sideTowerNotes,
 
       // Actions pour room notes
       updateRoomNote: (roomType, content) => {
@@ -146,5 +163,11 @@ export const debouncedUpdateRoomNote = debounce((roomType, content) => {
 export const debouncedUpdateSideTowerNote = debounce((content) => {
   useNotesStore.getState().updateSideTowerNote(content);
 }, 500);
+
+// Exposer le store pour les outils de développement
+if (typeof window !== 'undefined' && import.meta.env.DEV) {
+  window.__ZUSTAND_STORES__ = window.__ZUSTAND_STORES__ || {};
+  window.__ZUSTAND_STORES__.notes = useNotesStore;
+}
 
 export default useNotesStore;

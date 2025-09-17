@@ -7,14 +7,21 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "capture": "node scripts/capture-state.js && npm run capture:update-viewer",
+    "capture:simple": "node scripts/capture-state-simple.js",
+    "capture:update-viewer": "node scripts/list-captures.js",
+    "capture:compare": "node scripts/capture-state.js --compare",
+    "dev:capture": "npm run dev & sleep 5 && npm run capture"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.7.0",
     "crypto-js": "^4.2.0",
+    "fs-extra": "^11.3.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-markdown": "^10.1.0",
+    "react-native-svg": "^15.13.0",
     "remark-gfm": "^4.0.1",
     "styled-components": "^6.1.19",
     "vite": "^5.4.20",
@@ -27,6 +34,7 @@
     "eslint": "^9.33.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.3.0"
+    "globals": "^16.3.0",
+    "puppeteer": "^24.21.0"
   }
 }
