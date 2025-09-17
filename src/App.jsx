@@ -4,7 +4,6 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import StudioHall from './components/layout/StudioHall/StudioHall';
 import ModalManager from './components/modals/ModalManager';
-import Sandbox from './components/Sandbox';
 import exposeStoresToWindow from './utils/exposeStores';
 
 function App() {
@@ -13,19 +12,10 @@ function App() {
     exposeStoresToWindow();
   }, []);
 
-  // Mode sandbox si ?sandbox dans l'URL
-  const isSandbox = window.location.search.includes('sandbox');
-
   return (
     <ThemeProvider theme={theme}>
-      {isSandbox ? (
-        <Sandbox />
-      ) : (
-        <>
-          <StudioHall />
-          <ModalManager />
-        </>
-      )}
+      <StudioHall />
+      <ModalManager />
     </ThemeProvider>
   );
 }
