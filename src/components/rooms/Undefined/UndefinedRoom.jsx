@@ -14,6 +14,19 @@ import {
   InfoBadge
 } from './UndefinedRoom.styles';
 
+// ============================================
+// 🧪 IMPORTER LE COMPOSANT À TESTER ICI
+// ============================================
+// Exemple : import SystemOverview from '../../dev/SystemOverview/SystemOverview';
+// Exemple : import ComponentCatalog from '../../dev/ComponentCatalog/ComponentCatalog';
+// Exemple : import MonComposant from '../../../components/MonComposant';
+
+// ============================================
+// 🎯 DÉFINIR LE COMPOSANT À TESTER
+// ============================================
+const ComponentToTest = null; // Remplacer null par le nom du composant importé
+// Exemple : const ComponentToTest = SystemOverview;
+
 const UndefinedRoom = () => {
   const theme = useTheme();
   const [displayMode, setDisplayMode] = useState('panel-2x2'); // Par défaut panel 2x2
@@ -48,6 +61,50 @@ const UndefinedRoom = () => {
   };
 
   const panelPosition = getPanelPosition();
+
+  // ============================================
+  // 🎨 CONTENU À AFFICHER
+  // ============================================
+  const renderTestContent = () => {
+    if (ComponentToTest) {
+      // Si un composant est défini, on l'affiche
+      return <ComponentToTest />;
+    } else {
+      // Sinon, on affiche le placeholder 👋
+      return (
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100%',
+          minHeight: '200px',
+          color: theme.colors.text,
+          textAlign: 'center'
+        }}>
+          <div style={{ fontSize: '80px', marginBottom: theme.spacing.md }}>👋</div>
+          <h3 style={{ margin: 0, marginBottom: theme.spacing.sm, color: theme.colors.primary }}>
+            Labo Sandbox
+          </h3>
+          <p style={{ margin: 0, opacity: 0.7, fontSize: theme.typography.sizes.sm }}>
+            Panel: {currentConfig.hasPanel ? `${currentConfig.size}×${currentConfig.size}` : 'Aucun'}<br/>
+            Position: Centré<br/>
+            Texture: Stone
+          </p>
+          <div style={{
+            marginTop: theme.spacing.lg,
+            padding: theme.spacing.sm,
+            background: 'rgba(255, 215, 0, 0.1)',
+            borderRadius: theme.radii.md,
+            fontSize: theme.typography.sizes.xs,
+            fontFamily: theme.typography.families.mono
+          }}>
+            💡 Importe un composant pour le tester
+          </div>
+        </div>
+      );
+    }
+  };
 
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative' }}>
@@ -88,22 +145,10 @@ const UndefinedRoom = () => {
               >
                 <div style={{
                   padding: theme.spacing.lg,
-                  minHeight: '200px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: theme.colors.text,
-                  fontFamily: theme.typography.families.mono,
-                  textAlign: 'center'
+                  height: '100%',
+                  overflow: 'auto'
                 }}>
-                  <div style={{ fontSize: '2rem', marginBottom: theme.spacing.md }}>🧪</div>
-                  <h3 style={{ margin: 0, marginBottom: theme.spacing.sm }}>Test Zone</h3>
-                  <p style={{ margin: 0, opacity: 0.7, fontSize: theme.typography.sizes.sm }}>
-                    Panel: {currentConfig.size}×{currentConfig.size}<br/>
-                    Position: Centré<br/>
-                    Texture: Stone
-                  </p>
+                  {renderTestContent()}
                 </div>
               </Panel>
             ) : (
@@ -117,26 +162,10 @@ const UndefinedRoom = () => {
                 background: 'rgba(255, 215, 0, 0.05)',
                 border: `2px dashed ${alpha(theme.colors.primary, 0.3)}`,
                 borderRadius: theme.radii.lg,
-                padding: theme.spacing.xl,
-                color: theme.colors.text
+                padding: theme.spacing.xl
               }}>
-                <div style={{ fontSize: '3rem', marginBottom: theme.spacing.lg }}>📐</div>
-                <h2 style={{ margin: 0, marginBottom: theme.spacing.md, color: theme.colors.primary }}>Sans Panel</h2>
-                <p style={{ margin: 0, opacity: 0.7, textAlign: 'center', maxWidth: '400px' }}>
-                  Mode affichage direct dans la grille 5×5<br/>
-                  Parfait pour tester les composants sans conteneur
-                </p>
-                <div style={{
-                  marginTop: theme.spacing.xl,
-                  padding: theme.spacing.lg,
-                  background: 'rgba(0, 0, 0, 0.3)',
-                  borderRadius: theme.radii.md,
-                  minWidth: '300px',
-                  textAlign: 'center'
-                }}>
-                  {/* Ici on pourrait mettre le composant à tester */}
-                  <code style={{ color: theme.colors.primary }}>{'<ComponentToTest />'}</code>
-                </div>
+                {/* Mode sans panel - affichage direct */}
+                {renderTestContent()}
               </div>
             )}
           </PanelGrid>
