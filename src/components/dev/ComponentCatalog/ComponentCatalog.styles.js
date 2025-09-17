@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const CatalogContainer = styled.div`
   display: flex;
-  height: 100vh;
-  background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+  height: 100%;
+  background: transparent;
   color: white;
   font-family: 'Inter', -apple-system, sans-serif;
 `;

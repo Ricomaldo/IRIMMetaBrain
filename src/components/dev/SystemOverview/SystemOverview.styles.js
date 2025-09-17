@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 
 export const OverviewContainer = styled.div`
-  padding: 2rem;
-  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
-  min-height: 100vh;
+  padding: 1rem;
+  background: transparent;
+  height: 100%;
   color: white;
   font-family: 'Inter', -apple-system, sans-serif;
+  overflow: auto;
 
   h1 {
     color: #ffd700;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     text-align: center;
+    font-size: 1.5rem;
   }
 `;
 
@@ -64,15 +66,15 @@ export const StatsCard = styled.div`
 `;
 
 export const InfoPanel = styled.div`
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
   background: rgba(0, 0, 0, 0.9);
   border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: 8px;
-  padding: 1.5rem;
-  max-width: 300px;
-  z-index: 1000;
+  padding: 1rem;
+  max-width: 250px;
+  z-index: 10;
 
   h3 {
     color: #ffd700;

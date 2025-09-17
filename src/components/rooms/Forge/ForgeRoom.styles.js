@@ -68,12 +68,14 @@ export const TabButton = styled.button`
 
 export const DevToolContainer = styled.div`
   flex: 1;
-  overflow-y: auto;
-  padding: ${({ theme }) => theme.spacing.lg};
+  overflow: hidden;
+  padding: 0;
   background: ${({ theme }) => alpha(theme.colors.backgroundDark, 0.3)};
   border-radius: ${({ theme }) => `0 0 ${theme.radii.md} ${theme.radii.md}`};
   min-height: 400px;
   position: relative;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const LoadingMessage = styled.div`
