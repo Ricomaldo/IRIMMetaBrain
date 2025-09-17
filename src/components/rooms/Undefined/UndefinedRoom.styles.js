@@ -99,3 +99,90 @@ export const InfoBadge = styled.div`
   font-size: ${({ theme }) => theme.typography.sizes.xs};
   white-space: nowrap;
 `;
+
+// Barre de contrôle horizontale
+export const ControlBar = styled.div`
+  display: flex;
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #ffd700;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  width: fit-content;
+  margin: 0 auto 20px;
+`;
+
+// Bouton de configuration
+export const ConfigButton = styled.button`
+  padding: 6px 12px;
+  background: ${({ $active }) => $active ? '#ffd700' : 'transparent'};
+  color: ${({ $active }) => $active ? 'black' : '#ffd700'};
+  border: 1px solid #ffd700;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: ${({ $active }) => $active ? 'bold' : 'normal'};
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: ${({ $active }) => $active ? '#ffd700' : 'rgba(255, 215, 0, 0.1)'};
+  }
+`;
+
+// Contenu welcome pour Panel
+export const WelcomeContent = styled.div`
+  padding: ${({ theme }) => theme.spacing.lg};
+  text-align: center;
+`;
+
+// Emoji de bienvenue
+export const WelcomeEmoji = styled.div`
+  font-size: 60px;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
+// Titre de bienvenue
+export const WelcomeTitle = styled.h3`
+  color: ${({ theme }) => theme.colors.primary};
+  margin: 0;
+`;
+
+// Description de bienvenue
+export const WelcomeDescription = styled.p`
+  opacity: 0.7;
+  margin: ${({ theme }) => `${theme.spacing.sm} 0`};
+`;
+
+// Hint de bienvenue
+export const WelcomeHint = styled.div`
+  margin-top: ${({ theme }) => theme.spacing.lg};
+  padding: ${({ theme }) => theme.spacing.sm};
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: ${({ theme }) => theme.radii.sm};
+  font-size: ${({ theme }) => theme.typography.sizes.xs};
+`;
+
+// Contenu sans panel
+export const NoPanelContent = styled.div`
+  grid-column: 1 / 6;
+  grid-row: 1 / 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 215, 0, 0.05);
+  border: 2px dashed rgba(255, 215, 0, 0.3);
+  border-radius: ${({ theme }) => theme.radii.lg};
+  padding: ${({ theme }) => theme.spacing.xl};
+`;
+
+// Emoji grand pour sans panel
+export const LargeEmoji = styled.div`
+  font-size: 80px;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+`;
+
+// Sous-titre sans panel
+export const NoPanelSubtitle = styled.p`
+  opacity: 0.7;
+`;

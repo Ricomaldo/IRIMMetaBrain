@@ -6,6 +6,18 @@ import BaseRoom from '../../layout/BaseRoom';
 import PanelGrid from '../../layout/PanelGrid';
 import Panel from '../../common/Panel';
 import { useTheme } from 'styled-components';
+import {
+  ControlBar,
+  ConfigButton,
+  WelcomeContent,
+  WelcomeEmoji,
+  WelcomeTitle,
+  WelcomeDescription,
+  WelcomeHint,
+  NoPanelContent,
+  LargeEmoji,
+  NoPanelSubtitle
+} from './UndefinedRoom.styles';
 
 // ============================================
 // 🧪 IMPORTER LE COMPOSANT À TESTER ICI
@@ -53,36 +65,17 @@ const UndefinedRoom = () => {
   return (
     <BaseRoom roomType="undefined" layoutType="grid">
       {/* Barre de contrôle horizontale comme dans l'Atelier */}
-      <div style={{
-        display: 'flex',
-        gap: '10px',
-        padding: '10px 20px',
-        background: 'rgba(0, 0, 0, 0.8)',
-        border: '2px solid #ffd700',
-        borderRadius: '12px',
-        marginBottom: '20px',
-        width: 'fit-content',
-        margin: '0 auto 20px'
-      }}>
+      <ControlBar>
         {configs.map(config => (
-          <button
+          <ConfigButton
             key={config.mode}
             onClick={() => setDisplayMode(config.mode)}
-            style={{
-              padding: '6px 12px',
-              background: displayMode === config.mode ? '#ffd700' : 'transparent',
-              color: displayMode === config.mode ? 'black' : '#ffd700',
-              border: '1px solid #ffd700',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '14px',
-              fontWeight: displayMode === config.mode ? 'bold' : 'normal'
-            }}
+            $active={displayMode === config.mode}
           >
             {config.label}
-          </button>
+          </ConfigButton>
         ))}
-      </div>
+      </ControlBar>
 
       {/* Grille 5x5 */}
       <PanelGrid columns={5} rows={5}>
@@ -102,54 +95,33 @@ const UndefinedRoom = () => {
             {ComponentToTest ? (
               <ComponentToTest />
             ) : (
-              <div style={{
-                padding: theme.spacing.lg,
-                textAlign: 'center'
-              }}>
-                <div style={{ fontSize: '60px', marginBottom: theme.spacing.md }}>👋</div>
-                <h3 style={{ color: theme.colors.primary, margin: 0 }}>
-                  Labo Sandbox
-                </h3>
-                <p style={{ opacity: 0.7, margin: `${theme.spacing.sm} 0` }}>
+              <WelcomeContent>
+                <WelcomeEmoji>👋</WelcomeEmoji>
+                <WelcomeTitle>Labo Sandbox</WelcomeTitle>
+                <WelcomeDescription>
                   Panel {panelSize}×{panelSize}
-                </p>
-                <div style={{
-                  marginTop: theme.spacing.lg,
-                  padding: theme.spacing.sm,
-                  background: 'rgba(255, 215, 0, 0.1)',
-                  borderRadius: theme.radii.sm,
-                  fontSize: theme.typography.sizes.xs
-                }}>
+                </WelcomeDescription>
+                <WelcomeHint>
                   💡 Importe un composant ligne 14
-                </div>
-              </div>
+                </WelcomeHint>
+              </WelcomeContent>
             )}
           </Panel>
         ) : (
           // Sans Panel - Contenu direct
-          <div style={{
-            gridColumn: '1 / 6',
-            gridRow: '1 / 6',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: 'rgba(255, 215, 0, 0.05)',
-            border: '2px dashed rgba(255, 215, 0, 0.3)',
-            borderRadius: theme.radii.lg,
-            padding: theme.spacing.xl
-          }}>
+          <NoPanelContent>
             {ComponentToTest ? (
               <ComponentToTest />
             ) : (
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontSize: '80px', marginBottom: theme.spacing.md }}>👋</div>
-                <h3 style={{ color: theme.colors.primary }}>Mode Sans Panel</h3>
-                <p style={{ opacity: 0.7 }}>
+                <LargeEmoji>👋</LargeEmoji>
+                <WelcomeTitle>Mode Sans Panel</WelcomeTitle>
+                <NoPanelSubtitle>
                   Affichage direct dans la grille 5×5
-                </p>
+                </NoPanelSubtitle>
               </div>
             )}
-          </div>
+          </NoPanelContent>
         )}
       </PanelGrid>
     </BaseRoom>
