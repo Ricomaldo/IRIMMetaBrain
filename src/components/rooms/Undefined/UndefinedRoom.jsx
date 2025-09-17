@@ -6,6 +6,7 @@ import { useTheme } from 'styled-components';
 import BaseRoom from '../../layout/BaseRoom';
 import Panel from '../../common/Panel';
 import PanelGrid from '../../layout/PanelGrid';
+import { alpha } from '../../../styles/color';
 import {
   SandboxContainer,
   ControlBar,
@@ -16,34 +17,38 @@ import {
 
 const UndefinedRoom = () => {
   const theme = useTheme();
-  const [gridSize, setGridSize] = useState(2); // Par défaut 2x2
+  const [displayMode, setDisplayMode] = useState('panel-2x2'); // Par défaut panel 2x2
   const [collapsed, setCollapsed] = useState(false);
 
-  // Configuration des grilles
-  const gridConfigs = [
-    { size: 1, label: '1x1', columns: 1, rows: 1 },
-    { size: 2, label: '2x2', columns: 2, rows: 2 },
-    { size: 3, label: '3x3', columns: 3, rows: 3 },
-    { size: 4, label: '4x4', columns: 4, rows: 4 },
+  // Configuration des modes d'affichage
+  const displayConfigs = [
+    { mode: 'no-panel', label: 'Sans Panel', hasPanel: false },
+    { mode: 'panel-1x1', label: 'Panel 1×1', hasPanel: true, size: 1 },
+    { mode: 'panel-2x2', label: 'Panel 2×2', hasPanel: true, size: 2 },
+    { mode: 'panel-3x3', label: 'Panel 3×3', hasPanel: true, size: 3 },
   ];
 
-  const currentConfig = gridConfigs.find(c => c.size === gridSize);
+  const currentConfig = displayConfigs.find(c => c.mode === displayMode);
 
-  // Calcul de la position centrale dans la grille
-  const getCenterPosition = () => {
-    if (gridSize === 1) {
-      return { gridColumn: '1', gridRow: '1' };
-    }
-    // Pour les grilles paires (2x2, 4x4), on centre sur les cellules du milieu
-    // Pour les grilles impaires (3x3), on prend la cellule centrale
-    const mid = Math.ceil(gridSize / 2);
+  // Grille toujours 5x5
+  const GRID_SIZE = 5;
+
+  // Calcul de la position du panel dans la grille 5x5
+  const getPanelPosition = () => {
+    if (!currentConfig.hasPanel) return null;
+
+    const panelSize = currentConfig.size;
+    // Centrer le panel dans la grille 5x5
+    const start = Math.floor((GRID_SIZE - panelSize) / 2) + 1;
+    const end = start + panelSize;
+
     return {
-      gridColumn: `${mid} / ${mid + 1}`,
-      gridRow: `${mid} / ${mid + 1}`
+      gridColumn: `${start} / ${end}`,
+      gridRow: `${start} / ${end}`
     };
   };
 
-  const centerPos = getCenterPosition();
+  const panelPosition = getPanelPosition();
 
   return (
     <BaseRoom roomType="undefined" layoutType="flex">
@@ -52,55 +57,89 @@ const UndefinedRoom = () => {
         <ControlBar>
           <h2>🧪 Labo Sandbox</h2>
           <div style={{ display: 'flex', gap: theme.spacing.sm }}>
-            {gridConfigs.map(config => (
+            {displayConfigs.map(config => (
               <GridButton
-                key={config.size}
-                $active={gridSize === config.size}
-                onClick={() => setGridSize(config.size)}
+                key={config.mode}
+                $active={displayMode === config.mode}
+                onClick={() => setDisplayMode(config.mode)}
               >
                 {config.label}
               </GridButton>
             ))}
           </div>
           <InfoBadge>
-            Grid: {currentConfig.label} | Panel: Stone | Collapsible: {collapsed ? 'OFF' : 'ON'}
+            Mode: {currentConfig.label} | Grid: 5×5 | {currentConfig.hasPanel && `Collapse: ${collapsed ? 'OFF' : 'ON'}`}
           </InfoBadge>
         </ControlBar>
 
-        {/* Zone de test avec grille */}
+        {/* Zone de test avec grille 5x5 */}
         <TestArea>
-          <PanelGrid columns={currentConfig.columns} rows={currentConfig.rows}>
-            <Panel
-              gridColumn={centerPos.gridColumn}
-              gridRow={centerPos.gridRow}
-              title="Component Test"
-              icon="🔬"
-              texture="stone"
-              accentColor={theme.colors.accents.warm}
-              collapsible={true}
-              collapsed={collapsed}
-              onToggleCollapse={setCollapsed}
-            >
+          <PanelGrid columns={5} rows={5}>
+            {currentConfig.hasPanel ? (
+              <Panel
+                gridColumn={panelPosition.gridColumn}
+                gridRow={panelPosition.gridRow}
+                title="Component Test"
+                icon="🔬"
+                texture="stone"
+                accentColor={theme.colors.accents.warm}
+                collapsible={true}
+                collapsed={collapsed}
+                onToggleCollapse={setCollapsed}
+              >
+                <div style={{
+                  padding: theme.spacing.lg,
+                  minHeight: '200px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: theme.colors.text,
+                  fontFamily: theme.typography.families.mono,
+                  textAlign: 'center'
+                }}>
+                  <div style={{ fontSize: '2rem', marginBottom: theme.spacing.md }}>🧪</div>
+                  <h3 style={{ margin: 0, marginBottom: theme.spacing.sm }}>Test Zone</h3>
+                  <p style={{ margin: 0, opacity: 0.7, fontSize: theme.typography.sizes.sm }}>
+                    Panel: {currentConfig.size}×{currentConfig.size}<br/>
+                    Position: Centré<br/>
+                    Texture: Stone
+                  </p>
+                </div>
+              </Panel>
+            ) : (
               <div style={{
-                padding: theme.spacing.lg,
-                minHeight: '200px',
+                gridColumn: '1 / 6',
+                gridRow: '1 / 6',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: theme.colors.text,
-                fontFamily: theme.typography.families.mono,
-                textAlign: 'center'
+                background: 'rgba(255, 215, 0, 0.05)',
+                border: `2px dashed ${alpha(theme.colors.primary, 0.3)}`,
+                borderRadius: theme.radii.lg,
+                padding: theme.spacing.xl,
+                color: theme.colors.text
               }}>
-                <div style={{ fontSize: '2rem', marginBottom: theme.spacing.md }}>🧪</div>
-                <h3 style={{ margin: 0, marginBottom: theme.spacing.sm }}>Test Zone</h3>
-                <p style={{ margin: 0, opacity: 0.7, fontSize: theme.typography.sizes.sm }}>
-                  Grid: {currentConfig.label}<br/>
-                  Position: Center<br/>
-                  Texture: Stone
+                <div style={{ fontSize: '3rem', marginBottom: theme.spacing.lg }}>📐</div>
+                <h2 style={{ margin: 0, marginBottom: theme.spacing.md, color: theme.colors.primary }}>Sans Panel</h2>
+                <p style={{ margin: 0, opacity: 0.7, textAlign: 'center', maxWidth: '400px' }}>
+                  Mode affichage direct dans la grille 5×5<br/>
+                  Parfait pour tester les composants sans conteneur
                 </p>
+                <div style={{
+                  marginTop: theme.spacing.xl,
+                  padding: theme.spacing.lg,
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  borderRadius: theme.radii.md,
+                  minWidth: '300px',
+                  textAlign: 'center'
+                }}>
+                  {/* Ici on pourrait mettre le composant à tester */}
+                  <code style={{ color: theme.colors.primary }}>{'<ComponentToTest />'}</code>
+                </div>
               </div>
-            </Panel>
+            )}
           </PanelGrid>
         </TestArea>
       </SandboxContainer>
