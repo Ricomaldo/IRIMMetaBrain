@@ -18,7 +18,8 @@ export const SandboxContainer = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.md};
   padding: ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme }) => `linear-gradient(135deg, ${theme.colors.backgroundDark} 0%, ${theme.colors.background} 100%)`};
+  background: ${({ theme }) => theme.colors.backgroundDark};
+  overflow: hidden;
 `;
 
 export const ControlBar = styled.div`

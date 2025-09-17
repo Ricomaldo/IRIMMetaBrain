@@ -6,7 +6,6 @@ import { useTheme } from 'styled-components';
 import BaseRoom from '../../layout/BaseRoom';
 import Panel from '../../common/Panel';
 import PanelGrid from '../../layout/PanelGrid';
-import SystemOverview from '../../dev/SystemOverview/SystemOverview';
 import {
   SandboxContainer,
   ControlBar,
@@ -32,17 +31,22 @@ const UndefinedRoom = () => {
 
   // Calcul de la position centrale dans la grille
   const getCenterPosition = () => {
+    if (gridSize === 1) {
+      return { gridColumn: '1', gridRow: '1' };
+    }
+    // Pour les grilles paires (2x2, 4x4), on centre sur les cellules du milieu
+    // Pour les grilles impaires (3x3), on prend la cellule centrale
     const mid = Math.ceil(gridSize / 2);
     return {
-      gridColumn: gridSize === 1 ? '1' : `${mid} / ${mid + 1}`,
-      gridRow: gridSize === 1 ? '1' : `${mid} / ${mid + 1}`
+      gridColumn: `${mid} / ${mid + 1}`,
+      gridRow: `${mid} / ${mid + 1}`
     };
   };
 
   const centerPos = getCenterPosition();
 
   return (
-    <BaseRoom roomType="undefined" layoutType="grid">
+    <BaseRoom roomType="undefined" layoutType="flex">
       <SandboxContainer>
         {/* Barre de contrôle */}
         <ControlBar>
@@ -59,7 +63,7 @@ const UndefinedRoom = () => {
             ))}
           </div>
           <InfoBadge>
-            Grid: {currentConfig.label} | Panel: Stone | Collapsible: ON
+            Grid: {currentConfig.label} | Panel: Stone | Collapsible: {collapsed ? 'OFF' : 'ON'}
           </InfoBadge>
         </ControlBar>
 
@@ -69,7 +73,7 @@ const UndefinedRoom = () => {
             <Panel
               gridColumn={centerPos.gridColumn}
               gridRow={centerPos.gridRow}
-              title="SystemOverview Test"
+              title="Component Test"
               icon="🔬"
               texture="stone"
               accentColor={theme.colors.accents.warm}
@@ -78,11 +82,23 @@ const UndefinedRoom = () => {
               onToggleCollapse={setCollapsed}
             >
               <div style={{
-                padding: theme.spacing.md,
-                height: '100%',
-                overflow: 'auto'
+                padding: theme.spacing.lg,
+                minHeight: '200px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: theme.colors.text,
+                fontFamily: theme.typography.families.mono,
+                textAlign: 'center'
               }}>
-                <SystemOverview />
+                <div style={{ fontSize: '2rem', marginBottom: theme.spacing.md }}>🧪</div>
+                <h3 style={{ margin: 0, marginBottom: theme.spacing.sm }}>Test Zone</h3>
+                <p style={{ margin: 0, opacity: 0.7, fontSize: theme.typography.sizes.sm }}>
+                  Grid: {currentConfig.label}<br/>
+                  Position: Center<br/>
+                  Texture: Stone
+                </p>
               </div>
             </Panel>
           </PanelGrid>
