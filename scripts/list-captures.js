@@ -5,8 +5,12 @@
  * Met à jour viewer.html automatiquement
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const CAPTURES_DIR = path.join(__dirname, '..', 'captures');
 const VIEWER_PATH = path.join(CAPTURES_DIR, 'viewer.html');
