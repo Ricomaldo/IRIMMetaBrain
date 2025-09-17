@@ -1,8 +1,8 @@
 // src/components/rooms/Undefined/UndefinedRoom.styles.js
 
 import styled from "styled-components";
-import { alpha } from "../../../styles/color";
 import {
+  woodBg,
   metalBg,
   primaryLevel,
   secondaryLevel,
@@ -14,31 +14,17 @@ import {
 // Barre de contrôle horizontale - secondaryLevel
 export const SandboxControlBar = styled.div`
   ${secondaryLevel}
-  display: flex;
-  gap: ${({ theme }) => theme.spacing.sm};
-  padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.lg}`};
-  background: ${({ theme }) => alpha(theme.colors.black, 0.8)};
-  width: fit-content;
+  ${woodBg};
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 6px;
+  padding: 8px 16px;
+  width: 100%;
   margin: 0 auto;
-  justify-content: center;
-`;
-
-// Bouton de configuration - utilise le theme
-export const SandboxConfigButton = styled.button`
-  padding: ${({ theme }) => `${theme.spacing.xs} ${theme.spacing.sm}`};
-  background: ${({ theme, $active }) => $active ? theme.colors.primary : 'transparent'};
-  color: ${({ theme, $active }) => $active ? theme.colors.background : theme.colors.primary};
-  border: ${({ theme }) => `${theme.borders.thin} solid ${theme.colors.primary}`};
-  border-radius: ${({ theme }) => theme.radii.sm};
-  cursor: pointer;
-  font-size: ${({ theme }) => theme.typography.sizes.sm};
-  font-weight: ${({ $active }) => $active ? 'bold' : 'normal'};
-  transition: ${({ theme }) => `all ${theme.motion.durations.fast} ${theme.motion.easings.standard}`};
-
-  &:hover {
-    background: ${({ theme, $active }) =>
-      $active ? theme.colors.primary : alpha(theme.colors.primary, 0.1)};
-  }
+  background: transparent;
+  box-shadow: none;
+  flex: 1;
 `;
 
 // Contenu welcome pour Panel
@@ -99,15 +85,39 @@ export const NoPanelSubtitle = styled.p`
 
 // Titre du labo avec texture métal - primaryLevel
 export const LaboTitle = styled.h2`
-  ${primaryLevel}
-  ${metalBg}
-  text-align: center;
   color: ${({ theme }) => theme.colors.primary};
-  margin: ${({ theme }) => `${theme.spacing.xl} auto 20px auto`};
   font-size: 24px;
   font-family: ${({ theme }) => theme.typography.families.ui};
-  padding: ${({ theme }) => `${theme.spacing.md} ${theme.spacing.xl}`};
-  display: block;
-  width: 25%;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0;
+  padding: 0 ${({ theme }) => theme.spacing.lg};
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+`;
+
+// Conteneur unifié pour le titre et les contrôles
+export const ControlHeader = styled.div`
+  ${primaryLevel}
+  ${metalBg}
+  display: flex;
+  align-items: center;
+  padding: ${({ theme }) => theme.spacing.md};
+  margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
+  gap: ${({ theme }) => theme.spacing.md};
+  width: 100%;
+`;
+
+// Grille principale qui prend toute la place disponible
+export const MainGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: ${({ theme }) => theme.spacing.md};
+  flex: 1;
+`;
+
+// Conteneur pour le mode sans panel
+export const NoPanelCenter = styled.div`
+  text-align: center;
 `;

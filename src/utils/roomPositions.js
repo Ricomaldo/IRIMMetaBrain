@@ -15,8 +15,8 @@ export const roomConfig = [
   { x: 2, y: 1, type: 'forge', name: 'Forge', background: roomBackgrounds.forge },
   { x: 3, y: 1, type: 'boutique', name: 'Boutique', background: roomBackgrounds.boutique },
 
-  // Ligne 2: [Scriptorium] [Bibliothèque] [???] [Cave]
-  { x: 0, y: 2, type: 'undefined', name: 'À définir', background: null },
+  // Ligne 2: [Laboratoire] [Bibliothèque] [Scriptorium] [Cave]
+  { x: 0, y: 2, type: 'laboratoire', name: 'Laboratoire', background: roomBackgrounds.laboratoire },
   { x: 1, y: 2, type: 'bibliotheque', name: 'Bibliothèque', background: roomBackgrounds.bibliotheque },
   { x: 2, y: 2, type: 'scriptorium', name: 'Scriptorium', background: roomBackgrounds.scriptorium },
   { x: 3, y: 2, type: 'cave', name: 'Cave', background: roomBackgrounds.cave }

@@ -1,0 +1,56 @@
+# CHANGE-LOG.dev
+## Journal de développement IRIM Studio Hall
+
+---
+
+## 2024-09-17 - Session Laboratoire et Design System
+
+### 🧪 Création du Laboratoire de Test (UndefinedRoom → Laboratoire)
+- Transformation complète de la salle "Undefined" en laboratoire de test de composants
+- Renommage global : "undefined" → "laboratoire" dans toute l'application
+- Ajout d'un fond spécifique pour le laboratoire (`labo-xxx.jpg`)
+- Mise en place d'un espace de test modulaire pour le développement
+
+### 🎮 Système de Test de Rendu Multi-Dimensions
+- Implémentation d'une grille 5×5 pour tester différentes tailles de panels
+- Ajout de 14 configurations de panels :
+  - Sans Panel
+  - Dimensions : 1×1, 1×2, 1×4, 2×1, 2×2, 2×3, 2×4, 3×2, 3×3, 3×4, 4×4, 4×5, 5×5
+- Barre de contrôle unifiée avec titre "🧪 Test Rendu"
+- Organisation des boutons en grille 7×2 avec codes couleur par largeur
+
+### 🎨 Enrichissement du Design System
+
+#### Nouveau Composant Button
+- Création d'un composant Button générique avec 14 variants :
+  - **Basiques** : default, secondary, tab
+  - **Textures** : wood, stone, metal, parchment (avec mixins)
+  - **Niveaux** : primary-level, secondary-level, tertiary-level
+  - **Couleurs** : cool (bleu), warm (doré), nature (vert), primary-colored
+- Intégration complète avec le système de thème
+- États actifs et effets hover personnalisés par variant
+
+#### Amélioration des Mixins
+- Création de `blueBorder` : bordure avec dégradé bleu compatible border-radius
+- Application du dégradé bleu à `secondaryLevel`
+- Utilisation de CSS mask pour contourner les limitations de border-image
+
+### 🔧 Optimisations et Corrections
+- Résolution du bug de centrage des panels 2×2 (abandon du centrage parfait)
+- Correction du bug où le panel 2×1 poussait la barre de contrôle
+- Migration des styles inline vers styled-components
+- Unification du header (titre + contrôles) avec style primaryLevel et metalBg
+- Alignement parfait de la barre de contrôle avec la grille
+
+### 🛠️ Travaux Interrompus
+- Intégration des DevTools 2 et 3 (mise en pause)
+- Première capture d'écran effectuée
+
+### 📝 Notes Techniques
+- Utilisation de grid-template-rows fixe pour stabiliser la mise en page
+- Exception maintenue : style inline `flex: 1` sur PanelGrid
+- ComponentToTest conserve ses styles inline pour flexibilité
+
+---
+
+*Session productive avec focus sur l'infrastructure de test et l'enrichissement du système de design. Le laboratoire est maintenant opérationnel pour les tests de composants.*
