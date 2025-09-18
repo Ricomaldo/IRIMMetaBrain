@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-09-18T15:48:05.880Z",
+  "timestamp": "2025-09-18T16:16:55.597Z",
   "totalComponents": 62,
   "rootComponents": [
     "index",
@@ -606,6 +606,7 @@
         "PanelGrid",
         "Panel",
         "ComponentCatalog",
+        "SystemOverview",
         "ForgeToolbar",
         "Button"
       ],
@@ -614,6 +615,7 @@
         "PanelGrid",
         "Panel",
         "ComponentCatalog",
+        "SystemOverview",
         "Button"
       ]
     },
@@ -641,7 +643,6 @@
         "BaseRoom",
         "ControlHeader",
         "LaboTitle",
-        "SandboxControlBar",
         "Button",
         "PanelGrid",
         "Panel",
@@ -653,15 +654,13 @@
         "NoPanelContent",
         "NoPanelCenter",
         "LargeEmoji",
-        "NoPanelSubtitle",
-        "SystemOverview"
+        "NoPanelSubtitle"
       ],
       "children": [
         "BaseRoom",
         "Button",
         "PanelGrid",
-        "Panel",
-        "SystemOverview"
+        "Panel"
       ]
     },
     {

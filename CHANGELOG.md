@@ -2,7 +2,31 @@
 
 ## [Unreleased]
 
-### Added - 2025-09-18
+### Added - 2025-09-18 (Session SystemOverview & Architecture)
+
+- **SystemOverview dans la Forge** : Nouveau bouton 🌳 TREE pour visualiser l'architecture
+  - Intégration dans Panel fullscreen avec texture metal et bordure bleue
+  - Harmonisation complète avec le thème bleu de ComponentCatalog
+  - Suppression de la texture pierre au profit du gradient uiKitBlue
+  - Palette de bleus ajoutée au theme (blues: 100-500)
+  - Toutes les couleurs référencent maintenant le theme
+  - Hauteur réduite à 450px pour visibilité de la légende
+
+- **Laboratoire UI Refactoring** : Interface simplifiée et optimisée
+  - Nouveaux sélecteurs Width/Height séparés (10 boutons au lieu de 26)
+  - Bouton toggle pour afficher/masquer le panel
+  - Titre "🧪 Rendu" restauré grâce à l'interface compacte
+  - Fix alignement NoPanelContent (grid-row: 1/6)
+  - Fix débordement scrollbar avec wrapper dédié
+  - Simplification de ControlHeader
+
+- **Système @renders complet** : 41 composants annotés
+  - Tous les composants principaux ont maintenant des annotations JSDoc
+  - Parser script amélioré pour extraction complète
+  - Architecture-map.json reflète toute la hiérarchie
+  - Suppression de la limite de profondeur dans l'arbre
+
+### Added - 2025-09-18 (Session précédente)
 
 - **Layout Chambre Implémenté** : Structure complète avec panels placeholder
   - Grille 4x4 avec 6 zones distinctes

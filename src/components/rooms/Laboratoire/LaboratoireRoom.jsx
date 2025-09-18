@@ -24,10 +24,9 @@ import {
 // 🧪 IMPORTER LE COMPOSANT À TESTER ICI
 // ============================================
 import Button from "../../common/Button";
-import SystemOverview from "../../dev/SystemOverview/SystemOverview";
 
 // Remplace ComponentToTest par le composant que tu veux tester
-const ComponentToTest = SystemOverview;
+const ComponentToTest = null;
 
 /**
  * Laboratoire room component for testing and experimenting with components
@@ -46,7 +45,6 @@ const ComponentToTest = SystemOverview;
  * @renders NoPanelCenter
  * @renders LargeEmoji
  * @renders NoPanelSubtitle
- * @renders SystemOverview
  */
 const LaboratoireRoom = () => {
   const theme = useTheme();
