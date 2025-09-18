@@ -1,30 +1,52 @@
-# Documentation IRIMStudioHall
+# 📚 Documentation IRIMMetaBrain
 
-Ce dossier regroupe la documentation officielle, organisée par type. Les journaux quotidiens sont dans `devlog/`.
+> Meta-cerveau spatial pour développeurs TDA/H
 
-## Getting Started
-- Install: `npm install`
-- Dev: `npm run dev`
-- Build: `npm run build`
+## Navigation
 
-## Décisions
-- [ADR-001: Système de modales avec React Portals](./decisions/ADR-001-modal-system-portals.md) — Décision d'architecture pour les modales multi‑zones
+### Architecture
 
-## Architecture
-- [Project Vision](./architecture/project-vision.md) — Vision fondamentale meta-cerveau spatial neuro-adaptatif TDA/H
-- [Stores architecture](./architecture/stores-architecture.md) — Séparation Zustand et contrats d'état/actions
-- [Theme management](./architecture/theme-management.md) — Règles d'usage du thème et échelles
-- [Folder structure](./architecture/folder-structure.md) — Structure de dossiers cible et repères
+- [folder-structure](architecture/folder-structure.md)
+- [IRIMMetaBrain - Le Meta-Cerveau Spatial](architecture/project-vision.md)
+- [Architecture Stores - IRIM StudioLab](architecture/stores-architecture.md)
+- [Gestion du thème – IRIM StudioHall](architecture/theme-management.md)
 
-## Guides
-- [Dev tools](./guides/dev-tools.md) — Outils d'introspection, catalogues, captures d'état
-- [Sync system](./guides/sync-system.md) — Mode d'emploi de la sync chiffrée via GitHub Gist
-- [UI kit integration](./guides/ui-kit-integration.md) — Stratégie d'intégration progressive des assets UI
-- [Assets exploration](./guides/assets-exploration.md) — Sources d'assets et stratégie d'achat
-- [AI Cheatsheet](./AI-cheatsheet.md) — Points d'entrée code et scripts utiles
+### Decisions
 
-## Specs
-- [Components and hooks](./specs/components-and-hooks.md) — Contrats de props, contexts et hooks
+- [ADR-001: Système de Modales avec React Portals](decisions/ADR-001-modal-system-portals.md)
+- [DevLog - 2025-09-18](decisions/keyboard-navigation-pattern.md)
 
-## Milestones
-- [2025-09 Phase -1](./milestones/2025-09-phase-minus-one.md) — Wireframe & Assets (jalon de démarrage)
+### Guides
+
+- [Assets IRIM - Solutions Payantes Cohérentes](guides/assets-exploration.md)
+- [🎓 Guide des Outils de Développement - IRIMMetaBrain](guides/dev-tools.md)
+- [🚀 Système Auto-Documentation IRIMMetaBrain](guides/doc-workflow.md)
+- [Système de Synchronisation Multi-Device - Documentation](guides/sync-system.md)
+- [🎨 Stratégie d'Intégration Progressive des UI Kits](guides/ui-kit-integration.md)
+
+### Milestones
+
+- [IRIM StudioLab - Phase -1 : Wireframe & Assets](milestones/2025-09-phase-minus-one.md)
+
+### Root
+
+- [AI Cheatsheet](AI-cheatsheet.md)
+
+### Specs
+
+- [Documentation Props & Hooks - IRIM StudioLab](specs/components-and-hooks.md)
+
+---
+
+## 🚀 Commandes rapides
+
+```bash
+# Capturer une pensée
+npm run doc:capture "Ma pensée brute"
+
+# Promouvoir vers docs officiels
+npm run doc:promote devlog/YYYY-MM-DD.md category/filename.md
+
+# Régénérer cet index
+npm run doc:index
+```

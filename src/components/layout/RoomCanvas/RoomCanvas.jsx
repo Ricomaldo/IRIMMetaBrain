@@ -39,6 +39,19 @@ const RoomCanvas = ({ roomNavHook }) => {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
+      // Vérifier si on est dans un éditeur (textarea, input, ou contenteditable)
+      const activeElement = document.activeElement;
+      const isInEditor =
+        activeElement.tagName === 'TEXTAREA' ||
+        activeElement.tagName === 'INPUT' ||
+        activeElement.contentEditable === 'true' ||
+        activeElement.closest('[contenteditable="true"]');
+
+      // Si on est dans un éditeur, ne pas intercepter les touches
+      if (isInEditor) {
+        return;
+      }
+
       // Empêcher le scroll par défaut des flèches
       if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
         event.preventDefault();

@@ -1,5 +1,5 @@
 {
-  "name": "irimstudiohall",
+  "name": "irimmetabrain",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,7 +12,10 @@
     "capture:simple": "node scripts/capture-state-simple.js",
     "capture:update-viewer": "node scripts/list-captures.js",
     "capture:compare": "node scripts/capture-state.js --compare",
-    "dev:capture": "npm run dev & sleep 5 && npm run capture"
+    "dev:capture": "npm run dev & sleep 5 && npm run capture",
+    "doc:capture": "node scripts/doc-capture.js",
+    "doc:promote": "node scripts/doc-promote.js",
+    "doc:index": "node scripts/doc-index.js"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.7.0",
