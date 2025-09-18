@@ -6,6 +6,7 @@ import BaseRoom from '../../layout/BaseRoom';
 import PanelGrid from '../../layout/PanelGrid';
 import Panel from '../../common/Panel';
 import useNotesStore from '../../../stores/useNotesStore';
+import useRoomsUIStore from '../../../stores/useRoomsUIStore';
 import MarkdownEditor from '../../common/MarkdownEditor';
 import { ChambreTitle } from './ChambreRoom.styles';
 
@@ -23,12 +24,11 @@ import { ChambreTitle } from './ChambreRoom.styles';
 const ChambreRoom = () => {
   const theme = useTheme();
   const { roomNotes, updateRoomNote } = useNotesStore();
+  const { getPanelState, updatePanelState } = useRoomsUIStore();
   const chambreNotes = roomNotes.chambre || '';
 
   return (
     <BaseRoom roomType="chambre" layoutType="grid">
-      <ChambreTitle>🛏️ Chambre</ChambreTitle>
-
       <PanelGrid columns={4} rows={4}>
         {/* Timer Zone - 2x2 en haut à gauche */}
         <Panel
@@ -39,6 +39,8 @@ const ChambreRoom = () => {
           texture="wood"
           accentColor={theme.colors.accents.warm}
           collapsible={true}
+          collapsed={getPanelState('chambre', 'timer').collapsed}
+          onToggleCollapse={(val) => updatePanelState('chambre', 'timer', { collapsed: val })}
         >
           <div style={{
             padding: theme.spacing.lg,
@@ -59,6 +61,8 @@ const ChambreRoom = () => {
           texture="stone"
           accentColor={theme.colors.accents.nature}
           collapsible={true}
+          collapsed={getPanelState('chambre', 'totem').collapsed}
+          onToggleCollapse={(val) => updatePanelState('chambre', 'totem', { collapsed: val })}
         >
           <div style={{
             padding: theme.spacing.md,
@@ -79,6 +83,8 @@ const ChambreRoom = () => {
           texture="leather"
           accentColor={theme.colors.accents.cold}
           collapsible={true}
+          collapsed={getPanelState('chambre', 'mindlog').collapsed}
+          onToggleCollapse={(val) => updatePanelState('chambre', 'mindlog', { collapsed: val })}
         >
           <div style={{
             padding: theme.spacing.md,
@@ -99,6 +105,8 @@ const ChambreRoom = () => {
           texture="fabric"
           accentColor={theme.colors.accents.warm}
           collapsible={true}
+          collapsed={getPanelState('chambre', 'mantra').collapsed}
+          onToggleCollapse={(val) => updatePanelState('chambre', 'mantra', { collapsed: val })}
         >
           <div style={{
             padding: theme.spacing.md,
@@ -120,6 +128,8 @@ const ChambreRoom = () => {
           accentColor={theme.colors.accents.cold}
           contentType="markdown"
           collapsible={true}
+          collapsed={getPanelState('chambre', 'notes').collapsed}
+          onToggleCollapse={(val) => updatePanelState('chambre', 'notes', { collapsed: val })}
         >
           <MarkdownEditor
             value={chambreNotes}
@@ -141,6 +151,8 @@ const ChambreRoom = () => {
           texture="metal"
           accentColor={theme.colors.accents.neutral}
           collapsible={true}
+          collapsed={getPanelState('chambre', 'navigation').collapsed}
+          onToggleCollapse={(val) => updatePanelState('chambre', 'navigation', { collapsed: val })}
         >
           <div style={{
             padding: theme.spacing.md,

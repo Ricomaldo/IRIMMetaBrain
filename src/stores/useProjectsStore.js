@@ -20,6 +20,21 @@ const getInitialProjectsData = () => {
   return {
     selectedProject: "irimmetabrain",
     projects: {},
+    visibleProjects: ["irimmetabrain", "moodcycle", "pepetteszub", "echodesreves"],
+    categories: {
+      pro: {
+        label: "Professionnel",
+        subcategories: ["contrat", "maintenance", "consultation"]
+      },
+      perso: {
+        label: "Personnel",
+        subcategories: ["demo", "speculatif", "apprentissage"]
+      },
+      formation: {
+        label: "Formation",
+        subcategories: ["cours", "exercice", "certification"]
+      }
+    }
   };
 };
 
@@ -31,13 +46,36 @@ const useProjectsStore = create(
       // Projet actuel sélectionné
       selectedProject: initialData.selectedProject,
 
+      // Projets visibles dans le carrousel de l'Atelier
+      visibleProjects: initialData.visibleProjects || ["irimmetabrain", "moodcycle", "pepetteszub", "echodesreves"],
+
+      // Catégories et sous-catégories de projets
+      categories: initialData.categories || {
+        pro: {
+          label: "Professionnel",
+          subcategories: ["contrat", "maintenance", "consultation"]
+        },
+        perso: {
+          label: "Personnel",
+          subcategories: ["demo", "speculatif", "apprentissage"]
+        },
+        formation: {
+          label: "Formation",
+          subcategories: ["cours", "exercice", "certification"]
+        }
+      },
+
       // Base de données des projets
-      projects: initialData.projects || {
+      projects: (initialData.projects && Object.keys(initialData.projects).length > 0)
+        ? initialData.projects
+        : {
         irimmetabrain: {
           id: "irimmetabrain",
           name: "IRIMMetaBrain",
           type: "tool",
           status: "dev_actif",
+          category: "perso",
+          subcategory: "speculatif",
 
           // Contenu markdown des panneaux
           roadmapMarkdown: `# Roadmap
@@ -176,6 +214,8 @@ const useProjectsStore = create(
           name: "MoodCycle",
           type: "wellness",
           status: "dev_actif",
+          category: "perso",
+          subcategory: "apprentissage",
           roadmapMarkdown: `# MoodCycle - Cycle des Humeurs
 
 ## Phase 1 - Tracking
@@ -224,6 +264,8 @@ const useProjectsStore = create(
           name: "PepettesZub",
           type: "finance",
           status: "concept",
+          category: "perso",
+          subcategory: "demo",
           roadmapMarkdown: `# PepettesZub - Gestionnaire Finance
 
 ## Phase 1 - Base
@@ -272,6 +314,8 @@ const useProjectsStore = create(
           name: "EchoDesReves",
           type: "creative",
           status: "vision",
+          category: "formation",
+          subcategory: "exercice",
           roadmapMarkdown: `# EchoDesReves - Journal Créatif
 
 ## Phase 1 - Capture
@@ -362,6 +406,66 @@ const useProjectsStore = create(
 
       selectProject: (projectId) => {
         set({ selectedProject: projectId });
+      },
+
+      // Gestion des projets visibles dans le carrousel
+      toggleProjectVisibility: (projectId) => {
+        set((state) => {
+          const isVisible = state.visibleProjects.includes(projectId);
+          return {
+            visibleProjects: isVisible
+              ? state.visibleProjects.filter(id => id !== projectId)
+              : [...state.visibleProjects, projectId]
+          };
+        });
+      },
+
+      getVisibleProjects: () => {
+        const state = get();
+        return state.visibleProjects
+          .map(id => state.projects[id])
+          .filter(Boolean);
+      },
+
+      // Navigation dans le carrousel
+      selectNextProject: () => {
+        const state = get();
+        const visibleProjects = state.visibleProjects;
+        if (visibleProjects.length === 0) return;
+
+        const currentIndex = visibleProjects.indexOf(state.selectedProject);
+        const nextIndex = (currentIndex + 1) % visibleProjects.length;
+        set({ selectedProject: visibleProjects[nextIndex] });
+      },
+
+      selectPreviousProject: () => {
+        const state = get();
+        const visibleProjects = state.visibleProjects;
+        if (visibleProjects.length === 0) return;
+
+        const currentIndex = visibleProjects.indexOf(state.selectedProject);
+        const prevIndex = currentIndex === 0 ? visibleProjects.length - 1 : currentIndex - 1;
+        set({ selectedProject: visibleProjects[prevIndex] });
+      },
+
+      // Gestion des catégories
+      updateProjectCategory: (projectId, category, subcategory) => {
+        set((state) => {
+          const project = state.projects[projectId];
+          if (!project) return state;
+
+          return {
+            projects: {
+              ...state.projects,
+              [projectId]: {
+                ...project,
+                category,
+                subcategory,
+                updated_at: new Date().toISOString()
+              }
+            }
+          };
+        });
       },
 
       // Actions - Roadmap

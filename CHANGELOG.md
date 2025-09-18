@@ -2,6 +2,38 @@
 
 ## [Unreleased]
 
+### Added - 2025-09-19 (Session Gestion Projets & ProjectCarousel)
+
+- **Système de Gestion de Projets Complet** : Infrastructure pour gérer multiples projets
+  - ProjectOverviewModal : Interface fullscreen pour visualiser tous les projets
+  - Projets organisés par catégories (Professionnel, Personnel, Formation)
+  - Système de visibilité pour sélectionner les projets actifs
+  - Bouton "📊 Projets" ajouté dans ControlTower
+  - Cards blanches avec ombres pour meilleure lisibilité
+  - Bouton "+ Nouveau Projet" (base posée pour création future)
+
+- **ProjectCarousel dans Atelier** : Navigation entre projets visibles
+  - Navigation circulaire infinie (retour au début après le dernier)
+  - Style cohérent avec metalBg + secondaryLevel
+  - Bordure text.light pour visibilité
+  - Largeur 25% centrée horizontalement
+  - Triangles (◀ ▶) pour navigation
+  - Titre centré verticalement (après debug approfondi)
+  - Déplacé dans `room-modules/atelier/` pour organisation
+
+- **Store Enrichi** : Extensions useProjectsStore
+  - `visibleProjects`: Liste des projets affichés dans le carousel
+  - `categories`: Structure pour organiser les projets
+  - `toggleProjectVisibility()`: Afficher/masquer des projets
+  - `selectNextProject()` et `selectPreviousProject()`: Navigation
+  - Fallback pour charger les projets même après premier run
+  - 4 projets de démo avec catégories assignées
+
+- **Fixes Techniques** :
+  - Correction du chargement des projets vides après premier run
+  - Alignement vertical du ProjectCarousel (refait de zéro)
+  - Migration des styles inline vers styled-components
+
 ### Added - 2025-09-18 (Session SystemOverview & Architecture)
 
 - **SystemOverview dans la Forge** : Nouveau bouton 🌳 TREE pour visualiser l'architecture

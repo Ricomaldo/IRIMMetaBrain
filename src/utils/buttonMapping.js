@@ -26,6 +26,7 @@ export const controlButtons = [
 ];
 
 export const quickActions = [
+  { id: 'projects', icon: '📊', label: 'Projets', onClick: () => openModal('projects') },
   { id: 'inventory', icon: '🎒', label: 'Inventaire', onClick: () => {} },
   { id: 'book', icon: '📖', label: 'Grimoire', onClick: () => {} },
   { id: 'help', icon: '❓', label: 'Aide', onClick: () => {} },

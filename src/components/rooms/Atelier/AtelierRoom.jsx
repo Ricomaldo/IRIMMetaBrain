@@ -8,6 +8,7 @@ import Panel from '../../common/Panel';
 import MarkdownEditor from '../../common/MarkdownEditor';
 import { usePanelContent } from '../../../hooks/usePanelContent';
 import PanelGrid from '../../layout/PanelGrid';
+import ProjectCarousel from '../../room-modules/atelier/ProjectCarousel';
 import {
   PanelTitle
 } from './AtelierRoom.styles';
@@ -60,10 +61,8 @@ const AtelierRoom = () => {
 
       return (
         <BaseRoom roomType="atelier" layoutType="grid">
-            {/* Nom du projet - En haut */}
-            <PanelTitle>
-              Projet à l'affiche : {project.name}
-            </PanelTitle>
+            {/* Carrousel de navigation entre projets */}
+            <ProjectCarousel />
           <PanelGrid columns={5} rows={5}>
 
 

@@ -90,6 +90,12 @@ Données métier des projets (usage quotidien)
 ```js
 {
   selectedProject: string,              // ID projet actuel
+  visibleProjects: array,              // IDs projets visibles dans carousel
+  categories: {                        // Organisation des projets
+    pro: { label: string, subcategories: array },
+    perso: { label: string, subcategories: array },
+    formation: { label: string, subcategories: array }
+  },
   projects: {
     [projectId]: {
       // Méta-données
@@ -97,6 +103,8 @@ Données métier des projets (usage quotidien)
       name: string,
       type: string,                     // 'tool'|'wellness'|'finance'|'creative'
       status: string,                   // 'dev_actif'|'concept'|'vision'
+      category: string,                 // 'pro'|'perso'|'formation'
+      subcategory: string,              // Ex: 'demo', 'speculatif', 'exercice'
       
       // Contenu Markdown (utilisé activement)
       roadmapMarkdown: string,
@@ -131,6 +139,10 @@ createProject(projectData)             // Créer nouveau projet
 selectProject(projectId)               // Changer projet actuel
 getCurrentProject()                    // Récupérer projet actuel
 getProjectStats(projectId)             // Statistiques projet
+toggleProjectVisibility(projectId)    // Afficher/masquer dans carousel
+selectNextProject()                    // Navigation projet suivant
+selectPreviousProject()                // Navigation projet précédent
+updateProjectCategory(id, cat, subcat) // Modifier catégorie projet
 ```
 
 ### Actions contenu Markdown

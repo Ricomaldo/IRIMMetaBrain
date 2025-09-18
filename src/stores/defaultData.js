@@ -151,12 +151,29 @@ IRIMMetaBrain progresse bien ! L'architecture 4x3 rooms fonctionne parfaitement.
 // Les données projects restent telles quelles car elles sont déjà riches
 export const defaultProjectsData = {
   selectedProject: "irimmetabrain",
+  visibleProjects: ["irimmetabrain", "moodcycle", "pepetteszub", "echodesreves"],
+  categories: {
+    pro: {
+      label: "Professionnel",
+      subcategories: ["contrat", "maintenance", "consultation"]
+    },
+    perso: {
+      label: "Personnel",
+      subcategories: ["demo", "speculatif", "apprentissage"]
+    },
+    formation: {
+      label: "Formation",
+      subcategories: ["cours", "exercice", "certification"]
+    }
+  },
   projects: {
     irimmetabrain: {
       id: "irimmetabrain",
       name: "IRIMMetaBrain",
       type: "tool",
       status: "dev_actif",
+      category: "perso",
+      subcategory: "speculatif",
       roadmapMarkdown: `# Roadmap
 
 ## Phase 1 - Atelier habité ✓

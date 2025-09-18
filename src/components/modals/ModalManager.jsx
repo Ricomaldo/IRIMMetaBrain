@@ -5,6 +5,7 @@ import { registerModalHandler } from '../../utils/buttonMapping';
 import { HealingPotionModal, SleepPotionModal, StrengthPotionModal } from './PotionModals';
 import SyncModal from './SyncModal/SyncModal';
 import SettingsModal from './SettingsModal/SettingsModal';
+import ProjectOverviewModal from './ProjectOverviewModal/ProjectOverviewModal';
 
 /**
  * Manager component that renders all modals in the application
@@ -13,6 +14,7 @@ import SettingsModal from './SettingsModal/SettingsModal';
  * @renders StrengthPotionModal
  * @renders SyncModal
  * @renders SettingsModal
+ * @renders ProjectOverviewModal
  */
 const ModalManager = () => {
   // État pour chaque modale
@@ -22,6 +24,7 @@ const ModalManager = () => {
     'potion-strength': false,
     'sync': false,
     'settings': false,
+    'projects': false,
   });
 
   // Utiliser une ref pour stocker la fonction de setState
@@ -78,6 +81,11 @@ const ModalManager = () => {
       <SettingsModal
         isOpen={modalStates['settings']}
         onClose={() => closeModal('settings')}
+      />
+
+      <ProjectOverviewModal
+        isOpen={modalStates['projects']}
+        onClose={() => closeModal('projects')}
       />
     </>
   );
