@@ -5,6 +5,20 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { PreviewContainer, EmptyPreview } from './MarkdownPreview.styles';
 
+/**
+ * Markdown preview component with styling support
+ * @renders PreviewContainer
+ * @renders EmptyPreview
+ * @renders ReactMarkdown
+ * @renders h1
+ * @renders h2
+ * @renders h3
+ * @renders p
+ * @renders li
+ * @renders code
+ * @renders pre
+ * @renders input
+ */
 const MarkdownPreview = ({ content, height, compact, zoomLevel = 0, accentColor }) => {
   if (!content || !content.trim()) {
     return (

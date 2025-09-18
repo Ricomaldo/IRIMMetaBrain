@@ -6,6 +6,14 @@ import { HealingPotionModal, SleepPotionModal, StrengthPotionModal } from './Pot
 import SyncModal from './SyncModal/SyncModal';
 import SettingsModal from './SettingsModal/SettingsModal';
 
+/**
+ * Manager component that renders all modals in the application
+ * @renders HealingPotionModal
+ * @renders SleepPotionModal
+ * @renders StrengthPotionModal
+ * @renders SyncModal
+ * @renders SettingsModal
+ */
 const ModalManager = () => {
   // État pour chaque modale
   const [modalStates, setModalStates] = useState({

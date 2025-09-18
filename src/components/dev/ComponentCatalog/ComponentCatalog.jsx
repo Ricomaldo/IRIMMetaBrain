@@ -16,6 +16,34 @@ import {
 // Import dynamique des composants
 const componentModules = import.meta.glob('../../../components/**/*.jsx');
 
+/**
+ * Component catalog for exploring and testing components
+ * @renders CatalogContainer
+ * @renders EmptyState
+ * @renders Sidebar
+ * @renders div
+ * @renders h2
+ * @renders h3
+ * @renders button
+ * @renders span
+ * @renders CategorySection
+ * @renders ComponentItem
+ * @renders MainArea
+ * @renders TabBar
+ * @renders Tab
+ * @renders PreviewArea
+ * @renders Suspense
+ * @renders ControlPanel
+ * @renders label
+ * @renders input
+ * @renders select
+ * @renders option
+ * @renders CodeView
+ * @renders pre
+ * @renders code
+ * @renders p
+ */
+
 // Map statique des valeurs possibles pour les props connus
 const PROP_OPTIONS_MAP = {
   size: ['small', 'medium', 'large'],

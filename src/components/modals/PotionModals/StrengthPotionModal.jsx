@@ -30,6 +30,13 @@ const TestContent = styled.div`
   }
 `;
 
+/**
+ * Strength potion modal for UI testing with base floor tower variant
+ * @renders Modal
+ * @renders TestContent
+ * @renders h3
+ * @renders div
+ */
 const StrengthPotionModal = ({ isOpen, onClose }) => {
   return (
     <Modal

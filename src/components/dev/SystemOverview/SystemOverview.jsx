@@ -9,7 +9,14 @@ import {
 } from "./SystemOverview.styles";
 import architectureMap from "../../../../architecture-map.json";
 
-// Composant mémorisé pour visualiser un nœud de l'arbre
+/**
+ * Memorized tree node component for architecture visualization
+ * @renders g
+ * @renders circle
+ * @renders text
+ * @renders line
+ * @renders TreeNode
+ */
 const TreeNode = memo(
   ({ node, x, y, onHover, onClick, isExpanded, expandedNodes }) => {
     const getNodeColor = (depth) => {
@@ -96,6 +103,25 @@ TreeNode.displayName = "TreeNode";
 
 /**
  * Vue d'ensemble de l'architecture du système basée sur annotations JSDoc
+ * @renders OverviewContainer
+ * @renders h1
+ * @renders div
+ * @renders p
+ * @renders code
+ * @renders GraphArea
+ * @renders svg
+ * @renders defs
+ * @renders pattern
+ * @renders path
+ * @renders rect
+ * @renders g
+ * @renders TreeNode
+ * @renders InfoPanel
+ * @renders h3
+ * @renders strong
+ * @renders Legend
+ * @renders LegendItem
+ * @renders span
  */
 const SystemOverview = memo(() => {
   const [hoveredNode, setHoveredNode] = useState(null);
@@ -139,8 +165,8 @@ const SystemOverview = memo(() => {
         children: [],
       };
 
-      // Construire les enfants
-      if (component.children && component.children.length > 0 && depth < 4) {
+      // Construire les enfants (sans limite de profondeur)
+      if (component.children && component.children.length > 0) {
         component.children.forEach((childName) => {
           const childNode = buildTree(childName, depth + 1, new Set(visited));
           if (childNode) {
@@ -248,61 +274,31 @@ const SystemOverview = memo(() => {
 
   return (
     <OverviewContainer>
-      <h1>🔍 System Overview</h1>
-
-      <div
-        style={{
-          display: "flex",
-          gap: "1rem",
-          marginBottom: "1rem",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-        }}
-      >
-        <StatsCard style={{ flex: "1", minWidth: "120px", padding: "0.5rem" }}>
-          <strong style={{ fontSize: "1.2rem", marginLeft: "0.5rem" }}>
-            {stats.totalComponents}
-          </strong>
-          <span style={{ fontSize: "0.7rem", color: "#888" }}>Total</span>
-        </StatsCard>
-        <StatsCard style={{ flex: "1", minWidth: "120px", padding: "0.5rem" }}>
-          <strong style={{ fontSize: "1.2rem", marginLeft: "0.5rem" }}>
-            {stats.annotatedComponents}
-          </strong>
-          <span style={{ fontSize: "0.7rem", color: "#888" }}>@renders</span>
-        </StatsCard>
-        <StatsCard style={{ flex: "1", minWidth: "120px", padding: "0.5rem" }}>
-          <strong style={{ fontSize: "1.2rem", marginLeft: "0.5rem" }}>
-            {stats.rootComponents}
-          </strong>
-          <span style={{ fontSize: "0.7rem", color: "#888" }}>Racines</span>
-        </StatsCard>
-        <StatsCard style={{ flex: "1", minWidth: "120px", padding: "0.5rem" }}>
-          <strong style={{ fontSize: "1.2rem", marginLeft: "0.5rem" }}>
-            {stats.visibleNodes}
-          </strong>
-          <span style={{ fontSize: "0.7rem", color: "#888" }}>Visible</span>
-        </StatsCard>
-      </div>
 
       <GraphArea
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
-        style={{ cursor: isDragging ? "grabbing" : "grab" }}
+        style={{ cursor: isDragging ? "grabbing" : "grab", height: "450px" }}
       >
         <svg
           width="100%"
-          height="500"
-          viewBox="0 0 1000 500"
+          height="450"
+          viewBox="0 0 1000 450"
           style={{ display: "block" }}
         >
+          <defs>
+            <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+              <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(255,215,0,0.05)" strokeWidth="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
           <g transform={`translate(${viewOffset.x}, ${viewOffset.y})`}>
             <TreeNode
               node={componentTree}
               x={500}
-              y={50}
+              y={80}
               onHover={handleHover}
               onClick={toggleNode}
               expandedNodes={expandedNodes}
@@ -332,17 +328,45 @@ const SystemOverview = memo(() => {
         )}
       </GraphArea>
 
-      <Legend>
-        <LegendItem color="#ffd700">Niveau 0</LegendItem>
-        <LegendItem color="#4a9eff">Niveau 1</LegendItem>
-        <LegendItem color="#ff6b6b">Niveau 2</LegendItem>
-        <LegendItem color="#51cf66">Niveau 3</LegendItem>
-        <LegendItem color="#ff9ff3">Niveau 4</LegendItem>
-      </Legend>
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        marginTop: "1rem",
+        gap: "2rem"
+      }}>
+        <div style={{ flex: 1 }}>
+          <Legend>
+            <LegendItem color="#ffd700">Racine</LegendItem>
+            <LegendItem color="#4a9eff">Layout</LegendItem>
+            <LegendItem color="#ff6b6b">Rooms</LegendItem>
+            <LegendItem color="#51cf66">UI</LegendItem>
+            <LegendItem color="#ff9ff3">Widgets</LegendItem>
+          </Legend>
+        </div>
 
-      <div style={{ marginTop: "1rem", fontSize: "0.8rem", color: "#888" }}>
-        <strong>Dernière mise à jour:</strong>{" "}
-        {new Date(architectureMap.timestamp).toLocaleString()}
+        <div style={{
+          textAlign: "right",
+          fontSize: "0.85rem",
+          color: "#888",
+          minWidth: "200px"
+        }}>
+          <div style={{ marginBottom: "0.5rem" }}>
+            <strong style={{ color: "#ffd700" }}>{stats.totalComponents}</strong>
+            <span> composants au total</span>
+          </div>
+          <div style={{ marginBottom: "0.5rem" }}>
+            <strong style={{ color: "#ffd700" }}>{stats.annotatedComponents}</strong>
+            <span> avec @renders</span>
+          </div>
+          <div style={{ marginBottom: "0.5rem" }}>
+            <strong style={{ color: "#ffd700" }}>{stats.visibleNodes}</strong>
+            <span> nœuds visibles</span>
+          </div>
+          <div style={{ fontSize: "0.75rem", opacity: 0.7 }}>
+            {new Date(architectureMap.timestamp).toLocaleString('fr-FR')}
+          </div>
+        </div>
       </div>
     </OverviewContainer>
   );

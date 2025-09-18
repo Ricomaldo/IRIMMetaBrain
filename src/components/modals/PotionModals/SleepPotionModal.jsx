@@ -29,6 +29,13 @@ const TestContent = styled.div`
   }
 `;
 
+/**
+ * Sleep potion modal for UI testing with room canvas variant
+ * @renders Modal
+ * @renders TestContent
+ * @renders h3
+ * @renders div
+ */
 const SleepPotionModal = ({ isOpen, onClose }) => {
   return (
     <Modal

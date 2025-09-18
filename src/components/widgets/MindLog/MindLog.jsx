@@ -3,7 +3,14 @@
 import React from 'react';
 import { useTheme } from 'styled-components';
 
-// Composant MindLog prêt pour Panel + PanelContext
+/**
+ * MindLog widget for tracking mood and quick notes
+ * @renders div
+ * @renders select
+ * @renders option
+ * @renders br
+ * @renders textarea
+ */
 const MindLogContent = ({
   mood = '😐',
   note = '',

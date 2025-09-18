@@ -4,6 +4,23 @@
 
 ### Added - 2025-09-18
 
+- **Layout Chambre Implémenté** : Structure complète avec panels placeholder
+  - Grille 4x4 avec 6 zones distinctes
+  - Timer Zone (2x2) : Gestion du temps, texture bois
+  - Totem (1x1) : Élément spirituel, texture pierre
+  - MindLog (2x1) : État mental, texture cuir
+  - Mantras (2x1) : Méditation, texture tissu
+  - Notes (2x1) : Fonctionnel avec MarkdownEditor
+  - Navigation (2x1) : Accès rapide, texture métal
+  - Textures variées pour différenciation visuelle
+- **Laboratoire (UndefinedRoom) Amélioré** : Ajout boutons dimensions manquantes
+  - Toutes les dimensions 1×1 à 5×5 disponibles (26 configurations)
+  - Grid responsive avec auto-fit
+  - Boutons compacts avec largeur réduite
+- **Forge Simplifiée** : Reset et ajout toolbar
+  - ForgeToolbar avec mixins secondaryLevel + metalBg
+  - 4 boutons placeholder pour futures fonctionnalités
+  - Structure minimale prête pour expansion
 - **SystemOverview Refactoring** : Réécriture complète basée sur annotations JSDoc
   - Nouveau système d'annotations `@renders` dans les composants
   - Script `parse-component-tree.js` pour extraire l'architecture

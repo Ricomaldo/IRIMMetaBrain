@@ -4,6 +4,12 @@ import React from 'react';
 import BaseRoom from '../../layout/BaseRoom';
 import { SanctuaireWrapper, SanctuaireGrid } from './SanctuaireRoom.styles';
 
+/**
+ * Sanctuaire room component for spiritual and meditation activities
+ * @renders BaseRoom
+ * @renders SanctuaireWrapper
+ * @renders SanctuaireGrid
+ */
 const SanctuaireRoom = () => {
   return (
     <BaseRoom roomType="sanctuaire" layoutType="grid">

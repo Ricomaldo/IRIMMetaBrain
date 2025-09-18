@@ -4,6 +4,10 @@ import React, { createContext, useContext, useState } from 'react';
 
 const PanelContext = createContext();
 
+/**
+ * Provider component for panel context state
+ * @renders PanelContext.Provider
+ */
 export const PanelProvider = ({ children, contentType = "default" }) => {
   // États selon le type de contenu
   const [zoom, setZoom] = useState(0);

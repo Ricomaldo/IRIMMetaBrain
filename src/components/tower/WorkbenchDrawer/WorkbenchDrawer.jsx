@@ -5,6 +5,17 @@ import { DrawerContainer, TabsHeader, TabButton, TabContent, ItemsGrid } from '.
 import IconButton from '../../common/IconButton/IconButton';
 import { drawerTabs, drawerItemsByTab } from '../../../utils/buttonMapping';
 
+/**
+ * Workbench drawer with tabbed interface for tools and items
+ * @renders DrawerContainer
+ * @renders TabsHeader
+ * @renders TabButton
+ * @renders span
+ * @renders TabContent
+ * @renders ItemsGrid
+ * @renders div
+ * @renders IconButton
+ */
 const WorkbenchDrawer = () => {
   const [activeTab, setActiveTab] = useState('potions');
   const items = useMemo(() => drawerItemsByTab[activeTab] || [], [activeTab]);

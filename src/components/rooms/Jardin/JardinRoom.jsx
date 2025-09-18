@@ -4,6 +4,11 @@ import React from 'react';
 import BaseRoom from '../../layout/BaseRoom';
 import { JardinGrid } from './JardinRoom.styles';
 
+/**
+ * Jardin room component for nature and growth
+ * @renders BaseRoom
+ * @renders JardinGrid
+ */
 const JardinRoom = () => {
   return (
     <BaseRoom roomType="jardin" layoutType="grid">

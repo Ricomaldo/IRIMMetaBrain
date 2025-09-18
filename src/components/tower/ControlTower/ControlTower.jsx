@@ -5,6 +5,15 @@ import { TowerContainer, TopRow, BottomRow, CenterRect } from './ControlTower.st
 import IconButton from '../../common/IconButton/IconButton';
 import { controlButtons, quickActions } from '../../../utils/buttonMapping';
 
+/**
+ * Tour de contrôle avec actions rapides et statistiques
+ * @renders TowerContainer
+ * @renders TopRow
+ * @renders IconButton
+ * @renders CenterRect
+ * @renders div
+ * @renders BottomRow
+ */
 const ControlTower = () => {
   const calendarBtn = controlButtons.find(btn => btn.id === 'calendar');
   const timerBtn = controlButtons.find(btn => btn.id === 'timer');

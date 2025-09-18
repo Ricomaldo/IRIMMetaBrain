@@ -9,13 +9,25 @@ import useNotesStore from "../../../stores/useNotesStore";
 import MarkdownEditor from "../../common/MarkdownEditor";
 import Button from "../../common/Button";
 import ComponentCatalog from "../../dev/ComponentCatalog/ComponentCatalog";
+import SystemOverview from "../../dev/SystemOverview/SystemOverview";
 import { ForgeToolbar, ForgeTitle } from "./ForgeRoom.styles";
 
+/**
+ * Forge room component for development tools and component testing
+ * @renders BaseRoom
+ * @renders PanelGrid
+ * @renders Panel
+ * @renders ComponentCatalog
+ * @renders SystemOverview
+ * @renders ForgeToolbar
+ * @renders Button
+ */
 const ForgeRoom = () => {
   const theme = useTheme();
   const { roomNotes, updateRoomNote } = useNotesStore();
   const forgeNotes = roomNotes.forge || "";
   const [showCatalog, setShowCatalog] = useState(false);
+  const [showTree, setShowTree] = useState(false);
 
   return (
     <BaseRoom roomType="forge" layoutType="grid">
@@ -36,18 +48,44 @@ const ForgeRoom = () => {
             <ComponentCatalog />
           </Panel>
         )}
+        {showTree && (
+          <Panel
+            gridColumn="1/6"
+            gridRow="1/6"
+            title="Architecture Tree"
+            icon="🌳"
+            texture="metal"
+            borderType="blue"
+            accentColor={theme.colors.accents.warm}
+            collapsible={true}
+            collapsed={false}
+            onToggleCollapse={() => setShowTree(false)}
+          >
+            <SystemOverview />
+          </Panel>
+        )}
       </PanelGrid>
       {/* Toolbar avec 4 boutons placeholder */}
       <ForgeToolbar>
         <Button
           size="small"
           variant="secondary"
-          onClick={() => setShowCatalog(!showCatalog)}
+          onClick={() => {
+            setShowCatalog(!showCatalog);
+            setShowTree(false);
+          }}
         >
           🔨 PROPS
         </Button>
-        <Button size="small" variant="secondary">
-          ⚙️ Action 2
+        <Button
+          size="small"
+          variant="secondary"
+          onClick={() => {
+            setShowTree(!showTree);
+            setShowCatalog(false);
+          }}
+        >
+          🌳 TREE
         </Button>
         <Button size="small" variant="secondary">
           🔧 Action 3

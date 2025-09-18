@@ -6,6 +6,7 @@ import { BaseRoomContainer } from './BaseRoom.styles';
 
 /**
  * Conteneur de base pour toutes les pièces
+ * @renders BaseRoomContainer
  * @renders RoomNote
  */
 const BaseRoom = ({ 

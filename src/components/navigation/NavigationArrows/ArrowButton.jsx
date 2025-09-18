@@ -176,6 +176,11 @@ const ArrowContainer = styled.button`
   }}
 `;
 
+/**
+ * Individual arrow button with direction and styling support
+ * @renders ArrowContainer
+ * @renders img
+ */
 const ArrowButton = ({
   direction = 'left',
   onClick,

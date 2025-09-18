@@ -16,6 +16,20 @@ import {
 import useSettingsStore from '../../../stores/useSettingsStore';
 import { roomConfig } from '../../../utils/roomPositions';
 
+/**
+ * Settings modal for configuring application preferences
+ * @renders Modal
+ * @renders SettingsContainer
+ * @renders SettingsSection
+ * @renders SettingsTitle
+ * @renders SettingsDescription
+ * @renders InputGroup
+ * @renders Label
+ * @renders Select
+ * @renders option
+ * @renders SaveButton
+ * @renders StatusMessage
+ */
 const SettingsModal = ({ isOpen, onClose }) => {
   const { defaultRoom, setDefaultRoom } = useSettingsStore();
   const [selectedRoom, setSelectedRoom] = useState(

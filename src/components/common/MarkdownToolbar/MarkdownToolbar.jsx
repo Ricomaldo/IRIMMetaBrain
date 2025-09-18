@@ -2,6 +2,11 @@
 
 import React from 'react';
 
+/**
+ * Toolbar for markdown editing with zoom and edit controls
+ * @renders div
+ * @renders button
+ */
 const MarkdownToolbar = ({
   zoomLevel,
   onZoomIn,

@@ -11,19 +11,23 @@ import NavigationArrows from '../../navigation/NavigationArrows';
 
 /**
  * Conteneur principal pour la navigation entre les pièces
- * @renders NavigationArrows
+ * @renders CanvasContainer
+ * @renders RoomsGrid
+ * @renders RoomSlot
+ * @renders DefaultRoomRenderer
  * @renders AtelierRoom
  * @renders BibliothequeRoom
  * @renders BoutiqueRoom
  * @renders CaveRoom
  * @renders ChambreRoom
  * @renders ComptoirRoom
+ * @renders CuisineRoom
  * @renders ForgeRoom
+ * @renders JardinRoom
  * @renders LaboratoireRoom
- * @renders ObservatoireRoom
- * @renders ParcRoom
- * @renders PortRoom
- * @renders TempleDuCodeRoom
+ * @renders SanctuaireRoom
+ * @renders ScriptoriumRoom
+ * @renders NavigationArrows
  */
 const RoomCanvas = ({ roomNavHook }) => {
   const { currentRoom, navigateToRoom, getAvailableDirections } = roomNavHook;

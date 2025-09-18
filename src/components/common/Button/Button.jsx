@@ -4,6 +4,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledButton } from './Button.styles';
 
+/**
+ * Reusable button component with various styles and sizes
+ * @renders StyledButton
+ */
 const Button = ({
   children,
   onClick,

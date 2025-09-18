@@ -14,6 +14,17 @@ import {
 import { PanelProvider, usePanelContext } from './PanelContext';
 import MarkdownToolbar from '../MarkdownToolbar';
 
+/**
+ * Internal panel component that renders the panel structure
+ * @renders PanelWrapper
+ * @renders PanelContainer
+ * @renders PanelHeader
+ * @renders HeaderContent
+ * @renders PanelBadge
+ * @renders ToggleButton
+ * @renders MarkdownToolbar
+ * @renders PanelContent
+ */
 const PanelInner = ({
   // CONTENU
   title,
@@ -142,7 +153,11 @@ const PanelInner = ({
   );
 };
 
-// Wrapper Panel qui fournit le context
+/**
+ * Main Panel component that provides context and renders the panel
+ * @renders PanelProvider
+ * @renders PanelInner
+ */
 const Panel = (props) => {
   return (
     <PanelProvider contentType={props.contentType}>

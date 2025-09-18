@@ -7,6 +7,14 @@ import MarkdownEditor from '../../common/MarkdownEditor';
 import MarkdownToolbar from '../../common/MarkdownToolbar';
 import useNotesStore from '../../../stores/useNotesStore';
 
+/**
+ * Side tower notes component with expandable markdown editor
+ * @renders NoteContainer
+ * @renders div
+ * @renders span
+ * @renders MarkdownToolbar
+ * @renders MarkdownEditor
+ */
 const SideTowerNotes = () => {
   const theme = useTheme();
   const { getSideTowerNote, updateSideTowerNote } = useNotesStore();

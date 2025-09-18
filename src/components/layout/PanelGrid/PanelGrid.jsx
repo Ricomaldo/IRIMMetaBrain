@@ -5,7 +5,7 @@ import { GridContainer } from './PanelGrid.styles';
 
 /**
  * Grille flexible pour organiser les panels
- * @renders Panel
+ * @renders GridContainer
  */
 const PanelGrid = ({
   columns = 5,

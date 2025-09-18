@@ -11,48 +11,29 @@ import {
 
 // Composants non utilisés - supprimés pour éviter la redondance
 
-// Barre de contrôle horizontale - secondaryLevel
-export const SandboxControlBar = styled.div`
-  ${secondaryLevel}
-  ${woodBg};
+// Barre de contrôles simplifiée
+export const ControlHeader = styled.div`
+  ${primaryLevel}
+  ${metalBg}
   display: flex;
-  flex-wrap: nowrap;
+  align-items: center;
   gap: 4px;
-  padding: 8px 12px;
-  width: 100%;
-  max-width: 100%;
-  margin: 0 auto;
-  background: transparent;
-  box-shadow: none;
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  &::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 215, 0, 0.5);
-    border-radius: 3px;
-
-    &:hover {
-      background: rgba(255, 215, 0, 0.7);
-    }
-  }
+  padding: 12px;
+  margin-bottom: 12px;
 
   button {
-    min-width: 50px;
-    padding: 6px 10px;
-    font-size: 12px;
     flex-shrink: 0;
-    white-space: nowrap;
-    height: 32px;
   }
+`;
+
+// Titre du labo
+export const LaboTitle = styled.h2`
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 20px;
+  font-family: ${({ theme }) => theme.typography.families.ui};
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  margin: 0 16px 0 0;
+  white-space: nowrap;
 `;
 
 // Contenu welcome pour Panel
@@ -92,7 +73,7 @@ export const WelcomeHint = styled.div`
 export const NoPanelContent = styled.div`
   ${tertiaryLevel}
   grid-column: 1 / 6;
-  grid-row: 2 / 6;
+  grid-row: 1 / 6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,30 +92,6 @@ export const NoPanelSubtitle = styled.p`
   opacity: 0.7;
 `;
 
-// Titre du labo avec texture métal - primaryLevel
-export const LaboTitle = styled.h2`
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: 24px;
-  font-family: ${({ theme }) => theme.typography.families.ui};
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  margin: 0;
-  padding: 0 ${({ theme }) => theme.spacing.lg};
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-`;
-
-// Conteneur unifié pour le titre et les contrôles
-export const ControlHeader = styled.div`
-  ${primaryLevel}
-  ${metalBg}
-  display: flex;
-  align-items: center;
-  padding: ${({ theme }) => theme.spacing.md};
-  margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
-  gap: ${({ theme }) => theme.spacing.md};
-  width: 100%;
-`;
 
 // Grille principale qui prend toute la place disponible
 export const MainGrid = styled.div`

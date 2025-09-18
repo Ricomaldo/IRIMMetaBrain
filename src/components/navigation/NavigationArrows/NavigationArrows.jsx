@@ -18,6 +18,11 @@ const ArrowsContainer = styled.div`
   }
 `;
 
+/**
+ * Navigation arrows component for room-to-room movement
+ * @renders ArrowsContainer
+ * @renders ArrowButton
+ */
 const NavigationArrows = ({
   availableDirections = {},
   onNavigate,

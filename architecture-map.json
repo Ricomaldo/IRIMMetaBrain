@@ -1,45 +1,28 @@
 {
-  "timestamp": "2025-09-18T15:12:47.026Z",
+  "timestamp": "2025-09-18T15:48:05.880Z",
   "totalComponents": 62,
   "rootComponents": [
-    "Button",
     "index",
-    "IconButton",
-    "MarkdownPreview",
     "index",
-    "MarkdownToolbar",
     "index",
-    "Modal",
     "PanelContext",
     "index",
     "PanelTitle",
     "Typography",
     "index",
-    "ComponentCatalog",
     "index",
-    "SystemOverview",
     "index",
     "index",
     "StudioHall",
     "ModalManager",
-    "HealingPotionModal",
-    "SleepPotionModal",
-    "StrengthPotionModal",
-    "index",
-    "SettingsModal",
-    "SyncModal",
-    "ArrowButton",
     "index",
     "index",
     "index",
     "index",
     "index",
     "index",
-    "CuisineRoom",
     "index",
-    "JardinRoom",
-    "SanctuaireRoom",
-    "ScriptoriumRoom",
+    "index",
     "index",
     "index",
     "ActionList",
@@ -50,7 +33,9 @@
     {
       "name": "Button",
       "path": "common/Button/Button",
-      "renders": [],
+      "renders": [
+        "StyledButton"
+      ],
       "children": []
     },
     {
@@ -62,19 +47,42 @@
     {
       "name": "IconButton",
       "path": "common/IconButton/IconButton",
-      "renders": [],
+      "renders": [
+        "ButtonContainer",
+        "IconWrapper",
+        "Label"
+      ],
       "children": []
     },
     {
       "name": "MarkdownEditor",
       "path": "common/MarkdownEditor/MarkdownEditor",
-      "renders": [],
-      "children": []
+      "renders": [
+        "EditorContainer",
+        "EditorContent",
+        "Textarea",
+        "MarkdownPreview"
+      ],
+      "children": [
+        "MarkdownPreview"
+      ]
     },
     {
       "name": "MarkdownPreview",
       "path": "common/MarkdownEditor/MarkdownPreview/MarkdownPreview",
-      "renders": [],
+      "renders": [
+        "PreviewContainer",
+        "EmptyPreview",
+        "ReactMarkdown",
+        "h1",
+        "h2",
+        "h3",
+        "p",
+        "li",
+        "code",
+        "pre",
+        "input"
+      ],
       "children": []
     },
     {
@@ -86,7 +94,10 @@
     {
       "name": "MarkdownToolbar",
       "path": "common/MarkdownToolbar/MarkdownToolbar",
-      "renders": [],
+      "renders": [
+        "div",
+        "button"
+      ],
       "children": []
     },
     {
@@ -104,13 +115,28 @@
     {
       "name": "Panel",
       "path": "common/Panel/Panel",
-      "renders": [],
-      "children": []
+      "renders": [
+        "PanelWrapper",
+        "PanelContainer",
+        "PanelHeader",
+        "HeaderContent",
+        "PanelBadge",
+        "ToggleButton",
+        "MarkdownToolbar",
+        "PanelContent",
+        "PanelProvider",
+        "PanelInner"
+      ],
+      "children": [
+        "MarkdownToolbar"
+      ]
     },
     {
       "name": "PanelContext",
       "path": "common/Panel/PanelContext",
-      "renders": [],
+      "renders": [
+        "PanelContext.Provider"
+      ],
       "children": []
     },
     {
@@ -140,14 +166,47 @@
     {
       "name": "ComponentCatalog",
       "path": "dev/ComponentCatalog/ComponentCatalog",
-      "renders": [],
+      "renders": [
+        "CatalogContainer",
+        "EmptyState",
+        "Sidebar",
+        "div",
+        "h2",
+        "h3",
+        "button",
+        "span",
+        "CategorySection",
+        "ComponentItem",
+        "MainArea",
+        "TabBar",
+        "Tab",
+        "PreviewArea",
+        "Suspense",
+        "ControlPanel",
+        "label",
+        "input",
+        "select",
+        "option",
+        "CodeView",
+        "pre",
+        "code",
+        "p"
+      ],
       "children": []
     },
     {
       "name": "RoomNote",
       "path": "dev/RoomNote/RoomNote",
-      "renders": [],
-      "children": []
+      "renders": [
+        "NoteContainer",
+        "NoteHeader",
+        "RoomTitle",
+        "NoteContent",
+        "MarkdownEditor"
+      ],
+      "children": [
+        "MarkdownEditor"
+      ]
     },
     {
       "name": "index",
@@ -158,13 +217,39 @@
     {
       "name": "SystemOverview",
       "path": "dev/SystemOverview/SystemOverview",
-      "renders": [],
+      "renders": [
+        "g",
+        "circle",
+        "text",
+        "line",
+        "TreeNode",
+        "OverviewContainer",
+        "h1",
+        "div",
+        "p",
+        "code",
+        "GraphArea",
+        "svg",
+        "defs",
+        "pattern",
+        "path",
+        "rect",
+        "g",
+        "TreeNode",
+        "InfoPanel",
+        "h3",
+        "strong",
+        "Legend",
+        "LegendItem",
+        "span"
+      ],
       "children": []
     },
     {
       "name": "BaseRoom",
       "path": "layout/BaseRoom/BaseRoom",
       "renders": [
+        "BaseRoomContainer",
         "RoomNote"
       ],
       "children": [
@@ -181,11 +266,9 @@
       "name": "PanelGrid",
       "path": "layout/PanelGrid/PanelGrid",
       "renders": [
-        "Panel"
+        "GridContainer"
       ],
-      "children": [
-        "Panel"
-      ]
+      "children": []
     },
     {
       "name": "index",
@@ -197,38 +280,50 @@
       "name": "RoomCanvas",
       "path": "layout/RoomCanvas/RoomCanvas",
       "renders": [
-        "NavigationArrows",
+        "CanvasContainer",
+        "RoomsGrid",
+        "RoomSlot",
+        "DefaultRoomRenderer",
         "AtelierRoom",
         "BibliothequeRoom",
         "BoutiqueRoom",
         "CaveRoom",
         "ChambreRoom",
         "ComptoirRoom",
+        "CuisineRoom",
         "ForgeRoom",
+        "JardinRoom",
         "LaboratoireRoom",
-        "ObservatoireRoom",
-        "ParcRoom",
-        "PortRoom",
-        "TempleDuCodeRoom"
+        "SanctuaireRoom",
+        "ScriptoriumRoom",
+        "NavigationArrows"
       ],
       "children": [
-        "NavigationArrows",
         "AtelierRoom",
         "BibliothequeRoom",
         "BoutiqueRoom",
         "CaveRoom",
         "ChambreRoom",
         "ComptoirRoom",
+        "CuisineRoom",
         "ForgeRoom",
-        "LaboratoireRoom"
+        "JardinRoom",
+        "LaboratoireRoom",
+        "SanctuaireRoom",
+        "ScriptoriumRoom",
+        "NavigationArrows"
       ]
     },
     {
       "name": "SideTower",
       "path": "layout/SideTower/SideTower",
       "renders": [
+        "TowerContainer",
+        "TopTowerFloor",
         "ControlTower",
+        "MiddleTowerFloor",
         "WorkbenchDrawer",
+        "BottomTowerFloor",
         "SideTowerNotes"
       ],
       "children": [
@@ -241,6 +336,7 @@
       "name": "StudioHall",
       "path": "layout/StudioHall/StudioHall",
       "renders": [
+        "StudioContainer",
         "RoomCanvas",
         "SideTower"
       ],
@@ -252,26 +348,59 @@
     {
       "name": "ModalManager",
       "path": "modals/ModalManager",
-      "renders": [],
-      "children": []
+      "renders": [
+        "HealingPotionModal",
+        "SleepPotionModal",
+        "StrengthPotionModal",
+        "SyncModal",
+        "SettingsModal"
+      ],
+      "children": [
+        "HealingPotionModal",
+        "SleepPotionModal",
+        "StrengthPotionModal",
+        "SyncModal",
+        "SettingsModal"
+      ]
     },
     {
       "name": "HealingPotionModal",
       "path": "modals/PotionModals/HealingPotionModal",
-      "renders": [],
-      "children": []
+      "renders": [
+        "Modal",
+        "TestContent",
+        "h3",
+        "div"
+      ],
+      "children": [
+        "Modal"
+      ]
     },
     {
       "name": "SleepPotionModal",
       "path": "modals/PotionModals/SleepPotionModal",
-      "renders": [],
-      "children": []
+      "renders": [
+        "Modal",
+        "TestContent",
+        "h3",
+        "div"
+      ],
+      "children": [
+        "Modal"
+      ]
     },
     {
       "name": "StrengthPotionModal",
       "path": "modals/PotionModals/StrengthPotionModal",
-      "renders": [],
-      "children": []
+      "renders": [
+        "Modal",
+        "TestContent",
+        "h3",
+        "div"
+      ],
+      "children": [
+        "Modal"
+      ]
     },
     {
       "name": "index",
@@ -282,26 +411,65 @@
     {
       "name": "SettingsModal",
       "path": "modals/SettingsModal/SettingsModal",
-      "renders": [],
-      "children": []
+      "renders": [
+        "Modal",
+        "SettingsContainer",
+        "SettingsSection",
+        "SettingsTitle",
+        "SettingsDescription",
+        "InputGroup",
+        "Label",
+        "Select",
+        "option",
+        "SaveButton",
+        "StatusMessage"
+      ],
+      "children": [
+        "Modal"
+      ]
     },
     {
       "name": "SyncModal",
       "path": "modals/SyncModal/SyncModal",
-      "renders": [],
-      "children": []
+      "renders": [
+        "Modal",
+        "SyncContainer",
+        "SyncSection",
+        "SyncTitle",
+        "SyncDescription",
+        "InputGroup",
+        "Label",
+        "Input",
+        "PasswordInput",
+        "ActionButton",
+        "ButtonGroup",
+        "StatusMessage",
+        "ConfigInfo",
+        "ConfigRow"
+      ],
+      "children": [
+        "Modal"
+      ]
     },
     {
       "name": "ArrowButton",
       "path": "navigation/NavigationArrows/ArrowButton",
-      "renders": [],
+      "renders": [
+        "ArrowContainer",
+        "img"
+      ],
       "children": []
     },
     {
       "name": "NavigationArrows",
       "path": "navigation/NavigationArrows/NavigationArrows",
-      "renders": [],
-      "children": []
+      "renders": [
+        "ArrowsContainer",
+        "ArrowButton"
+      ],
+      "children": [
+        "ArrowButton"
+      ]
     },
     {
       "name": "index",
@@ -328,8 +496,13 @@
     {
       "name": "BibliothequeRoom",
       "path": "rooms/Bibliotheque/BibliothequeRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "BibliothequeGrid"
+      ],
+      "children": [
+        "BaseRoom"
+      ]
     },
     {
       "name": "index",
@@ -340,8 +513,13 @@
     {
       "name": "BoutiqueRoom",
       "path": "rooms/Boutique/BoutiqueRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "BoutiqueGrid"
+      ],
+      "children": [
+        "BaseRoom"
+      ]
     },
     {
       "name": "index",
@@ -352,8 +530,13 @@
     {
       "name": "CaveRoom",
       "path": "rooms/Cave/CaveRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "CaveGrid"
+      ],
+      "children": [
+        "BaseRoom"
+      ]
     },
     {
       "name": "index",
@@ -364,8 +547,22 @@
     {
       "name": "ChambreRoom",
       "path": "rooms/Chambre/ChambreRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "ChambreTitle",
+        "PanelGrid",
+        "Panel",
+        "div",
+        "p",
+        "small",
+        "MarkdownEditor"
+      ],
+      "children": [
+        "BaseRoom",
+        "PanelGrid",
+        "Panel",
+        "MarkdownEditor"
+      ]
     },
     {
       "name": "index",
@@ -376,8 +573,13 @@
     {
       "name": "ComptoirRoom",
       "path": "rooms/Comptoir/ComptoirRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "ComptoirGrid"
+      ],
+      "children": [
+        "BaseRoom"
+      ]
     },
     {
       "name": "index",
@@ -388,14 +590,32 @@
     {
       "name": "CuisineRoom",
       "path": "rooms/Cuisine/CuisineRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "CuisineGrid"
+      ],
+      "children": [
+        "BaseRoom"
+      ]
     },
     {
       "name": "ForgeRoom",
       "path": "rooms/Forge/ForgeRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "PanelGrid",
+        "Panel",
+        "ComponentCatalog",
+        "ForgeToolbar",
+        "Button"
+      ],
+      "children": [
+        "BaseRoom",
+        "PanelGrid",
+        "Panel",
+        "ComponentCatalog",
+        "Button"
+      ]
     },
     {
       "name": "index",
@@ -406,26 +626,66 @@
     {
       "name": "JardinRoom",
       "path": "rooms/Jardin/JardinRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "JardinGrid"
+      ],
+      "children": [
+        "BaseRoom"
+      ]
     },
     {
       "name": "LaboratoireRoom",
       "path": "rooms/Laboratoire/LaboratoireRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "ControlHeader",
+        "LaboTitle",
+        "SandboxControlBar",
+        "Button",
+        "PanelGrid",
+        "Panel",
+        "WelcomeContent",
+        "WelcomeEmoji",
+        "WelcomeTitle",
+        "WelcomeDescription",
+        "WelcomeHint",
+        "NoPanelContent",
+        "NoPanelCenter",
+        "LargeEmoji",
+        "NoPanelSubtitle",
+        "SystemOverview"
+      ],
+      "children": [
+        "BaseRoom",
+        "Button",
+        "PanelGrid",
+        "Panel",
+        "SystemOverview"
+      ]
     },
     {
       "name": "SanctuaireRoom",
       "path": "rooms/Sanctuaire/SanctuaireRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "SanctuaireWrapper",
+        "SanctuaireGrid"
+      ],
+      "children": [
+        "BaseRoom"
+      ]
     },
     {
       "name": "ScriptoriumRoom",
       "path": "rooms/Scriptorium/ScriptoriumRoom",
-      "renders": [],
-      "children": []
+      "renders": [
+        "BaseRoom",
+        "ScriptoriumGrid"
+      ],
+      "children": [
+        "BaseRoom"
+      ]
     },
     {
       "name": "index",
@@ -436,20 +696,49 @@
     {
       "name": "ControlTower",
       "path": "tower/ControlTower/ControlTower",
-      "renders": [],
-      "children": []
+      "renders": [
+        "TowerContainer",
+        "TopRow",
+        "IconButton",
+        "CenterRect",
+        "div",
+        "BottomRow"
+      ],
+      "children": [
+        "IconButton"
+      ]
     },
     {
       "name": "SideTowerNotes",
       "path": "tower/SideTowerNotes/SideTowerNotes",
-      "renders": [],
-      "children": []
+      "renders": [
+        "NoteContainer",
+        "div",
+        "span",
+        "MarkdownToolbar",
+        "MarkdownEditor"
+      ],
+      "children": [
+        "MarkdownToolbar",
+        "MarkdownEditor"
+      ]
     },
     {
       "name": "WorkbenchDrawer",
       "path": "tower/WorkbenchDrawer/WorkbenchDrawer",
-      "renders": [],
-      "children": []
+      "renders": [
+        "DrawerContainer",
+        "TabsHeader",
+        "TabButton",
+        "span",
+        "TabContent",
+        "ItemsGrid",
+        "div",
+        "IconButton"
+      ],
+      "children": [
+        "IconButton"
+      ]
     },
     {
       "name": "index",
@@ -460,19 +749,34 @@
     {
       "name": "ActionList",
       "path": "widgets/ActionList/ActionList",
-      "renders": [],
+      "renders": [
+        "div",
+        "input"
+      ],
       "children": []
     },
     {
       "name": "ImageCarousel",
       "path": "widgets/ImageCarousel/ImageCarousel",
-      "renders": [],
+      "renders": [
+        "div",
+        "p",
+        "input",
+        "img",
+        "button"
+      ],
       "children": []
     },
     {
       "name": "MindLog",
       "path": "widgets/MindLog/MindLog",
-      "renders": [],
+      "renders": [
+        "div",
+        "select",
+        "option",
+        "br",
+        "textarea"
+      ],
       "children": []
     }
   ]

@@ -4,6 +4,11 @@ import React from 'react';
 import BaseRoom from '../../layout/BaseRoom';
 import { ScriptoriumGrid } from './ScriptoriumRoom.styles';
 
+/**
+ * Scriptorium room component for writing and documentation
+ * @renders BaseRoom
+ * @renders ScriptoriumGrid
+ */
 const ScriptoriumRoom = () => {
   return (
     <BaseRoom roomType="scriptorium" layoutType="grid">

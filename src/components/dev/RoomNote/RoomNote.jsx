@@ -7,6 +7,14 @@ import MarkdownEditor from '../../common/MarkdownEditor';
 import useNotesStore from '../../../stores/useNotesStore';
 import { icons } from '../../../utils/assetMapping';
 
+/**
+ * Room note component for development notes per room
+ * @renders NoteContainer
+ * @renders NoteHeader
+ * @renders RoomTitle
+ * @renders NoteContent
+ * @renders MarkdownEditor
+ */
 const RoomNote = ({ roomType }) => {
   const theme = useTheme();
   const [isExpanded, setIsExpanded] = useState(false);

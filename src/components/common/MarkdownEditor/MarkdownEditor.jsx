@@ -15,6 +15,13 @@ import MarkdownPreview from './MarkdownPreview/MarkdownPreview';
 import { icons } from '../../../utils/assetMapping';
 import { usePanelContext } from '../Panel/PanelContext';
 
+/**
+ * Markdown editor with preview functionality
+ * @renders EditorContainer
+ * @renders EditorContent
+ * @renders Textarea
+ * @renders MarkdownPreview
+ */
 const MarkdownEditor = ({
   value = '',
   onChange,

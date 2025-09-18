@@ -3,7 +3,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Composant Actions prêt pour Panel + PanelContext
+/**
+ * ActionList widget for managing todo items with checkboxes
+ * @renders div
+ * @renders input
+ */
 const ActionsContent = ({
   actions = [],
   onToggleAction,

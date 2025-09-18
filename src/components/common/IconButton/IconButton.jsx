@@ -4,6 +4,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ButtonContainer, IconWrapper, Label } from './IconButton.styles';
 
+/**
+ * Button component with icon and optional label
+ * @renders ButtonContainer
+ * @renders IconWrapper
+ * @renders Label
+ */
 const IconButton = ({ icon, label, onClick, active = false, size = 'medium', variant = 'default' }) => {
   return (
     <ButtonContainer onClick={onClick} $active={active} size={size} variant={variant} title={label}>

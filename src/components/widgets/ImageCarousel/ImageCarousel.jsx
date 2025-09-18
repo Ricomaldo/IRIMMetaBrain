@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-// Composant ScreenTV prêt pour Panel + PanelContext
+/**
+ * ScreenTV image carousel widget for displaying screenshots
+ * @renders div
+ * @renders p
+ * @renders input
+ * @renders img
+ * @renders button
+ */
 const ScreenTVContent = ({
   screenshots = [],
   onUpload,

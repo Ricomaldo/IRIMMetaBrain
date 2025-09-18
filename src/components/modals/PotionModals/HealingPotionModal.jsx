@@ -24,6 +24,13 @@ const TestContent = styled.div`
   }
 `;
 
+/**
+ * Healing potion modal for UI testing
+ * @renders Modal
+ * @renders TestContent
+ * @renders h3
+ * @renders div
+ */
 const HealingPotionModal = ({ isOpen, onClose }) => {
   return (
     <Modal

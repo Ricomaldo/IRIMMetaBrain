@@ -6,6 +6,7 @@ import { useRoomNavigation } from '../../../hooks/useRoomNavigation';
 
 /**
  * Composant principal de l'application - Conteneur studio
+ * @renders StudioContainer
  * @renders RoomCanvas
  * @renders SideTower
  */

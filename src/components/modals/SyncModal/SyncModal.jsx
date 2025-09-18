@@ -29,6 +29,21 @@ import useProjectsStore from '../../../stores/useProjectsStore';
  * - Export/Import des stores chiffrés
  * - Feedback visuel des opérations
  * - Gestion des erreurs
+ *
+ * @renders Modal
+ * @renders SyncContainer
+ * @renders SyncSection
+ * @renders SyncTitle
+ * @renders SyncDescription
+ * @renders InputGroup
+ * @renders Label
+ * @renders Input
+ * @renders PasswordInput
+ * @renders ActionButton
+ * @renders ButtonGroup
+ * @renders StatusMessage
+ * @renders ConfigInfo
+ * @renders ConfigRow
  */
 const SyncModal = ({ isOpen, onClose }) => {
   // États locaux pour l'UI

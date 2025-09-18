@@ -11,8 +11,12 @@ import { ControlTower, WorkbenchDrawer, SideTowerNotes } from '../../tower';
 
 /**
  * Tour latérale contenant les contrôles et outils
+ * @renders TowerContainer
+ * @renders TopTowerFloor
  * @renders ControlTower
+ * @renders MiddleTowerFloor
  * @renders WorkbenchDrawer
+ * @renders BottomTowerFloor
  * @renders SideTowerNotes
  */
 const SideTower = () => {
