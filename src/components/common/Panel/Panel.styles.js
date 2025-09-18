@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 import { textures } from '../../../utils/assetMapping';
 import { alpha } from '../../../styles/color';
+import { blueBorder, craftBorderHeavy } from '../../../styles/mixins';
 
 export const PanelWrapper = styled.div`
   grid-column: ${props => props.$gridColumn};
@@ -21,7 +22,9 @@ export const PanelContainer = styled.div`
   background-size: cover;
   background-attachment: local;
   border-radius: ${({ theme }) => theme.radii.xl};
-  border: ${({ theme }) => `${theme.borders.thick} solid ${theme.colors.border}`};
+  ${props => props.$borderType === 'blue' ? blueBorder :
+            props.$borderType === 'craft' ? craftBorderHeavy :
+            `border: ${props.theme.borders.thick} solid ${props.theme.colors.border};`}
   padding: ${({ theme }) => theme.spacing.sm};
   position: relative;
   display: flex;

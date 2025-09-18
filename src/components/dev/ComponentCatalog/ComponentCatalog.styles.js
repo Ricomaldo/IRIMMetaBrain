@@ -3,9 +3,11 @@ import styled from 'styled-components';
 export const CatalogContainer = styled.div`
   display: flex;
   height: 100%;
+  max-height: 100%;
   background: transparent;
   color: white;
   font-family: 'Inter', -apple-system, sans-serif;
+  overflow: hidden;
 `;
 
 export const Sidebar = styled.div`

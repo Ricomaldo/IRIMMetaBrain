@@ -1,6 +1,7 @@
 // src/components/common/Button/Button.jsx
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyledButton } from './Button.styles';
 
 const Button = ({
@@ -22,6 +23,20 @@ const Button = ({
       {children}
     </StyledButton>
   );
+};
+
+Button.propTypes = {
+  children: PropTypes.node,
+  onClick: PropTypes.func,
+  active: PropTypes.bool,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  variant: PropTypes.oneOf(['default', 'primary', 'secondary', 'danger'])
+};
+
+Button.defaultProps = {
+  active: false,
+  size: 'medium',
+  variant: 'default'
 };
 
 export default Button;

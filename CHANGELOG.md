@@ -20,11 +20,25 @@
   - Prévisualisation interactive avec props éditables
   - Génération de code d'utilisation
   - Intégré dans le Laboratoire (ex-UndefinedRoom)
+  - Sidebar collapsible avec catégories dépliables
+  - Détection automatique des types de props (dropdowns pour enums, checkbox pour booléens)
+  - Common ouvert et Button sélectionné par défaut
 - **Restructuration Architecture Composants** :
   - Nouveau dossier `widgets/` pour composants réutilisables (MindLog, ActionList, ImageCarousel)
   - Nouveau dossier `room-modules/` pour composants spécifiques aux rooms
   - RoomNote déplacé dans `dev/` (meta-système)
   - Renommage : UndefinedRoom → LaboratoireRoom
+- **PropTypes** : Ajout de définitions PropTypes aux composants clés
+  - ActionList, ImageCarousel, Panel, Button, IconButton, Modal, MarkdownEditor
+  - Amélioration de la documentation automatique dans ComponentCatalog
+- **Panel Amélioré** :
+  - Nouvelle prop `borderType` avec options : 'default', 'blue', 'craft'
+  - Utilisation des mixins `blueBorder` et `craftBorderHeavy`
+  - Border blue appliqué au ComponentCatalog dans la Forge
+- **Forge Integration** :
+  - ComponentCatalog accessible via bouton "🔨 PROPS" dans la toolbar
+  - Panel fullscreen avec texture metal et border blue
+  - Fix du chevauchement grid/toolbar avec max-height approprié
 
 ### Added - Précédent
 

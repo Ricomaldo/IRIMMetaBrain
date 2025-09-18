@@ -1,6 +1,7 @@
 // src/components/common/Modal/Modal.jsx - Composant modal réutilisable
 
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import {
   ModalOverlay,
@@ -116,6 +117,31 @@ const Modal = ({
     </ModalOverlay>,
     getPortalContainer()
   );
+};
+
+Modal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  children: PropTypes.node,
+  footer: PropTypes.node,
+  size: PropTypes.oneOf(['small', 'medium', 'large', 'fullscreen']),
+  variant: PropTypes.oneOf(['overlay', 'roomCanvas', 'baseFloorTower']),
+  closeOnOverlay: PropTypes.bool,
+  closeOnEscape: PropTypes.bool,
+  showCloseButton: PropTypes.bool,
+  showFooterCloseButton: PropTypes.bool,
+  closeButtonText: PropTypes.string
+};
+
+Modal.defaultProps = {
+  size: 'medium',
+  variant: 'overlay',
+  closeOnOverlay: true,
+  closeOnEscape: true,
+  showCloseButton: true,
+  showFooterCloseButton: false,
+  closeButtonText: 'Fermer'
 };
 
 export default Modal;

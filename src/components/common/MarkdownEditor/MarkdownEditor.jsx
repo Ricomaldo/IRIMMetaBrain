@@ -1,6 +1,7 @@
 // src/components/common/MarkdownEditor/MarkdownEditor.jsx
 
 import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import {
   EditorContainer,
   EditorHeader,
@@ -214,6 +215,33 @@ const MarkdownEditor = ({
       </EditorContent>
     </EditorContainer>
   );
+};
+
+MarkdownEditor.propTypes = {
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  height: PropTypes.string,
+  compact: PropTypes.bool,
+  showPreview: PropTypes.bool,
+  title: PropTypes.string,
+  variant: PropTypes.oneOf(['embedded', 'standalone']),
+  readOnly: PropTypes.bool,
+  zoomLevel: PropTypes.number,
+  accentColor: PropTypes.string
+};
+
+MarkdownEditor.defaultProps = {
+  value: '',
+  placeholder: 'Écrivez vos notes...',
+  height: '120px',
+  compact: false,
+  showPreview: true,
+  title: 'Notes',
+  variant: 'embedded',
+  readOnly: false,
+  zoomLevel: 0,
+  accentColor: null
 };
 
 export default MarkdownEditor;

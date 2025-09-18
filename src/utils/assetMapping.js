@@ -28,7 +28,7 @@ export const roomColors = {
   comptoir: "#DDA0DD", // Prune commerce
 
   // Ligne 1
-  jardin: "#90EE90", // Vert nature
+  jardin: "#79eaf3ff", // Vert nature
   atelier: "#DEB887", // Bois buriné
   forge: "#CD853F", // Peru ardent
   boutique: "#F0E68C", // Khaki doré

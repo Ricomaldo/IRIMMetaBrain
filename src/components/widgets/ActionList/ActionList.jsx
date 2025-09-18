@@ -1,6 +1,7 @@
-// src/components/rooms/Atelier/Actions/Actions.jsx
+// src/components/widgets/ActionList/ActionList.jsx
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Composant Actions prêt pour Panel + PanelContext
 const ActionsContent = ({
@@ -57,6 +58,23 @@ const ActionsContent = ({
 //   />
 // </Panel>
 
-const Actions = ActionsContent;
+const ActionList = ActionsContent;
 
-export default Actions;
+// PropTypes pour le composant
+ActionList.propTypes = {
+  actions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+      text: PropTypes.string,
+      completed: PropTypes.bool
+    })
+  ),
+  onToggleAction: PropTypes.func,
+  onUpdateText: PropTypes.func
+};
+
+ActionList.defaultProps = {
+  actions: []
+};
+
+export default ActionList;

@@ -13,4 +13,7 @@ export const GridContainer = styled.div`
   /* Laisser les enfants rétrécir et scroller */
   min-width: 0;
   min-height: 0;
+  /* Limiter la hauteur maximale pour éviter le chevauchement */
+  max-height: calc(100vh - 280px); /* 64px padding top/bottom + 100px toolbar + marges */
+  overflow: hidden;
 `;

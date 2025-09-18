@@ -1,6 +1,7 @@
 // src/components/common/Panel/Panel.jsx
 
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import {
   PanelWrapper,
   PanelContainer,
@@ -23,6 +24,7 @@ const PanelInner = ({
   texture,
   accentColor,
   maxHeight,
+  borderType,
 
   // LAYOUT
   gridColumn,
@@ -60,7 +62,7 @@ const PanelInner = ({
         $gridRow={gridRow}
         onClick={onClick}
       >
-        <PanelContainer $maxHeight={maxHeight} $collapsed={true} $texture={texture}>
+        <PanelContainer $maxHeight={maxHeight} $collapsed={true} $texture={texture} $borderType={borderType}>
           <PanelHeader $accentColor={accentColor}>
             <HeaderContent>
               <span>{icon} {title}</span>
@@ -96,7 +98,7 @@ const PanelInner = ({
       $gridRow={gridRow}
       onClick={onClick}
     >
-      <PanelContainer $maxHeight={maxHeight} $collapsed={false} $texture={texture}>
+      <PanelContainer $maxHeight={maxHeight} $collapsed={false} $texture={texture} $borderType={borderType}>
         <PanelHeader $accentColor={accentColor}>
           <HeaderContent>
             <span>{icon} {title}</span>
@@ -147,6 +149,40 @@ const Panel = (props) => {
       <PanelInner {...props} />
     </PanelProvider>
   );
+};
+
+// PropTypes pour le composant
+Panel.propTypes = {
+  // CONTENU
+  title: PropTypes.string,
+  icon: PropTypes.string,
+  children: PropTypes.node,
+  contentType: PropTypes.string,
+
+  // APPARENCE
+  texture: PropTypes.string,
+  accentColor: PropTypes.string,
+  maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  borderType: PropTypes.oneOf(['default', 'blue', 'craft']),
+
+  // LAYOUT
+  gridColumn: PropTypes.string,
+  gridRow: PropTypes.string,
+
+  // COMPORTEMENT
+  collapsible: PropTypes.bool,
+  collapsed: PropTypes.bool,
+  defaultCollapsed: PropTypes.bool,
+  onToggleCollapse: PropTypes.func,
+  badge: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  // ÉVÉNEMENTS
+  onClick: PropTypes.func
+};
+
+Panel.defaultProps = {
+  collapsible: true,
+  defaultCollapsed: false
 };
 
 export default Panel;

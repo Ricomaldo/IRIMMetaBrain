@@ -7,13 +7,17 @@ const PanelGrid = ({
   columns = 5,
   rows = 5,
   gap = "8px",
-  children
+  children,
+  style,
+  ...props
 }) => {
   return (
     <GridContainer
       $columns={columns}
       $rows={rows}
       $gap={gap}
+      style={style}
+      {...props}
     >
       {children}
     </GridContainer>

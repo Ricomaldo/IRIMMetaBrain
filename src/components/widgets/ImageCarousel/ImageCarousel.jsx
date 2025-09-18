@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 // Composant ScreenTV prêt pour Panel + PanelContext
 const ScreenTVContent = ({
@@ -141,5 +142,21 @@ const ScreenTVContent = ({
 // </Panel>
 
 const ScreenTV = ScreenTVContent;
+
+// PropTypes pour le composant
+ScreenTV.propTypes = {
+  screenshots: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      name: PropTypes.string
+    })
+  ),
+  onUpload: PropTypes.func,
+  onNavigate: PropTypes.func
+};
+
+ScreenTV.defaultProps = {
+  screenshots: []
+};
 
 export default ScreenTV;
