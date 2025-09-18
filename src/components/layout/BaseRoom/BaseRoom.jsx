@@ -1,7 +1,7 @@
-// src/components/rooms/shared/BaseRoom/BaseRoom.jsx
+// src/components/layout/BaseRoom/BaseRoom.jsx
 
 import React from 'react';
-import RoomNote from '../../rooms/shared/RoomNote/RoomNote';
+import RoomNote from '../../dev/RoomNote/RoomNote';
 import { BaseRoomContainer } from './BaseRoom.styles';
 
 const BaseRoom = ({ 

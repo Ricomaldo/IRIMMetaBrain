@@ -1,4 +1,4 @@
-// src/components/rooms/Undefined/UndefinedRoom.styles.js
+// src/components/rooms/Laboratoire/LaboratoireRoom.styles.js
 
 import styled from "styled-components";
 import {

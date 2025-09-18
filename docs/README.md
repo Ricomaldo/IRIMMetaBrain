@@ -6,6 +6,7 @@
 
 ### Architecture
 
+- [Organisation des Composants - IRIMMetaBrain](architecture/component-organization.md)
 - [folder-structure](architecture/folder-structure.md)
 - [IRIMMetaBrain - Le Meta-Cerveau Spatial](architecture/project-vision.md)
 - [Architecture Stores - IRIM StudioLab](architecture/stores-architecture.md)
@@ -14,6 +15,7 @@
 ### Decisions
 
 - [ADR-001: Système de Modales avec React Portals](decisions/ADR-001-modal-system-portals.md)
+- [ADR-002: Restructuration Architecture Composants](decisions/ADR-002-component-architecture-restructure.md)
 - [DevLog - 2025-09-18](decisions/keyboard-navigation-pattern.md)
 
 ### Guides

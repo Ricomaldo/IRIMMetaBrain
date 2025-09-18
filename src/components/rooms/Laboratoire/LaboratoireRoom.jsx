@@ -1,5 +1,5 @@
-// src/components/rooms/Undefined/UndefinedRoom.jsx
-// LABO SANDBOX - Structure identique à l'Atelier
+// src/components/rooms/Laboratoire/LaboratoireRoom.jsx
+// LABO SANDBOX - Espace de test et expérimentation
 
 import React, { useState } from "react";
 import BaseRoom from "../../layout/BaseRoom";
@@ -19,7 +19,7 @@ import {
   LaboTitle,
   ControlHeader,
   NoPanelCenter,
-} from "./UndefinedRoom.styles";
+} from "./LaboratoireRoom.styles";
 
 // ============================================
 // 🧪 IMPORTER LE COMPOSANT À TESTER ICI
@@ -30,7 +30,7 @@ import ComponentCatalog from "../../dev/ComponentCatalog/ComponentCatalog";
 // Remplace ComponentToTest par le composant que tu veux tester
 const ComponentToTest = ComponentCatalog;
 
-const UndefinedRoom = () => {
+const LaboratoireRoom = () => {
   const theme = useTheme();
   const [displayMode, setDisplayMode] = useState("panel-4x4");
   const [collapsed, setCollapsed] = useState(false);
@@ -179,4 +179,4 @@ const UndefinedRoom = () => {
   );
 };
 
-export default UndefinedRoom;
+export default LaboratoireRoom;

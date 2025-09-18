@@ -61,10 +61,11 @@ const ComponentCatalog = () => {
   useEffect(() => {
     const loadComponents = async () => {
       const categorizedComponents = {
-        rooms: [],
+        widgets: [],
         common: [],
         tower: [],
-        navigation: []
+        navigation: [],
+        dev: []
       };
 
       for (const [path, module] of Object.entries(componentModules)) {
@@ -73,18 +74,23 @@ const ComponentCatalog = () => {
         const fileName = pathParts[pathParts.length - 1];
         const componentName = fileName.replace('.jsx', '');
 
-        // Ignorer les fichiers styles et index
-        if (componentName.includes('.styles') || componentName === 'index') {
+        // Ignorer les fichiers styles, index et les Rooms principales
+        if (componentName.includes('.styles') ||
+            componentName === 'index' ||
+            componentName.endsWith('Room')) {
           continue;
         }
 
         // Déterminer la catégorie
         let category = 'other';
-        if (path.includes('/rooms/')) category = 'rooms';
+        if (path.includes('/widgets/')) category = 'widgets';
         else if (path.includes('/common/')) category = 'common';
         else if (path.includes('/tower/')) category = 'tower';
         else if (path.includes('/navigation/')) category = 'navigation';
-        else if (path.includes('/layout/')) category = null; // Ignorer layout
+        else if (path.includes('/dev/')) category = 'dev';
+        else if (path.includes('/layout/') || path.includes('/rooms/') || path.includes('/room-modules/')) {
+          category = null; // Ignorer layout, rooms et room-modules
+        }
 
         // Charger le module
         try {

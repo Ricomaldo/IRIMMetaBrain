@@ -15,6 +15,16 @@
   - `doc-index.js` : Génération automatique de l'index README.md
 - **Fix Navigation Clavier** : Désactivation des flèches pendant l'édition markdown
 - **Renommage Projet** : IRIMStudioHall → IRIMMetaBrain
+- **ComponentCatalog** : Outil de test et documentation des composants
+  - Auto-découverte des composants
+  - Prévisualisation interactive avec props éditables
+  - Génération de code d'utilisation
+  - Intégré dans le Laboratoire (ex-UndefinedRoom)
+- **Restructuration Architecture Composants** :
+  - Nouveau dossier `widgets/` pour composants réutilisables (MindLog, ActionList, ImageCarousel)
+  - Nouveau dossier `room-modules/` pour composants spécifiques aux rooms
+  - RoomNote déplacé dans `dev/` (meta-système)
+  - Renommage : UndefinedRoom → LaboratoireRoom
 
 ### Added - Précédent
 

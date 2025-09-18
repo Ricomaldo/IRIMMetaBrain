@@ -1,11 +1,11 @@
-// src/components/rooms/shared/RoomNote/RoomNote.jsx
+// src/components/dev/RoomNote/RoomNote.jsx
 
 import React, { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { NoteContainer, NoteHeader, NoteContent, RoomTitle } from './RoomNote.styles';
-import MarkdownEditor from '../../../common/MarkdownEditor';
-import useNotesStore from '../../../../stores/useNotesStore';
-import { icons } from '../../../../utils/assetMapping';
+import MarkdownEditor from '../../common/MarkdownEditor';
+import useNotesStore from '../../../stores/useNotesStore';
+import { icons } from '../../../utils/assetMapping';
 
 const RoomNote = ({ roomType }) => {
   const theme = useTheme();

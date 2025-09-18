@@ -1,8 +1,8 @@
-// src/components/rooms/shared/RoomNote/RoomNote.styles.js
+// src/components/dev/RoomNote/RoomNote.styles.js
 
 import styled from 'styled-components';
-import { parchmentBg } from '../../../../styles/mixins';
-import { alpha } from '../../../../styles/color';
+import { parchmentBg } from '../../../styles/mixins';
+import { alpha } from '../../../styles/color';
 
 export const RoomTitle = styled.div`
   font-family: ${props => props.theme.typography.families.primary};

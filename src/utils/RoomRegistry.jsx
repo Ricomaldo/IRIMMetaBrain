@@ -13,8 +13,8 @@ import ForgeRoom from '../components/rooms/Forge/ForgeRoom';
 import ScriptoriumRoom from '../components/rooms/Scriptorium/ScriptoriumRoom';
 import BibliothequeRoom from '../components/rooms/Bibliotheque/BibliothequeRoom';
 import CaveRoom from '../components/rooms/Cave/CaveRoom';
-import LaboratoireRoom from '../components/rooms/Undefined/UndefinedRoom'; // Laboratoire utilise UndefinedRoom
-import RoomNote from '../components/rooms/shared/RoomNote/RoomNote';
+import LaboratoireRoom from '../components/rooms/Laboratoire/LaboratoireRoom';
+import RoomNote from '../components/dev/RoomNote/RoomNote';
 
 // Registry des composants Room
 export const RoomRegistry = {
