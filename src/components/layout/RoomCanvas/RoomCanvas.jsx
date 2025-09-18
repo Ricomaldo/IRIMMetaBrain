@@ -9,6 +9,22 @@ import { roomConfig } from '../../../utils/roomPositions';
 import { roomColors } from '../../../utils/assetMapping';
 import NavigationArrows from '../../navigation/NavigationArrows';
 
+/**
+ * Conteneur principal pour la navigation entre les pièces
+ * @renders NavigationArrows
+ * @renders AtelierRoom
+ * @renders BibliothequeRoom
+ * @renders BoutiqueRoom
+ * @renders CaveRoom
+ * @renders ChambreRoom
+ * @renders ComptoirRoom
+ * @renders ForgeRoom
+ * @renders LaboratoireRoom
+ * @renders ObservatoireRoom
+ * @renders ParcRoom
+ * @renders PortRoom
+ * @renders TempleDuCodeRoom
+ */
 const RoomCanvas = ({ roomNavHook }) => {
   const { currentRoom, navigateToRoom, getAvailableDirections } = roomNavHook;
   const availableDirections = getAvailableDirections();

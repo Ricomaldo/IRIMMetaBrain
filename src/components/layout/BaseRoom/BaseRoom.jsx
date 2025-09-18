@@ -4,6 +4,10 @@ import React from 'react';
 import RoomNote from '../../dev/RoomNote/RoomNote';
 import { BaseRoomContainer } from './BaseRoom.styles';
 
+/**
+ * Conteneur de base pour toutes les pièces
+ * @renders RoomNote
+ */
 const BaseRoom = ({ 
   roomType, 
   children, 

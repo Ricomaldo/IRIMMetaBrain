@@ -12,6 +12,13 @@ import {
   PanelTitle
 } from './AtelierRoom.styles';
 
+/**
+ * Atelier - Espace de travail sur les projets
+ * @renders BaseRoom
+ * @renders PanelGrid
+ * @renders Panel
+ * @renders MarkdownEditor
+ */
 const AtelierRoom = () => {
   const { getCurrentProject, updateModuleState, getModuleState } = useProjectsStore();
   const project = getCurrentProject();

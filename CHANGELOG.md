@@ -4,6 +4,16 @@
 
 ### Added - 2025-09-18
 
+- **SystemOverview Refactoring** : Réécriture complète basée sur annotations JSDoc
+  - Nouveau système d'annotations `@renders` dans les composants
+  - Script `parse-component-tree.js` pour extraire l'architecture
+  - Génération automatique de `architecture-map.json`
+  - SystemOverview lit maintenant le JSON au lieu d'un arbre hardcodé
+  - ADR-004 documentant la convention @renders
+  - Script npm `doc:tree` pour générer l'arbre de composants
+
+### Added - 2025-09-18 (précédent)
+
 - **Paramètre Pièce de Démarrage** : Choix de la room initiale au lancement
   - Nouveau store `useSettingsStore` avec persistance localStorage
   - Modal Settings accessible via bouton ⚙️ dans ControlTower

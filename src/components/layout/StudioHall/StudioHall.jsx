@@ -4,6 +4,11 @@ import RoomCanvas from '../RoomCanvas/RoomCanvas';
 import SideTower from '../SideTower/SideTower';
 import { useRoomNavigation } from '../../../hooks/useRoomNavigation';
 
+/**
+ * Composant principal de l'application - Conteneur studio
+ * @renders RoomCanvas
+ * @renders SideTower
+ */
 const StudioHall = () => {
   const roomNavHook = useRoomNavigation();
 

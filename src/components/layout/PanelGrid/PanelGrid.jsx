@@ -3,6 +3,10 @@
 import React from 'react';
 import { GridContainer } from './PanelGrid.styles';
 
+/**
+ * Grille flexible pour organiser les panels
+ * @renders Panel
+ */
 const PanelGrid = ({
   columns = 5,
   rows = 5,

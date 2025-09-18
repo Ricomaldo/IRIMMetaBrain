@@ -1,0 +1,479 @@
+{
+  "timestamp": "2025-09-18T15:12:47.026Z",
+  "totalComponents": 62,
+  "rootComponents": [
+    "Button",
+    "index",
+    "IconButton",
+    "MarkdownPreview",
+    "index",
+    "MarkdownToolbar",
+    "index",
+    "Modal",
+    "PanelContext",
+    "index",
+    "PanelTitle",
+    "Typography",
+    "index",
+    "ComponentCatalog",
+    "index",
+    "SystemOverview",
+    "index",
+    "index",
+    "StudioHall",
+    "ModalManager",
+    "HealingPotionModal",
+    "SleepPotionModal",
+    "StrengthPotionModal",
+    "index",
+    "SettingsModal",
+    "SyncModal",
+    "ArrowButton",
+    "index",
+    "index",
+    "index",
+    "index",
+    "index",
+    "index",
+    "CuisineRoom",
+    "index",
+    "JardinRoom",
+    "SanctuaireRoom",
+    "ScriptoriumRoom",
+    "index",
+    "index",
+    "ActionList",
+    "ImageCarousel",
+    "MindLog"
+  ],
+  "components": [
+    {
+      "name": "Button",
+      "path": "common/Button/Button",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "common/Button/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "IconButton",
+      "path": "common/IconButton/IconButton",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "MarkdownEditor",
+      "path": "common/MarkdownEditor/MarkdownEditor",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "MarkdownPreview",
+      "path": "common/MarkdownEditor/MarkdownPreview/MarkdownPreview",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "common/MarkdownEditor/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "MarkdownToolbar",
+      "path": "common/MarkdownToolbar/MarkdownToolbar",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "common/MarkdownToolbar/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "Modal",
+      "path": "common/Modal/Modal",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "Panel",
+      "path": "common/Panel/Panel",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "PanelContext",
+      "path": "common/Panel/PanelContext",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "common/Panel/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "PanelTitle",
+      "path": "common/Typography/PanelTitle",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "Typography",
+      "path": "common/Typography/Typography",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "common/Typography/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "ComponentCatalog",
+      "path": "dev/ComponentCatalog/ComponentCatalog",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "RoomNote",
+      "path": "dev/RoomNote/RoomNote",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "dev/RoomNote/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "SystemOverview",
+      "path": "dev/SystemOverview/SystemOverview",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "BaseRoom",
+      "path": "layout/BaseRoom/BaseRoom",
+      "renders": [
+        "RoomNote"
+      ],
+      "children": [
+        "RoomNote"
+      ]
+    },
+    {
+      "name": "index",
+      "path": "layout/BaseRoom/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "PanelGrid",
+      "path": "layout/PanelGrid/PanelGrid",
+      "renders": [
+        "Panel"
+      ],
+      "children": [
+        "Panel"
+      ]
+    },
+    {
+      "name": "index",
+      "path": "layout/PanelGrid/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "RoomCanvas",
+      "path": "layout/RoomCanvas/RoomCanvas",
+      "renders": [
+        "NavigationArrows",
+        "AtelierRoom",
+        "BibliothequeRoom",
+        "BoutiqueRoom",
+        "CaveRoom",
+        "ChambreRoom",
+        "ComptoirRoom",
+        "ForgeRoom",
+        "LaboratoireRoom",
+        "ObservatoireRoom",
+        "ParcRoom",
+        "PortRoom",
+        "TempleDuCodeRoom"
+      ],
+      "children": [
+        "NavigationArrows",
+        "AtelierRoom",
+        "BibliothequeRoom",
+        "BoutiqueRoom",
+        "CaveRoom",
+        "ChambreRoom",
+        "ComptoirRoom",
+        "ForgeRoom",
+        "LaboratoireRoom"
+      ]
+    },
+    {
+      "name": "SideTower",
+      "path": "layout/SideTower/SideTower",
+      "renders": [
+        "ControlTower",
+        "WorkbenchDrawer",
+        "SideTowerNotes"
+      ],
+      "children": [
+        "ControlTower",
+        "WorkbenchDrawer",
+        "SideTowerNotes"
+      ]
+    },
+    {
+      "name": "StudioHall",
+      "path": "layout/StudioHall/StudioHall",
+      "renders": [
+        "RoomCanvas",
+        "SideTower"
+      ],
+      "children": [
+        "RoomCanvas",
+        "SideTower"
+      ]
+    },
+    {
+      "name": "ModalManager",
+      "path": "modals/ModalManager",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "HealingPotionModal",
+      "path": "modals/PotionModals/HealingPotionModal",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "SleepPotionModal",
+      "path": "modals/PotionModals/SleepPotionModal",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "StrengthPotionModal",
+      "path": "modals/PotionModals/StrengthPotionModal",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "modals/PotionModals/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "SettingsModal",
+      "path": "modals/SettingsModal/SettingsModal",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "SyncModal",
+      "path": "modals/SyncModal/SyncModal",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "ArrowButton",
+      "path": "navigation/NavigationArrows/ArrowButton",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "NavigationArrows",
+      "path": "navigation/NavigationArrows/NavigationArrows",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "navigation/NavigationArrows/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "AtelierRoom",
+      "path": "rooms/Atelier/AtelierRoom",
+      "renders": [
+        "BaseRoom",
+        "PanelGrid",
+        "Panel",
+        "MarkdownEditor"
+      ],
+      "children": [
+        "BaseRoom",
+        "PanelGrid",
+        "Panel",
+        "MarkdownEditor"
+      ]
+    },
+    {
+      "name": "BibliothequeRoom",
+      "path": "rooms/Bibliotheque/BibliothequeRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "rooms/Bibliotheque/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "BoutiqueRoom",
+      "path": "rooms/Boutique/BoutiqueRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "rooms/Boutique/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "CaveRoom",
+      "path": "rooms/Cave/CaveRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "rooms/Cave/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "ChambreRoom",
+      "path": "rooms/Chambre/ChambreRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "rooms/Chambre/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "ComptoirRoom",
+      "path": "rooms/Comptoir/ComptoirRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "rooms/Comptoir/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "CuisineRoom",
+      "path": "rooms/Cuisine/CuisineRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "ForgeRoom",
+      "path": "rooms/Forge/ForgeRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "rooms/Forge/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "JardinRoom",
+      "path": "rooms/Jardin/JardinRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "LaboratoireRoom",
+      "path": "rooms/Laboratoire/LaboratoireRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "SanctuaireRoom",
+      "path": "rooms/Sanctuaire/SanctuaireRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "ScriptoriumRoom",
+      "path": "rooms/Scriptorium/ScriptoriumRoom",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "rooms/Scriptorium/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "ControlTower",
+      "path": "tower/ControlTower/ControlTower",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "SideTowerNotes",
+      "path": "tower/SideTowerNotes/SideTowerNotes",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "WorkbenchDrawer",
+      "path": "tower/WorkbenchDrawer/WorkbenchDrawer",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "index",
+      "path": "tower/index",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "ActionList",
+      "path": "widgets/ActionList/ActionList",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "ImageCarousel",
+      "path": "widgets/ImageCarousel/ImageCarousel",
+      "renders": [],
+      "children": []
+    },
+    {
+      "name": "MindLog",
+      "path": "widgets/MindLog/MindLog",
+      "renders": [],
+      "children": []
+    }
+  ]
+}

@@ -25,14 +25,14 @@ import {
 // 🧪 IMPORTER LE COMPOSANT À TESTER ICI
 // ============================================
 import Button from "../../common/Button";
-import ComponentCatalog from "../../dev/ComponentCatalog/ComponentCatalog";
+import SystemOverview from "../../dev/SystemOverview/SystemOverview";
 
 // Remplace ComponentToTest par le composant que tu veux tester
-const ComponentToTest = ComponentCatalog;
+const ComponentToTest = SystemOverview;
 
 const LaboratoireRoom = () => {
   const theme = useTheme();
-  const [displayMode, setDisplayMode] = useState("panel-4x4");
+  const [displayMode, setDisplayMode] = useState("panel-4x3");
   const [collapsed, setCollapsed] = useState(false);
 
   const configsLine1 = [

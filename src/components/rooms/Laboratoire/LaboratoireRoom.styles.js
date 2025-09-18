@@ -15,21 +15,43 @@ import {
 export const SandboxControlBar = styled.div`
   ${secondaryLevel}
   ${woodBg};
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
-  grid-auto-rows: minmax(28px, auto);
+  display: flex;
+  flex-wrap: nowrap;
   gap: 4px;
   padding: 8px 12px;
   width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   background: transparent;
   box-shadow: none;
-  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.5);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(255, 215, 0, 0.7);
+    }
+  }
 
   button {
-    min-width: 45px;
-    padding: 4px 8px;
+    min-width: 50px;
+    padding: 6px 10px;
     font-size: 12px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    height: 32px;
   }
 `;
 

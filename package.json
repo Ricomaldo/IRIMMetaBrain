@@ -15,7 +15,8 @@
     "dev:capture": "npm run dev & sleep 5 && npm run capture",
     "doc:capture": "node scripts/doc-capture.js",
     "doc:promote": "node scripts/doc-promote.js",
-    "doc:index": "node scripts/doc-index.js"
+    "doc:index": "node scripts/doc-index.js",
+    "doc:tree": "node scripts/parse-component-tree.js"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^4.7.0",

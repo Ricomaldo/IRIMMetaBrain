@@ -1,29 +1,33 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { woodBg, stoneBg, metalBg } from "../../../styles/mixins";
 
 export const OverviewContainer = styled.div`
   padding: 1rem;
   background: transparent;
   height: 100%;
-  color: white;
-  font-family: 'Inter', -apple-system, sans-serif;
+  color: ${({ theme }) => theme.colors.text};
+  font-family: ${({ theme }) => theme.typography.families.ui};
   overflow: auto;
 
   h1 {
-    color: #ffd700;
+    color: ${({ theme }) => theme.colors.primary};
     margin-bottom: 1rem;
     text-align: center;
     font-size: 1.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    font-family: "Georgia", serif;
   }
 `;
 
 export const GraphArea = styled.div`
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  border-radius: 12px;
+  ${stoneBg}
+  border: 3px solid #8B7355;
+  border-radius: ${({ theme }) => theme.radii.lg};
   padding: 1rem;
   margin-bottom: 1rem;
   position: relative;
   min-height: 400px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 4px 8px rgba(0, 0, 0, 0.3);
 
   svg {
     width: 100%;
@@ -49,49 +53,77 @@ export const Connection = styled.line`
 `;
 
 export const StatsCard = styled.div`
-  background: rgba(255, 215, 0, 0.1);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 8px;
-  padding: 1rem;
-  text-align: center;
+  ${woodBg}
+  border: 2px solid #8B5A2B;
+  border-radius: ${({ theme }) => theme.radii.md};
+  padding: 0.5rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  box-shadow: inset 0 1px 0 rgba(255, 215, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.4);
+  position: relative;
+  flex: 1;
+  min-width: 100px;
 
-  h3 {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    margin: 0 0 0.25rem 0;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    border: 1px solid rgba(255, 215, 0, 0.1);
+    border-radius: 6px;
+    pointer-events: none;
   }
 
-  .value {
-    font-size: 1.5rem;
+  span {
+    color: ${({ theme }) => theme.colors.secondary};
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    font-family: "Georgia", serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  strong {
+    color: ${({ theme }) => theme.colors.primary};
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    font-family: "Georgia", serif;
+    font-size: 1.25rem;
     font-weight: bold;
-    color: #ffd700;
   }
 `;
 
 export const InfoPanel = styled.div`
+  ${woodBg}
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  background: rgba(0, 0, 0, 0.9);
-  border: 1px solid rgba(255, 215, 0, 0.3);
-  border-radius: 8px;
+  border: 2px solid #8b5a2b;
+  border-radius: ${({ theme }) => theme.radii.md};
   padding: 1rem;
   max-width: 250px;
   z-index: 10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 215, 0, 0.1);
 
   h3 {
-    color: #ffd700;
-    margin-bottom: 1rem;
+    color: ${({ theme }) => theme.colors.primary};
+    margin-bottom: 0.5rem;
+    font-family: "Georgia", serif;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   }
 
   p {
-    margin: 0.5rem 0;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
+    margin: 0.3rem 0;
+    color: ${({ theme }) => theme.colors.text};
+    font-size: 0.85rem;
+    font-family: "Georgia", serif;
 
     strong {
-      color: rgba(255, 215, 0, 0.8);
+      color: ${({ theme }) => theme.colors.accents.warm};
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
   }
 `;
@@ -110,10 +142,10 @@ export const LegendItem = styled.div`
   gap: 0.5rem;
 
   &::before {
-    content: '';
+    content: "";
     width: 20px;
     height: 20px;
-    background: ${props => props.color};
+    background: ${(props) => props.color};
     border-radius: 50%;
     opacity: 0.8;
   }
