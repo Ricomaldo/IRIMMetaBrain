@@ -1,7 +1,7 @@
 // src/components/rooms/Laboratoire/LaboratoireRoom.jsx
 // LABO SANDBOX - Espace de test et expérimentation
 
-import React, { useState } from "react";
+import { useState } from "react";
 import BaseRoom from "../../layout/BaseRoom";
 import PanelGrid from "../../layout/PanelGrid";
 import Panel from "../../common/Panel";

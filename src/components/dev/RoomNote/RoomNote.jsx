@@ -1,6 +1,6 @@
 // src/components/dev/RoomNote/RoomNote.jsx
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTheme } from "styled-components";
 import {
   NoteContainer,
