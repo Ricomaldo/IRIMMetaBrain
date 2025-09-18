@@ -1,561 +1,580 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>📸 IRIMMetaBrain - Captures Viewer</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
-            color: #e1e1e1;
-            min-height: 100vh;
-        }
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+        color: #e1e1e1;
+        min-height: 100vh;
+      }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
 
-        header {
-            text-align: center;
-            padding: 2rem 0;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-            margin-bottom: 3rem;
-        }
+      header {
+        text-align: center;
+        padding: 2rem 0;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        margin-bottom: 3rem;
+      }
 
-        h1 {
-            color: #ffd700;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
+      h1 {
+        color: #ffd700;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
 
-        .subtitle {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.1rem;
-        }
+      .subtitle {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1.1rem;
+      }
 
-        .captures-grid {
-            display: grid;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
+      .captures-grid {
+        display: grid;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
 
-        .capture-card {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
+      .capture-card {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
 
-        .capture-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
-            border-color: rgba(255, 215, 0, 0.4);
-        }
+      .capture-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+        border-color: rgba(255, 215, 0, 0.4);
+      }
 
-        .capture-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
+      .capture-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
 
-        .capture-date {
-            color: #ffd700;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
+      .capture-date {
+        color: #ffd700;
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
 
-        .capture-time {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
-        }
+      .capture-time {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+      }
 
-        .capture-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin: 1rem 0;
-        }
+      .capture-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin: 1rem 0;
+      }
 
-        .stat-item {
-            background: rgba(255, 215, 0, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-        }
+      .stat-item {
+        background: rgba(255, 215, 0, 0.1);
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+      }
 
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffd700;
-        }
+      .stat-value {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #ffd700;
+      }
 
-        .stat-label {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.6);
-            text-transform: uppercase;
-            margin-top: 0.25rem;
-        }
+      .stat-label {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        margin-top: 0.25rem;
+      }
 
-        .screenshots-preview {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
+      .screenshots-preview {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
 
-        .screenshot-thumb {
-            aspect-ratio: 16/9;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-        }
+      .screenshot-thumb {
+        aspect-ratio: 16/9;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+      }
 
-        .screenshot-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+      .screenshot-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
-        .screenshot-thumb::after {
-            content: attr(data-room);
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.8);
-            color: #ffd700;
-            text-align: center;
-            padding: 0.25rem;
-            font-size: 0.7rem;
-        }
+      .screenshot-thumb::after {
+        content: attr(data-room);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.8);
+        color: #ffd700;
+        text-align: center;
+        padding: 0.25rem;
+        font-size: 0.7rem;
+      }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            padding: 2rem;
-            overflow-y: auto;
-        }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        padding: 2rem;
+        overflow-y: auto;
+      }
 
-        .modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        .modal-content {
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 12px;
-            max-width: 1200px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2rem;
-        }
+      .modal-content {
+        background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 12px;
+        max-width: 1200px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 2rem;
+      }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-        }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      }
 
-        .close-btn {
-            background: rgba(255, 215, 0, 0.2);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            color: #ffd700;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+      .close-btn {
+        background: rgba(255, 215, 0, 0.2);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        color: #ffd700;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
 
-        .close-btn:hover {
-            background: rgba(255, 215, 0, 0.3);
-        }
+      .close-btn:hover {
+        background: rgba(255, 215, 0, 0.3);
+      }
 
-        .json-viewer {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto;
-        }
+      .json-viewer {
+        background: rgba(0, 0, 0, 0.5);
+        padding: 1rem;
+        border-radius: 8px;
+        overflow-x: auto;
+      }
 
-        .json-viewer pre {
-            color: #ffd700;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-        }
+      .json-viewer pre {
+        color: #ffd700;
+        font-family: "Fira Code", monospace;
+        font-size: 0.9rem;
+      }
 
-        .tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-        }
+      .tabs {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      }
 
-        .tab {
-            padding: 1rem 1.5rem;
-            background: transparent;
-            border: none;
-            color: rgba(255, 255, 255, 0.6);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 2px solid transparent;
-        }
+      .tab {
+        padding: 1rem 1.5rem;
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border-bottom: 2px solid transparent;
+      }
 
-        .tab.active {
-            color: #ffd700;
-            border-bottom-color: #ffd700;
-        }
+      .tab.active {
+        color: #ffd700;
+        border-bottom-color: #ffd700;
+      }
 
-        .tab:hover {
-            color: white;
-        }
+      .tab:hover {
+        color: white;
+      }
 
-        .tab-content {
-            display: none;
-        }
+      .tab-content {
+        display: none;
+      }
 
-        .tab-content.active {
-            display: block;
-        }
+      .tab-content.active {
+        display: block;
+      }
 
-        .no-captures {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: rgba(255, 255, 255, 0.4);
-        }
+      .no-captures {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: rgba(255, 255, 255, 0.4);
+      }
 
-        .loading {
-            text-align: center;
-            padding: 4rem;
-            color: #ffd700;
-        }
+      .loading {
+        text-align: center;
+        padding: 4rem;
+        color: #ffd700;
+      }
 
-        .screenshot-gallery {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-        }
+      .screenshot-gallery {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
 
-        .screenshot-full {
-            border-radius: 8px;
-            overflow: hidden;
-            background: rgba(0, 0, 0, 0.5);
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+      .screenshot-full {
+        border-radius: 8px;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
 
-        .screenshot-full:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
-        }
+      .screenshot-full:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+      }
 
-        .screenshot-full h4 {
-            padding: 0.5rem;
-            color: #ffd700;
-            font-size: 0.85rem;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.8);
-            margin: 0;
-        }
+      .screenshot-full h4 {
+        padding: 0.5rem;
+        color: #ffd700;
+        font-size: 0.85rem;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.8);
+        margin: 0;
+      }
 
-        .screenshot-full img {
-            width: 100%;
-            height: 140px;
-            object-fit: cover;
-        }
+      .screenshot-full img {
+        width: 100%;
+        height: 140px;
+        object-fit: cover;
+      }
 
-        /* Modal zoom image */
-        .image-zoom-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 2000;
-            cursor: pointer;
-            animation: fadeIn 0.3s ease;
-        }
+      /* Modal zoom image */
+      .image-zoom-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 2000;
+        cursor: pointer;
+        animation: fadeIn 0.3s ease;
+      }
 
-        .image-zoom-modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      .image-zoom-modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-        .image-zoom-content {
-            max-width: 90%;
-            max-height: 90%;
-            position: relative;
-            cursor: default;
-        }
+      .image-zoom-content {
+        max-width: 90%;
+        max-height: 90%;
+        position: relative;
+        cursor: default;
+      }
 
-        .image-zoom-content img {
-            width: 100%;
-            height: auto;
-            max-height: 85vh;
-            object-fit: contain;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            border-radius: 8px;
-        }
+      .image-zoom-content img {
+        width: 100%;
+        height: auto;
+        max-height: 85vh;
+        object-fit: contain;
+        border: 2px solid rgba(255, 215, 0, 0.3);
+        border-radius: 8px;
+      }
 
-        .image-zoom-caption {
-            text-align: center;
-            color: #ffd700;
-            margin-top: 1rem;
-            font-size: 1.2rem;
-        }
+      .image-zoom-caption {
+        text-align: center;
+        color: #ffd700;
+        margin-top: 1rem;
+        font-size: 1.2rem;
+      }
 
-        .close-zoom {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            background: rgba(255, 215, 0, 0.2);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            color: #ffd700;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
+      .close-zoom {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        background: rgba(255, 215, 0, 0.2);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        color: #ffd700;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
 
-        .close-zoom:hover {
-            background: rgba(255, 215, 0, 0.3);
-        }
+      .close-zoom:hover {
+        background: rgba(255, 215, 0, 0.3);
+      }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
+        to {
+          opacity: 1;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <header>
-            <h1>📸 IRIMMetaBrain Captures</h1>
-            <p class="subtitle">Visualiseur de l'historique des captures d'état</p>
-        </header>
+      <header>
+        <h1>📸 IRIMMetaBrain Captures</h1>
+        <p class="subtitle">Visualiseur de l'historique des captures d'état</p>
+      </header>
 
-        <div id="loading" class="loading">
-            Chargement des captures...
-        </div>
+      <div id="loading" class="loading">Chargement des captures...</div>
 
-        <div id="captures-container" class="captures-grid" style="display: none;">
-            <!-- Les captures seront injectées ici -->
-        </div>
+      <div id="captures-container" class="captures-grid" style="display: none">
+        <!-- Les captures seront injectées ici -->
+      </div>
 
-        <div id="no-captures" class="no-captures" style="display: none;">
-            <h2>Aucune capture trouvée</h2>
-            <p>Lance <code>npm run capture</code> pour créer ta première capture!</p>
-        </div>
+      <div id="no-captures" class="no-captures" style="display: none">
+        <h2>Aucune capture trouvée</h2>
+        <p>
+          Lance <code>npm run capture</code> pour créer ta première capture!
+        </p>
+      </div>
     </div>
 
     <!-- Modal zoom image -->
-    <div id="image-zoom-modal" class="image-zoom-modal" onclick="closeImageZoom(event)">
-        <div class="image-zoom-content" onclick="event.stopPropagation()">
-            <button class="close-zoom" onclick="closeImageZoom()">✕ Fermer</button>
-            <img id="zoom-image" src="" alt="">
-            <div class="image-zoom-caption" id="zoom-caption"></div>
-        </div>
+    <div
+      id="image-zoom-modal"
+      class="image-zoom-modal"
+      onclick="closeImageZoom(event)"
+    >
+      <div class="image-zoom-content" onclick="event.stopPropagation()">
+        <button class="close-zoom" onclick="closeImageZoom()">✕ Fermer</button>
+        <img id="zoom-image" src="" alt="" />
+        <div class="image-zoom-caption" id="zoom-caption"></div>
+      </div>
     </div>
 
     <!-- Modal pour les détails -->
     <div id="modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title">Détails de la capture</h2>
-                <button class="close-btn" onclick="closeModal()">Fermer</button>
-            </div>
-
-            <div class="tabs">
-                <button class="tab active" onclick="switchTab('state')">État</button>
-                <button class="tab" onclick="switchTab('metrics')">Métriques</button>
-                <button class="tab" onclick="switchTab('screenshots')">Screenshots</button>
-                <button class="tab" onclick="switchTab('diff')">Différences</button>
-            </div>
-
-            <div id="state-tab" class="tab-content active">
-                <div class="json-viewer">
-                    <pre id="state-content"></pre>
-                </div>
-            </div>
-
-            <div id="metrics-tab" class="tab-content">
-                <div class="json-viewer">
-                    <pre id="metrics-content"></pre>
-                </div>
-            </div>
-
-            <div id="screenshots-tab" class="tab-content">
-                <div id="screenshots-gallery" class="screenshot-gallery">
-                    <!-- Screenshots seront injectés ici -->
-                </div>
-            </div>
-
-            <div id="diff-tab" class="tab-content">
-                <div class="json-viewer">
-                    <pre id="diff-content">Pas de comparaison disponible</pre>
-                </div>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modal-title">Détails de la capture</h2>
+          <button class="close-btn" onclick="closeModal()">Fermer</button>
         </div>
+
+        <div class="tabs">
+          <button class="tab active" onclick="switchTab('state')">État</button>
+          <button class="tab" onclick="switchTab('metrics')">Métriques</button>
+          <button class="tab" onclick="switchTab('screenshots')">
+            Screenshots
+          </button>
+          <button class="tab" onclick="switchTab('diff')">Différences</button>
+        </div>
+
+        <div id="state-tab" class="tab-content active">
+          <div class="json-viewer">
+            <pre id="state-content"></pre>
+          </div>
+        </div>
+
+        <div id="metrics-tab" class="tab-content">
+          <div class="json-viewer">
+            <pre id="metrics-content"></pre>
+          </div>
+        </div>
+
+        <div id="screenshots-tab" class="tab-content">
+          <div id="screenshots-gallery" class="screenshot-gallery">
+            <!-- Screenshots seront injectés ici -->
+          </div>
+        </div>
+
+        <div id="diff-tab" class="tab-content">
+          <div class="json-viewer">
+            <pre id="diff-content">Pas de comparaison disponible</pre>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-        let captures = [];
-        let currentCapture = null;
+      let captures = [];
+      let currentCapture = null;
 
-        // Charger les captures au démarrage
-        async function loadCaptures() {
-            try {
-                // Essayer de charger un index généré ou scanner manuellement
-                let capturesList = [];
+      // Charger les captures au démarrage
+      async function loadCaptures() {
+        try {
+          // Essayer de charger un index généré ou scanner manuellement
+          let capturesList = [];
 
-                // D'abord essayer de charger l'index s'il existe
+          // D'abord essayer de charger l'index s'il existe
+          try {
+            const indexResponse = await fetch("./captures-index.json");
+            if (indexResponse.ok) {
+              const index = await indexResponse.json();
+              capturesList = index.captures || [];
+              console.log("Index trouvé:", capturesList.length, "captures");
+            }
+          } catch (e) {
+            console.log("Pas d'index, scan manuel...");
+          }
+
+          // Si pas d'index, scanner les timestamps possibles (dernières 24h)
+          if (capturesList.length === 0) {
+            const today = new Date().toISOString().split("T")[0];
+
+            // Tester les heures récentes (stratégie de découverte)
+            for (let h = 23; h >= 0; h--) {
+              for (let m = 59; m >= 0; m -= 5) {
+                // Par tranches de 5 minutes
+                const timestamp = `${today}T${h.toString().padStart(2, "0")}-${m
+                  .toString()
+                  .padStart(2, "0")}-00`;
+
                 try {
-                    const indexResponse = await fetch('./captures-index.json');
-                    if (indexResponse.ok) {
-                        const index = await indexResponse.json();
-                        capturesList = index.captures || [];
-                        console.log('Index trouvé:', capturesList.length, 'captures');
-                    }
+                  const testResponse = await fetch(`./${timestamp}/state.json`);
+                  if (testResponse.ok) {
+                    capturesList.push(timestamp);
+                    console.log("Capture trouvée:", timestamp);
+
+                    // Limiter à 10 captures max pour performance
+                    if (capturesList.length >= 10) break;
+                  }
                 } catch (e) {
-                    console.log('Pas d\'index, scan manuel...');
+                  // Pas de capture à ce timestamp
                 }
-
-                // Si pas d'index, scanner les timestamps possibles (dernières 24h)
-                if (capturesList.length === 0) {
-                    const today = new Date().toISOString().split('T')[0];
-
-                    // Tester les heures récentes (stratégie de découverte)
-                    for (let h = 23; h >= 0; h--) {
-                        for (let m = 59; m >= 0; m -= 5) { // Par tranches de 5 minutes
-                            const timestamp = `${today}T${h.toString().padStart(2,'0')}-${m.toString().padStart(2,'0')}-00`;
-
-                            try {
-                                const testResponse = await fetch(`./${timestamp}/state.json`);
-                                if (testResponse.ok) {
-                                    capturesList.push(timestamp);
-                                    console.log('Capture trouvée:', timestamp);
-
-                                    // Limiter à 10 captures max pour performance
-                                    if (capturesList.length >= 10) break;
-                                }
-                            } catch (e) {
-                                // Pas de capture à ce timestamp
-                            }
-                        }
-                        if (capturesList.length >= 10) break;
-                    }
-                }
-
-                // Si toujours rien, utiliser la dernière connue
-                if (capturesList.length === 0) {
-                    capturesList = ['2025-09-17T09-36-38'];
-                }
-
-                // Charger chaque capture trouvée
-                for (const captureId of capturesList) {
-                    try {
-                        // Toujours essayer de charger state.json (il existe toujours)
-                        const stateResponse = await fetch(`./${captureId}/state.json`);
-                        if (stateResponse.ok) {
-                            const state = await stateResponse.json();
-
-                            // Compter les vraies données
-                            let notesCount = 0;
-                            if (state.stores?.notes?.roomNotes) {
-                                notesCount = Object.values(state.stores.notes.roomNotes)
-                                    .filter(note => note && note.trim() !== '').length;
-                            }
-
-                            captures.push({
-                                id: captureId,
-                                timestamp: state.timestamp || captureId,
-                                summary: {
-                                    roomsCaptured: 12,  // Toujours 12 rooms
-                                    storesFound: Object.keys(state.stores || {}).length,
-                                    notesWithContent: notesCount,
-                                    hasProjectData: !!(state.stores?.projects?.projects?.irimstudiohall)
-                                }
-                            });
-                        }
-                    } catch (e) {
-                        console.log(`Erreur chargement ${captureId}:`, e);
-                    }
-                }
-
-                if (captures.length > 0) {
-                    // Trier par date décroissante
-                    captures.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
-                    displayCaptures();
-                } else {
-                    document.getElementById('loading').style.display = 'none';
-                    document.getElementById('no-captures').style.display = 'block';
-                }
-            } catch (error) {
-                console.error('Erreur lors du chargement:', error);
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('no-captures').style.display = 'block';
+              }
+              if (capturesList.length >= 10) break;
             }
+          }
+
+          // Si toujours rien, utiliser la dernière connue
+          if (capturesList.length === 0) {
+            capturesList = ["2025-09-17T09-36-38"];
+          }
+
+          // Charger chaque capture trouvée
+          for (const captureId of capturesList) {
+            try {
+              // Toujours essayer de charger state.json (il existe toujours)
+              const stateResponse = await fetch(`./${captureId}/state.json`);
+              if (stateResponse.ok) {
+                const state = await stateResponse.json();
+
+                // Compter les vraies données
+                let notesCount = 0;
+                if (state.stores?.notes?.roomNotes) {
+                  notesCount = Object.values(
+                    state.stores.notes.roomNotes
+                  ).filter((note) => note && note.trim() !== "").length;
+                }
+
+                captures.push({
+                  id: captureId,
+                  timestamp: state.timestamp || captureId,
+                  summary: {
+                    roomsCaptured: 12, // Toujours 12 rooms
+                    storesFound: Object.keys(state.stores || {}).length,
+                    notesWithContent: notesCount,
+                    hasProjectData:
+                      !!state.stores?.projects?.projects?.irimmetabrain,
+                  },
+                });
+              }
+            } catch (e) {
+              console.log(`Erreur chargement ${captureId}:`, e);
+            }
+          }
+
+          if (captures.length > 0) {
+            // Trier par date décroissante
+            captures.sort((a, b) => b.timestamp.localeCompare(a.timestamp));
+            displayCaptures();
+          } else {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("no-captures").style.display = "block";
+          }
+        } catch (error) {
+          console.error("Erreur lors du chargement:", error);
+          document.getElementById("loading").style.display = "none";
+          document.getElementById("no-captures").style.display = "block";
+        }
+      }
+
+      // Afficher les captures
+      function displayCaptures() {
+        const container = document.getElementById("captures-container");
+        const loading = document.getElementById("loading");
+        const noCaptures = document.getElementById("no-captures");
+
+        loading.style.display = "none";
+
+        if (captures.length === 0) {
+          noCaptures.style.display = "block";
+          return;
         }
 
-        // Afficher les captures
-        function displayCaptures() {
-            const container = document.getElementById('captures-container');
-            const loading = document.getElementById('loading');
-            const noCaptures = document.getElementById('no-captures');
+        container.style.display = "grid";
+        container.innerHTML = captures
+          .map((capture) => createCaptureCard(capture))
+          .join("");
+      }
 
-            loading.style.display = 'none';
+      // Créer une carte de capture
+      function createCaptureCard(capture) {
+        const date = new Date(capture.timestamp);
+        const dateStr = date.toLocaleDateString("fr-FR");
+        const timeStr = date.toLocaleTimeString("fr-FR");
 
-            if (captures.length === 0) {
-                noCaptures.style.display = 'block';
-                return;
-            }
+        const notesIcon = capture.summary?.notesWithContent > 0 ? "📝" : "📭";
+        const projectIcon = capture.summary?.hasProjectData ? "✅" : "❌";
 
-            container.style.display = 'grid';
-            container.innerHTML = captures.map(capture => createCaptureCard(capture)).join('');
-        }
-
-        // Créer une carte de capture
-        function createCaptureCard(capture) {
-            const date = new Date(capture.timestamp);
-            const dateStr = date.toLocaleDateString('fr-FR');
-            const timeStr = date.toLocaleTimeString('fr-FR');
-
-            const notesIcon = capture.summary?.notesWithContent > 0 ? '📝' : '📭';
-            const projectIcon = capture.summary?.hasProjectData ? '✅' : '❌';
-
-            return `
-                <div class="capture-card" onclick="openCapture('${capture.id}')">
+        return `
+                <div class="capture-card" onclick="openCapture('${
+                  capture.id
+                }')">
                     <div class="capture-header">
                         <div class="capture-date">${dateStr}</div>
                         <div class="capture-time">${timeStr}</div>
@@ -566,11 +585,15 @@
                             <div class="stat-label">Rooms 📸</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value">${capture.summary?.storesFound || 0}</div>
+                            <div class="stat-value">${
+                              capture.summary?.storesFound || 0
+                            }</div>
                             <div class="stat-label">Stores 📦</div>
                         </div>
                         <div class="stat-item">
-                            <div class="stat-value">${notesIcon} ${capture.summary?.notesWithContent || 0}</div>
+                            <div class="stat-value">${notesIcon} ${
+          capture.summary?.notesWithContent || 0
+        }</div>
                             <div class="stat-label">Notes</div>
                         </div>
                         <div class="stat-item">
@@ -580,138 +603,163 @@
                     </div>
                 </div>
             `;
+      }
+
+      // Ouvrir une capture
+      async function openCapture(captureId) {
+        const capture = captures.find((c) => c.id === captureId);
+        if (!capture) return;
+
+        currentCapture = capture;
+        document.getElementById("modal").classList.add("active");
+        document.getElementById(
+          "modal-title"
+        ).textContent = `Capture du ${new Date(
+          capture.timestamp
+        ).toLocaleString("fr-FR")}`;
+
+        // Charger les données
+        await loadCaptureData(capture);
+      }
+
+      // Charger les données d'une capture
+      async function loadCaptureData(capture) {
+        try {
+          // État
+          const stateResponse = await fetch(`${capture.id}/state.json`).catch(
+            () => null
+          );
+          if (stateResponse && stateResponse.ok) {
+            const state = await stateResponse.json();
+            document.getElementById("state-content").textContent =
+              JSON.stringify(state, null, 2);
+          } else {
+            document.getElementById("state-content").textContent =
+              "État non disponible";
+          }
+
+          // Métriques
+          const metricsResponse = await fetch(
+            `${capture.id}/metrics.json`
+          ).catch(() => null);
+          if (metricsResponse && metricsResponse.ok) {
+            const metrics = await metricsResponse.json();
+            document.getElementById("metrics-content").textContent =
+              JSON.stringify(metrics, null, 2);
+          } else {
+            document.getElementById("metrics-content").textContent =
+              "Métriques non disponibles";
+          }
+
+          // Différences
+          const diffResponse = await fetch(`${capture.id}/diff.json`).catch(
+            () => null
+          );
+          if (diffResponse && diffResponse.ok) {
+            const diff = await diffResponse.json();
+            document.getElementById("diff-content").textContent =
+              JSON.stringify(diff, null, 2);
+          } else {
+            document.getElementById("diff-content").textContent =
+              "Pas de comparaison disponible";
+          }
+
+          // Screenshots
+          loadScreenshots(capture);
+        } catch (error) {
+          console.error("Erreur chargement données:", error);
         }
+      }
 
-        // Ouvrir une capture
-        async function openCapture(captureId) {
-            const capture = captures.find(c => c.id === captureId);
-            if (!capture) return;
+      // Charger les screenshots
+      function loadScreenshots(capture) {
+        const gallery = document.getElementById("screenshots-gallery");
 
-            currentCapture = capture;
-            document.getElementById('modal').classList.add('active');
-            document.getElementById('modal-title').textContent = `Capture du ${new Date(capture.timestamp).toLocaleString('fr-FR')}`;
+        // Grille 4x3 = 12 rooms (room1 à room12)
+        const roomGrid = [
+          { id: "room1", pos: "(0,0)", name: "Sanctuaire" },
+          { id: "room2", pos: "(1,0)", name: "Chambre" },
+          { id: "room3", pos: "(2,0)", name: "Cuisine" },
+          { id: "room4", pos: "(3,0)", name: "Comptoir" },
+          { id: "room5", pos: "(0,1)", name: "Jardin" },
+          { id: "room6", pos: "(1,1)", name: "Atelier" },
+          { id: "room7", pos: "(2,1)", name: "Forge" },
+          { id: "room8", pos: "(3,1)", name: "Boutique" },
+          { id: "room9", pos: "(0,2)", name: "À définir" },
+          { id: "room10", pos: "(1,2)", name: "Bibliothèque" },
+          { id: "room11", pos: "(2,2)", name: "Scriptorium" },
+          { id: "room12", pos: "(3,2)", name: "Cave" },
+        ];
 
-            // Charger les données
-            await loadCaptureData(capture);
-        }
-
-        // Charger les données d'une capture
-        async function loadCaptureData(capture) {
-            try {
-                // État
-                const stateResponse = await fetch(`${capture.id}/state.json`).catch(() => null);
-                if (stateResponse && stateResponse.ok) {
-                    const state = await stateResponse.json();
-                    document.getElementById('state-content').textContent = JSON.stringify(state, null, 2);
-                } else {
-                    document.getElementById('state-content').textContent = 'État non disponible';
-                }
-
-                // Métriques
-                const metricsResponse = await fetch(`${capture.id}/metrics.json`).catch(() => null);
-                if (metricsResponse && metricsResponse.ok) {
-                    const metrics = await metricsResponse.json();
-                    document.getElementById('metrics-content').textContent = JSON.stringify(metrics, null, 2);
-                } else {
-                    document.getElementById('metrics-content').textContent = 'Métriques non disponibles';
-                }
-
-                // Différences
-                const diffResponse = await fetch(`${capture.id}/diff.json`).catch(() => null);
-                if (diffResponse && diffResponse.ok) {
-                    const diff = await diffResponse.json();
-                    document.getElementById('diff-content').textContent = JSON.stringify(diff, null, 2);
-                } else {
-                    document.getElementById('diff-content').textContent = 'Pas de comparaison disponible';
-                }
-
-                // Screenshots
-                loadScreenshots(capture);
-
-            } catch (error) {
-                console.error('Erreur chargement données:', error);
-            }
-        }
-
-        // Charger les screenshots
-        function loadScreenshots(capture) {
-            const gallery = document.getElementById('screenshots-gallery');
-
-            // Grille 4x3 = 12 rooms (room1 à room12)
-            const roomGrid = [
-                { id: 'room1', pos: '(0,0)', name: 'Sanctuaire' },
-                { id: 'room2', pos: '(1,0)', name: 'Chambre' },
-                { id: 'room3', pos: '(2,0)', name: 'Cuisine' },
-                { id: 'room4', pos: '(3,0)', name: 'Comptoir' },
-                { id: 'room5', pos: '(0,1)', name: 'Jardin' },
-                { id: 'room6', pos: '(1,1)', name: 'Atelier' },
-                { id: 'room7', pos: '(2,1)', name: 'Forge' },
-                { id: 'room8', pos: '(3,1)', name: 'Boutique' },
-                { id: 'room9', pos: '(0,2)', name: 'À définir' },
-                { id: 'room10', pos: '(1,2)', name: 'Bibliothèque' },
-                { id: 'room11', pos: '(2,2)', name: 'Scriptorium' },
-                { id: 'room12', pos: '(3,2)', name: 'Cave' }
-            ];
-
-            gallery.innerHTML = roomGrid.map(room => `
+        gallery.innerHTML = roomGrid
+          .map(
+            (room) => `
                 <div class="screenshot-full" onclick="openImageZoom('${capture.id}/screenshots/${room.id}.png', '${room.id} ${room.pos} - ${room.name}')">
                     <h4>${room.id} - ${room.name}</h4>
                     <img src="${capture.id}/screenshots/${room.id}.png"
                          alt="${room.id}"
                          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\"%3E%3Crect fill=\"%23222\" width=\"400\" height=\"300\"/%3E%3Ctext x=\"50%25\" y=\"50%25\" fill=\"%23666\" text-anchor=\"middle\" dominant-baseline=\"middle\" font-family=\"sans-serif\"%3E${room.id} - Image non disponible%3C/text%3E%3C/svg%3E'">
                 </div>
-            `).join('');
+            `
+          )
+          .join("");
+      }
+
+      // Ouvrir le zoom d'image
+      function openImageZoom(imageSrc, caption) {
+        const modal = document.getElementById("image-zoom-modal");
+        const img = document.getElementById("zoom-image");
+        const cap = document.getElementById("zoom-caption");
+
+        img.src = imageSrc;
+        cap.textContent = caption;
+        modal.classList.add("active");
+      }
+
+      // Fermer le zoom d'image
+      function closeImageZoom(event) {
+        if (
+          !event ||
+          event.target.id === "image-zoom-modal" ||
+          event.target.classList.contains("close-zoom")
+        ) {
+          document
+            .getElementById("image-zoom-modal")
+            .classList.remove("active");
         }
+      }
 
-        // Ouvrir le zoom d'image
-        function openImageZoom(imageSrc, caption) {
-            const modal = document.getElementById('image-zoom-modal');
-            const img = document.getElementById('zoom-image');
-            const cap = document.getElementById('zoom-caption');
+      // Fermer la modal
+      function closeModal() {
+        document.getElementById("modal").classList.remove("active");
+        currentCapture = null;
+      }
 
-            img.src = imageSrc;
-            cap.textContent = caption;
-            modal.classList.add('active');
-        }
-
-        // Fermer le zoom d'image
-        function closeImageZoom(event) {
-            if (!event || event.target.id === 'image-zoom-modal' || event.target.classList.contains('close-zoom')) {
-                document.getElementById('image-zoom-modal').classList.remove('active');
-            }
-        }
-
-        // Fermer la modal
-        function closeModal() {
-            document.getElementById('modal').classList.remove('active');
-            currentCapture = null;
-        }
-
-        // Changer d'onglet
-        function switchTab(tabName) {
-            // Désactiver tous les onglets
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Activer l'onglet sélectionné
-            event.target.classList.add('active');
-            document.getElementById(`${tabName}-tab`).classList.add('active');
-        }
-
-        // Fermer les modales avec Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-                closeImageZoom();
-            }
+      // Changer d'onglet
+      function switchTab(tabName) {
+        // Désactiver tous les onglets
+        document.querySelectorAll(".tab").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+        document.querySelectorAll(".tab-content").forEach((content) => {
+          content.classList.remove("active");
         });
 
-        // Charger les captures au démarrage
-        window.addEventListener('load', loadCaptures);
+        // Activer l'onglet sélectionné
+        event.target.classList.add("active");
+        document.getElementById(`${tabName}-tab`).classList.add("active");
+      }
+
+      // Fermer les modales avec Escape
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeModal();
+          closeImageZoom();
+        }
+      });
+
+      // Charger les captures au démarrage
+      window.addEventListener("load", loadCaptures);
     </script>
-</body>
+  </body>
 </html>

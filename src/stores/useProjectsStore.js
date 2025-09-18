@@ -1,12 +1,12 @@
 // src/stores/useProjectsStore.js - Store Projects/Business (Usage quotidien/données métier)
 
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import { defaultProjectsData } from './defaultData';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import { defaultProjectsData } from "./defaultData";
 
 // Vérifier si c'est la première utilisation (même flag que NotesStore)
 const isFirstRun = () => {
-  const initialized = localStorage.getItem('irim-initialized');
+  const initialized = localStorage.getItem("irim-initialized");
   return !initialized;
 };
 
@@ -18,8 +18,8 @@ const getInitialProjectsData = () => {
   }
   // Utilisations suivantes : structure minimale (les vraies données viendront du localStorage)
   return {
-    selectedProject: 'irimstudiohall',
-    projects: {}
+    selectedProject: "irimmetabrain",
+    projects: {},
   };
 };
 
@@ -33,9 +33,9 @@ const useProjectsStore = create(
 
       // Base de données des projets
       projects: initialData.projects || {
-        irimstudiohall: {
-          id: "irimstudiohall",
-          name: "IRIMStudioHall",
+        irimmetabrain: {
+          id: "irimmetabrain",
+          name: "IRIMMetaBrain",
           type: "tool",
           status: "dev_actif",
 
@@ -94,78 +94,81 @@ const useProjectsStore = create(
           atelierModules: {
             roadmap: { collapsed: true },
             todo: { collapsed: true },
-            mindlog: { collapsed: true, mood: '😐', note: '' },
-            actions: { collapsed: true, items: [
-              { id: 1, text: 'Action prioritaire', completed: false },
-              { id: 2, text: 'Tâche en cours', completed: false },
-              { id: 3, text: 'À démarrer', completed: false }
-            ]},
-            screentv: { collapsed: true, screenshots: [] }
+            mindlog: { collapsed: true, mood: "😐", note: "" },
+            actions: {
+              collapsed: true,
+              items: [
+                { id: 1, text: "Action prioritaire", completed: false },
+                { id: 2, text: "Tâche en cours", completed: false },
+                { id: 3, text: "À démarrer", completed: false },
+              ],
+            },
+            screentv: { collapsed: true, screenshots: [] },
           },
 
           // Atelier - 4 panneaux centraux (données structurées - legacy)
           roadmap: [
             {
               id: 1,
-              milestone: 'Phase 1 - Atelier habité',
-              status: 'en_cours',
-              description: 'Migration Zustand + 4 panneaux métier',
-              priority: 'high',
-              created_at: new Date().toISOString()
-            }
+              milestone: "Phase 1 - Atelier habité",
+              status: "en_cours",
+              description: "Migration Zustand + 4 panneaux métier",
+              priority: "high",
+              created_at: new Date().toISOString(),
+            },
           ],
 
           todo: [
             {
               id: 1,
-              task: 'Migration Zustand',
-              priority: 'high',
-              status: 'in_progress',
-              category: 'architecture',
-              created_at: new Date().toISOString()
+              task: "Migration Zustand",
+              priority: "high",
+              status: "in_progress",
+              category: "architecture",
+              created_at: new Date().toISOString(),
             },
             {
               id: 2,
-              task: 'Créer panneaux Atelier',
-              priority: 'high',
-              status: 'pending',
-              category: 'feature',
-              created_at: new Date().toISOString()
-            }
+              task: "Créer panneaux Atelier",
+              priority: "high",
+              status: "pending",
+              category: "feature",
+              created_at: new Date().toISOString(),
+            },
           ],
 
           idees: [
             {
               id: 1,
-              idea: 'Auto-référencement projet dans ses propres données',
-              status: 'implemented',
-              category: 'meta',
-              created_at: new Date().toISOString()
+              idea: "Auto-référencement projet dans ses propres données",
+              status: "implemented",
+              category: "meta",
+              created_at: new Date().toISOString(),
             },
             {
               id: 2,
-              idea: 'Navigation spatiale entre projets',
-              status: 'future',
-              category: 'ux',
-              created_at: new Date().toISOString()
-            }
+              idea: "Navigation spatiale entre projets",
+              status: "future",
+              category: "ux",
+              created_at: new Date().toISOString(),
+            },
           ],
 
           prochaineAction: {
             action: "Finaliser architecture 2 stores",
             priority: "immediate",
             context: "Atelier",
-            updated_at: new Date().toISOString()
+            updated_at: new Date().toISOString(),
           },
 
           // Métadonnées projet
           links: {
-            repo: "github.com/eric/irimstudiohall",
-            local: "localhost:5173"
+            repo: "github.com/eric/irimmetabrain",
+            local: "localhost:5173",
           },
 
           created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         },
 
         moodcycle: {
@@ -197,16 +200,23 @@ const useProjectsStore = create(
           atelierModules: {
             roadmap: { collapsed: true },
             todo: { collapsed: true },
-            mindlog: { collapsed: true, mood: '🌈', note: 'Projet bien-être et suivi humeurs' },
-            actions: { collapsed: true, items: [
-              { id: 1, text: 'Design mood picker', completed: false },
-              { id: 2, text: 'Créer DB schema', completed: false },
-              { id: 3, text: 'Interface analytics', completed: false }
-            ]},
-            screentv: { collapsed: true, screenshots: [] }
+            mindlog: {
+              collapsed: true,
+              mood: "🌈",
+              note: "Projet bien-être et suivi humeurs",
+            },
+            actions: {
+              collapsed: true,
+              items: [
+                { id: 1, text: "Design mood picker", completed: false },
+                { id: 2, text: "Créer DB schema", completed: false },
+                { id: 3, text: "Interface analytics", completed: false },
+              ],
+            },
+            screentv: { collapsed: true, screenshots: [] },
           },
           created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         },
 
         pepetteszub: {
@@ -238,16 +248,23 @@ const useProjectsStore = create(
           atelierModules: {
             roadmap: { collapsed: true },
             todo: { collapsed: true },
-            mindlog: { collapsed: true, mood: '💰', note: 'Focus économies et investissements' },
-            actions: { collapsed: true, items: [
-              { id: 1, text: 'Setup base données', completed: false },
-              { id: 2, text: 'Interface transactions', completed: false },
-              { id: 3, text: 'Algorithme budgets', completed: false }
-            ]},
-            screentv: { collapsed: true, screenshots: [] }
+            mindlog: {
+              collapsed: true,
+              mood: "💰",
+              note: "Focus économies et investissements",
+            },
+            actions: {
+              collapsed: true,
+              items: [
+                { id: 1, text: "Setup base données", completed: false },
+                { id: 2, text: "Interface transactions", completed: false },
+                { id: 3, text: "Algorithme budgets", completed: false },
+              ],
+            },
+            screentv: { collapsed: true, screenshots: [] },
           },
           created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         },
 
         echodesreves: {
@@ -279,17 +296,24 @@ const useProjectsStore = create(
           atelierModules: {
             roadmap: { collapsed: true },
             todo: { collapsed: true },
-            mindlog: { collapsed: true, mood: '✨', note: 'Inspiration et créativité nocturne' },
-            actions: { collapsed: true, items: [
-              { id: 1, text: 'Design journal interface', completed: false },
-              { id: 2, text: 'Système tags', completed: false },
-              { id: 3, text: 'Moteur recherche', completed: false }
-            ]},
-            screentv: { collapsed: true, screenshots: [] }
+            mindlog: {
+              collapsed: true,
+              mood: "✨",
+              note: "Inspiration et créativité nocturne",
+            },
+            actions: {
+              collapsed: true,
+              items: [
+                { id: 1, text: "Design journal interface", completed: false },
+                { id: 2, text: "Système tags", completed: false },
+                { id: 3, text: "Moteur recherche", completed: false },
+              ],
+            },
+            screentv: { collapsed: true, screenshots: [] },
           },
           created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        }
+          updated_at: new Date().toISOString(),
+        },
       },
 
       // Actions - Gestion des projets
@@ -323,14 +347,14 @@ const useProjectsStore = create(
 **Next:** Définir les prochaines étapes`,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
-          ...projectData
+          ...projectData,
         };
 
         set((state) => ({
           projects: {
             ...state.projects,
-            [newProject.id]: newProject
-          }
+            [newProject.id]: newProject,
+          },
         }));
 
         return newProject.id;
@@ -349,7 +373,7 @@ const useProjectsStore = create(
           const newItem = {
             id: Date.now(),
             ...milestone,
-            created_at: new Date().toISOString()
+            created_at: new Date().toISOString(),
           };
 
           return {
@@ -358,9 +382,9 @@ const useProjectsStore = create(
               [projectId]: {
                 ...project,
                 roadmap: [...project.roadmap, newItem],
-                updated_at: new Date().toISOString()
-              }
-            }
+                updated_at: new Date().toISOString(),
+              },
+            },
           };
         });
       },
@@ -373,9 +397,9 @@ const useProjectsStore = create(
 
           const newTodo = {
             id: Date.now(),
-            status: 'pending',
+            status: "pending",
             ...task,
-            created_at: new Date().toISOString()
+            created_at: new Date().toISOString(),
           };
 
           return {
@@ -384,9 +408,9 @@ const useProjectsStore = create(
               [projectId]: {
                 ...project,
                 todo: [...project.todo, newTodo],
-                updated_at: new Date().toISOString()
-              }
-            }
+                updated_at: new Date().toISOString(),
+              },
+            },
           };
         });
       },
@@ -401,14 +425,14 @@ const useProjectsStore = create(
               ...state.projects,
               [projectId]: {
                 ...project,
-                todo: project.todo.map(item =>
+                todo: project.todo.map((item) =>
                   item.id === todoId
                     ? { ...item, status, updated_at: new Date().toISOString() }
                     : item
                 ),
-                updated_at: new Date().toISOString()
-              }
-            }
+                updated_at: new Date().toISOString(),
+              },
+            },
           };
         });
       },
@@ -421,9 +445,9 @@ const useProjectsStore = create(
 
           const newIdea = {
             id: Date.now(),
-            status: 'new',
+            status: "new",
             ...idea,
-            created_at: new Date().toISOString()
+            created_at: new Date().toISOString(),
           };
 
           return {
@@ -432,9 +456,9 @@ const useProjectsStore = create(
               [projectId]: {
                 ...project,
                 idees: [...project.idees, newIdea],
-                updated_at: new Date().toISOString()
-              }
-            }
+                updated_at: new Date().toISOString(),
+              },
+            },
           };
         });
       },
@@ -452,11 +476,11 @@ const useProjectsStore = create(
                 ...project,
                 prochaineAction: {
                   ...action,
-                  updated_at: new Date().toISOString()
+                  updated_at: new Date().toISOString(),
                 },
-                updated_at: new Date().toISOString()
-              }
-            }
+                updated_at: new Date().toISOString(),
+              },
+            },
           };
         });
       },
@@ -473,9 +497,9 @@ const useProjectsStore = create(
               [projectId]: {
                 ...project,
                 roadmapMarkdown: content,
-                updated_at: new Date().toISOString()
-              }
-            }
+                updated_at: new Date().toISOString(),
+              },
+            },
           };
         });
       },
@@ -491,9 +515,9 @@ const useProjectsStore = create(
               [projectId]: {
                 ...project,
                 todoMarkdown: content,
-                updated_at: new Date().toISOString()
-              }
-            }
+                updated_at: new Date().toISOString(),
+              },
+            },
           };
         });
       },
@@ -515,12 +539,12 @@ const useProjectsStore = create(
                   ...(project.atelierModules || {}),
                   [moduleName]: {
                     ...(project.atelierModules?.[moduleName] || {}),
-                    ...stateUpdate
-                  }
+                    ...stateUpdate,
+                  },
                 },
-                updated_at: new Date().toISOString()
-              }
-            }
+                updated_at: new Date().toISOString(),
+              },
+            },
           };
           return newState;
         });
@@ -533,9 +557,9 @@ const useProjectsStore = create(
           const defaultModules = {
             roadmap: { collapsed: true },
             todo: { collapsed: true },
-            mindlog: { collapsed: true, mood: '😐', note: '' },
+            mindlog: { collapsed: true, mood: "😐", note: "" },
             actions: { collapsed: true, items: [] },
-            screentv: { collapsed: true, screenshots: [] }
+            screentv: { collapsed: true, screenshots: [] },
           };
           return defaultModules[moduleName] || { collapsed: true };
         }
@@ -554,10 +578,11 @@ const useProjectsStore = create(
 
         return {
           totalTodos: project.todo.length,
-          completedTodos: project.todo.filter(t => t.status === 'completed').length,
+          completedTodos: project.todo.filter((t) => t.status === "completed")
+            .length,
           totalIdeas: project.idees.length,
           roadmapItems: project.roadmap.length,
-          hasNextAction: !!project.prochaineAction
+          hasNextAction: !!project.prochaineAction,
         };
       },
 
@@ -565,13 +590,13 @@ const useProjectsStore = create(
       importData: (data) => {
         set({
           projects: data.projects || {},
-          selectedProject: data.currentProjectId || 'irimstudiohall'
+          selectedProject: data.currentProjectId || "irimmetabrain",
         });
-      }
+      },
     }),
     {
-      name: 'irim-projects-store', // localStorage key séparé
-      version: 1
+      name: "irim-projects-store", // localStorage key séparé
+      version: 1,
     }
   )
 );

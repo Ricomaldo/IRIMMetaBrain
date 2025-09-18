@@ -16,6 +16,40 @@ import {
 // Import dynamique des composants
 const componentModules = import.meta.glob('../../../components/**/*.jsx');
 
+// Fonction pour extraire les props d'un composant
+const extractComponentProps = (Component) => {
+  const props = {};
+
+  // Essayer de récupérer les props depuis propTypes
+  if (Component.propTypes) {
+    return Component.propTypes;
+  }
+
+  // Pour les composants styled-components ou fonctionnels, analyser les paramètres
+  const componentString = Component.toString();
+  const propsMatch = componentString.match(/\(\s*{([^}]+)}\s*\)/);
+
+  if (propsMatch && propsMatch[1]) {
+    // Extraire les noms de props depuis la destructuration
+    const propNames = propsMatch[1].split(',').map(p => p.trim().split(/[=:]/)[0].trim());
+    propNames.forEach(name => {
+      if (name && !name.includes('...')) {
+        props[name] = { type: 'any' };
+      }
+    });
+  }
+
+  // Props communes pour la plupart des composants
+  const commonProps = ['children', 'className', 'style', 'onClick', 'onChange', 'title', 'icon'];
+  commonProps.forEach(prop => {
+    if (componentString.includes(prop)) {
+      props[prop] = { type: 'any' };
+    }
+  });
+
+  return props;
+};
+
 const ComponentCatalog = () => {
   const [components, setComponents] = useState({});
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -29,7 +63,7 @@ const ComponentCatalog = () => {
       const categorizedComponents = {
         rooms: [],
         common: [],
-        layout: [],
+        tower: [],
         navigation: []
       };
 
@@ -48,20 +82,21 @@ const ComponentCatalog = () => {
         let category = 'other';
         if (path.includes('/rooms/')) category = 'rooms';
         else if (path.includes('/common/')) category = 'common';
-        else if (path.includes('/layout/')) category = 'layout';
+        else if (path.includes('/tower/')) category = 'tower';
         else if (path.includes('/navigation/')) category = 'navigation';
+        else if (path.includes('/layout/')) category = null; // Ignorer layout
 
         // Charger le module
         try {
           const loadedModule = await module();
           const Component = loadedModule.default;
 
-          if (Component && categorizedComponents[category]) {
+          if (Component && category && categorizedComponents[category]) {
             categorizedComponents[category].push({
               name: componentName,
               path: path,
               Component,
-              props: Component.propTypes || {},
+              props: extractComponentProps(Component),
               defaultProps: Component.defaultProps || {}
             });
           }
@@ -206,24 +241,43 @@ const MyComponent = () => {
               <ControlPanel>
                 <h3>Props</h3>
                 {Object.keys(selectedComponent.props).length > 0 ? (
-                  Object.entries(selectedComponent.props).map(([propName, propType]) => (
+                  Object.keys(selectedComponent.props).map((propName) => (
                     <div key={propName} style={{ marginBottom: '1rem' }}>
-                      <label>
-                        <strong>{propName}</strong>
-                        <input
-                          type="text"
-                          value={props[propName] || ''}
-                          onChange={(e) => updateProp(propName, e.target.value)}
-                          style={{
-                            width: '100%',
-                            padding: '0.5rem',
-                            marginTop: '0.25rem',
-                            background: 'rgba(255,255,255,0.1)',
-                            border: '1px solid rgba(255,255,255,0.2)',
-                            color: 'white',
-                            borderRadius: '4px'
-                          }}
-                        />
+                      <label style={{ display: 'block' }}>
+                        <strong style={{ color: '#ffd700', fontSize: '0.9rem' }}>{propName}</strong>
+                        {propName === 'onClick' || propName === 'onChange' || propName === 'onClose' ? (
+                          <button
+                            onClick={() => updateProp(propName, () => alert(`${propName} triggered!`))}
+                            style={{
+                              width: '100%',
+                              padding: '0.5rem',
+                              marginTop: '0.25rem',
+                              background: 'rgba(255,215,0,0.1)',
+                              border: '1px solid rgba(255,215,0,0.3)',
+                              color: '#ffd700',
+                              borderRadius: '4px',
+                              cursor: 'pointer'
+                            }}
+                          >
+                            Set {propName} handler
+                          </button>
+                        ) : (
+                          <input
+                            type="text"
+                            value={props[propName] || ''}
+                            onChange={(e) => updateProp(propName, e.target.value)}
+                            placeholder={`Enter ${propName}...`}
+                            style={{
+                              width: '100%',
+                              padding: '0.5rem',
+                              marginTop: '0.25rem',
+                              background: 'rgba(255,255,255,0.1)',
+                              border: '1px solid rgba(255,255,255,0.2)',
+                              color: 'white',
+                              borderRadius: '4px'
+                            }}
+                          />
+                        )}
                       </label>
                     </div>
                   ))
@@ -235,8 +289,20 @@ const MyComponent = () => {
 
             {activeTab === 'code' && (
               <CodeView>
-                <pre>
-                  <code>{generateUsageCode()}</code>
+                <pre style={{
+                  margin: '0',
+                  padding: '1.5rem',
+                  background: 'rgba(0, 0, 0, 0.5)',
+                  borderRadius: '8px',
+                  border: '1px solid rgba(255, 215, 0, 0.1)',
+                  overflowX: 'auto',
+                  maxWidth: '100%'
+                }}>
+                  <code style={{
+                    display: 'block',
+                    whiteSpace: 'pre',
+                    fontFamily: "'Monaco', 'Courier New', monospace"
+                  }}>{generateUsageCode()}</code>
                 </pre>
               </CodeView>
             )}

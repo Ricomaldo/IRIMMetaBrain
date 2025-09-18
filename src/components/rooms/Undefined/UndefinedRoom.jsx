@@ -25,129 +25,45 @@ import {
 // 🧪 IMPORTER LE COMPOSANT À TESTER ICI
 // ============================================
 import Button from "../../common/Button";
+import ComponentCatalog from "../../dev/ComponentCatalog/ComponentCatalog";
 
-const ComponentToTest = () => {
-  const [activeVariant, setActiveVariant] = React.useState(null);
-
-  const variants = {
-    Basiques: [
-      { name: "default", label: "Default" },
-      { name: "secondary", label: "Secondary" },
-      { name: "tab", label: "Tab" },
-    ],
-    Textures: [
-      { name: "wood", label: "🪵 Wood" },
-      { name: "stone", label: "🪨 Stone" },
-      { name: "metal", label: "⚙️ Metal" },
-      { name: "parchment", label: "📜 Parchment" },
-    ],
-    Niveaux: [
-      { name: "primary-level", label: "Primary Level" },
-      { name: "secondary-level", label: "Secondary Level" },
-      { name: "tertiary-level", label: "Tertiary Level" },
-    ],
-    Couleurs: [
-      { name: "cool", label: "Cool 💙" },
-      { name: "warm", label: "Warm 🧡" },
-      { name: "nature", label: "Nature 💚" },
-      { name: "primary-colored", label: "Primary ⭐" },
-    ],
-  };
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "20px",
-        padding: "20px",
-        maxHeight: "400px",
-        overflowY: "auto",
-      }}
-    >
-      <h3 style={{ margin: 0, color: "#ffd700", textAlign: "center" }}>
-        🎨 Arsenal de Boutons
-      </h3>
-
-      {Object.entries(variants).map(([category, buttons]) => (
-        <div key={category}>
-          <h4
-            style={{
-              margin: "10px 0 5px 0",
-              color: "#DDA0DD",
-              fontSize: "14px",
-              borderBottom: "1px solid #DDA0DD",
-              paddingBottom: "3px",
-            }}
-          >
-            {category}
-          </h4>
-          <div
-            style={{
-              display: "flex",
-              gap: "8px",
-              flexWrap: "wrap",
-              marginBottom: "10px",
-            }}
-          >
-            {buttons.map((btn) => (
-              <Button
-                key={btn.name}
-                size="small"
-                variant={btn.name}
-                active={activeVariant === btn.name}
-                onClick={() =>
-                  setActiveVariant(activeVariant === btn.name ? null : btn.name)
-                }
-              >
-                {btn.label}
-              </Button>
-            ))}
-          </div>
-        </div>
-      ))}
-
-      <div
-        style={{
-          marginTop: "10px",
-          padding: "10px",
-          background: "rgba(255, 215, 0, 0.1)",
-          borderRadius: "4px",
-          fontSize: "12px",
-        }}
-      >
-        <strong>Variant actif :</strong> {activeVariant || "Aucun"}
-        <br />
-        <em style={{ opacity: 0.7 }}>
-          Clique sur les boutons pour voir l'état actif !
-        </em>
-      </div>
-    </div>
-  );
-};
+// Remplace ComponentToTest par le composant que tu veux tester
+const ComponentToTest = ComponentCatalog;
 
 const UndefinedRoom = () => {
   const theme = useTheme();
-  const [displayMode, setDisplayMode] = useState("panel-2x2");
+  const [displayMode, setDisplayMode] = useState("panel-4x4");
   const [collapsed, setCollapsed] = useState(false);
 
   const configsLine1 = [
-    { mode: "no-panel", label: "Sans Panel" },
+    { mode: "no-panel", label: "∅" },
     { mode: "panel-1x1", label: "1×1" },
     { mode: "panel-1x2", label: "1×2" },
+    { mode: "panel-1x3", label: "1×3" },
     { mode: "panel-1x4", label: "1×4" },
+    { mode: "panel-1x5", label: "1×5" },
     { mode: "panel-2x1", label: "2×1" },
     { mode: "panel-2x2", label: "2×2" },
+    { mode: "panel-2x3", label: "2×3" },
+    { mode: "panel-2x4", label: "2×4" },
+    { mode: "panel-2x5", label: "2×5" },
   ];
 
   const configsLine2 = [
-    { mode: "panel-2x3", label: "2×3" },
-    { mode: "panel-2x4", label: "2×4" },
+    { mode: "panel-3x1", label: "3×1" },
     { mode: "panel-3x2", label: "3×2" },
     { mode: "panel-3x3", label: "3×3" },
     { mode: "panel-3x4", label: "3×4" },
+    { mode: "panel-3x5", label: "3×5" },
+    { mode: "panel-4x1", label: "4×1" },
+    { mode: "panel-4x2", label: "4×2" },
+    { mode: "panel-4x3", label: "4×3" },
     { mode: "panel-4x4", label: "4×4" },
     { mode: "panel-4x5", label: "4×5" },
+    { mode: "panel-5x1", label: "5×1" },
+    { mode: "panel-5x2", label: "5×2" },
+    { mode: "panel-5x3", label: "5×3" },
+    { mode: "panel-5x4", label: "5×4" },
     { mode: "panel-5x5", label: "5×5" },
   ];
 
@@ -160,6 +76,7 @@ const UndefinedRoom = () => {
       2: "warm", // Doré
       3: "nature", // Vert
       4: "primary-colored", // Principal (doré)
+      5: "danger", // Rouge
     };
     return variants[width] || "default";
   };

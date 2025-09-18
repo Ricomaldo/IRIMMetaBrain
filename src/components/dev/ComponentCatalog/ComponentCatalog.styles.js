@@ -116,19 +116,21 @@ export const CodeView = styled.div`
   flex: 1;
   padding: 2rem;
   overflow: auto;
-  background: rgba(0, 0, 0, 0.5);
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0; /* Important pour permettre le rétrécissement */
 
   pre {
     margin: 0;
-    padding: 1.5rem;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 215, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
   }
 
   code {
     color: #ffd700;
-    font-family: 'Fira Code', monospace;
+    font-family: 'Fira Code', 'Monaco', 'Courier New', monospace;
     font-size: 0.9rem;
     line-height: 1.6;
   }

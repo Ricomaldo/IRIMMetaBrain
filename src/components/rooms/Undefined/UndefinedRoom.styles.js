@@ -16,15 +16,21 @@ export const SandboxControlBar = styled.div`
   ${secondaryLevel}
   ${woodBg};
   display: grid;
-  grid-template-columns: repeat(7, auto);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 6px;
-  padding: 8px 16px;
+  grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+  grid-auto-rows: minmax(28px, auto);
+  gap: 4px;
+  padding: 8px 12px;
   width: 100%;
   margin: 0 auto;
   background: transparent;
   box-shadow: none;
   flex: 1;
+
+  button {
+    min-width: 45px;
+    padding: 4px 8px;
+    font-size: 12px;
+  }
 `;
 
 // Contenu welcome pour Panel

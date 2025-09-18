@@ -31,7 +31,7 @@ export const quickActions = [
   { id: 'help', icon: '❓', label: 'Aide', onClick: () => {} },
   { id: 'map', icon: '🗺️', label: 'Carte', onClick: () => {} },
   { id: 'sync', icon: '🔄', label: 'Synchronisation', onClick: () => openModal('sync') },
-  { id: 'config', icon: '⚙️', label: 'Paramètres', onClick: () => {} },
+  { id: 'config', icon: '⚙️', label: 'Paramètres', onClick: () => openModal('settings') },
 ];
 
 // Deprecated - keeping for compatibility

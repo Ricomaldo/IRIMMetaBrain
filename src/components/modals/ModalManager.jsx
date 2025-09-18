@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { registerModalHandler } from '../../utils/buttonMapping';
 import { HealingPotionModal, SleepPotionModal, StrengthPotionModal } from './PotionModals';
 import SyncModal from './SyncModal/SyncModal';
+import SettingsModal from './SettingsModal/SettingsModal';
 
 const ModalManager = () => {
   // État pour chaque modale
@@ -12,6 +13,7 @@ const ModalManager = () => {
     'potion-sleep': false,
     'potion-strength': false,
     'sync': false,
+    'settings': false,
   });
 
   // Utiliser une ref pour stocker la fonction de setState
@@ -63,6 +65,11 @@ const ModalManager = () => {
       <SyncModal
         isOpen={modalStates['sync']}
         onClose={() => closeModal('sync')}
+      />
+
+      <SettingsModal
+        isOpen={modalStates['settings']}
+        onClose={() => closeModal('settings')}
       />
     </>
   );

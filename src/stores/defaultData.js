@@ -125,7 +125,7 @@ Espace pour présenter les features terminées et les démos interactives.
 ## Outils de debug
 - React DevTools ✅
 - Zustand DevTools ✅
-- Console logs stratégiques`
+- Console logs stratégiques`,
   },
 
   sideTowerNotes: {
@@ -144,17 +144,17 @@ IRIMMetaBrain progresse bien ! L'architecture 4x3 rooms fonctionne parfaitement.
 1. Finaliser la capture d'état
 2. Implémenter ComponentCatalog
 3. Ajouter SystemOverview
-4. Tests et optimisations`
-  }
+4. Tests et optimisations`,
+  },
 };
 
 // Les données projects restent telles quelles car elles sont déjà riches
 export const defaultProjectsData = {
-  selectedProject: 'irimstudiohall',
+  selectedProject: "irimmetabrain",
   projects: {
-    irimstudiohall: {
-      id: "irimstudiohall",
-      name: "IRIMStudioHall",
+    irimmetabrain: {
+      id: "irimmetabrain",
+      name: "IRIMMetaBrain",
       type: "tool",
       status: "dev_actif",
       roadmapMarkdown: `# Roadmap
@@ -213,18 +213,18 @@ export const defaultProjectsData = {
         mindlog: {
           collapsed: true,
           mood: "🔥",
-          note: "Architecture stores harmonisée !"
+          note: "Architecture stores harmonisée !",
         },
         actions: {
           collapsed: true,
           items: [
             { id: 1, text: "Implémenter isFirstRun", completed: true },
             { id: 2, text: "Harmoniser les stores", completed: false },
-            { id: 3, text: "Finaliser capture", completed: false }
-          ]
+            { id: 3, text: "Finaliser capture", completed: false },
+          ],
         },
-        screentv: { collapsed: true, screenshots: [] }
-      }
-    }
-  }
+        screentv: { collapsed: true, screenshots: [] },
+      },
+    },
+  },
 };

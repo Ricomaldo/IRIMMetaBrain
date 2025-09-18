@@ -1,0 +1,186 @@
+{
+  "files": {
+    "jsx": [
+      "src/utils/RoomRegistry.jsx",
+      "src/components/tower/ControlTower/ControlTower.jsx",
+      "src/components/tower/WorkbenchDrawer/WorkbenchDrawer.jsx",
+      "src/components/tower/SideTowerNotes/SideTowerNotes.jsx",
+      "src/components/layout/PanelGrid/PanelGrid.jsx",
+      "src/components/layout/SideTower/SideTower.jsx",
+      "src/components/layout/RoomCanvas/RoomCanvas.jsx",
+      "src/components/layout/StudioHall/StudioHall.jsx",
+      "src/components/layout/BaseRoom/BaseRoom.jsx",
+      "src/components/navigation/NavigationArrows/NavigationArrows.jsx",
+      "src/components/navigation/NavigationArrows/ArrowButton.jsx",
+      "src/components/modals/ModalManager.jsx",
+      "src/components/modals/SyncModal/SyncModal.jsx",
+      "src/components/modals/PotionModals/HealingPotionModal.jsx",
+      "src/components/modals/PotionModals/StrengthPotionModal.jsx",
+      "src/components/modals/PotionModals/SleepPotionModal.jsx",
+      "src/components/common/MarkdownEditor/MarkdownPreview/MarkdownPreview.jsx",
+      "src/components/common/MarkdownEditor/MarkdownEditor.jsx",
+      "src/components/common/Panel/Panel.jsx",
+      "src/components/common/Panel/PanelContext.jsx",
+      "src/components/common/MarkdownToolbar/MarkdownToolbar.jsx",
+      "src/components/common/Button/Button.jsx",
+      "src/components/common/Typography/PanelTitle.jsx",
+      "src/components/common/Typography/Typography.jsx",
+      "src/components/common/IconButton/IconButton.jsx",
+      "src/components/common/Modal/Modal.jsx",
+      "src/components/dev/SystemOverview/SystemOverview.jsx",
+      "src/components/dev/ComponentCatalog/ComponentCatalog.jsx",
+      "src/components/rooms/Atelier/ScreenTV/ScreenTV.jsx",
+      "src/components/rooms/Atelier/AtelierRoom.jsx",
+      "src/components/rooms/Atelier/Actions/Actions.jsx",
+      "src/components/rooms/Atelier/MindLog/MindLog.jsx",
+      "src/components/rooms/Comptoir/ComptoirRoom.jsx",
+      "src/components/rooms/Cave/CaveRoom.jsx",
+      "src/components/rooms/Cuisine/CuisineRoom.jsx",
+      "src/components/rooms/Chambre/ChambreRoom.jsx",
+      "src/components/rooms/shared/RoomNote/RoomNote.jsx",
+      "src/components/rooms/Forge/ForgeRoom.jsx",
+      "src/components/rooms/Undefined/UndefinedRoom.jsx",
+      "src/components/rooms/Boutique/BoutiqueRoom.jsx",
+      "src/components/rooms/Scriptorium/ScriptoriumRoom.jsx",
+      "src/components/rooms/Sanctuaire/SanctuaireRoom.jsx",
+      "src/components/rooms/Jardin/JardinRoom.jsx",
+      "src/components/rooms/Bibliotheque/BibliothequeRoom.jsx",
+      "src/main.jsx",
+      "src/App.jsx"
+    ],
+    "js": [
+      "src/stores/defaultData.js",
+      "src/stores/useProjectsStore.js",
+      "src/stores/useNotesStore.js",
+      "src/utils/exposeStores.js",
+      "src/utils/buttonMapping.js",
+      "src/utils/debounce.js",
+      "src/utils/roomPositions.js",
+      "src/utils/assetMapping.js",
+      "src/styles/mixins.js",
+      "src/styles/theme.js",
+      "src/styles/color.js",
+      "src/components/tower/ControlTower/ControlTower.styles.js",
+      "src/components/tower/index.js",
+      "src/components/tower/WorkbenchDrawer/WorkbenchDrawer.styles.js",
+      "src/components/tower/SideTowerNotes/SideTowerNotes.styles.js",
+      "src/components/layout/PanelGrid/index.js",
+      "src/components/layout/PanelGrid/PanelGrid.styles.js",
+      "src/components/layout/SideTower/SideTower.styles.js",
+      "src/components/layout/RoomCanvas/RoomCanvas.styles.js",
+      "src/components/layout/StudioHall/StudioHall.styles.js",
+      "src/components/layout/BaseRoom/BaseRoom.styles.js",
+      "src/components/layout/BaseRoom/index.js",
+      "src/components/navigation/NavigationArrows/index.js",
+      "src/components/modals/SyncModal/SyncModal.styles.js",
+      "src/components/modals/PotionModals/index.js",
+      "src/components/common/MarkdownEditor/MarkdownPreview/MarkdownPreview.styles.js",
+      "src/components/common/MarkdownEditor/MarkdownEditor.styles.js",
+      "src/components/common/MarkdownEditor/index.js",
+      "src/components/common/Panel/Panel.styles.js",
+      "src/components/common/Panel/index.js",
+      "src/components/common/MarkdownToolbar/index.js",
+      "src/components/common/Button/index.js",
+      "src/components/common/Button/Button.styles.js",
+      "src/components/common/Typography/index.js",
+      "src/components/common/IconButton/IconButton.styles.js",
+      "src/components/common/Modal/Modal.styles.js",
+      "src/components/dev/SystemOverview/SystemOverview.styles.js",
+      "src/components/dev/ComponentCatalog/ComponentCatalog.styles.js",
+      "src/components/rooms/Atelier/AtelierRoom.styles.js",
+      "src/components/rooms/Comptoir/ComptoirRoom.styles.js",
+      "src/components/rooms/Comptoir/index.js",
+      "src/components/rooms/Cave/CaveRoom.styles.js",
+      "src/components/rooms/Cave/index.js",
+      "src/components/rooms/Cuisine/CuisineRoom.styles.js",
+      "src/components/rooms/Chambre/index.js",
+      "src/components/rooms/Chambre/ChambreRoom.styles.js",
+      "src/components/rooms/shared/RoomNote/RoomNote.styles.js",
+      "src/components/rooms/shared/RoomNote/index.js",
+      "src/components/rooms/Forge/index.js",
+      "src/components/rooms/Forge/ForgeRoom.styles.js",
+      "src/components/rooms/Undefined/UndefinedRoom.styles.js",
+      "src/components/rooms/Boutique/index.js",
+      "src/components/rooms/Boutique/BoutiqueRoom.styles.js",
+      "src/components/rooms/Scriptorium/ScriptoriumRoom.styles.js",
+      "src/components/rooms/Scriptorium/index.js",
+      "src/components/rooms/Sanctuaire/SanctuaireRoom.styles.js",
+      "src/components/rooms/Jardin/JardinRoom.styles.js",
+      "src/components/rooms/Bibliotheque/BibliothequeRoom.styles.js",
+      "src/components/rooms/Bibliotheque/index.js",
+      "src/hooks/useTypography.js",
+      "src/hooks/useModal.js",
+      "src/hooks/usePanelContent.js",
+      "src/hooks/useRoomNavigation.js",
+      "src/services/SyncManager.js"
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "category": "common",
+      "path": "src/components/common/Button/Button.jsx"
+    },
+    {
+      "name": "IconButton",
+      "category": "common",
+      "path": "src/components/common/IconButton/IconButton.jsx"
+    },
+    {
+      "name": "MarkdownEditor",
+      "category": "common",
+      "path": "src/components/common/MarkdownEditor/MarkdownEditor.jsx"
+    },
+    {
+      "name": "MarkdownToolbar",
+      "category": "common",
+      "path": "src/components/common/MarkdownToolbar/MarkdownToolbar.jsx"
+    },
+    {
+      "name": "Modal",
+      "category": "common",
+      "path": "src/components/common/Modal/Modal.jsx"
+    },
+    {
+      "name": "Panel",
+      "category": "common",
+      "path": "src/components/common/Panel/Panel.jsx"
+    },
+    {
+      "name": "Typography",
+      "category": "common",
+      "path": "src/components/common/Typography/Typography.jsx"
+    },
+    {
+      "name": "BaseRoom",
+      "category": "layout",
+      "path": "src/components/layout/BaseRoom/BaseRoom.jsx"
+    },
+    {
+      "name": "PanelGrid",
+      "category": "layout",
+      "path": "src/components/layout/PanelGrid/PanelGrid.jsx"
+    },
+    {
+      "name": "RoomCanvas",
+      "category": "layout",
+      "path": "src/components/layout/RoomCanvas/RoomCanvas.jsx"
+    },
+    {
+      "name": "SideTower",
+      "category": "layout",
+      "path": "src/components/layout/SideTower/SideTower.jsx"
+    },
+    {
+      "name": "StudioHall",
+      "category": "layout",
+      "path": "src/components/layout/StudioHall/StudioHall.jsx"
+    }
+  ],
+  "totals": {
+    "jsx": 46,
+    "js": 64,
+    "total": 110,
+    "components": 12
+  }
+}

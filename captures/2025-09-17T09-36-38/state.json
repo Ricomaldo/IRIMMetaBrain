@@ -19,11 +19,11 @@
       }
     },
     "projects": {
-      "selectedProject": "irimstudiohall",
+      "selectedProject": "irimmetabrain",
       "projects": {
-        "irimstudiohall": {
-          "id": "irimstudiohall",
-          "name": "IRIMStudioHall",
+        "irimmetabrain": {
+          "id": "irimmetabrain",
+          "name": "IRIMMetaBrain",
           "type": "tool",
           "status": "dev_actif",
           "roadmapMarkdown": "# Roadmap\n\n## Phase 1 - Atelier habité ✓\n- [x] Migration **Zustand** + stores\n- [x] Panneaux éditables avec **markdown**\n- [x] Design system avec accents froids\n\n## Phase 2 - Expansion\n- [ ] Autres pièces (Forge, Boutique, Chambre)\n- [ ] **Navigation** entre projets\n- [ ] Import/Export projets\n\n## Phase 3 - Pro Features\n- [ ] **Sync cloud** optionnelle\n- [ ] **Templates** de projets\n- [ ] **Analytics** et métriques\n\n---\n\n> *\"Medieval workspace meets modern productivity\"* 🏰",
@@ -76,17 +76,9 @@
   "timestamp": "2025-09-17T09:36:46.916Z",
   "debug": {
     "method": "__GET_ALL_STATE__",
-    "rawStateKeys": [
-      "notes",
-      "projects"
-    ],
+    "rawStateKeys": ["notes", "projects"],
     "zustandPersist": {},
-    "storeKeys": [
-      "notes",
-      "projects"
-    ],
-    "localStorageKeys": [
-      "irim-initialized"
-    ]
+    "storeKeys": ["notes", "projects"],
+    "localStorageKeys": ["irim-initialized"]
   }
 }
