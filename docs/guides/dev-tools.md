@@ -1,3 +1,8 @@
+---
+type: guide
+updated: 2025-09-18
+---
+
 # 🎓 Guide des Outils de Développement - IRIMMetaBrain
 
 > Formation complète sur les outils de capitalisation et documentation
@@ -142,7 +147,7 @@ const ComponentCatalog = () => {
 
   useEffect(() => {
     // Auto-discovery des composants
-    const context = require.context('../../', true, /\.jsx$/);
+    const context = require.context('../../', true, \/\.jsx$/);
     const comps = context.keys().map(path => ({
       path,
       name: path.split('/').pop().replace('.jsx', ''),
@@ -447,7 +452,7 @@ captures/
 1. **SystemOverview** = Comprendre les connexions
 2. **Catalog** = Tester les variations
 3. **Captures** = Tracer l'évolution
-4. **CHANGELOG-DEV** = Raconter l'histoire
+4. **devlog/** = Raconter l'histoire
 
 Ensemble, ils forment un **système de mémoire augmentée** pour ton développement.
 
@@ -457,7 +462,3 @@ Code → Introspection → Visualisation → Documentation → Mémoire
 ```
 
 C'est transformer ton processus de dev en système d'apprentissage continu !
-
----
-
-*"The code remembers what the developer forgets"* - Architecture auto-documentée

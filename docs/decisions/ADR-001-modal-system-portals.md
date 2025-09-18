@@ -1,3 +1,8 @@
+---
+type: decision
+updated: 2025-09-18
+---
+
 # ADR-001: Système de Modales avec React Portals
 
 Date: 2024-09-16
