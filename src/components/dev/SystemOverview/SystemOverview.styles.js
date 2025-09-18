@@ -12,11 +12,11 @@ export const OverviewContainer = styled.div`
   flex-direction: column;
 
   h1 {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.palettes.blues[100]};
     margin-bottom: 1.5rem;
     text-align: center;
     font-size: 1.8rem;
-    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.3);
+    text-shadow: 0 3px 6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(74, 158, 255, 0.3);
     font-family: "Georgia", serif;
     letter-spacing: 1px;
     position: relative;
@@ -31,14 +31,13 @@ export const OverviewContainer = styled.div`
       height: 2px;
       background: linear-gradient(90deg,
         transparent,
-        ${({ theme }) => theme.colors.primary},
+        ${({ theme }) => theme.palettes.blues[100]},
         transparent);
     }
   }
 `;
 
 export const GraphArea = styled.div`
-  ${stoneBg}
   border: 4px solid #8B7355;
   border-radius: ${({ theme }) => theme.radii.lg};
   padding: 0;
@@ -52,9 +51,7 @@ export const GraphArea = styled.div`
     0 6px 12px rgba(0, 0, 0, 0.4),
     inset 0 -1px 0 rgba(255, 215, 0, 0.1);
   overflow: hidden;
-  background:
-    ${stoneBg},
-    radial-gradient(circle at center, rgba(255, 215, 0, 0.02), transparent 70%);
+  background: ${({ theme }) => theme.gradients.uiKitBlue};
 
   svg {
     width: 100%;
@@ -129,7 +126,7 @@ export const InfoPanel = styled.div`
   position: absolute;
   top: 1rem;
   right: 1rem;
-  border: 3px solid #8b5a2b;
+  border: 3px solid rgba(74, 158, 255, 0.3);
   border-radius: ${({ theme }) => theme.radii.md};
   padding: 1.2rem;
   min-width: 200px;
@@ -137,30 +134,30 @@ export const InfoPanel = styled.div`
   z-index: 10;
   box-shadow:
     0 6px 12px rgba(0, 0, 0, 0.6),
-    inset 0 1px 0 rgba(255, 215, 0, 0.2),
+    inset 0 1px 0 rgba(74, 158, 255, 0.2),
     inset 0 -1px 0 rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(4px);
   background: rgba(20, 20, 20, 0.95);
 
   h3 {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.palettes.blues[100]};
     margin-bottom: 0.8rem;
     font-family: "Georgia", serif;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
     font-size: 1.1rem;
-    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    border-bottom: 1px solid rgba(74, 158, 255, 0.2);
     padding-bottom: 0.5rem;
   }
 
   p {
     margin: 0.5rem 0;
-    color: ${({ theme }) => theme.colors.text};
+    color: rgba(255, 255, 255, 0.9);
     font-size: 0.9rem;
     font-family: "Georgia", serif;
     line-height: 1.4;
 
     strong {
-      color: ${({ theme }) => theme.colors.accents.warm};
+      color: ${({ theme }) => theme.palettes.blues[200]};
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
       font-weight: 600;
     }
@@ -174,7 +171,7 @@ export const Legend = styled.div`
   padding: 0.8rem;
   background: rgba(0, 0, 0, 0.2);
   border-radius: ${({ theme }) => theme.radii.md};
-  border: 1px solid rgba(255, 215, 0, 0.1);
+  border: 1px solid rgba(74, 158, 255, 0.1);
 `;
 
 export const LegendItem = styled.div`
@@ -183,6 +180,7 @@ export const LegendItem = styled.div`
   gap: 0.6rem;
   font-size: 0.9rem;
   font-family: "Georgia", serif;
+  color: rgba(255, 255, 255, 0.8);
 
   &::before {
     content: "";

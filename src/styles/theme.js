@@ -141,6 +141,18 @@ export const theme = {
     modal: 30
   },
   // Gradients UI Kit pour enrichissement visuel
+  // Palettes de couleurs pour visualisations
+  palettes: {
+    // Gamme de bleus pour hiérarchies et arbres
+    blues: {
+      100: '#4a9eff',  // Bleu vif - Niveau 0/Root
+      200: '#6ba3ff',  // Bleu moyen-vif - Niveau 1
+      300: '#89b4ff',  // Bleu moyen - Niveau 2
+      400: '#a7c5ff',  // Bleu clair - Niveau 3
+      500: '#c5d6ff'   // Bleu très clair - Niveau 4+
+    }
+  },
+
   gradients: {
     // Or premium (flèches navigation, bordures spéciales)
     uiKitGold: 'linear-gradient(135deg, #f0deba 0%, #b1845a 100%)',

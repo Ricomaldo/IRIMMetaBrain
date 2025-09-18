@@ -56,7 +56,7 @@ const ForgeRoom = () => {
             icon="🌳"
             texture="metal"
             borderType="blue"
-            accentColor={theme.colors.accents.warm}
+            accentColor={theme.colors.cold}
             collapsible={true}
             collapsed={false}
             onToggleCollapse={() => setShowTree(false)}

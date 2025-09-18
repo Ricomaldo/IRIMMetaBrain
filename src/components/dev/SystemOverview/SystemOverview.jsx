@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, memo } from "react";
+import { useTheme } from "styled-components";
 import {
   OverviewContainer,
   GraphArea,
@@ -19,8 +20,9 @@ import architectureMap from "../../../../architecture-map.json";
  */
 const TreeNode = memo(
   ({ node, x, y, onHover, onClick, isExpanded, expandedNodes }) => {
+    const theme = useTheme();
     const getNodeColor = (depth) => {
-      const colors = ["#ffd700", "#4a9eff", "#ff6b6b", "#51cf66", "#ff9ff3"];
+      const colors = Object.values(theme.palettes.blues);
       return colors[depth % colors.length];
     };
 
@@ -124,6 +126,7 @@ TreeNode.displayName = "TreeNode";
  * @renders span
  */
 const SystemOverview = memo(() => {
+  const theme = useTheme();
   const [hoveredNode, setHoveredNode] = useState(null);
   const [expandedNodes, setExpandedNodes] = useState(
     new Set(["StudioHall", "RoomCanvas", "SideTower"])
@@ -337,11 +340,11 @@ const SystemOverview = memo(() => {
       }}>
         <div style={{ flex: 1 }}>
           <Legend>
-            <LegendItem color="#ffd700">Racine</LegendItem>
-            <LegendItem color="#4a9eff">Layout</LegendItem>
-            <LegendItem color="#ff6b6b">Rooms</LegendItem>
-            <LegendItem color="#51cf66">UI</LegendItem>
-            <LegendItem color="#ff9ff3">Widgets</LegendItem>
+            <LegendItem color={theme.palettes.blues[100]}>Racine</LegendItem>
+            <LegendItem color={theme.palettes.blues[200]}>Niveau 1</LegendItem>
+            <LegendItem color={theme.palettes.blues[300]}>Niveau 2</LegendItem>
+            <LegendItem color={theme.palettes.blues[400]}>Niveau 3</LegendItem>
+            <LegendItem color={theme.palettes.blues[500]}>Niveau 4</LegendItem>
           </Legend>
         </div>
 
@@ -352,18 +355,18 @@ const SystemOverview = memo(() => {
           minWidth: "200px"
         }}>
           <div style={{ marginBottom: "0.5rem" }}>
-            <strong style={{ color: "#ffd700" }}>{stats.totalComponents}</strong>
-            <span> composants au total</span>
+            <strong style={{ color: theme.palettes.blues[100] }}>{stats.totalComponents}</strong>
+            <span style={{ color: "rgba(255, 255, 255, 0.8)" }}> composants au total</span>
           </div>
           <div style={{ marginBottom: "0.5rem" }}>
-            <strong style={{ color: "#ffd700" }}>{stats.annotatedComponents}</strong>
-            <span> avec @renders</span>
+            <strong style={{ color: theme.palettes.blues[100] }}>{stats.annotatedComponents}</strong>
+            <span style={{ color: "rgba(255, 255, 255, 0.8)" }}> avec @renders</span>
           </div>
           <div style={{ marginBottom: "0.5rem" }}>
-            <strong style={{ color: "#ffd700" }}>{stats.visibleNodes}</strong>
-            <span> nœuds visibles</span>
+            <strong style={{ color: theme.palettes.blues[100] }}>{stats.visibleNodes}</strong>
+            <span style={{ color: "rgba(255, 255, 255, 0.8)" }}> nœuds visibles</span>
           </div>
-          <div style={{ fontSize: "0.75rem", opacity: 0.7 }}>
+          <div style={{ fontSize: "0.75rem", color: "rgba(255, 255, 255, 0.5)" }}>
             {new Date(architectureMap.timestamp).toLocaleString('fr-FR')}
           </div>
         </div>
