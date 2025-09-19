@@ -2,6 +2,48 @@
 
 ## [Unreleased]
 
+### Added - 2025-09-19 (J6 - Architecture Multi-Stores v2 & Robustesse)
+
+- **Architecture Multi-Stores v2** : Refonte complète de la gestion des données
+  - Séparation métadonnées (`useProjectMetaStore`) / données (`useProjectDataStore`)
+  - Stores dynamiques par projet avec lazy loading
+  - Migration automatique et transparente v1 → v2
+  - Backup automatique avant migration
+  - Cache des instances pour performance optimale
+
+- **Système d'Initialisation Robuste** :
+  - Détection automatique localStorage vide → charge 4 projets démo
+  - `defaultProjectsData.js` avec contenu riche (roadmaps, todos, modules)
+  - Gestion des stores corrompus avec réinitialisation automatique
+  - Loading state pendant l'initialisation dans App.jsx
+  - Fallback intelligent sur données démo si problème
+
+- **Synchronisation Cloud Améliorée** :
+  - `ProjectSyncAdapter` compatible avec architecture multi-stores
+  - Format v2.0 avec détection automatique de version
+  - Compatibilité descendante (import v1 → migration → v2)
+  - Export/Import chiffré AES-256 vers GitHub Gist
+  - SyncModal mise à jour pour nouvelle architecture
+
+- **Documentation Complète et Pédagogique** :
+  - `data-flow-guide.md` : Guide utilisateur simple avec scénarios concrets
+  - `sync-system.md` v2 : Documentation technique mise à jour
+  - `CHANGELOG-stores.md` : Historique détaillé de l'évolution
+  - Consolidation docs (suppression stores-architecture.md obsolète)
+  - Commandes debug et test documentées
+
+- **UI/UX ProjectOverviewModal** :
+  - `DraggableProjectCard` : Cards réorganisables par drag & drop
+  - `ProjectBadges` : Badges visuels pour statuts et catégories
+  - `ProjectForm` : Formulaire création/édition avec champs enrichis
+  - Support de propriétés enrichies (technologies, dates, client, etc.)
+
+- **Outils de Test et Debug** :
+  - `test-scenarios.js` : Script de validation complète
+  - `window.stores` : Accès simplifié pour console
+  - `exposeStores.js` amélioré avec alias pratiques
+  - Commandes de réinitialisation et migration
+
 ### Added - 2025-09-19 (Session Gestion Projets & ProjectCarousel)
 
 - **Système de Gestion de Projets Complet** : Infrastructure pour gérer multiples projets
