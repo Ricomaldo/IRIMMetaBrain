@@ -388,6 +388,33 @@ export default function TimeTimer({
               );
             })}
 
+            {/* Nombres des minutes */}
+            {Array.from({ length: 12 }, (_, i) => {
+              const minute = i === 0 ? 0 : 60 - (i * 5); // 0 en haut, puis 55, 50, 45...
+              const angle = (i * 30) - 90; // 30 degrés entre chaque nombre
+              const numberRadius = radius - (radius * 0.15); // Position des nombres
+
+              const x = diskSize / 2 + numberRadius * Math.cos((angle * Math.PI) / 180);
+              const y = diskSize / 2 + numberRadius * Math.sin((angle * Math.PI) / 180);
+
+              return (
+                <text
+                  key={`num-${i}`}
+                  x={x}
+                  y={y}
+                  textAnchor="middle"
+                  dominantBaseline="middle"
+                  fill="#A0522D"
+                  fontSize={`${Math.max(10, dimensions.size * 0.04)}px`}
+                  fontWeight="500"
+                  fontFamily="system-ui, sans-serif"
+                  opacity="0.8"
+                >
+                  {minute}
+                </text>
+              );
+            })}
+
             {/* Disque coloré */}
             {remaining > 0 &&
               (progressAngle >= 359.9 ? (
@@ -444,6 +471,15 @@ export default function TimeTimer({
               stroke="#A0522D"
               strokeWidth="3"
               fill="none"
+            />
+
+            {/* Disque central */}
+            <circle
+              cx={diskSize / 2}
+              cy={diskSize / 2}
+              r={radius * 0.15}
+              fill="#A0522D"
+              opacity="0.9"
             />
           </svg>
 
