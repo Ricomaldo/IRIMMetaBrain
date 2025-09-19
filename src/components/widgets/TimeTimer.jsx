@@ -1,5 +1,8 @@
 // TimeTimer.jsx - Composant timer visuel style TimeTimer
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import PlayIcon from "../../assets/icons/play.svg";
+import PauseIcon from "../../assets/icons/pause.svg";
+import ResetIcon from "../../assets/icons/reset.svg";
 
 // ========== Configuration ==========
 const TIMER_COLORS = [
@@ -289,6 +292,14 @@ export default function TimeTimer({
       transition: "all 0.18s ease",
       minWidth: `${Math.max(35, dimensions.size * 0.12)}px`,
       flexShrink: 0,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    buttonIcon: {
+      width: `${Math.max(14, dimensions.size * 0.05)}px`,
+      height: `${Math.max(14, dimensions.size * 0.05)}px`,
+      filter: "brightness(0.2)",
     },
   };
 
@@ -396,7 +407,11 @@ export default function TimeTimer({
             onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
             onMouseLeave={(e) => (e.target.style.opacity = "1")}
           >
-            {running ? "⏸" : "▶️"}
+            <img
+              src={running ? PauseIcon : PlayIcon}
+              alt={running ? "Pause" : "Play"}
+              style={styles.buttonIcon}
+            />
           </button>
 
           <button
@@ -405,7 +420,11 @@ export default function TimeTimer({
             onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
             onMouseLeave={(e) => (e.target.style.opacity = "1")}
           >
-            🔄
+            <img
+              src={ResetIcon}
+              alt="Reset"
+              style={styles.buttonIcon}
+            />
           </button>
         </div>
 
