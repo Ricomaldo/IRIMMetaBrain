@@ -4,14 +4,11 @@ import PlayIcon from "../../assets/icons/play.svg";
 import PauseIcon from "../../assets/icons/pause.svg";
 import ResetIcon from "../../assets/icons/reset.svg";
 import ReverseIcon from "../../assets/icons/reverse.svg";
+import palettesData from "../../data/palettes.json";
 
 // ========== Configuration ==========
-const TIMER_COLORS = [
-  "#8B3A3A", // Rouge Terre
-  "#FFD700", // Or
-  "#68752C", // Vert succès
-  "#4A5568", // Gris froid
-];
+const PALETTES = Object.values(palettesData);
+const PALETTE_NAMES = Object.keys(palettesData);
 
 const MIN_SIZE = 150;
 const MAX_MINUTES = 60;
@@ -40,6 +37,11 @@ export default function TimeTimer({
   const [showParti, setShowParti] = useState(false);
   const [showReparti, setShowReparti] = useState(false);
   const [dimensions, setDimensions] = useState({ size: 300 });
+  const [paletteIndex, setPaletteIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  // Palette actuelle
+  const currentPalette = PALETTES[paletteIndex];
 
   // ========== Refs ==========
   const intervalRef = useRef(null);
@@ -252,6 +254,45 @@ export default function TimeTimer({
       display: "flex",
       flexDirection: "column",
       gap: `${Math.max(4, dimensions.size * 0.02)}px`,
+      alignItems: "center",
+    },
+    carouselContainer: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: `${Math.max(2, dimensions.size * 0.01)}px`,
+    },
+    carouselButton: {
+      background: "none",
+      border: "none",
+      cursor: "pointer",
+      padding: 0,
+      fontSize: `${Math.max(12, dimensions.size * 0.05)}px`,
+      color: "#A0522D",
+      transition: "opacity 0.2s ease",
+      lineHeight: 0.5,
+    },
+    carouselButtonDisabled: {
+      opacity: 0.3,
+      cursor: "not-allowed",
+    },
+    colorsWrapper: {
+      position: "relative",
+      height: `${Math.max(18, dimensions.size * 0.07) * 4 + Math.max(4, dimensions.size * 0.02) * 3}px`,
+      overflow: "hidden",
+    },
+    colorsSlider: {
+      display: "flex",
+      flexDirection: "column",
+      gap: `${Math.max(4, dimensions.size * 0.02)}px`,
+      transition: isTransitioning ? "transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)" : "none",
+      transform: `translateY(-${paletteIndex * 100}%)`,
+    },
+    paletteGroup: {
+      display: "flex",
+      flexDirection: "column",
+      gap: `${Math.max(4, dimensions.size * 0.02)}px`,
+      height: `${Math.max(18, dimensions.size * 0.07) * 4 + Math.max(4, dimensions.size * 0.02) * 3}px`,
     },
     colorButton: {
       width: `${Math.max(18, dimensions.size * 0.07)}px`,
@@ -571,25 +612,74 @@ export default function TimeTimer({
           />
         </button>
 
-        {/* Sélecteur de couleur sur la droite */}
+        {/* Sélecteur de couleur sur la droite avec carousel */}
         {colorSelect && (
           <div style={styles.colorRow}>
-            {TIMER_COLORS.map((c) => (
+            <div style={styles.carouselContainer}>
+              {/* Triangle du haut */}
               <button
-                key={c}
                 style={{
-                  ...styles.colorButton,
-                  backgroundColor: c,
-                  transform: color === c ? "scale(1.2)" : "scale(1)",
+                  ...styles.carouselButton,
+                  ...(paletteIndex === 0 ? styles.carouselButtonDisabled : {}),
                 }}
-                onClick={() => setColor(c)}
-                onMouseEnter={(e) => (e.target.style.transform = "scale(1.15)")}
-                onMouseLeave={(e) =>
-                  (e.target.style.transform =
-                    color === c ? "scale(1.2)" : "scale(1)")
-                }
-              />
-            ))}
+                onClick={() => {
+                  if (paletteIndex > 0) {
+                    setIsTransitioning(true);
+                    setPaletteIndex(paletteIndex - 1);
+                    setTimeout(() => setIsTransitioning(false), 400);
+                  }
+                }}
+                disabled={paletteIndex === 0}
+              >
+                ▲
+              </button>
+
+              {/* Container des couleurs avec animation */}
+              <div style={styles.colorsWrapper}>
+                <div style={styles.colorsSlider}>
+                  {PALETTES.map((palette, pIndex) => (
+                    <div key={pIndex} style={styles.paletteGroup}>
+                      {palette.map((c, cIndex) => (
+                        <button
+                          key={`${pIndex}-${cIndex}`}
+                          style={{
+                            ...styles.colorButton,
+                            backgroundColor: c,
+                            transform: color === c ? "scale(1.2)" : "scale(1)",
+                          }}
+                          onClick={() => setColor(c)}
+                          onMouseEnter={(e) => {
+                            e.target.style.transform = "scale(1.15)";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.target.style.transform =
+                              color === c ? "scale(1.2)" : "scale(1)";
+                          }}
+                        />
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Triangle du bas */}
+              <button
+                style={{
+                  ...styles.carouselButton,
+                  ...(paletteIndex === PALETTES.length - 1 ? styles.carouselButtonDisabled : {}),
+                }}
+                onClick={() => {
+                  if (paletteIndex < PALETTES.length - 1) {
+                    setIsTransitioning(true);
+                    setPaletteIndex(paletteIndex + 1);
+                    setTimeout(() => setIsTransitioning(false), 400);
+                  }
+                }}
+                disabled={paletteIndex === PALETTES.length - 1}
+              >
+                ▼
+              </button>
+            </div>
           </div>
         )}
       </div>
