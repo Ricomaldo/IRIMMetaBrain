@@ -100,7 +100,7 @@ export const ToggleButton = styled.button.withConfig({
 
 export const PanelContent = styled.div`
   flex: 1;
-  background: ${props => props.$accentColor || props.theme.colors.accents.cold};
+  background: ${props => props.$transparentContent ? 'transparent' : (props.$accentColor || props.theme.colors.accents.cold)};
   border-radius: 0 0 ${({ theme }) => theme.radii.sm} ${({ theme }) => theme.radii.sm};
   /* Autoriser le scroll interne du contenu */
   overflow: auto;

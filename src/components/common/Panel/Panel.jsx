@@ -37,6 +37,7 @@ const PanelInner = ({
   accentColor,
   maxHeight,
   borderType,
+  transparentContent,
 
   // LAYOUT
   gridColumn,
@@ -156,7 +157,7 @@ const PanelInner = ({
           </div>
         </PanelHeader>
 
-        <PanelContent $accentColor={accentColor}>
+        <PanelContent $accentColor={accentColor} $transparentContent={transparentContent}>
           {children}
         </PanelContent>
       </PanelContainer>
@@ -190,6 +191,7 @@ Panel.propTypes = {
   accentColor: PropTypes.string,
   maxHeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   borderType: PropTypes.oneOf(['default', 'blue', 'craft']),
+  transparentContent: PropTypes.bool,
 
   // LAYOUT
   gridColumn: PropTypes.string,

@@ -1,19 +1,19 @@
 // src/components/rooms/Chambre/ChambreRoom.jsx
 
-import React from 'react';
-import { useTheme } from 'styled-components';
-import BaseRoom from '../../layout/BaseRoom';
-import PanelGrid from '../../layout/PanelGrid';
-import Panel from '../../common/Panel';
-import useNotesStore from '../../../stores/useNotesStore';
-import useRoomsUIStore from '../../../stores/useRoomsUIStore';
-import MarkdownEditor from '../../common/MarkdownEditor';
-import ImageDisplay from '../../widgets/ImageDisplay/ImageDisplay';
-import QuoteCarousel from '../../widgets/QuoteCarousel/QuoteCarousel';
-import NavigationGrid from '../../room-modules/chambre/NavigationGrid';
-import TimeTimer from '../../widgets/TimeTimer';
-import { ChambreTitle } from './ChambreRoom.styles';
-import lionImage from '../../../assets/images/totems/Lion.png';
+import React from "react";
+import { useTheme } from "styled-components";
+import BaseRoom from "../../layout/BaseRoom";
+import PanelGrid from "../../layout/PanelGrid";
+import Panel from "../../common/Panel";
+import useNotesStore from "../../../stores/useNotesStore";
+import useRoomsUIStore from "../../../stores/useRoomsUIStore";
+import MarkdownEditor from "../../common/MarkdownEditor";
+import ImageDisplay from "../../widgets/ImageDisplay/ImageDisplay";
+import QuoteCarousel from "../../widgets/QuoteCarousel/QuoteCarousel";
+import NavigationGrid from "../../room-modules/chambre/NavigationGrid";
+import TimeTimer from "../../widgets/TimeTimer";
+import { ChambreTitle } from "./ChambreRoom.styles";
+import lionImage from "../../../assets/images/totems/Lion.png";
 
 /**
  * Chambre room component for personal space and timers
@@ -30,74 +30,77 @@ const ChambreRoom = () => {
   const theme = useTheme();
   const { roomNotes, updateRoomNote } = useNotesStore();
   const { getPanelState, updatePanelState } = useRoomsUIStore();
-  const chambreNotes = roomNotes.chambre || '';
+  const chambreNotes = roomNotes.chambre || "";
 
   return (
     <BaseRoom roomType="chambre" layoutType="grid">
       <PanelGrid columns={4} rows={4}>
-        {/* Timer Zone - 2x2 en haut à gauche */}
-        <Panel
-          gridColumn="1 / 3"
-          gridRow="1 / 3"
-          title="TimeTimer"
-          icon="⏰"
-          texture="wood"
-          accentColor={theme.colors.accents.warm}
-          collapsible={true}
-          collapsed={getPanelState('chambre', 'timer').collapsed}
-          onToggleCollapse={(val) => updatePanelState('chambre', 'timer', { collapsed: val })}
-        >
-          <div style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: theme.spacing.md
-          }}>
-            <TimeTimer
-              colorSelect={true}
-              maxSize={300}
-            />
-          </div>
-        </Panel>
-
         {/* Totem - 1x1 en haut à droite */}
         <Panel
-          gridColumn="4 / 5"
+          gridColumn="2 / 3"
           gridRow="1 / 3"
           title="Totem"
           icon="🗿"
           texture="stone"
           accentColor={theme.colors.accents.nature}
           collapsible={true}
-          collapsed={getPanelState('chambre', 'totem').collapsed}
-          onToggleCollapse={(val) => updatePanelState('chambre', 'totem', { collapsed: val })}
+          collapsed={getPanelState("chambre", "totem").collapsed}
+          onToggleCollapse={(val) =>
+            updatePanelState("chambre", "totem", { collapsed: val })
+          }
         >
-          <ImageDisplay 
-            src={lionImage}
-            alt="Lion Totem"
-            hoverEffect={true}
-          />
+          <ImageDisplay src={lionImage} alt="Lion Totem" hoverEffect={true} />
+        </Panel>
+        {/* Timer Zone - 2x2 en haut à gauche */}
+        <Panel
+          gridColumn="3 / 5"
+          gridRow="1 / 3"
+          title="TimeTimer"
+          icon="⏰"
+          texture="wood"
+          accentColor={theme.colors.accents.warm}
+          transparentContent={true}
+          collapsible={true}
+          collapsed={getPanelState("chambre", "timer").collapsed}
+          onToggleCollapse={(val) =>
+            updatePanelState("chambre", "timer", { collapsed: val })
+          }
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: theme.spacing.md,
+            }}
+          >
+            <TimeTimer colorSelect={true} maxSize={300} />
+          </div>
         </Panel>
 
         {/* MindLog - 2x1 ligne 3 */}
         <Panel
-          gridColumn="1 / 3"
-          gridRow="3 / 4"
+          gridColumn="1 / 2"
+          gridRow="1 / 3"
           title="MindLog"
           icon="🧠"
           texture="leather"
           accentColor={theme.colors.accents.cold}
           collapsible={true}
-          collapsed={getPanelState('chambre', 'mindlog').collapsed}
-          onToggleCollapse={(val) => updatePanelState('chambre', 'mindlog', { collapsed: val })}
+          collapsed={getPanelState("chambre", "mindlog").collapsed}
+          onToggleCollapse={(val) =>
+            updatePanelState("chambre", "mindlog", { collapsed: val })
+          }
         >
-          <div style={{
-            padding: theme.spacing.md,
-            textAlign: 'center',
-            opacity: 0.7
-          }}>
+          <div
+            style={{
+              padding: theme.spacing.md,
+              textAlign: "center",
+              opacity: 0.7,
+            }}
+          >
             <p>Module MindLog</p>
             <small>À implémenter - État mental</small>
           </div>
@@ -105,7 +108,7 @@ const ChambreRoom = () => {
 
         {/* Mantra - 2x1 ligne 3 */}
         <Panel
-          gridColumn="3 / 5"
+          gridColumn="1 / 3"
           gridRow="3 / 4"
           title="Mantras"
           icon="🕉️"
@@ -113,8 +116,10 @@ const ChambreRoom = () => {
           accentColor={theme.colors.accents.warm}
           contentType="mantras"
           collapsible={true}
-          collapsed={getPanelState('chambre', 'mantra').collapsed}
-          onToggleCollapse={(val) => updatePanelState('chambre', 'mantra', { collapsed: val })}
+          collapsed={getPanelState("chambre", "mantra").collapsed}
+          onToggleCollapse={(val) =>
+            updatePanelState("chambre", "mantra", { collapsed: val })
+          }
         >
           <QuoteCarousel showCategory={false} infinite={true} random={true} />
         </Panel>
@@ -129,12 +134,14 @@ const ChambreRoom = () => {
           accentColor={theme.colors.accents.cold}
           contentType="markdown"
           collapsible={true}
-          collapsed={getPanelState('chambre', 'notes').collapsed}
-          onToggleCollapse={(val) => updatePanelState('chambre', 'notes', { collapsed: val })}
+          collapsed={getPanelState("chambre", "notes").collapsed}
+          onToggleCollapse={(val) =>
+            updatePanelState("chambre", "notes", { collapsed: val })
+          }
         >
           <MarkdownEditor
             value={chambreNotes}
-            onChange={(value) => updateRoomNote('chambre', value)}
+            onChange={(value) => updateRoomNote("chambre", value)}
             placeholder="Notes personnelles..."
             height="100%"
             compact={true}
@@ -146,14 +153,16 @@ const ChambreRoom = () => {
         {/* Navigation - 2x1 ligne 4 */}
         <Panel
           gridColumn="3 / 5"
-          gridRow="4 / 5"
+          gridRow="3 / 4"
           title="Navigation"
           icon="🧭"
           texture="metal"
           accentColor={theme.colors.accents.neutral}
           collapsible={true}
-          collapsed={getPanelState('chambre', 'navigation').collapsed}
-          onToggleCollapse={(val) => updatePanelState('chambre', 'navigation', { collapsed: val })}
+          collapsed={getPanelState("chambre", "navigation").collapsed}
+          onToggleCollapse={(val) =>
+            updatePanelState("chambre", "navigation", { collapsed: val })
+          }
         >
           <NavigationGrid />
         </Panel>
