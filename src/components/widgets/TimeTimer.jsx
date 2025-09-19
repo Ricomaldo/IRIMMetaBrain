@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import PlayIcon from "../../assets/icons/play.svg";
 import PauseIcon from "../../assets/icons/pause.svg";
 import ResetIcon from "../../assets/icons/reset.svg";
+import ReverseIcon from "../../assets/icons/reverse.svg";
 
 // ========== Configuration ==========
 const TIMER_COLORS = [
@@ -32,6 +33,7 @@ export default function TimeTimer({
   const [running, setRunning] = useState(false);
   const [color, setColor] = useState(diskColor);
   const [startTime, setStartTime] = useState(null);
+  const [clockwise, setClockwise] = useState(false);
 
   // ========== États de l'interface ==========
   const [isPaused, setIsPaused] = useState(false);
@@ -306,6 +308,27 @@ export default function TimeTimer({
       height: `${Math.max(14, dimensions.size * 0.05)}px`,
       filter: "brightness(0.2)",
     },
+    reverseButton: {
+      position: "absolute",
+      left: `${Math.max(8, dimensions.size * 0.03)}px`,
+      top: "50%",
+      transform: "translateY(-50%)",
+      width: `${Math.max(32, dimensions.size * 0.1)}px`,
+      height: `${Math.max(32, dimensions.size * 0.1)}px`,
+      backgroundColor: "#D2B48C",
+      border: "2px solid #A0522D",
+      borderRadius: "8px",
+      cursor: "pointer",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      transition: "all 0.2s ease",
+    },
+    reverseIcon: {
+      width: `${Math.max(20, dimensions.size * 0.07)}px`,
+      height: `${Math.max(20, dimensions.size * 0.07)}px`,
+      filter: "brightness(0.2)",
+    },
   };
 
   // ========== Rendu ==========
@@ -348,7 +371,14 @@ export default function TimeTimer({
                 />
               ) : (
                 <path
-                  d={`
+                  d={clockwise ? `
+                    M ${diskSize / 2} ${diskSize / 2}
+                    L ${diskSize / 2} ${diskSize / 2 - radius}
+                    A ${radius} ${radius} 0 ${progressAngle > 180 ? 1 : 0} 0
+                      ${diskSize / 2 - radius * Math.sin((progressAngle * Math.PI) / 180)}
+                      ${diskSize / 2 - radius * Math.cos((progressAngle * Math.PI) / 180)}
+                    Z
+                  ` : `
                     M ${diskSize / 2} ${diskSize / 2}
                     L ${diskSize / 2} ${diskSize / 2 - radius}
                     A ${radius} ${radius} 0 ${progressAngle > 180 ? 1 : 0} 1
@@ -432,6 +462,21 @@ export default function TimeTimer({
             />
           </button>
         </div>
+
+        {/* Bouton de sens sur la gauche */}
+        <button
+          style={styles.reverseButton}
+          onClick={() => setClockwise(!clockwise)}
+          onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
+          onMouseLeave={(e) => (e.target.style.opacity = "1")}
+          title={clockwise ? "Passer en sens anti-horaire" : "Passer en sens horaire"}
+        >
+          <img
+            src={ReverseIcon}
+            alt="Inverser le sens"
+            style={styles.reverseIcon}
+          />
+        </button>
 
         {/* Sélecteur de couleur sur la droite */}
         {colorSelect && (
