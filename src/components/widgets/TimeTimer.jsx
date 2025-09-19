@@ -240,8 +240,8 @@ export default function TimeTimer({
       flexShrink: 0,
     },
     colorButton: {
-      width: dimensions.size > 250 ? "24px" : "20px",
-      height: dimensions.size > 250 ? "24px" : "20px",
+      width: `${Math.max(18, dimensions.size * 0.07)}px`,
+      height: `${Math.max(18, dimensions.size * 0.07)}px`,
       borderRadius: "50%",
       border: "2px solid #A0522D",
       cursor: "pointer",
