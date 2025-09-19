@@ -17,9 +17,8 @@ import {
   ConfigInfo,
   ConfigRow
 } from './SyncModal.styles';
-import SyncManager from '../../../services/SyncManager';
-import useNotesStore from '../../../stores/useNotesStore';
-import useProjectsStore from '../../../stores/useProjectsStore';
+import ProjectSyncAdapter from '../../../services/ProjectSyncAdapter';
+import useProjectMetaStore from '../../../stores/useProjectMetaStore';
 
 /**
  * SyncModal - Interface de synchronisation des stores
@@ -53,9 +52,9 @@ const SyncModal = ({ isOpen, onClose }) => {
   const [status, setStatus] = useState({ type: '', message: '' });
   const [isLoading, setIsLoading] = useState(false);
 
-  // Récupération des stores
-  const notesStore = useNotesStore();
-  const projectsStore = useProjectsStore();
+  // Stats de synchronisation
+  const metaStore = useProjectMetaStore();
+  const projectCount = Object.keys(metaStore.projects || {}).length;
 
   // Helper pour afficher un message de statut
   const showStatus = (type, message) => {
@@ -73,8 +72,8 @@ const SyncModal = ({ isOpen, onClose }) => {
 
     setIsLoading(true);
     try {
-      SyncManager.configure(githubToken);
-      const isConnected = await SyncManager.testConnection();
+      ProjectSyncAdapter.configure(githubToken);
+      const isConnected = await ProjectSyncAdapter.testConnection();
 
       if (isConnected) {
         showStatus('success', '✅ Connexion GitHub OK');
@@ -102,35 +101,22 @@ const SyncModal = ({ isOpen, onClose }) => {
     setIsLoading(true);
     try {
       // Configurer le service
-      SyncManager.configure(githubToken, gistId);
-      SyncManager.setPassword(password);
+      ProjectSyncAdapter.configure(githubToken, gistId);
+      ProjectSyncAdapter.setPassword(password);
 
-      // Préparer les données des stores
-      const storesData = {
-        notes: {
-          roomNotes: notesStore.roomNotes,
-          sideTowerNotes: notesStore.sideTowerNotes
-        },
-        projects: {
-          projects: projectsStore.projects,
-          currentProjectId: projectsStore.currentProjectId
+      // Export avec le nouvel adaptateur
+      const result = await ProjectSyncAdapter.exportToGist(true);
+
+      if (result.success) {
+        // Sauvegarder l'ID du Gist pour futures mises à jour
+        if (!gistId && result.id) {
+          setGistId(result.id);
         }
-      };
 
-      // Upload vers GitHub
-      const gistUrl = await SyncManager.uploadGist(storesData, true);
-
-      // Sauvegarder l'ID du Gist pour futures mises à jour
-      if (!gistId && SyncManager.gistId) {
-        setGistId(SyncManager.gistId);
-      }
-
-      showStatus('success', `✅ Export réussi ! Gist: ${SyncManager.gistId}`);
-
-      // Copier l'URL dans le clipboard
-      if (navigator.clipboard) {
-        await navigator.clipboard.writeText(gistUrl);
-        showStatus('success', '✅ Export réussi ! URL copiée dans le presse-papier');
+        showStatus('success', `✅ Export réussi ! ${projectCount} projets synchronisés`);
+        showStatus('info', `📋 Gist ID: ${result.id} (copié dans le presse-papier)`);
+      } else {
+        showStatus('error', `❌ Erreur export: ${result.error}`);
       }
     } catch (error) {
       showStatus('error', `❌ Erreur export: ${error.message}`);
@@ -158,16 +144,16 @@ const SyncModal = ({ isOpen, onClose }) => {
     setIsLoading(true);
     try {
       // Configurer le service
-      SyncManager.configure(githubToken, gistId);
-      SyncManager.setPassword(password);
+      ProjectSyncAdapter.configure(githubToken, gistId);
+      ProjectSyncAdapter.setPassword(password);
 
-      // Télécharger depuis GitHub
-      const data = await SyncManager.downloadGist(gistId, true);
+      // Vérifier d'abord les stats
+      const stats = ProjectSyncAdapter.getSyncStats();
 
       // Confirmation avant d'écraser les données locales
       const confirm = window.confirm(
         `⚠️ Ceci va remplacer toutes vos données locales par celles du Gist.\n` +
-        `Date de sync: ${data.timestamp}\n` +
+        `Projets locaux: ${projectCount}\n` +
         `Continuer ?`
       );
 
@@ -177,16 +163,19 @@ const SyncModal = ({ isOpen, onClose }) => {
         return;
       }
 
-      // Mettre à jour les stores
-      if (data.stores.notes) {
-        notesStore.importData(data.stores.notes);
-      }
+      // Import avec le nouvel adaptateur
+      const result = await ProjectSyncAdapter.importFromGist(gistId, true);
 
-      if (data.stores.projects) {
-        projectsStore.importData(data.stores.projects);
+      if (result.success) {
+        showStatus('success', '✅ Import réussi ! Données synchronisées');
+        if (result.migrated) {
+          showStatus('info', '📦 Migration depuis l\'ancien format effectuée');
+        }
+        // Recharger la page pour appliquer les changements
+        setTimeout(() => window.location.reload(), 2000);
+      } else {
+        showStatus('error', `❌ Erreur import: ${result.error}`);
       }
-
-      showStatus('success', '✅ Import réussi ! Données synchronisées');
     } catch (error) {
       showStatus('error', `❌ Erreur import: ${error.message}`);
     }
@@ -202,8 +191,8 @@ const SyncModal = ({ isOpen, onClose }) => {
 
     setIsLoading(true);
     try {
-      SyncManager.configure(githubToken);
-      const gists = await SyncManager.listGists();
+      ProjectSyncAdapter.configure(githubToken);
+      const gists = await ProjectSyncAdapter.listGists();
 
       if (gists.length === 0) {
         showStatus('info', 'Aucun Gist IRIM trouvé');

@@ -29,20 +29,47 @@ export const StatsBar = styled.div`
 `;
 
 export const CategorySection = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.xxl};
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
   background: white;
-  padding: ${({ theme }) => theme.spacing.lg};
   border-radius: ${({ theme }) => theme.radii.lg};
   box-shadow: 0 2px 8px ${({ theme }) => alpha(theme.colors.black, 0.1)};
+  overflow: hidden;
+`;
+
+export const CategoryHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => alpha(theme.colors.primary, 0.05)};
+  border-bottom: 2px solid ${({ theme }) => alpha(theme.colors.primary, 0.2)};
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: ${({ theme }) => alpha(theme.colors.primary, 0.1)};
+  }
 `;
 
 export const CategoryTitle = styled.h3`
   color: ${({ theme }) => theme.colors.primary};
   font-size: ${({ theme }) => theme.typography.sizes.lg};
-  margin-bottom: ${({ theme }) => theme.spacing.md};
-  padding-bottom: ${({ theme }) => theme.spacing.sm};
-  border-bottom: 2px solid ${({ theme }) => alpha(theme.colors.primary, 0.2)};
   font-weight: 600;
+  margin: 0;
+  flex: 1;
+`;
+
+export const CollapseIcon = styled.span`
+  display: inline-block;
+  transition: transform 0.2s ease;
+  transform: ${({ $collapsed }) => $collapsed ? 'rotate(-90deg)' : 'rotate(0)'};
+  font-size: 12px;
+`;
+
+export const CategoryContent = styled.div`
+  padding: ${({ theme }) => theme.spacing.lg};
+  display: ${({ $collapsed }) => $collapsed ? 'none' : 'block'};
 `;
 
 export const ProjectGrid = styled.div`
@@ -68,6 +95,9 @@ export const ProjectCard = styled.div`
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 1px 3px ${({ theme }) => alpha(theme.colors.black, 0.1)};
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     transform: translateY(-2px);
@@ -79,7 +109,7 @@ export const ProjectCard = styled.div`
 export const CheckboxWrapper = styled.div`
   position: absolute;
   top: ${({ theme }) => theme.spacing.sm};
-  right: ${({ theme }) => theme.spacing.sm};
+  left: ${({ theme }) => theme.spacing.sm};
 
   input {
     cursor: pointer;
@@ -126,11 +156,26 @@ export const ProjectCategory = styled.div`
   font-style: italic;
 `;
 
+export const FloatingButtons = styled.div`
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: ${({ theme }) => theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.lg} 0 0;
+  margin-top: ${({ theme }) => theme.spacing.xl};
+  background: linear-gradient(to top,
+    ${({ theme }) => theme.colors.backgroundLight} 0%,
+    ${({ theme }) => alpha(theme.colors.backgroundLight, 0)} 100%
+  );
+`;
+
 export const ActionButton = styled.button`
-  position: fixed;
-  bottom: ${({ theme }) => theme.spacing.xl};
-  right: ${({ theme, $secondary }) => $secondary ? `calc(${theme.spacing.xl} + 200px)` : theme.spacing.xl};
-  background: ${({ theme, $secondary }) => $secondary ? theme.colors.success : theme.colors.primary};
+  background: ${({ theme, $variant }) =>
+    $variant === 'success' ? theme.colors.success :
+    $variant === 'secondary' ? theme.colors.secondary :
+    theme.colors.primary
+  };
   color: white;
   border: none;
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
@@ -139,11 +184,25 @@ export const ActionButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 12px ${({ theme, $secondary }) => alpha($secondary ? theme.colors.success : theme.colors.primary, 0.3)};
+  box-shadow: 0 4px 12px ${({ theme, $variant }) =>
+    alpha(
+      $variant === 'success' ? theme.colors.success :
+      $variant === 'secondary' ? theme.colors.secondary :
+      theme.colors.primary,
+      0.3
+    )
+  };
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px ${({ theme, $secondary }) => alpha($secondary ? theme.colors.success : theme.colors.primary, 0.4)};
+    box-shadow: 0 6px 16px ${({ theme, $variant }) =>
+      alpha(
+        $variant === 'success' ? theme.colors.success :
+        $variant === 'secondary' ? theme.colors.secondary :
+        theme.colors.primary,
+        0.4
+      )
+    };
   }
 `;
 

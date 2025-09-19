@@ -20,10 +20,11 @@
 
 ### Guides
 
+- [🚀 Guide du Flux de Données - Simple et Pédagogique](guides/data-flow-guide.md)
+- [🔄 Système de Synchronisation - Documentation Technique](guides/sync-system.md)
 - [Assets IRIM - Solutions Payantes Cohérentes](guides/assets-exploration.md)
 - [🎓 Guide des Outils de Développement - IRIMMetaBrain](guides/dev-tools.md)
 - [🚀 Système Auto-Documentation IRIMMetaBrain](guides/doc-workflow.md)
-- [Système de Synchronisation Multi-Device - Documentation](guides/sync-system.md)
 - [🎨 Stratégie d'Intégration Progressive des UI Kits](guides/ui-kit-integration.md)
 
 ### Milestones

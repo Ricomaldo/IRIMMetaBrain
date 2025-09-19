@@ -3,6 +3,8 @@
 
 import useNotesStore from '../stores/useNotesStore';
 import useProjectsStore from '../stores/useProjectsStore';
+import useProjectMetaStore from '../stores/useProjectMetaStore';
+import { getProjectData } from '../stores/useProjectDataStore';
 
 // Fonction pour exposer les stores et helpers
 export const exposeStoresToWindow = (navigationHook = null) => {
@@ -12,7 +14,9 @@ export const exposeStoresToWindow = (navigationHook = null) => {
 
     // Exposer TOUS les stores
     window.__ZUSTAND_STORES__.notes = useNotesStore;
-    window.__ZUSTAND_STORES__.projects = useProjectsStore;
+    window.__ZUSTAND_STORES__.projects = useProjectsStore; // Legacy store
+    window.__ZUSTAND_STORES__.projectMeta = useProjectMetaStore;
+    window.__ZUSTAND_STORES__.getProjectData = getProjectData;
 
     // Exposer la navigation si fournie
     if (navigationHook) {
@@ -49,8 +53,20 @@ export const exposeStoresToWindow = (navigationHook = null) => {
       }
     };
 
+    // Alias plus simple pour accès rapide
+    window.stores = {
+      notes: useNotesStore.getState,
+      projectMeta: useProjectMetaStore.getState,
+      projectData: (projectId) => getProjectData(projectId),
+      // Alias pour actions communes
+      selectProject: (id) => useProjectMetaStore.getState().selectProject(id),
+      getCurrentProject: () => useProjectMetaStore.getState().getCurrentProject(),
+      getVisibleProjects: () => useProjectMetaStore.getState().getVisibleProjects()
+    };
+
     console.log('✅ Stores exposés dans window.__ZUSTAND_STORES__');
     console.log('💡 Utilise window.__DEBUG_STORES__() pour voir l\'état');
+    console.log('🚀 Accès rapide: window.stores.projectMeta() ou window.stores.projectData("irimmetabrain")');
   }
 };
 

@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { useTheme } from 'styled-components';
-import useProjectsStore from '../../../stores/useProjectsStore';
+import useProjectMetaStore from '../../../stores/useProjectMetaStore';
+import { useProjectData } from '../../../stores/useProjectDataStore';
 import BaseRoom from '../../layout/BaseRoom';
 import Panel from '../../common/Panel';
 import MarkdownEditor from '../../common/MarkdownEditor';
@@ -21,8 +22,10 @@ import {
  * @renders MarkdownEditor
  */
 const AtelierRoom = () => {
-  const { getCurrentProject, updateModuleState, getModuleState } = useProjectsStore();
+  const { getCurrentProject, selectedProject } = useProjectMetaStore();
   const project = getCurrentProject();
+  const projectData = useProjectData(selectedProject);
+  const { updateModuleState, getModuleState } = projectData || {};
   const theme = useTheme();
 
 
@@ -35,9 +38,9 @@ const AtelierRoom = () => {
   } = usePanelContent(project?.id || 'default');
 
   // États collapse des modules
-  const roadmapState = getModuleState(project?.id, 'roadmap');
-  const todoState = getModuleState(project?.id, 'todo');
-  const screentvState = getModuleState(project?.id, 'screentv');
+  const roadmapState = getModuleState ? getModuleState('roadmap') : { collapsed: true };
+  const todoState = getModuleState ? getModuleState('todo') : { collapsed: true };
+  const screentvState = getModuleState ? getModuleState('screentv') : { collapsed: true };
 
   if (!project) {
     return (
@@ -77,7 +80,7 @@ const AtelierRoom = () => {
               contentType="markdown"
               collapsible={true}
               collapsed={roadmapState.collapsed ?? true}
-              onToggleCollapse={(newCollapsed) => updateModuleState(project.id, 'roadmap', { collapsed: newCollapsed })}
+              onToggleCollapse={(newCollapsed) => updateModuleState && updateModuleState('roadmap', { collapsed: newCollapsed })}
             >
               <MarkdownEditor
                 value={roadmapContent}
@@ -101,7 +104,7 @@ const AtelierRoom = () => {
               contentType="markdown"
               collapsible={true}
               collapsed={todoState.collapsed ?? true}
-              onToggleCollapse={(newCollapsed) => updateModuleState(project.id, 'todo', { collapsed: newCollapsed })}
+              onToggleCollapse={(newCollapsed) => updateModuleState && updateModuleState('todo', { collapsed: newCollapsed })}
             >
               <MarkdownEditor
                 value={todoContent}
@@ -124,7 +127,7 @@ const AtelierRoom = () => {
               accentColor={theme.colors.accents.cold}
               collapsible={true}
               collapsed={screentvState.collapsed ?? true}
-              onToggleCollapse={(newCollapsed) => updateModuleState(project.id, 'screentv', { collapsed: newCollapsed })}
+              onToggleCollapse={(newCollapsed) => updateModuleState && updateModuleState('screentv', { collapsed: newCollapsed })}
             >
               <div style={{ padding: '8px', textAlign: 'center' }}>
                 📺 Upload screenshots here

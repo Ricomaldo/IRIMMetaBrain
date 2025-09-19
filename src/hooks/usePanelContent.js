@@ -1,29 +1,29 @@
 // src/hooks/usePanelContent.js - Hook simplifié pour contenu markdown
 
 import { useCallback } from 'react';
-import useProjectsStore from '../stores/useProjectsStore';
+import { useProjectData } from '../stores/useProjectDataStore';
 import { debounce } from '../utils/debounce';
 
 // Debounced functions centralisées
-const debouncedUpdateRoadmap = debounce((projectId, content, updateFn) => {
-  updateFn(projectId, content);
+const debouncedUpdateRoadmap = debounce((content, updateFn) => {
+  updateFn(content);
 }, 1000);
 
-const debouncedUpdateTodo = debounce((projectId, content, updateFn) => {
-  updateFn(projectId, content);
+const debouncedUpdateTodo = debounce((content, updateFn) => {
+  updateFn(content);
 }, 1000);
 
 export const usePanelContent = (projectId) => {
-  const { 
-    getCurrentProject, 
-    updateRoadmapMarkdown, 
-    updateTodoMarkdown 
-  } = useProjectsStore();
-
-  const project = getCurrentProject();
+  const projectData = useProjectData(projectId);
+  const {
+    roadmapMarkdown,
+    todoMarkdown,
+    updateRoadmapMarkdown,
+    updateTodoMarkdown
+  } = projectData || {};
 
   // Contenu direct du store (plus d'état local)
-  const roadmapContent = project?.roadmapMarkdown || `# Roadmap
+  const roadmapContent = roadmapMarkdown || `# Roadmap
 
 ## Phase 1 - Setup
 - [ ] Initialiser le projet
@@ -33,7 +33,7 @@ export const usePanelContent = (projectId) => {
 
 > *Commencez votre roadmap ici* 🚀`;
 
-  const todoContent = project?.todoMarkdown || `# Todo
+  const todoContent = todoMarkdown || `# Todo
 
 ## 🔴 **Priorité Haute**
 - [ ] Première tâche importante
@@ -47,14 +47,14 @@ export const usePanelContent = (projectId) => {
 
   // Handlers avec debounce
   const updateRoadmapContent = useCallback((content) => {
-    if (projectId) {
-      debouncedUpdateRoadmap(projectId, content, updateRoadmapMarkdown);
+    if (projectId && updateRoadmapMarkdown) {
+      debouncedUpdateRoadmap(content, updateRoadmapMarkdown);
     }
   }, [projectId, updateRoadmapMarkdown]);
 
   const updateTodoContent = useCallback((content) => {
-    if (projectId) {
-      debouncedUpdateTodo(projectId, content, updateTodoMarkdown);
+    if (projectId && updateTodoMarkdown) {
+      debouncedUpdateTodo(content, updateTodoMarkdown);
     }
   }, [projectId, updateTodoMarkdown]);
 

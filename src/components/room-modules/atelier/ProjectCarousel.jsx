@@ -3,7 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { metalBg, secondaryLevel } from '../../../styles/mixins';
-import useProjectsStore from '../../../stores/useProjectsStore';
+import useProjectMetaStore from '../../../stores/useProjectMetaStore';
 
 const Container = styled.div`
   height: 50px;
@@ -52,7 +52,7 @@ const Title = styled.div`
 `;
 
 const ProjectCarousel = () => {
-  const { getCurrentProject, selectProject, visibleProjects } = useProjectsStore();
+  const { getCurrentProject, selectProject, visibleProjects } = useProjectMetaStore();
   const currentProject = getCurrentProject();
 
   if (!currentProject || visibleProjects.length === 0) {

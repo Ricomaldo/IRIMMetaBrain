@@ -1,131 +1,72 @@
 ---
 type: architecture
-updated: 2025-09-18
+updated: 2025-09-19
+version: 2.0
 ---
 
-# Architecture Stores - IRIM StudioLab
+# Architecture Multi-Stores v2 - IRIM MetaBrain
 
 ## Vue d'ensemble
 
-**2 stores Zustand indépendants** avec responsabilités distinctes et clés localStorage séparées.
+**Architecture modulaire** avec séparation des responsabilités entre métadonnées et données projet.
 
-### Séparation des responsabilités
+### Stores principaux
 
 ```
-useNotesStore     → Infrastructure/Méta-développement
-useProjectsStore  → Business/Données métier quotidiennes
+useNotesStore          → Notes transversales (infrastructure)
+useProjectMetaStore    → Métadonnées globales des projets
+useProjectDataStore    → Données spécifiques par projet (dynamique)
 ```
 
 ---
 
-## Store: useNotesStore
+## Store: useProjectMetaStore
 
-**Fichier:** `stores/useNotesStore.js`  
-**Clé localStorage:** `irim-notes-store`  
-**Version:** 1
+**Fichier:** `stores/useProjectMetaStore.js`
+**Clé localStorage:** `project-meta-store`
+**Version:** 2
 
 ### Responsabilité
-Notes transversales par pièce (infrastructure de l'app elle-même)
+Gestion centralisée des métadonnées de tous les projets.
 
 ### État
 ```js
 {
-  // Notes par pièce (architecture 4x3 complète)
-  roomNotes: {
-    // Ligne 0
-    sanctuaire: string,
-    chambre: string,
-    cuisine: string,
-    comptoir: string,
-    // Ligne 1
-    jardin: string,
-    atelier: string,
-    forge: string,
-    boutique: string,
-    // Ligne 2
-    scriptorium: string,
-    bibliotheque: string,
-    cave: string
-  },
-  
-  // Notes tour latérale
-  sideTowerNotes: {
-    general: string
-  }
-}
-```
-
-### Actions principales
-```js
-updateRoomNote(roomType, content)     // Mettre à jour note pièce
-updateSideTowerNote(content)          // Mettre à jour note tour
-getRoomNote(roomType)                 // Récupérer note pièce
-getSideTowerNote()                    // Récupérer note tour
-clearAllNotes()                       // Reset complet
-exportNotes() / importNotes(data)     // Migration
-```
-
-### Debounce intégré
-```js
-debouncedUpdateRoomNote(roomType, content, 500ms)
-debouncedUpdateSideTowerNote(content, 500ms)
-```
-
-### Migration
-- **Version 0→1** : Extension 4 pièces → 11 pièces
-- Préservation données existantes
-
----
-
-## Store: useProjectsStore
-
-**Fichier:** `stores/useProjectsStore.js`  
-**Clé localStorage:** `irim-projects-store`  
-**Version:** 1
-
-### Responsabilité
-Données métier des projets (usage quotidien)
-
-### État principal
-```js
-{
+  // Navigation
   selectedProject: string,              // ID projet actuel
-  visibleProjects: array,              // IDs projets visibles dans carousel
-  categories: {                        // Organisation des projets
-    pro: { label: string, subcategories: array },
-    perso: { label: string, subcategories: array },
-    formation: { label: string, subcategories: array }
+  visibleProjects: string[],           // IDs projets visibles dans carousel
+
+  // Organisation
+  categories: {
+    pro: { label, subcategories },
+    perso: { label, subcategories },
+    formation: { label, subcategories }
   },
+
+  // Métadonnées projets
   projects: {
     [projectId]: {
-      // Méta-données
+      // Identité
       id: string,
       name: string,
-      type: string,                     // 'tool'|'wellness'|'finance'|'creative'
-      status: string,                   // 'dev_actif'|'concept'|'vision'
-      category: string,                 // 'pro'|'perso'|'formation'
-      subcategory: string,              // Ex: 'demo', 'speculatif', 'exercice'
-      
-      // Contenu Markdown (utilisé activement)
-      roadmapMarkdown: string,
-      todoMarkdown: string,
-      
-      // État modules Atelier
-      atelierModules: {
-        roadmap: { collapsed: boolean },
-        todo: { collapsed: boolean },
-        mindlog: { collapsed: boolean, mood: string, note: string },
-        actions: { collapsed: boolean, items: array },
-        screentv: { collapsed: boolean, screenshots: array }
-      },
-      
-      // Legacy : Données structurées (déprécié)
-      roadmap: array,                   // ⚠️ À migrer vers roadmapMarkdown
-      todo: array,                      // ⚠️ À migrer vers todoMarkdown
-      idees: array,                     // ⚠️ Peu utilisé
-      prochaineAction: object,          // ⚠️ Peu utilisé
-      
-      // Méta
+      type: string,                   // tool|wellness|finance|creative
+      status: string,                 // dev_actif|concept|vision
+
+      // Catégorisation
+      category: string,               // pro|perso|formation
+      subcategory: string,
+
+      // Propriétés enrichies
+      contractType: string,
+      deploymentStatus: string,       // local|staging|production|concept
+      projectNature: string,
+      technologies: string[],
+      client: string,
+      startDate: string,
+      endDate: string,
+      order: number,                  // Position dans la liste
+
+      // Timestamps
       created_at: string,
       updated_at: string
     }
@@ -133,169 +74,344 @@ Données métier des projets (usage quotidien)
 }
 ```
 
-### Actions de gestion projets
+### Actions principales
 ```js
-createProject(projectData)             // Créer nouveau projet
-selectProject(projectId)               // Changer projet actuel
-getCurrentProject()                    // Récupérer projet actuel
-getProjectStats(projectId)             // Statistiques projet
-toggleProjectVisibility(projectId)    // Afficher/masquer dans carousel
-selectNextProject()                    // Navigation projet suivant
-selectPreviousProject()                // Navigation projet précédent
-updateProjectCategory(id, cat, subcat) // Modifier catégorie projet
-```
+// CRUD
+createProject(projectData)
+updateProjectMeta(projectId, updates)
+deleteProject(projectId)
 
-### Actions contenu Markdown
-```js
-updateRoadmapMarkdown(projectId, content)
-updateTodoMarkdown(projectId, content)
-```
+// Navigation
+selectProject(projectId)
+selectNextProject()
+selectPreviousProject()
 
-### Actions modules Atelier
-```js
-updateModuleState(projectId, moduleName, stateUpdate)
-getModuleState(projectId, moduleName)
-```
+// Visibilité
+toggleProjectVisibility(projectId)
 
-### Actions legacy (déprécié)
-```js
-addRoadmapItem()                       // ⚠️ Utiliser roadmapMarkdown
-addTodoItem()                          // ⚠️ Utiliser todoMarkdown
-updateTodoStatus()                     // ⚠️ Utiliser todoMarkdown
-addIdea()                              // ⚠️ Peu utilisé
-updateNextAction()                     // ⚠️ Peu utilisé
+// Organisation
+reorderProjects(activeId, overId)
+updateProjectCategory(id, cat, subcat)
+
+// Helpers
+getCurrentProject()
+getVisibleProjects()
+getProjectsSortedByOrder()
 ```
 
 ---
 
-## Hook: usePanelContent
+## Store: useProjectDataStore (Dynamique)
 
-Voir spécification complète dans [specs/components-and-hooks.md](../specs/components-and-hooks.md)
+**Fichier:** `stores/useProjectDataStore.js`
+**Clé localStorage:** `project-data-${projectId}` (un par projet)
+**Version:** 1
+
+### Responsabilité
+Données spécifiques à chaque projet, créé dynamiquement à la demande.
+
+### État
+```js
+{
+  // Contenu Markdown
+  roadmapMarkdown: string,
+  todoMarkdown: string,
+
+  // État modules Atelier
+  atelierModules: {
+    roadmap: { collapsed: boolean },
+    todo: { collapsed: boolean },
+    mindlog: { collapsed: boolean, mood: string, note: string },
+    actions: { collapsed: boolean, items: array },
+    screentv: { collapsed: boolean, screenshots: array }
+  },
+
+  // Legacy (conservé pour compatibilité)
+  roadmap: array,
+  todo: array,
+  idees: array,
+  prochaineAction: object
+}
+```
+
+### Usage
+```js
+import { useProjectData } from './stores/useProjectDataStore';
+
+// Dans un composant
+const projectData = useProjectData(projectId);
+
+// Actions disponibles
+projectData.updateRoadmapMarkdown(content);
+projectData.updateTodoMarkdown(content);
+projectData.updateModuleState(moduleName, stateUpdate);
+```
+
+### Cache et performance
+```js
+// Le store est mis en cache pour éviter les recreations
+const storeCache = {};
+
+// Nettoyer le cache si nécessaire
+clearProjectDataCache(projectId);
+```
 
 ---
 
-## Connexions entre stores
+## Initialisation et Migration
 
-### Séparation stricte
-```
-useNotesStore    ←→ NO CROSS-TALK ←→  useProjectsStore
-```
+### Fichier: `stores/defaultProjectsData.js`
 
-### Usage par composant
+Structure des données par défaut avec 4 projets démo :
+- **irimmetabrain** : IRIM MetaBrain (dev_actif)
+- **moodcycle** : MoodCycle (concept)
+- **pepetteszub** : Les Pepettes Zub (production)
+- **echodesreves** : L'Echo des Rêves (vision)
+
+### Fichier: `stores/migrateProjectStores.js`
+
+Fonctions d'initialisation et migration :
+
 ```js
-// Notes infrastructure (RoomNote, SideTowerNotes)
-useNotesStore → updateRoomNote(roomType, content)
+// Initialisation automatique (App.jsx)
+const status = await initializeStores();
+// Returns: 'initialized' | 'migrated' | 'reinitialized' | 'existing'
 
-// Projets business (AtelierRoom, usePanelContent)  
-useProjectsStore → updateRoadmapMarkdown(projectId, content)
+// Vérifications
+needsInitialization()     // true si stores vides
+verifyMigration()        // vérifie intégrité après migration
+
+// Maintenance
+rollbackMigration()      // rollback vers backup
+resetToDefaultData()     // reset complet (avec confirmation)
 ```
 
-### Patterns d'usage
-```js
-// Pattern Notes (par pièce)
-const note = getRoomNote('atelier');
-updateRoomNote('atelier', newContent);
+### Flow d'initialisation (App.jsx)
 
-// Pattern Projets (par projet + module)
-const project = getCurrentProject();
-updateRoadmapMarkdown(project.id, newContent);
-updateModuleState(project.id, 'roadmap', { collapsed: true });
+```mermaid
+graph TD
+    A[App Start] --> B{localStorage vide?}
+    B -->|Oui| C[Load defaultProjectsData]
+    B -->|Non| D{Ancien format?}
+    D -->|Oui| E[Migration v1→v2]
+    D -->|Non| F{Stores corrompus?}
+    F -->|Oui| G[Réinitialisation]
+    F -->|Non| H[Utiliser existant]
+    C --> I[App Ready]
+    E --> I
+    G --> I
+    H --> I
 ```
 
 ---
 
-## Migration technique recommandée
+## Synchronisation Multi-Device
 
-### ⚠️ Nettoyage legacy data
+### Service: `ProjectSyncAdapter`
 
-**Données obsolètes à supprimer :**
+Adaptateur pour synchroniser l'architecture multi-stores avec GitHub Gist.
+
 ```js
-// Dans useProjectsStore
-roadmap: array,              // → roadmapMarkdown: string
-todo: array,                 // → todoMarkdown: string  
-idees: array,                // → Non utilisé
-prochaineAction: object,     // → Non utilisé
+// Configuration
+ProjectSyncAdapter.configure(githubToken, gistId);
+ProjectSyncAdapter.setPassword(password);
+
+// Export
+const result = await ProjectSyncAdapter.exportToGist(encrypted);
+// → { success: true, url: string, id: string }
+
+// Import
+const result = await ProjectSyncAdapter.importFromGist(gistId, encrypted);
+// → { success: true, message: string, timestamp: string }
+
+// Helpers
+ProjectSyncAdapter.getSyncStats();
+ProjectSyncAdapter.needsSync();
 ```
 
-**Actions obsolètes à supprimer :**
-- `addRoadmapItem()`, `addTodoItem()`, `updateTodoStatus()`
-- `addIdea()`, `updateNextAction()`
+### Format de synchronisation v2
 
-### ✅ Architecture finale cible
-```js
-projects: {
-  [projectId]: {
-    // Core
-    id, name, type, status,
-    
-    // Contenu actuel (gardé)
-    roadmapMarkdown: string,
-    todoMarkdown: string,
-    
-    // États UI (gardé)  
-    atelierModules: object,
-    
-    // Méta (gardé)
-    created_at, updated_at
+```json
+{
+  "version": "2.0.0",
+  "architecture": "multi-store",
+  "timestamp": "2025-09-19T10:00:00Z",
+  "stores": {
+    "notes": {
+      "roomNotes": {},
+      "sideTowerNotes": {}
+    },
+    "projectMeta": {
+      "selectedProject": "id",
+      "visibleProjects": [],
+      "categories": {},
+      "projects": {}
+    },
+    "projectData": {
+      "projectId1": { /* data */ },
+      "projectId2": { /* data */ }
+    }
   }
 }
 ```
 
----
+### Compatibilité descendante
 
-## Performance et bonnes pratiques
-
-### Debounce patterns
-- **Notes courtes** : 500ms (`useNotesStore`)
-- **Contenu long** : 1000ms (`usePanelContent`)
-
-### Persistence
-- **Automatique** : Zustand persist middleware
-- **Clés séparées** : Évite conflicts lors migrations
-
-### État local vs Store
-- **❌ Éviter** : État local dupliqué (sync complexe)
-- **✅ Préférer** : Lecture directe store + debounce write
-
-### Extensibilité
-- **useNotesStore** : Ajout pièces → Modifier `roomNotes` object
-- **useProjectsStore** : Nouveaux projets → Utiliser `createProject()`
-- **Nouveaux modules** : Étendre `atelierModules` structure
+Le système détecte automatiquement :
+- Format v1.0.0 → Migration automatique
+- Format v2.0.0 → Import direct
+- Format inconnu → Erreur avec message
 
 ---
 
-## Métriques et diagnostics
+## Patterns d'usage
 
-### Taille stores (localStorage)
+### Création d'un nouveau projet
+
 ```js
-// useNotesStore : ~2-5KB (notes texte)
-// useProjectsStore : ~15-50KB (projets + markdown)
+// 1. Créer les métadonnées
+const metaStore = useProjectMetaStore.getState();
+const projectId = metaStore.createProject({
+  name: "Mon Projet",
+  type: "tool",
+  status: "concept",
+  category: "perso",
+  subcategory: "demo"
+});
+
+// 2. Le store de données sera créé automatiquement au premier accès
+const projectData = useProjectData(projectId);
+projectData.updateRoadmapMarkdown("# Ma Roadmap");
 ```
 
-### Performance hooks
-- `usePanelContent` : O(1) - lecture directe
-- `useNotesStore` : O(1) - accès par clé
-- Re-renders minimaux grâce à Zustand selectors
+### Navigation entre projets
 
-### Debugging
 ```js
-// Console inspection
-useNotesStore.getState()
-useProjectsStore.getState()
+// Dans un composant
+const { selectedProject, selectNextProject } = useProjectMetaStore();
+const projectData = useProjectData(selectedProject);
 
-// Export pour backup
-const notesBackup = useNotesStore.getState().exportNotes()
+// Navigation
+selectNextProject();
+// Le nouveau projet est automatiquement chargé
+```
+
+### Synchronisation complète
+
+```js
+// Export
+await ProjectSyncAdapter.exportToGist(true);
+
+// Import (avec confirmation utilisateur)
+await ProjectSyncAdapter.importFromGist(gistId, true);
 ```
 
 ---
 
-## Conclusion
+## Performance et optimisations
 
-**Architecture validée** pour production avec séparation responsabilités claire.
+### Lazy Loading
+- Les `ProjectDataStore` sont créés à la demande
+- Cache des instances pour éviter les recreations
+- localStorage lu une seule fois par session
 
-**Actions immédiates :**
-1. ✅ Hook `usePanelContent` optimisé
-2. ⚠️ Migration legacy data recommandée (non-breaking)
-3. 📚 Documentation créée
+### Debounce
+- Markdown editors : 1000ms
+- Module states : 500ms
+- Notes : 500ms
 
-**Stabilité :** Prêt pour développement continu sans refactoring majeur.
+### Taille des données
+```
+project-meta-store     : ~5KB (métadonnées)
+project-data-{id}      : ~10-20KB par projet
+Total (4 projets)      : ~50-100KB
+```
+
+---
+
+## Scénarios de test
+
+### 1. Premier lancement (localStorage vide)
+```
+✅ Doit charger defaultProjectsData
+✅ 4 projets créés avec contenu démo
+✅ Navigation fonctionnelle
+```
+
+### 2. Migration ancien format
+```
+✅ Détection automatique ancien store
+✅ Migration sans perte de données
+✅ Backup créé automatiquement
+```
+
+### 3. Import/Export Gist
+```
+✅ Export chiffré avec mot de passe
+✅ Import avec confirmation
+✅ Gestion versions v1 et v2
+```
+
+### 4. Changement navigateur
+```
+✅ Export depuis navigateur A
+✅ Import dans navigateur B
+✅ Données identiques après sync
+```
+
+### 5. Corruption données
+```
+✅ Détection store corrompu
+✅ Réinitialisation automatique
+✅ Message utilisateur
+```
+
+---
+
+## Commandes de debug
+
+```js
+// Console browser
+
+// Voir l'état complet
+window.stores.projectMeta.getState()
+window.stores.projectData('irimmetabrain')
+
+// Forcer réinitialisation
+import { resetToDefaultData } from './stores/migrateProjectStores'
+await resetToDefaultData()
+
+// Vérifier migration
+import { verifyMigration } from './stores/migrateProjectStores'
+verifyMigration()
+
+// Stats sync
+import ProjectSyncAdapter from './services/ProjectSyncAdapter'
+ProjectSyncAdapter.getSyncStats()
+```
+
+---
+
+## Évolutions futures
+
+### v2.1 - Optimisations
+- [ ] Compression des données localStorage
+- [ ] Sync incrémentale (diff-based)
+- [ ] Cache IndexedDB pour grandes données
+
+### v2.2 - Fonctionnalités
+- [ ] Templates de projets
+- [ ] Import/Export CSV
+- [ ] Historique des modifications
+- [ ] Multi-user collaboration
+
+### v3.0 - Architecture
+- [ ] Migration vers SQLite WASM
+- [ ] Sync temps réel WebSocket
+- [ ] Offline-first avec service worker
+
+---
+
+**Status:** ✅ Production Ready
+**Version:** 2.0.0
+**Date:** 2025-09-19
