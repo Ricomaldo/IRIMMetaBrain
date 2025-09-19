@@ -272,7 +272,7 @@ export default function TimeTimer({
     controlsRow: {
       display: "flex",
       gap: "6px",
-      flexWrap: "wrap",
+      flexWrap: "nowrap",
       justifyContent: "center",
       width: "100%",
       flexShrink: 0,
