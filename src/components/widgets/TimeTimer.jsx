@@ -176,25 +176,24 @@ export default function TimeTimer({
       const newRunning = !prev;
 
       if (newRunning) {
-        setIsPaused(false);
-
         if (remaining === 0) {
           // Redémarrage après fin
           setRemaining(duration);
           setShowParti(true);
           setShowReparti(false);
           setTimeout(() => setShowParti(false), 2000);
-        } else if (remaining === duration) {
-          // Premier démarrage
-          setShowParti(true);
-          setShowReparti(false);
-          setTimeout(() => setShowParti(false), 2000);
-        } else {
-          // Reprise après pause
+        } else if (isPaused) {
+          // Reprise après pause (on était en pause et on reprend)
           setShowReparti(true);
           setShowParti(false);
           setTimeout(() => setShowReparti(false), 2000);
+        } else {
+          // Premier démarrage ou après reset
+          setShowParti(true);
+          setShowReparti(false);
+          setTimeout(() => setShowParti(false), 2000);
         }
+        setIsPaused(false);
       } else {
         // Mise en pause
         setIsPaused(true);
@@ -204,7 +203,7 @@ export default function TimeTimer({
 
       return newRunning;
     });
-  }, [remaining, duration]);
+  }, [remaining, duration, isPaused]);
 
   const resetTimer = useCallback(() => {
     setRemaining(duration);
