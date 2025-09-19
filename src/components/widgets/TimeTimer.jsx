@@ -488,7 +488,6 @@ export default function TimeTimer({
               cy={diskSize / 2}
               r={radius * 0.15}
               fill="#A0522D"
-              opacity="0.9"
             />
           </svg>
 
