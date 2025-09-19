@@ -393,11 +393,11 @@ export default function TimeTimer({
               // Calcul des minutes selon le sens
               let minute;
               if (clockwise) {
-                // Sens horaire: 0, 5, 10, 15...
-                minute = (i * 5) % 60;
-              } else {
-                // Sens anti-horaire: 0, 55, 50, 45...
+                // Sens horaire (pie-chart à droite): 0, 55, 50, 45...
                 minute = i === 0 ? 0 : 60 - (i * 5);
+              } else {
+                // Sens anti-horaire (pie-chart à gauche): 0, 5, 10, 15...
+                minute = (i * 5) % 60;
               }
 
               const angle = (i * 30) - 90; // 30 degrés entre chaque nombre
