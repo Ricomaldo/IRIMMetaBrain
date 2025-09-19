@@ -7,10 +7,10 @@ import ReverseIcon from "../../assets/icons/reverse.svg";
 
 // ========== Configuration ==========
 const TIMER_COLORS = [
-  "#4A5568", // Gris froid
-  "#68752C", // Vert succès
+  "#8B3A3A", // Rouge Terre
   "#FFD700", // Or
-  "#B8860B", // Chaud
+  "#68752C", // Vert succès
+  "#4A5568", // Gris froid
 ];
 
 const MIN_SIZE = 150;
@@ -51,7 +51,8 @@ export default function TimeTimer({
     const updateDimensions = () => {
       if (containerRef.current && containerRef.current.parentElement) {
         const parent = containerRef.current.parentElement;
-        const { width: parentWidth, height: parentHeight } = parent.getBoundingClientRect();
+        const { width: parentWidth, height: parentHeight } =
+          parent.getBoundingClientRect();
 
         // Calculer la taille disponible (prendre le minimum pour garder un carré)
         const availableSize = Math.min(
@@ -291,7 +292,10 @@ export default function TimeTimer({
       backgroundColor: "#D2B48C",
       color: "#2F1B14",
       border: "none",
-      padding: `${Math.max(4, dimensions.size * 0.02)}px ${Math.max(8, dimensions.size * 0.03)}px`,
+      padding: `${Math.max(4, dimensions.size * 0.02)}px ${Math.max(
+        8,
+        dimensions.size * 0.03
+      )}px`,
       borderRadius: "6px",
       fontSize: fontSize.button,
       fontWeight: "500",
@@ -313,21 +317,20 @@ export default function TimeTimer({
       left: `${Math.max(8, dimensions.size * 0.03)}px`,
       top: "50%",
       transform: "translateY(-50%)",
-      width: `${Math.max(32, dimensions.size * 0.1)}px`,
-      height: `${Math.max(32, dimensions.size * 0.1)}px`,
-      backgroundColor: "#D2B48C",
-      border: "2px solid #A0522D",
-      borderRadius: "8px",
+      background: "none",
+      border: "none",
+      padding: 0,
       cursor: "pointer",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      transition: "all 0.2s ease",
+      transition: "opacity 0.2s ease",
     },
     reverseIcon: {
-      width: `${Math.max(20, dimensions.size * 0.07)}px`,
-      height: `${Math.max(20, dimensions.size * 0.07)}px`,
-      filter: "brightness(0.2)",
+      width: `${Math.max(24, dimensions.size * 0.08)}px`,
+      height: `${Math.max(24, dimensions.size * 0.08)}px`,
+      filter: "brightness(0.4)",
+      transition: "filter 0.2s ease",
     },
   };
 
@@ -371,21 +374,37 @@ export default function TimeTimer({
                 />
               ) : (
                 <path
-                  d={clockwise ? `
+                  d={
+                    clockwise
+                      ? `
                     M ${diskSize / 2} ${diskSize / 2}
                     L ${diskSize / 2} ${diskSize / 2 - radius}
                     A ${radius} ${radius} 0 ${progressAngle > 180 ? 1 : 0} 0
-                      ${diskSize / 2 - radius * Math.sin((progressAngle * Math.PI) / 180)}
-                      ${diskSize / 2 - radius * Math.cos((progressAngle * Math.PI) / 180)}
+                      ${
+                        diskSize / 2 -
+                        radius * Math.sin((progressAngle * Math.PI) / 180)
+                      }
+                      ${
+                        diskSize / 2 -
+                        radius * Math.cos((progressAngle * Math.PI) / 180)
+                      }
                     Z
-                  ` : `
+                  `
+                      : `
                     M ${diskSize / 2} ${diskSize / 2}
                     L ${diskSize / 2} ${diskSize / 2 - radius}
                     A ${radius} ${radius} 0 ${progressAngle > 180 ? 1 : 0} 1
-                      ${diskSize / 2 + radius * Math.sin((progressAngle * Math.PI) / 180)}
-                      ${diskSize / 2 - radius * Math.cos((progressAngle * Math.PI) / 180)}
+                      ${
+                        diskSize / 2 +
+                        radius * Math.sin((progressAngle * Math.PI) / 180)
+                      }
+                      ${
+                        diskSize / 2 -
+                        radius * Math.cos((progressAngle * Math.PI) / 180)
+                      }
                     Z
-                  `}
+                  `
+                  }
                   fill={color}
                   opacity="0.9"
                 />
@@ -455,11 +474,7 @@ export default function TimeTimer({
             onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
             onMouseLeave={(e) => (e.target.style.opacity = "1")}
           >
-            <img
-              src={ResetIcon}
-              alt="Reset"
-              style={styles.buttonIcon}
-            />
+            <img src={ResetIcon} alt="Reset" style={styles.buttonIcon} />
           </button>
         </div>
 
@@ -467,9 +482,15 @@ export default function TimeTimer({
         <button
           style={styles.reverseButton}
           onClick={() => setClockwise(!clockwise)}
-          onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
-          onMouseLeave={(e) => (e.target.style.opacity = "1")}
-          title={clockwise ? "Passer en sens anti-horaire" : "Passer en sens horaire"}
+          onMouseEnter={(e) => {
+            e.currentTarget.querySelector('img').style.filter = "brightness(0.6)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.querySelector('img').style.filter = "brightness(0.4)";
+          }}
+          title={
+            clockwise ? "Passer en sens anti-horaire" : "Passer en sens horaire"
+          }
         >
           <img
             src={ReverseIcon}
@@ -492,7 +513,8 @@ export default function TimeTimer({
                 onClick={() => setColor(c)}
                 onMouseEnter={(e) => (e.target.style.transform = "scale(1.15)")}
                 onMouseLeave={(e) =>
-                  (e.target.style.transform = color === c ? "scale(1.2)" : "scale(1)")
+                  (e.target.style.transform =
+                    color === c ? "scale(1.2)" : "scale(1)")
                 }
               />
             ))}
