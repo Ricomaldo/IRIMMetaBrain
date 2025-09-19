@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   CanvasContainer,
   RoomsGrid,
@@ -8,6 +8,7 @@ import { getRoomComponent, DefaultRoomRenderer } from '../../../utils/RoomRegist
 import { roomConfig } from '../../../utils/roomPositions';
 import { roomColors } from '../../../utils/assetMapping';
 import NavigationArrows from '../../navigation/NavigationArrows';
+import useKeyboardNavigation from '../../../hooks/useKeyboardNavigation';
 
 /**
  * Conteneur principal pour la navigation entre les pièces
@@ -57,50 +58,16 @@ const RoomCanvas = ({ roomNavHook }) => {
     }
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      // Vérifier si on est dans un éditeur (textarea, input, ou contenteditable)
-      const activeElement = document.activeElement;
-      const isInEditor =
-        activeElement.tagName === 'TEXTAREA' ||
-        activeElement.tagName === 'INPUT' ||
-        activeElement.contentEditable === 'true' ||
-        activeElement.closest('[contenteditable="true"]');
-
-      // Si on est dans un éditeur, ne pas intercepter les touches
-      if (isInEditor) {
-        return;
-      }
-
-      // Empêcher le scroll par défaut des flèches
-      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(event.key)) {
-        event.preventDefault();
-      }
-
-      switch (event.key) {
-        case 'ArrowUp':
-          handleNavigation('up');
-          break;
-        case 'ArrowDown':
-          handleNavigation('down');
-          break;
-        case 'ArrowLeft':
-          handleNavigation('left');
-          break;
-        case 'ArrowRight':
-          handleNavigation('right');
-          break;
-        default:
-          break;
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [availableDirections, isNavigating]); // Ajout de isNavigating dans les dépendances
+  // Gestion des raccourcis clavier via hook dédié
+  useKeyboardNavigation({
+    onNavigate: handleNavigation,
+    availableDirections,
+    isNavigating,
+    enabled: true,
+    currentPosition: currentRoom,
+    stepDelayMs: 520,
+    enableEscapeToDefault: true
+  });
 
   return (
     <CanvasContainer id="room-canvas-container">

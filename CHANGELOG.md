@@ -2,6 +2,50 @@
 
 ## [Unreleased]
 
+### Added - 2025-09-19 (Session Capture d'État & Interface)
+
+- **Bouton Capture d'État** : Nouveau bouton 📷 dans ControlTower
+  - Icône appareil photo intégrée dans la BottomRow (quickActions)
+  - Modale de confirmation `CaptureConfirmModal` avec design thématisé
+  - Instructions claires pour lancer `npm run capture` manuellement
+  - Copie automatique de la commande dans le presse-papier
+  - Interface cohérente avec le design system de l'application
+  - Styles utilisant `theme.radii`, `theme.colors.accent`, et `theme.colors.accents.danger`
+  - Workflow pratique : clic → instructions → exécution terminal → résultats
+
+- **Système Modal Robuste** : Corrections et améliorations
+  - Fix des handlers de modales avec dépendances dynamiques dans ModalManager
+  - Enregistrement automatique des nouveaux handlers lors d'ajouts
+  - Logs de debug temporaires pour diagnostics de problèmes modal
+  - Correction des références de thème (borderRadius → radii, accent.primary → accent)
+
+### Added - 2025-09-19 (Session Navigation & Keyboard Hooks)
+
+- **Hook useKeyboardNavigation** (`src/hooks/useKeyboardNavigation.js`) :
+  - Externalisation de la gestion des raccourcis clavier depuis RoomCanvas
+  - API flexible avec support des touches personnalisées (WASD, etc.)
+  - Protection intelligente contre les éditeurs (textarea, input, contenteditable)
+  - Prévention du scroll par défaut des flèches
+  - Vérification des directions disponibles avant navigation
+  - Documentation JSDoc complète avec exemples d'usage
+  - Support de la touche Échap pour retour à la pièce par défaut
+  - Calcul de chemin complet (Manhattan) vers la pièce par défaut
+  - Exécution pas-à-pas avec temporisation configurable
+  - Intégration transparente dans RoomCanvas sans modification de l'architecture
+
+- **Navigation Échap vers Pièce par Défaut** :
+  - Touche Échap pré-calcule le chemin vers la pièce définie dans SettingsModal
+  - Utilise la même logique que les flèches de navigation existantes
+  - Navigation automatique étape par étape jusqu'à destination
+  - Synchronisation avec useSettingsStore pour la pièce par défaut
+  - Temporisation de 520ms entre chaque mouvement pour animations fluides
+
+- **Refactoring RoomCanvas** :
+  - Suppression de 40+ lignes de gestion clavier
+  - Remplacement par 6 lignes utilisant le hook dédié
+  - Code plus propre et réutilisable
+  - Séparation des responsabilités (UI vs logique clavier)
+
 ### Added - 2025-09-19 (Session NavigationGrid)
 
 - **NavigationGrid dans la Chambre** (`src/components/room-modules/chambre/NavigationGrid.jsx`) :
@@ -15,6 +59,8 @@
   - Intégration transparente sans modification de l'architecture existante
   - Temporisation de 600ms entre chaque mouvement pour animations fluides
   - Priorité X puis Y pour trajectoire cohérente
+  - Stratégie spéciale pour rangées 1 et 2 via l'atelier comme hub central
+  - Navigation intelligente : rangée 0 → directe, rangée 1 → atelier puis destination, rangée 2 → atelier → colonne → descente
 
 - **Remplacement du Placeholder Navigation** :
   - NavigationGrid remplace le contenu temporaire du panel Navigation
@@ -266,8 +312,13 @@
 
 - Replaced hardcoded values with theme-based styling
 - Centralized actions in `buttonMapping.js`
+- **Scripts de capture** : Migration `capture-state-simple.js` de CommonJS vers ESM pour compatibilité avec le projet
+- **Navigation clavier** : Externalisation de la logique dans un hook réutilisable `useKeyboardNavigation`
 
 ### Improved
 
 - Performance optimizations
 - UX enhancements in navigation and modal interactions
+- **Navigation** : Ajout de la touche Échap pour retour rapide à la pièce par défaut
+- **Code quality** : Refactoring de la gestion clavier avec séparation des responsabilités
+- **Scripts** : Correction des scripts de capture pour création automatique de dossiers timestamp

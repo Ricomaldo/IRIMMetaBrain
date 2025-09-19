@@ -29,8 +29,8 @@ const RoomCell = styled.div`
   font-weight: 500;
   text-align: center;
   transition: all 0.2s ease;
-  opacity: ${props => props.isCurrent ? 1 : 0.7};
-  box-shadow: ${props => props.isCurrent ? `0 0 4px ${props.color}` : 'none'};
+  opacity: ${props => props.$isCurrent ? 1 : 0.7};
+  box-shadow: ${props => props.$isCurrent ? `0 0 4px ${props.color}` : 'none'};
   
   &:hover {
     opacity: 1;
@@ -56,7 +56,7 @@ const RoomLabel = styled.span`
  * @renders RoomLabel
  */
 const NavigationGrid = () => {
-  const { defaultRoom, setDefaultRoom } = useSettingsStore();
+  const { defaultRoom } = useSettingsStore();
 
   const handleRoomClick = async (roomType) => {
     const targetRoom = roomConfig.find(r => r.type === roomType);
@@ -75,33 +75,68 @@ const NavigationGrid = () => {
         `[aria-label="Navigate ${direction}"]`
       ];
 
+      // Debug: voir quelles flèches sont disponibles
+      const allArrows = document.querySelectorAll('button[aria-label*="Navigate"]');
+      console.log(`🔍 Flèches disponibles:`, Array.from(allArrows).map(el => el.getAttribute('aria-label')));
+
       for (const selector of selectors) {
         const element = document.querySelector(selector);
         if (element) {
-          element.click();
-          return true;
+          console.log(`✓ Trouvé: ${selector}, disabled: ${element.disabled}`);
+          if (!element.disabled) {
+            element.click();
+            return true;
+          } else {
+            console.warn(`⚠️ Flèche ${direction} trouvée mais désactivée`);
+            return false;
+          }
         }
       }
       console.warn(`⚠️ Impossible de trouver la flèche ${direction}`);
       return false;
     };
 
-    // Navigation pas-à-pas (comme dans capture-state.js)
+    // Navigation pas-à-pas avec stratégie spéciale pour rangées 1 et 2
     const navigateStepByStep = async () => {
       let current = { ...currentPos };
+      let steps = 0;
+      const maxSteps = 15; // Plus d'étapes pour la stratégie 3-phases
 
-      while (current.x !== targetRoom.x || current.y !== targetRoom.y) {
+      console.log(`🧭 Début navigation: (${current.x}, ${current.y}) → (${targetRoom.x}, ${targetRoom.y})`);
+
+      // Stratégie spéciale pour rangées 1 et 2 (via atelier)
+      const isTargetingRow1or2 = targetRoom.y >= 1;
+      const atelierPos = { x: 1, y: 1 }; // Position de l'atelier (hub central)
+
+      while ((current.x !== targetRoom.x || current.y !== targetRoom.y) && steps < maxSteps) {
         let direction = null;
 
-        // Priorité: d'abord X puis Y (comme le viewer)
-        if (current.x < targetRoom.x) direction = 'right';
-        else if (current.x > targetRoom.x) direction = 'left';
-        else if (current.y < targetRoom.y) direction = 'down';
-        else if (current.y > targetRoom.y) direction = 'up';
+        if (isTargetingRow1or2 && current.y === 0) {
+          // Phase 1: Depuis rangée 0, aller d'abord à l'atelier
+          console.log(`🎯 Phase 1: Direction atelier (${atelierPos.x}, ${atelierPos.y})`);
+          if (current.x < atelierPos.x) direction = 'right';
+          else if (current.x > atelierPos.x) direction = 'left';
+          else if (current.y < atelierPos.y) direction = 'down';
+        } else if (targetRoom.y === 2 && current.y === 1 && current.x !== targetRoom.x) {
+          // Phase 2: Pour rangée 2, se positionner sur la bonne colonne depuis l'atelier
+          console.log(`🎯 Phase 2: Positionnement colonne ${targetRoom.x} en rangée 1`);
+          if (current.x < targetRoom.x) direction = 'right';
+          else if (current.x > targetRoom.x) direction = 'left';
+        } else {
+          // Phase 3: Navigation normale (X puis Y)
+          if (current.x < targetRoom.x) direction = 'right';
+          else if (current.x > targetRoom.x) direction = 'left';
+          else if (current.y < targetRoom.y) direction = 'down';
+          else if (current.y > targetRoom.y) direction = 'up';
+        }
 
         if (direction) {
+          console.log(`🔄 Étape ${steps + 1}: ${direction} depuis (${current.x}, ${current.y})`);
           const success = await clickArrow(direction);
-          if (!success) break; // Arrêter si on ne peut pas cliquer
+          if (!success) {
+            console.warn(`❌ Échec du clic ${direction}`);
+            break;
+          }
           
           // Mettre à jour la position locale pour le calcul suivant
           switch(direction) {
@@ -110,11 +145,20 @@ const NavigationGrid = () => {
             case 'down': current.y++; break;
             case 'up': current.y--; break;
           }
+          
+          console.log(`✓ Nouvelle position: (${current.x}, ${current.y})`);
+          steps++;
+          
           // Attendre la transition (comme dans capture-state.js)
           await new Promise(resolve => setTimeout(resolve, 600));
         } else {
+          console.log(`✅ Navigation terminée`);
           break;
         }
+      }
+      
+      if (steps >= maxSteps) {
+        console.warn(`⚠️ Navigation interrompue après ${maxSteps} étapes`);
       }
     };
 
@@ -132,13 +176,13 @@ const NavigationGrid = () => {
   return (
     <GridContainer>
       {roomConfig.map((room) => (
-        <RoomCell
-          key={`${room.x}-${room.y}`}
-          color={roomColors[room.type]}
-          isCurrent={room.type === currentRoomType}
-          onClick={() => handleRoomClick(room.type)}
-          title={`Aller vers ${room.name}`}
-        >
+          <RoomCell
+            key={`${room.x}-${room.y}`}
+            color={roomColors[room.type]}
+            $isCurrent={room.type === currentRoomType}
+            onClick={() => handleRoomClick(room.type)}
+            title={`Aller vers ${room.name}`}
+          >
           <RoomLabel>
             {room.name.substring(0, 3)}
           </RoomLabel>

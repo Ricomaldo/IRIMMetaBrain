@@ -7,11 +7,15 @@
  * Usage: node scripts/capture-state-simple.js
  */
 
-const fs = require('fs-extra');
-const path = require('path');
-const { exec } = require('child_process');
-const util = require('util');
-const execPromise = util.promisify(exec);
+import fs from 'fs-extra';
+import path from 'path';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+import { fileURLToPath } from 'url';
+
+const execPromise = promisify(exec);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configuration
 const CAPTURES_DIR = path.join(__dirname, '..', 'captures');
@@ -261,12 +265,8 @@ ${diff.changes.newRooms.length > 0 ? `- Nouvelles rooms: ${diff.changes.newRooms
   console.log(`📸 Voir les résultats dans: ${captureDir}\n`);
 }
 
-// Exécuter si appelé directement
-if (require.main === module) {
-  captureState().catch(error => {
-    console.error('❌ Erreur lors de la capture:', error);
-    process.exit(1);
-  });
-}
-
-module.exports = { captureState, collectMetrics };
+// Exécution directe
+captureState().catch(error => {
+  console.error('❌ Erreur lors de la capture:', error);
+  process.exit(1);
+});

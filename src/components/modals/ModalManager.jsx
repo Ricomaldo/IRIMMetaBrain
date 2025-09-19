@@ -6,6 +6,7 @@ import { HealingPotionModal, SleepPotionModal, StrengthPotionModal } from './Pot
 import SyncModal from './SyncModal/SyncModal';
 import SettingsModal from './SettingsModal/SettingsModal';
 import ProjectOverviewModal from './ProjectOverviewModal/ProjectOverviewModal';
+import CaptureConfirmModal from './CaptureConfirmModal/CaptureConfirmModal';
 
 /**
  * Manager component that renders all modals in the application
@@ -15,6 +16,7 @@ import ProjectOverviewModal from './ProjectOverviewModal/ProjectOverviewModal';
  * @renders SyncModal
  * @renders SettingsModal
  * @renders ProjectOverviewModal
+ * @renders CaptureConfirmModal
  */
 const ModalManager = () => {
   // État pour chaque modale
@@ -25,6 +27,7 @@ const ModalManager = () => {
     'sync': false,
     'settings': false,
     'projects': false,
+    'capture-confirm': false,
   });
 
   // Utiliser une ref pour stocker la fonction de setState
@@ -36,7 +39,7 @@ const ModalManager = () => {
     setModalStates(prev => ({ ...prev, [modalId]: false }));
   };
 
-  // Enregistrer les handlers au montage (une seule fois)
+  // Enregistrer les handlers au montage et quand de nouvelles modales sont ajoutées
   useEffect(() => {
     // Fonction stable qui utilise setModalStates
     const openModal = (modalId) => {
@@ -50,11 +53,13 @@ const ModalManager = () => {
       });
     };
 
-    // Enregistrer les handlers
+    // Enregistrer les handlers pour toutes les modales définies
     Object.keys(modalStates).forEach(modalId => {
       registerModalHandler(modalId, () => openModal(modalId));
     });
-  }, []); // Vide pour ne s'exécuter qu'une fois
+    
+    console.log('✅ Handlers enregistrés pour:', Object.keys(modalStates));
+  }, [Object.keys(modalStates).join(',')]); // Re-run si la liste des modales change
 
   return (
     <>
@@ -86,6 +91,11 @@ const ModalManager = () => {
       <ProjectOverviewModal
         isOpen={modalStates['projects']}
         onClose={() => closeModal('projects')}
+      />
+
+      <CaptureConfirmModal
+        isOpen={modalStates['capture-confirm']}
+        onClose={() => closeModal('capture-confirm')}
       />
     </>
   );

@@ -31,6 +31,7 @@ export const quickActions = [
   { id: 'book', icon: '📖', label: 'Grimoire', onClick: () => {} },
   { id: 'help', icon: '❓', label: 'Aide', onClick: () => {} },
   { id: 'map', icon: '🗺️', label: 'Carte', onClick: () => {} },
+  { id: 'camera', icon: '📷', label: 'Capture d\'état', onClick: () => openModal('capture-confirm') },
   { id: 'sync', icon: '🔄', label: 'Synchronisation', onClick: () => openModal('sync') },
   { id: 'config', icon: '⚙️', label: 'Paramètres', onClick: () => openModal('settings') },
 ];
