@@ -273,9 +273,9 @@ export default function TimeTimer({
     },
     timeDisplay: {
       position: "absolute",
-      bottom: `${radius * 0.3}px`,
+      top: "75%",  // Milieu de la partie basse (entre 50% et 100%)
       left: "50%",
-      transform: "translateX(-50%)",
+      transform: "translate(-50%, -50%)",
       fontSize: fontSize.message,
       fontWeight: "bold",
       fontFamily: "system-ui, sans-serif",
