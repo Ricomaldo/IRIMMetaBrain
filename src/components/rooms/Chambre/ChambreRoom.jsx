@@ -8,7 +8,10 @@ import Panel from '../../common/Panel';
 import useNotesStore from '../../../stores/useNotesStore';
 import useRoomsUIStore from '../../../stores/useRoomsUIStore';
 import MarkdownEditor from '../../common/MarkdownEditor';
+import ImageDisplay from '../../widgets/ImageDisplay/ImageDisplay';
+import QuoteCarousel from '../../widgets/QuoteCarousel/QuoteCarousel';
 import { ChambreTitle } from './ChambreRoom.styles';
+import lionImage from '../../../assets/images/totems/Lion.png';
 
 /**
  * Chambre room component for personal space and timers
@@ -55,7 +58,7 @@ const ChambreRoom = () => {
         {/* Totem - 1x1 en haut à droite */}
         <Panel
           gridColumn="4 / 5"
-          gridRow="1 / 2"
+          gridRow="1 / 3"
           title="Totem"
           icon="🗿"
           texture="stone"
@@ -64,14 +67,11 @@ const ChambreRoom = () => {
           collapsed={getPanelState('chambre', 'totem').collapsed}
           onToggleCollapse={(val) => updatePanelState('chambre', 'totem', { collapsed: val })}
         >
-          <div style={{
-            padding: theme.spacing.md,
-            textAlign: 'center',
-            opacity: 0.7
-          }}>
-            <p>Totem</p>
-            <small>Spirituel</small>
-          </div>
+          <ImageDisplay 
+            src={lionImage}
+            alt="Lion Totem"
+            hoverEffect={true}
+          />
         </Panel>
 
         {/* MindLog - 2x1 ligne 3 */}
@@ -104,18 +104,12 @@ const ChambreRoom = () => {
           icon="🕉️"
           texture="fabric"
           accentColor={theme.colors.accents.warm}
+          contentType="mantras"
           collapsible={true}
           collapsed={getPanelState('chambre', 'mantra').collapsed}
           onToggleCollapse={(val) => updatePanelState('chambre', 'mantra', { collapsed: val })}
         >
-          <div style={{
-            padding: theme.spacing.md,
-            textAlign: 'center',
-            opacity: 0.7
-          }}>
-            <p>Module Mantras</p>
-            <small>À implémenter - Méditation</small>
-          </div>
+          <QuoteCarousel showCategory={false} infinite={true} random={true} />
         </Panel>
 
         {/* Notes - 2x1 ligne 4 */}

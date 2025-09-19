@@ -13,6 +13,7 @@ import {
 } from './Panel.styles';
 import { PanelProvider, usePanelContext } from './PanelContext';
 import MarkdownToolbar from '../MarkdownToolbar';
+import CategoryFilters from '../CategoryFilters/CategoryFilters.jsx';
 
 /**
  * Internal panel component that renders the panel structure
@@ -130,6 +131,16 @@ const PanelInner = ({
                 isEditing={panelContext.editing}
                 onToggleEdit={panelContext.handleToggleEdit}
                 showEditButton={true}
+              />
+            )}
+
+            {panelContext.contentType === 'mantras' && (
+              <CategoryFilters
+                categories={panelContext.categories || []}
+                activeFilters={panelContext.activeFilters || []}
+                onToggleFilter={panelContext.handleToggleFilter}
+                onClearFilters={panelContext.handleClearFilters}
+                iconsMap={panelContext.iconsMap}
               />
             )}
 

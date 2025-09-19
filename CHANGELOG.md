@@ -2,6 +2,73 @@
 
 ## [Unreleased]
 
+### Added - 2025-09-19 (Session TimeTimer)
+
+- **Composant TimeTimer** (`src/components/widgets/TimeTimer.jsx`) :
+  - Timer visuel façon vrai TimeTimer avec disque qui se vide
+  - Représentation sur base 60 minutes (horloge complète)
+  - 3 durées : 4min, 20min et personnalisée (1-60min)
+  - Input vide pour durée custom sans placeholder ni flèches
+  - Sélecteur de couleur avec 6 options
+  - Messages contextuels : "C'est parti" (2s), "Pause", "C'est reparti" (2s), "C'est fini"
+  - Rendu responsive avec disque à 80% du conteneur
+  - Style réveil-matin avec padding et bordures arrondies
+  - Pas d'affichage numérique du temps (purement visuel)
+  - Animation fluide avec requestAnimationFrame
+  - Support complet pause/reprise avec états distincts
+  - Code nettoyé et réorganisé avec sections claires
+
+### Added - 2025-09-19 (Session Kanban & Design System Badges)
+
+- **Architecture Kanban pour Gestion des Projets** :
+  - ADR-005 : Architecture décisionnelle documentée
+  - 3 colonnes : EN TÊTE (max 5, auto-visible), ACTIF, PAUSE (invisible)
+  - Système de tabs : Professionnel | Personnel | Formation
+  - Drag & drop entre colonnes avec `@dnd-kit`
+  - Drop zones avec `useDroppable` pour colonnes vides
+  - Auto-visibilité basée sur colonne (EN TÊTE → visible, PAUSE → invisible)
+
+- **Section Inbox/Réserve** :
+  - Zone "📥 Réserve de projets" pour projets non classés
+  - Drag depuis inbox vers colonnes Kanban
+  - Catégorie obligatoire dans formulaire
+  - KanbanColumn par défaut : 'inbox' pour nouveaux projets
+
+- **Composant Badge Réutilisable** (`src/components/common/Badge/`) :
+  - Variants : subtle (défaut), solid, outline
+  - Tailles : sm, md, lg
+  - Formes : default, rounded, pill
+  - Couleurs automatiques selon type de donnée
+  - Support d'icônes intégrées
+
+- **Amélioration Visuelle des ProjectCards** :
+  - Status avec badges colorés et icônes (⚡ Dev Actif, 💡 Concept, etc.)
+  - Types avec badges colorés (🔨 Outil, 📱 App, 🌐 Site, etc.)
+  - Hiérarchie visuelle : EN TÊTE doré et mis en valeur
+  - Cards PAUSE estompées (opacité 60% + grayscale)
+  - Drag handle amélioré (28px, plus visible)
+  - Layout TopBar avec collapse button
+
+- **Modal ProjectDetails (Overlay)** :
+  - Clic simple sur carte → affiche détails complets
+  - Double-clic → édition directe
+  - Support modales superposées (overlay z-index: 10000)
+  - Vue structurée des infos projet
+  - Bouton "✏️ Modifier" intégré
+
+- **Améliorations UI/UX** :
+  - Tabs plus visibles (fond opaque, meilleur contraste)
+  - Boutons avec gradient et text-shadow
+  - Suppression barre de stats inutile
+  - Timer pour distinguer simple/double clic
+  - Checkbox non-overlapping avec titre
+
+- **Vue Formation Spécifique** :
+  - Sections par complexité (Débutant/Intermédiaire/Avancé)
+  - Tri par complexité ou date
+  - Sections collapsibles
+  - Grid layout responsive
+
 ### Added - 2025-09-19 (J6 - Architecture Multi-Stores v2 & Robustesse)
 
 - **Architecture Multi-Stores v2** : Refonte complète de la gestion des données

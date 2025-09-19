@@ -81,6 +81,8 @@ export const ProjectGrid = styled.div`
 export const ProjectCard = styled.div`
   position: relative;
   padding: ${({ theme }) => theme.spacing.md};
+  padding-left: ${({ theme }) => `calc(${theme.spacing.md} + 28px)`};
+  padding-right: ${({ theme }) => `calc(${theme.spacing.md} + 36px)`};
   background: ${({ theme, $selected }) =>
     $selected
       ? alpha(theme.colors.primary, 0.15)
@@ -172,21 +174,28 @@ export const FloatingButtons = styled.div`
 
 export const ActionButton = styled.button`
   background: ${({ theme, $variant }) =>
-    $variant === 'success' ? theme.colors.success :
-    $variant === 'secondary' ? theme.colors.secondary :
+    $variant === 'success' ?
+      `linear-gradient(135deg, ${theme.colors.accents?.success || '#68752C'} 0%, ${alpha(theme.colors.accents?.success || '#68752C', 0.8)} 100%)` :
+    $variant === 'secondary' ?
+      alpha(theme.colors.secondary, 0.9) :
     theme.colors.primary
   };
   color: white;
-  border: none;
+  border: 2px solid ${({ theme, $variant }) =>
+    $variant === 'success' ? theme.colors.accents?.success || '#68752C' :
+    $variant === 'secondary' ? theme.colors.secondary :
+    theme.colors.primary
+  };
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.xl};
   border-radius: ${({ theme }) => theme.radii.lg};
   font-size: ${({ theme }) => theme.typography.sizes.md};
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
   box-shadow: 0 4px 12px ${({ theme, $variant }) =>
     alpha(
-      $variant === 'success' ? theme.colors.success :
+      $variant === 'success' ? theme.colors.accents?.success || '#68752C' :
       $variant === 'secondary' ? theme.colors.secondary :
       theme.colors.primary,
       0.3
@@ -197,11 +206,16 @@ export const ActionButton = styled.button`
     transform: translateY(-2px);
     box-shadow: 0 6px 16px ${({ theme, $variant }) =>
       alpha(
-        $variant === 'success' ? theme.colors.success :
+        $variant === 'success' ? theme.colors.accents?.success || '#68752C' :
         $variant === 'secondary' ? theme.colors.secondary :
         theme.colors.primary,
         0.4
       )
+    };
+    background: ${({ theme, $variant }) =>
+      $variant === 'success' ? theme.colors.accents?.success || '#68752C' :
+      $variant === 'secondary' ? theme.colors.secondary :
+      alpha(theme.colors.primary, 0.9)
     };
   }
 `;

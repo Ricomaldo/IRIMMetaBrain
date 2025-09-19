@@ -50,10 +50,13 @@ const PROP_OPTIONS_MAP = {
   variant: {
     button: ['default', 'primary', 'secondary', 'danger'],
     modal: ['overlay', 'roomCanvas', 'baseFloorTower'],
-    markdown: ['embedded', 'standalone']
+    markdown: ['embedded', 'standalone'],
+    badge: ['subtle', 'solid', 'outline']
   },
   texture: ['wood', 'metal', 'stone', 'fabric'],
-  contentType: ['markdown', 'actions', 'screentv', 'mindlog']
+  contentType: ['markdown', 'actions', 'screentv', 'mindlog'],
+  color: ['primary', 'success', 'warning', 'info', 'danger', 'muted', 'tech', 'secondary'],
+  shape: ['default', 'rounded', 'pill']
 };
 
 // Fonction pour extraire les props d'un composant et leurs métadonnées
@@ -72,17 +75,20 @@ const extractComponentProps = (Component, componentName) => {
       };
 
       // Déterminer le type basé sur le nom de la prop
-      if (propName === 'children' || propName === 'title' || propName === 'label' || propName === 'placeholder') {
+      if (propName === 'children' || propName === 'title' || propName === 'label' || propName === 'placeholder' || propName === 'icon') {
         propsInfo[propName].type = 'string';
       } else if (propName.startsWith('on')) {
         propsInfo[propName].type = 'function';
       } else if (propName === 'active' || propName === 'collapsed' || propName === 'collapsible' ||
                  propName === 'isOpen' || propName === 'showPreview' || propName === 'readOnly' ||
                  propName === 'closeOnOverlay' || propName === 'closeOnEscape' ||
-                 propName === 'showCloseButton' || propName === 'showFooterCloseButton') {
+                 propName === 'showCloseButton' || propName === 'showFooterCloseButton' ||
+                 propName === 'clickable') {
         propsInfo[propName].type = 'boolean';
       } else if (propName === 'badge' || propName === 'zoomLevel') {
         propsInfo[propName].type = 'number';
+      } else if (propName === 'color' || propName === 'shape') {
+        propsInfo[propName].type = 'enum';
       }
 
       // Ajouter les options possibles depuis notre map
@@ -131,6 +137,17 @@ const extractComponentProps = (Component, componentName) => {
     });
   }
 
+  // Props spécifiques pour Badge
+  if (componentName === 'Badge') {
+    propsInfo.children = { type: 'string', required: false, options: null };
+    propsInfo.color = { type: 'enum', required: false, options: PROP_OPTIONS_MAP.color };
+    propsInfo.variant = { type: 'enum', required: false, options: PROP_OPTIONS_MAP.variant.badge };
+    propsInfo.size = { type: 'enum', required: false, options: ['sm', 'md', 'lg'] };
+    propsInfo.shape = { type: 'enum', required: false, options: PROP_OPTIONS_MAP.shape };
+    propsInfo.icon = { type: 'string', required: false, options: null };
+    propsInfo.onClick = { type: 'function', required: false, options: null };
+  }
+
   return propsInfo;
 };
 
@@ -153,17 +170,31 @@ const ComponentCatalog = () => {
   const generateDefaultProps = (component) => {
     const defaultProps = { ...component.defaultProps };
 
+    // Props spécifiques par composant
+    if (component.name === 'Badge') {
+      defaultProps.children = defaultProps.children || 'Badge Exemple';
+      defaultProps.color = defaultProps.color || 'primary';
+      defaultProps.variant = defaultProps.variant || 'subtle';
+      defaultProps.size = defaultProps.size || 'md';
+      defaultProps.shape = defaultProps.shape || 'default';
+      defaultProps.icon = defaultProps.icon || '⭐';
+    } else if (component.name === 'Button') {
+      defaultProps.children = defaultProps.children || 'Cliquez-moi';
+      defaultProps.variant = defaultProps.variant || 'default';
+      defaultProps.size = defaultProps.size || 'medium';
+    }
+
     // Ajouter des valeurs par défaut pour les props communes
-    if (component.props.children) {
+    if (component.props.children && !defaultProps.children) {
       defaultProps.children = 'Contenu exemple';
     }
-    if (component.props.onClick) {
+    if (component.props.onClick && !defaultProps.onClick) {
       defaultProps.onClick = () => alert('Click!');
     }
-    if (component.props.title) {
+    if (component.props.title && !defaultProps.title) {
       defaultProps.title = 'Titre exemple';
     }
-    if (component.props.content) {
+    if (component.props.content && !defaultProps.content) {
       defaultProps.content = 'Lorem ipsum dolor sit amet...';
     }
 

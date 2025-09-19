@@ -104,9 +104,9 @@ const ForgeRoom = () => {
               icon="🔨"
               texture="metal"
               accentColor={theme.colors.accents.warm}
-              collapsible={false}
+              collapsible={true}
             >
-              <div style={{ padding: theme.spacing.md, textAlign: 'center' }}>
+              <div style={{ padding: theme.spacing.md, textAlign: "center" }}>
                 <p>Zone principale de la Forge</p>
               </div>
             </Panel>
@@ -125,7 +125,7 @@ const ForgeRoom = () => {
             >
               <MarkdownEditor
                 value={forgeNotes}
-                onChange={(value) => updateRoomNote('forge', value)}
+                onChange={(value) => updateRoomNote("forge", value)}
                 placeholder="Notes de forge..."
                 height="100%"
                 compact={true}

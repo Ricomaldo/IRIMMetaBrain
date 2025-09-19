@@ -19,14 +19,8 @@ import {
   NoPanelSubtitle,
   NoPanelCenter,
 } from "./LaboratoireRoom.styles";
-import ProjectCarousel from "../../room-modules/atelier/ProjectCarousel";
-// ============================================
-// 🧪 IMPORTER LE COMPOSANT À TESTER ICI
-// ============================================
 import Button from "../../common/Button";
-
-// Remplace ComponentToTest par le composant que tu veux tester
-const ComponentToTest = ProjectCarousel;
+import ComponentToTest from "../../room-modules/laboratoire/ComponentToTest";
 
 /**
  * Laboratoire room component for testing and experimenting with components
@@ -162,7 +156,7 @@ const LaboratoireRoom = () => {
           // Sans Panel - Contenu direct
           <NoPanelContent>
             {ComponentToTest ? (
-              <ProjectCarousel />
+              <ComponentToTest />
             ) : (
               <NoPanelCenter>
                 <LargeEmoji>👋</LargeEmoji>

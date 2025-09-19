@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled, { css } from 'styled-components';
-import arrowLeft from '../../../assets/images/ui/navigation/navigation-arrow-left.png';
+import arrowLeft from '../../../assets/images/ui/navigation/navigation-wood-arrow-left.png';
 import { alpha } from '../../../styles/color';
 
 // Définition des rotations pour chaque direction

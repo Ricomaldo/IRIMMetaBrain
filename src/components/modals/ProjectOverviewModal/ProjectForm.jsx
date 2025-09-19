@@ -184,7 +184,7 @@ const ProjectForm = ({ project, categories, onSave, onDelete, onCancel }) => {
     name: '',
     type: 'tool',
     status: 'concept',
-    category: 'perso',
+    category: '',
     subcategory: '',
     contractType: null,
     deploymentStatus: 'local',
@@ -213,7 +213,7 @@ const ProjectForm = ({ project, categories, onSave, onDelete, onCancel }) => {
         name: project.name || '',
         type: project.type || 'tool',
         status: project.status || 'concept',
-        category: project.category || 'perso',
+        category: project.category || '',
         subcategory: project.subcategory || '',
         contractType: project.contractType || null,
         deploymentStatus: project.deploymentStatus || 'local',
@@ -250,6 +250,10 @@ const ProjectForm = ({ project, categories, onSave, onDelete, onCancel }) => {
 
     if (!formData.name.trim()) {
       newErrors.name = 'Le nom du projet est requis';
+    }
+
+    if (!formData.category) {
+      newErrors.category = 'La catégorie est requise';
     }
 
     if (!isEditMode && !formData.id.trim()) {
@@ -330,12 +334,14 @@ const ProjectForm = ({ project, categories, onSave, onDelete, onCancel }) => {
         </FormGroup>
 
         <FormGroup>
-          <Label>Catégorie</Label>
+          <Label>Catégorie*</Label>
           <Select value={formData.category} onChange={(e) => handleChange('category', e.target.value)}>
+            <option value="">-- Sélectionner --</option>
             {Object.entries(categories).map(([key, cat]) => (
               <option key={key} value={key}>{cat.label}</option>
             ))}
           </Select>
+          {errors.category && <ErrorMessage>{errors.category}</ErrorMessage>}
         </FormGroup>
 
         <FormGroup>

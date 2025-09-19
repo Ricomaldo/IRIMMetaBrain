@@ -28,7 +28,9 @@ const slideUp = keyframes`
 // Overlay adaptable selon variante
 export const ModalOverlay = styled.div`
   position: fixed;
-  z-index: ${({ theme }) => theme.zIndex.modal};
+  z-index: ${({ theme, $variant }) =>
+    $variant === 'overlay' ? (theme.zIndex.modalTop || 10000) : theme.zIndex.modal
+  };
   animation: ${fadeIn} 0.2s ease-out;
   display: flex;
   align-items: center;

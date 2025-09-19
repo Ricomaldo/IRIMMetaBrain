@@ -94,6 +94,7 @@ const useProjectMetaStore = create(
           startDate: projectData.startDate, // nouveau
           endDate: projectData.endDate, // nouveau
           order: projectData.order !== undefined ? projectData.order : maxOrder + 1, // nouveau
+          kanbanColumn: projectData.kanbanColumn !== undefined ? projectData.kanbanColumn : (projectData.category === 'formation' ? null : 'inbox'), // nouveau
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString()
         };
@@ -156,6 +157,36 @@ const useProjectMetaStore = create(
             }
           }
         }));
+      },
+
+      // Actions - Kanban
+      moveToColumn: (projectId, column) => {
+        set((state) => ({
+          projects: {
+            ...state.projects,
+            [projectId]: {
+              ...state.projects[projectId],
+              kanbanColumn: column,
+              updated_at: new Date().toISOString()
+            }
+          }
+        }));
+
+        // Si on déplace vers EN TÊTE, rendre automatiquement visible
+        if (column === 'entete') {
+          const state = get();
+          if (!state.visibleProjects.includes(projectId)) {
+            set((state) => ({
+              visibleProjects: [...state.visibleProjects, projectId]
+            }));
+          }
+        }
+        // Si on déplace vers PAUSE, retirer de la visibilité
+        else if (column === 'pause') {
+          set((state) => ({
+            visibleProjects: state.visibleProjects.filter(id => id !== projectId)
+          }));
+        }
       },
 
       // Actions - Réorganisation

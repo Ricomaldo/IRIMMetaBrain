@@ -13,6 +13,11 @@ export const PanelProvider = ({ children, contentType = "default" }) => {
   const [zoom, setZoom] = useState(0);
   const [editing, setEditing] = useState(false);
 
+  // États spécifiques mantras (filtres)
+  const [activeFilters, setActiveFilters] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [iconsMap, setIconsMap] = useState({});
+
   // Fonctions zoom
   const handleZoomIn = () => {
     setZoom(prev => Math.min(prev + 1, 2));
@@ -32,13 +37,28 @@ export const PanelProvider = ({ children, contentType = "default" }) => {
     zoom,
     editing,
     contentType,
+    activeFilters,
+    categories,
+    iconsMap,
 
     // Actions
     setZoom,
     setEditing,
     handleZoomIn,
     handleZoomOut,
-    handleToggleEdit
+    handleToggleEdit,
+
+    // Actions mantras
+    setCategories,
+    setIconsMap,
+    handleToggleFilter: (category) => {
+      setActiveFilters(prev =>
+        prev.includes(category)
+          ? prev.filter(c => c !== category)
+          : [...prev, category]
+      );
+    },
+    handleClearFilters: () => setActiveFilters([])
   };
 
   return (
