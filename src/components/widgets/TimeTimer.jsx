@@ -303,50 +303,26 @@ export default function TimeTimer({
       `}</style>
 
       <div ref={containerRef} style={styles.container}>
-        {/* Contrôles en haut */}
-        <div style={styles.controlsRow}>
-          <button
-            style={{
-              ...styles.button,
-              backgroundColor: duration === 240 ? "#8B4513" : "#D2B48C",
-            }}
-            onClick={() => setPresetDuration(4)}
-            onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
-            onMouseLeave={(e) => (e.target.style.opacity = "1")}
-          >
-            4m
-          </button>
-
-          <button
-            style={{
-              ...styles.button,
-              backgroundColor: duration === 1200 ? "#8B4513" : "#D2B48C",
-            }}
-            onClick={() => setPresetDuration(20)}
-            onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
-            onMouseLeave={(e) => (e.target.style.opacity = "1")}
-          >
-            20m
-          </button>
-
-          <button
-            style={styles.button}
-            onClick={toggleRunning}
-            onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
-            onMouseLeave={(e) => (e.target.style.opacity = "1")}
-          >
-            {running ? "⏸" : "▶️"}
-          </button>
-
-          <button
-            style={styles.button}
-            onClick={resetTimer}
-            onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
-            onMouseLeave={(e) => (e.target.style.opacity = "1")}
-          >
-            🔄
-          </button>
-        </div>
+        {/* Sélecteur de couleur en haut */}
+        {colorSelect && (
+          <div style={styles.colorRow}>
+            {TIMER_COLORS.map((c) => (
+              <button
+                key={c}
+                style={{
+                  ...styles.colorButton,
+                  backgroundColor: c,
+                  transform: color === c ? "scale(1.2)" : "scale(1)",
+                }}
+                onClick={() => setColor(c)}
+                onMouseEnter={(e) => (e.target.style.transform = "scale(1.15)")}
+                onMouseLeave={(e) =>
+                  (e.target.style.transform = color === c ? "scale(1.2)" : "scale(1)")
+                }
+              />
+            ))}
+          </div>
+        )}
 
         {/* Timer SVG */}
         <div style={styles.timerWrapper}>
@@ -405,26 +381,50 @@ export default function TimeTimer({
           )}
         </div>
 
-        {/* Sélecteur de couleur en bas */}
-        {colorSelect && (
-          <div style={styles.colorRow}>
-            {TIMER_COLORS.map((c) => (
-              <button
-                key={c}
-                style={{
-                  ...styles.colorButton,
-                  backgroundColor: c,
-                  transform: color === c ? "scale(1.2)" : "scale(1)",
-                }}
-                onClick={() => setColor(c)}
-                onMouseEnter={(e) => (e.target.style.transform = "scale(1.15)")}
-                onMouseLeave={(e) =>
-                  (e.target.style.transform = color === c ? "scale(1.2)" : "scale(1)")
-                }
-              />
-            ))}
-          </div>
-        )}
+        {/* Contrôles en bas */}
+        <div style={styles.controlsRow}>
+          <button
+            style={{
+              ...styles.button,
+              backgroundColor: duration === 240 ? "#8B4513" : "#D2B48C",
+            }}
+            onClick={() => setPresetDuration(4)}
+            onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
+            onMouseLeave={(e) => (e.target.style.opacity = "1")}
+          >
+            4m
+          </button>
+
+          <button
+            style={{
+              ...styles.button,
+              backgroundColor: duration === 1200 ? "#8B4513" : "#D2B48C",
+            }}
+            onClick={() => setPresetDuration(20)}
+            onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
+            onMouseLeave={(e) => (e.target.style.opacity = "1")}
+          >
+            20m
+          </button>
+
+          <button
+            style={styles.button}
+            onClick={toggleRunning}
+            onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
+            onMouseLeave={(e) => (e.target.style.opacity = "1")}
+          >
+            {running ? "⏸" : "▶️"}
+          </button>
+
+          <button
+            style={styles.button}
+            onClick={resetTimer}
+            onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
+            onMouseLeave={(e) => (e.target.style.opacity = "1")}
+          >
+            🔄
+          </button>
+        </div>
       </div>
     </>
   );
