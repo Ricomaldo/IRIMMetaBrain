@@ -232,13 +232,16 @@ export default function TimeTimer({
       margin: "0 auto",
       boxSizing: "border-box",
       overflow: "hidden",
+      position: "relative",
     },
     colorRow: {
+      position: "absolute",
+      right: `${Math.max(8, dimensions.size * 0.03)}px`,
+      top: "50%",
+      transform: "translateY(-50%)",
       display: "flex",
-      gap: "4px",
-      flexWrap: "wrap",
-      justifyContent: "center",
-      flexShrink: 0,
+      flexDirection: "column",
+      gap: `${Math.max(4, dimensions.size * 0.02)}px`,
     },
     colorButton: {
       width: `${Math.max(18, dimensions.size * 0.07)}px`,
@@ -304,27 +307,6 @@ export default function TimeTimer({
       `}</style>
 
       <div ref={containerRef} style={styles.container}>
-        {/* Sélecteur de couleur en haut */}
-        {colorSelect && (
-          <div style={styles.colorRow}>
-            {TIMER_COLORS.map((c) => (
-              <button
-                key={c}
-                style={{
-                  ...styles.colorButton,
-                  backgroundColor: c,
-                  transform: color === c ? "scale(1.2)" : "scale(1)",
-                }}
-                onClick={() => setColor(c)}
-                onMouseEnter={(e) => (e.target.style.transform = "scale(1.15)")}
-                onMouseLeave={(e) =>
-                  (e.target.style.transform = color === c ? "scale(1.2)" : "scale(1)")
-                }
-              />
-            ))}
-          </div>
-        )}
-
         {/* Timer SVG */}
         <div style={styles.timerWrapper}>
           <svg width={diskSize} height={diskSize}>
@@ -426,6 +408,27 @@ export default function TimeTimer({
             🔄
           </button>
         </div>
+
+        {/* Sélecteur de couleur sur la droite */}
+        {colorSelect && (
+          <div style={styles.colorRow}>
+            {TIMER_COLORS.map((c) => (
+              <button
+                key={c}
+                style={{
+                  ...styles.colorButton,
+                  backgroundColor: c,
+                  transform: color === c ? "scale(1.2)" : "scale(1)",
+                }}
+                onClick={() => setColor(c)}
+                onMouseEnter={(e) => (e.target.style.transform = "scale(1.15)")}
+                onMouseLeave={(e) =>
+                  (e.target.style.transform = color === c ? "scale(1.2)" : "scale(1)")
+                }
+              />
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
