@@ -52,8 +52,8 @@ async function updateViewer() {
     console.log('❌ Viewer non trouvé');
   }
 
-  // Créer aussi un index.json pour un accès plus facile
-  const indexPath = path.join(CAPTURES_DIR, 'index.json');
+  // Créer aussi un captures-index.json pour un accès plus facile
+  const indexPath = path.join(CAPTURES_DIR, 'captures-index.json');
   const index = {
     captures: captures,
     lastUpdated: new Date().toISOString(),
@@ -61,7 +61,7 @@ async function updateViewer() {
   };
 
   await fs.writeJson(indexPath, index, { spaces: 2 });
-  console.log('✅ Index JSON créé');
+  console.log('✅ Index JSON créé (captures-index.json)');
 }
 
 updateViewer().catch(console.error);

@@ -68,24 +68,24 @@
   - Aucune modification de RoomCanvas ou useRoomNavigation nécessaire
   - Utilise l'API publique des flèches pour navigation automatique
 
-### Added - 2025-09-19 (Session TimeTimer)
+### Added - 2025-09-20 (Session TimeTimer Complet)
 
-- **Composant TimeTimer** (`src/components/widgets/TimeTimer.jsx`) :
-  - Timer visuel façon vrai TimeTimer avec disque qui se vide
-  - Représentation sur base 60 minutes (horloge complète)
-  - 2 durées présélectionnées : 4min, 20min
-  - Input personnalisé (1-60min) vide sans placeholder ni flèches
-  - Sélecteur de couleur avec 6 options en bas
-  - Contrôles de durée et lecture/reset en haut
-  - Messages contextuels : "C'est parti" (2s), "Pause", "C'est reparti" (2s), "C'est fini"
-  - Disque agrandi à 75% du conteneur (plus visible)
-  - Responsive carré parfait (min 200px, max 400px)
-  - Style réveil-matin avec padding et bordures arrondies
-  - Pas d'affichage numérique du temps (purement visuel)
-  - Animation fluide avec requestAnimationFrame
-  - Support complet pause/reprise avec états distincts
-  - Layout inversé : contrôles en haut, couleurs en bas
-  - Code refactorisé avec structure claire et sections bien définies
+- **Composant TimeTimer Finalisé** (`src/components/widgets/TimeTimer.jsx`) :
+  - Timer visuel façon vrai TimeTimer physique avec disque qui se vide
+  - Représentation sur base 60 minutes (horloge complète comme une vraie horloge)
+  - 2 durées présélectionnées : 4min et 20min uniquement
+  - Messages contextuels temporisés : "C'est parti" (2s au démarrage), "Pause", "C'est reparti" (2s après pause), "C'est fini"
+  - Responsive carré parfait (min 150px, max 400px) avec ResizeObserver
+  - **Inversion du sens d'écoulement** : bouton pour basculer horaire/anti-horaire
+  - **60 graduations de minutes** à l'intérieur du cercle (plus longues toutes les 5 min)
+  - **Nombres 0-55** à l'extérieur du cercle, inversés selon le sens d'écoulement
+  - **Disque central** opaque de 15% du rayon (style TimeTimer authentique)
+  - **Icônes SVG** personnalisées : play, pause, reset, reverse (remplacent les emojis)
+  - **Carousel de palettes de couleurs** : 8 palettes disponibles via `palettes.json`
+  - Navigation par triangles avec animation type roulette verticale
+  - **Thème sombre** : fond gris foncé (#1F2937) pour contraste maximal avec cercle blanc
+  - Tous les éléments en nuances de gris cohérentes pour hiérarchie visuelle
+  - **Intégration dans la Chambre** : remplace le placeholder Timer Zone (panel 2x2)
 
 ### Added - 2025-09-19 (Session Kanban & Design System Badges)
 
