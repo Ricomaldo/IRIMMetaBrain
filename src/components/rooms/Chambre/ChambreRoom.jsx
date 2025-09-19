@@ -11,6 +11,7 @@ import MarkdownEditor from '../../common/MarkdownEditor';
 import ImageDisplay from '../../widgets/ImageDisplay/ImageDisplay';
 import QuoteCarousel from '../../widgets/QuoteCarousel/QuoteCarousel';
 import NavigationGrid from '../../room-modules/chambre/NavigationGrid';
+import TimeTimer from '../../widgets/TimeTimer';
 import { ChambreTitle } from './ChambreRoom.styles';
 import lionImage from '../../../assets/images/totems/Lion.png';
 
@@ -38,7 +39,7 @@ const ChambreRoom = () => {
         <Panel
           gridColumn="1 / 3"
           gridRow="1 / 3"
-          title="Timers"
+          title="TimeTimer"
           icon="⏰"
           texture="wood"
           accentColor={theme.colors.accents.warm}
@@ -47,12 +48,17 @@ const ChambreRoom = () => {
           onToggleCollapse={(val) => updatePanelState('chambre', 'timer', { collapsed: val })}
         >
           <div style={{
-            padding: theme.spacing.lg,
-            textAlign: 'center',
-            opacity: 0.7
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: theme.spacing.md
           }}>
-            <p>Module Timers</p>
-            <small>À implémenter - Gestion du temps</small>
+            <TimeTimer
+              colorSelect={true}
+              maxSize={300}
+            />
           </div>
         </Panel>
 
