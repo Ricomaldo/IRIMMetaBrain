@@ -9,8 +9,16 @@ import TimeTimer from "../../widgets/TimeTimer";
  */
 const ComponentToTest = () => {
   return (
-    <div style={{ width: "100%", padding: "20px", boxSizing: "border-box" }}>
-      <TimeTimer diskColor="#FF6B6B" colorSelect={true} maxSize={350} />
+    <div style={{
+      width: "100%",
+      height: "100%",
+      padding: "20px",
+      boxSizing: "border-box",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+      <TimeTimer diskColor="#FF6B6B" colorSelect={true} maxSize={400} />
     </div>
   );
 };

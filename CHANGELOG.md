@@ -7,16 +7,19 @@
 - **Composant TimeTimer** (`src/components/widgets/TimeTimer.jsx`) :
   - Timer visuel façon vrai TimeTimer avec disque qui se vide
   - Représentation sur base 60 minutes (horloge complète)
-  - 3 durées : 4min, 20min et personnalisée (1-60min)
-  - Input vide pour durée custom sans placeholder ni flèches
-  - Sélecteur de couleur avec 6 options
+  - 2 durées présélectionnées : 4min, 20min
+  - Input personnalisé (1-60min) vide sans placeholder ni flèches
+  - Sélecteur de couleur avec 6 options en bas
+  - Contrôles de durée et lecture/reset en haut
   - Messages contextuels : "C'est parti" (2s), "Pause", "C'est reparti" (2s), "C'est fini"
-  - Rendu responsive avec disque à 80% du conteneur
+  - Disque agrandi à 75% du conteneur (plus visible)
+  - Responsive carré parfait (min 200px, max 400px)
   - Style réveil-matin avec padding et bordures arrondies
   - Pas d'affichage numérique du temps (purement visuel)
   - Animation fluide avec requestAnimationFrame
   - Support complet pause/reprise avec états distincts
-  - Code nettoyé et réorganisé avec sections claires
+  - Layout inversé : contrôles en haut, couleurs en bas
+  - Code refactorisé avec structure claire et sections bien définies
 
 ### Added - 2025-09-19 (Session Kanban & Design System Badges)
 
