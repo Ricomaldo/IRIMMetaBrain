@@ -286,7 +286,7 @@ export default function TimeTimer({
       flexDirection: "column",
       gap: `${Math.max(4, dimensions.size * 0.02)}px`,
       transition: isTransitioning ? "transform 0.4s cubic-bezier(0.4, 0.0, 0.2, 1)" : "none",
-      transform: `translateY(-${paletteIndex * 100}%)`,
+      transform: `translateY(-${paletteIndex * (Math.max(18, dimensions.size * 0.07) * 4 + Math.max(4, dimensions.size * 0.02) * 4)}px)`,
     },
     paletteGroup: {
       display: "flex",
