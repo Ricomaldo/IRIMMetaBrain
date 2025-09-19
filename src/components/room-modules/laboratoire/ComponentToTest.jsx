@@ -18,7 +18,7 @@ const ComponentToTest = () => {
       alignItems: "center",
       justifyContent: "center"
     }}>
-      <TimeTimer diskColor="#FF6B6B" colorSelect={true} maxSize={400} />
+      <TimeTimer diskColor="#4A5568" colorSelect={true} maxSize={400} />
     </div>
   );
 };

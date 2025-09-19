@@ -3,15 +3,13 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 
 // ========== Configuration ==========
 const TIMER_COLORS = [
-  "#FF6B6B", // Rouge par défaut
   "#4A5568", // Gris froid
   "#68752C", // Vert succès
-  "#8B3A3A", // Rouge danger
   "#FFD700", // Or
   "#B8860B", // Chaud
 ];
 
-const MIN_SIZE = 200;
+const MIN_SIZE = 150;
 const MAX_MINUTES = 60;
 
 /**
@@ -21,7 +19,7 @@ const MAX_MINUTES = 60;
  * @param {number} maxSize - Taille maximale du composant
  */
 export default function TimeTimer({
-  diskColor = "#FF6B6B",
+  diskColor = "#4A5568",
   colorSelect = false,
   maxSize = 400,
 }) {
@@ -33,8 +31,6 @@ export default function TimeTimer({
   const [startTime, setStartTime] = useState(null);
 
   // ========== États de l'interface ==========
-  const [customMinutes, setCustomMinutes] = useState("");
-  const [showCustomInput, setShowCustomInput] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [showReparti, setShowReparti] = useState(false);
@@ -54,8 +50,8 @@ export default function TimeTimer({
 
         // Calculer la taille disponible (prendre le minimum pour garder un carré)
         const availableSize = Math.min(
-          parentWidth - 40, // Padding du parent
-          parentHeight - 40,
+          parentWidth * 0.95,
+          parentHeight * 0.95,
           maxSize
         );
 
@@ -215,7 +211,7 @@ export default function TimeTimer({
 
   // ========== Styles dynamiques ==========
   const fontSize = {
-    button: dimensions.size > 250 ? "14px" : "12px",
+    button: `${Math.max(11, Math.min(14, dimensions.size * 0.045))}px`,
     message: diskSize > 200 ? "18px" : diskSize > 150 ? "14px" : "12px",
   };
 
@@ -225,8 +221,8 @@ export default function TimeTimer({
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "space-between",
-      gap: "8px",
-      padding: "16px",
+      gap: `${Math.max(6, dimensions.size * 0.025)}px`,
+      padding: `${Math.max(12, dimensions.size * 0.05)}px`,
       backgroundColor: "#F7F4EF",
       borderRadius: "16px",
       border: "2px solid #A0522D",
@@ -271,7 +267,7 @@ export default function TimeTimer({
     },
     controlsRow: {
       display: "flex",
-      gap: "6px",
+      gap: `${Math.max(4, dimensions.size * 0.02)}px`,
       flexWrap: "nowrap",
       justifyContent: "center",
       width: "100%",
@@ -281,13 +277,13 @@ export default function TimeTimer({
       backgroundColor: "#D2B48C",
       color: "#2F1B14",
       border: "none",
-      padding: dimensions.size > 250 ? "8px 12px" : "6px 10px",
+      padding: `${Math.max(6, dimensions.size * 0.025)}px ${Math.max(10, dimensions.size * 0.04)}px`,
       borderRadius: "6px",
       fontSize: fontSize.button,
       fontWeight: "500",
       cursor: "pointer",
       transition: "all 0.18s ease",
-      minWidth: dimensions.size > 250 ? "45px" : "40px",
+      minWidth: `${Math.max(40, dimensions.size * 0.15)}px`,
       flexShrink: 0,
     },
   };
@@ -314,10 +310,7 @@ export default function TimeTimer({
               ...styles.button,
               backgroundColor: duration === 240 ? "#8B4513" : "#D2B48C",
             }}
-            onClick={() => {
-              setPresetDuration(4);
-              setShowCustomInput(false);
-            }}
+            onClick={() => setPresetDuration(4)}
             onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
             onMouseLeave={(e) => (e.target.style.opacity = "1")}
           >
@@ -329,68 +322,12 @@ export default function TimeTimer({
               ...styles.button,
               backgroundColor: duration === 1200 ? "#8B4513" : "#D2B48C",
             }}
-            onClick={() => {
-              setPresetDuration(20);
-              setShowCustomInput(false);
-            }}
+            onClick={() => setPresetDuration(20)}
             onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
             onMouseLeave={(e) => (e.target.style.opacity = "1")}
           >
             20m
           </button>
-
-          {showCustomInput ? (
-            <input
-              type="text"
-              placeholder=""
-              value={customMinutes}
-              onChange={(e) => {
-                const input = e.target.value.replace(/[^0-9]/g, "");
-                if (input === "") {
-                  setCustomMinutes("");
-                  setDuration(0);
-                  setRemaining(0);
-                } else {
-                  const val = Math.min(60, Math.max(1, parseInt(input)));
-                  setCustomMinutes(val);
-                  setPresetDuration(val);
-                }
-              }}
-              onBlur={() => setShowCustomInput(false)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.target.blur();
-                }
-              }}
-              style={{
-                ...styles.button,
-                backgroundColor: "#8B4513",
-                width: dimensions.size > 250 ? "50px" : "45px",
-                textAlign: "center",
-                outline: "none",
-              }}
-              autoFocus
-            />
-          ) : (
-            <button
-              style={{
-                ...styles.button,
-                backgroundColor: duration !== 240 && duration !== 1200 ? "#8B4513" : "#D2B48C",
-                minWidth: dimensions.size > 250 ? "50px" : "45px",
-              }}
-              onClick={() => {
-                setShowCustomInput(true);
-                setCustomMinutes("");
-                setDuration(0);
-              }}
-              onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
-              onMouseLeave={(e) => (e.target.style.opacity = "1")}
-            >
-              {duration !== 240 && duration !== 1200 && duration > 0
-                ? `${Math.floor(duration / 60)}m`
-                : ""}
-            </button>
-          )}
 
           <button
             style={styles.button}
