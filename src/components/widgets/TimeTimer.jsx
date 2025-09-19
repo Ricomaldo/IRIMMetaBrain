@@ -35,7 +35,7 @@ export default function TimeTimer({
 
   // ========== États de l'interface ==========
   const [isPaused, setIsPaused] = useState(false);
-  const [hasStarted, setHasStarted] = useState(false);
+  const [showParti, setShowParti] = useState(false);
   const [showReparti, setShowReparti] = useState(false);
   const [dimensions, setDimensions] = useState({ size: 300 });
 
@@ -146,7 +146,7 @@ export default function TimeTimer({
     setRunning(false);
     setStartTime(null);
     setIsPaused(false);
-    setHasStarted(false);
+    setShowParti(false);
     setShowReparti(false);
   }, [duration]);
 
@@ -158,13 +158,11 @@ export default function TimeTimer({
     if (!running && isPaused) {
       return "Pause";
     }
-    if (running) {
-      if (showReparti) {
-        return "C'est reparti";
-      }
-      if (!hasStarted || remaining >= duration - 2) {
-        return "C'est parti";
-      }
+    if (showParti) {
+      return "C'est parti";
+    }
+    if (showReparti) {
+      return "C'est reparti";
     }
     return "";
   };
@@ -175,22 +173,29 @@ export default function TimeTimer({
       const newRunning = !prev;
 
       if (newRunning) {
+        setIsPaused(false);
+
         if (remaining === 0) {
+          // Redémarrage après fin
           setRemaining(duration);
-          setHasStarted(false);
-          setIsPaused(false);
+          setShowParti(true);
           setShowReparti(false);
+          setTimeout(() => setShowParti(false), 2000);
         } else if (remaining === duration) {
-          setHasStarted(true);
-          setIsPaused(false);
+          // Premier démarrage
+          setShowParti(true);
           setShowReparti(false);
+          setTimeout(() => setShowParti(false), 2000);
         } else {
-          setIsPaused(false);
+          // Reprise après pause
           setShowReparti(true);
+          setShowParti(false);
           setTimeout(() => setShowReparti(false), 2000);
         }
       } else {
+        // Mise en pause
         setIsPaused(true);
+        setShowParti(false);
         setShowReparti(false);
       }
 
@@ -203,7 +208,7 @@ export default function TimeTimer({
     setRunning(false);
     setStartTime(null);
     setIsPaused(false);
-    setHasStarted(false);
+    setShowParti(false);
     setShowReparti(false);
   }, [duration]);
 
