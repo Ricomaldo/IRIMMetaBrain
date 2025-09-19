@@ -83,7 +83,7 @@ export default function TimeTimer({
 
   // ========== Calculs SVG ==========
   const diskSize = dimensions.size * 0.75;
-  const radius = diskSize / 2 - 10;
+  const radius = diskSize / 2 - 20; // Réduit pour faire de la place aux nombres
   const remainingInMinutes = remaining / 60;
   const progressAngle = (remainingInMinutes / MAX_MINUTES) * 360;
 
@@ -390,9 +390,18 @@ export default function TimeTimer({
 
             {/* Nombres des minutes */}
             {Array.from({ length: 12 }, (_, i) => {
-              const minute = i === 0 ? 0 : 60 - (i * 5); // 0 en haut, puis 55, 50, 45...
+              // Calcul des minutes selon le sens
+              let minute;
+              if (clockwise) {
+                // Sens horaire: 0, 5, 10, 15...
+                minute = (i * 5) % 60;
+              } else {
+                // Sens anti-horaire: 0, 55, 50, 45...
+                minute = i === 0 ? 0 : 60 - (i * 5);
+              }
+
               const angle = (i * 30) - 90; // 30 degrés entre chaque nombre
-              const numberRadius = radius - (radius * 0.15); // Position des nombres
+              const numberRadius = radius + 12; // Position des nombres à l'extérieur
 
               const x = diskSize / 2 + numberRadius * Math.cos((angle * Math.PI) / 180);
               const y = diskSize / 2 + numberRadius * Math.sin((angle * Math.PI) / 180);
@@ -405,10 +414,10 @@ export default function TimeTimer({
                   textAnchor="middle"
                   dominantBaseline="middle"
                   fill="#A0522D"
-                  fontSize={`${Math.max(10, dimensions.size * 0.04)}px`}
+                  fontSize={`${Math.max(9, dimensions.size * 0.035)}px`}
                   fontWeight="500"
                   fontFamily="system-ui, sans-serif"
-                  opacity="0.8"
+                  opacity="0.7"
                 >
                   {minute}
                 </text>
