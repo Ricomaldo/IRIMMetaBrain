@@ -362,6 +362,32 @@ export default function TimeTimer({
               fill="white"
             />
 
+            {/* Graduations des minutes */}
+            {Array.from({ length: 60 }, (_, i) => {
+              const angle = (i * 6) - 90; // 6 degrés par minute, -90 pour commencer en haut
+              const isHour = i % 5 === 0; // Marque plus longue toutes les 5 minutes
+              const tickLength = isHour ? radius * 0.08 : radius * 0.04;
+              const innerRadius = radius - tickLength;
+
+              const x1 = diskSize / 2 + innerRadius * Math.cos((angle * Math.PI) / 180);
+              const y1 = diskSize / 2 + innerRadius * Math.sin((angle * Math.PI) / 180);
+              const x2 = diskSize / 2 + radius * Math.cos((angle * Math.PI) / 180);
+              const y2 = diskSize / 2 + radius * Math.sin((angle * Math.PI) / 180);
+
+              return (
+                <line
+                  key={i}
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
+                  stroke="#A0522D"
+                  strokeWidth={isHour ? "1.5" : "0.8"}
+                  opacity={isHour ? "0.6" : "0.3"}
+                />
+              );
+            })}
+
             {/* Disque coloré */}
             {remaining > 0 &&
               (progressAngle >= 359.9 ? (
