@@ -22,7 +22,7 @@ export const roomBackgrounds = {
 
 export const roomColors = {
   // Ligne 0
-  sanctuaire: "black", // Lavande mystique
+  sanctuaire: "#4B0082", // Lavande mystique
   chambre: "#FFE4B5", // Beige moelleux
   cuisine: "#F0E68C", // Jaune chaleureux
   comptoir: "#DDA0DD", // Prune commerce
@@ -36,7 +36,7 @@ export const roomColors = {
   // Ligne 2
   scriptorium: "#F5DEB3", // Wheat parchemin
   bibliotheque: "#D2B48C", // Tan savant
-  laboratoire: "#4B0082", // Indigo laboratoire
+  laboratoire: "#2C2C2C", // Indigo laboratoire
   cave: "#696969", // Gris sombre
 
   empty: "#F5F5F5",

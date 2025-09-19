@@ -19,7 +19,7 @@ const GridContainer = styled.div`
 
 const RoomCell = styled.div`
   background-color: ${props => props.color};
-  border: 1px solid ${props => props.theme.colors.ui.border};
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 2px;
   cursor: pointer;
   display: flex;
@@ -58,11 +58,67 @@ const RoomLabel = styled.span`
 const NavigationGrid = () => {
   const { defaultRoom, setDefaultRoom } = useSettingsStore();
 
-  const handleRoomClick = (roomType) => {
-    console.log(`Navigation vers: ${roomType}`);
-    setDefaultRoom({ x: roomConfig.find(r => r.type === roomType)?.x || 1, y: roomConfig.find(r => r.type === roomType)?.y || 1 });
-    // Ici on pourrait ajouter une logique de navigation réelle
-    // Par exemple déclencher un changement de route ou d'état global
+  const handleRoomClick = async (roomType) => {
+    const targetRoom = roomConfig.find(r => r.type === roomType);
+    if (!targetRoom) return;
+
+    const currentPos = defaultRoom;
+    if (currentPos.x === targetRoom.x && currentPos.y === targetRoom.y) return;
+
+    console.log(`🧭 Navigation vers: ${roomType} (${targetRoom.x}, ${targetRoom.y})`);
+
+    // Fonction helper pour cliquer sur une flèche (comme dans capture-state.js)
+    const clickArrow = async (direction) => {
+      const selectors = [
+        `button[aria-label="Navigate ${direction}"]`,
+        `button[title="Navigate ${direction}"]`,
+        `[aria-label="Navigate ${direction}"]`
+      ];
+
+      for (const selector of selectors) {
+        const element = document.querySelector(selector);
+        if (element) {
+          element.click();
+          return true;
+        }
+      }
+      console.warn(`⚠️ Impossible de trouver la flèche ${direction}`);
+      return false;
+    };
+
+    // Navigation pas-à-pas (comme dans capture-state.js)
+    const navigateStepByStep = async () => {
+      let current = { ...currentPos };
+
+      while (current.x !== targetRoom.x || current.y !== targetRoom.y) {
+        let direction = null;
+
+        // Priorité: d'abord X puis Y (comme le viewer)
+        if (current.x < targetRoom.x) direction = 'right';
+        else if (current.x > targetRoom.x) direction = 'left';
+        else if (current.y < targetRoom.y) direction = 'down';
+        else if (current.y > targetRoom.y) direction = 'up';
+
+        if (direction) {
+          const success = await clickArrow(direction);
+          if (!success) break; // Arrêter si on ne peut pas cliquer
+          
+          // Mettre à jour la position locale pour le calcul suivant
+          switch(direction) {
+            case 'right': current.x++; break;
+            case 'left': current.x--; break;
+            case 'down': current.y++; break;
+            case 'up': current.y--; break;
+          }
+          // Attendre la transition (comme dans capture-state.js)
+          await new Promise(resolve => setTimeout(resolve, 600));
+        } else {
+          break;
+        }
+      }
+    };
+
+    navigateStepByStep();
   };
 
   const getCurrentRoomType = () => {

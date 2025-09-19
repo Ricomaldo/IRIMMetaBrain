@@ -10,6 +10,7 @@ import useRoomsUIStore from '../../../stores/useRoomsUIStore';
 import MarkdownEditor from '../../common/MarkdownEditor';
 import ImageDisplay from '../../widgets/ImageDisplay/ImageDisplay';
 import QuoteCarousel from '../../widgets/QuoteCarousel/QuoteCarousel';
+import NavigationGrid from '../../room-modules/chambre/NavigationGrid';
 import { ChambreTitle } from './ChambreRoom.styles';
 import lionImage from '../../../assets/images/totems/Lion.png';
 
@@ -148,14 +149,7 @@ const ChambreRoom = () => {
           collapsed={getPanelState('chambre', 'navigation').collapsed}
           onToggleCollapse={(val) => updatePanelState('chambre', 'navigation', { collapsed: val })}
         >
-          <div style={{
-            padding: theme.spacing.md,
-            textAlign: 'center',
-            opacity: 0.7
-          }}>
-            <p>Module Navigation</p>
-            <small>À implémenter - Accès rapide</small>
-          </div>
+          <NavigationGrid />
         </Panel>
       </PanelGrid>
     </BaseRoom>

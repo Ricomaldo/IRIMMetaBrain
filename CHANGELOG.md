@@ -2,6 +2,26 @@
 
 ## [Unreleased]
 
+### Added - 2025-09-19 (Session NavigationGrid)
+
+- **NavigationGrid dans la Chambre** (`src/components/room-modules/chambre/NavigationGrid.jsx`) :
+  - Grille de navigation 4x3 représentant toutes les rooms
+  - Cases cliquables avec couleurs distinctives par room
+  - Navigation programmée pas-à-pas utilisant les flèches existantes
+  - Simulation de clics sur `button[aria-label="Navigate ${direction}"]`
+  - Logique identique à `capture-state.js` pour robustesse
+  - Indicateur visuel de la room actuelle avec surbrillance
+  - Libellés courts (3 premières lettres) pour identification
+  - Intégration transparente sans modification de l'architecture existante
+  - Temporisation de 600ms entre chaque mouvement pour animations fluides
+  - Priorité X puis Y pour trajectoire cohérente
+
+- **Remplacement du Placeholder Navigation** :
+  - NavigationGrid remplace le contenu temporaire du panel Navigation
+  - Import ajouté dans ChambreRoom.jsx
+  - Aucune modification de RoomCanvas ou useRoomNavigation nécessaire
+  - Utilise l'API publique des flèches pour navigation automatique
+
 ### Added - 2025-09-19 (Session TimeTimer)
 
 - **Composant TimeTimer** (`src/components/widgets/TimeTimer.jsx`) :
