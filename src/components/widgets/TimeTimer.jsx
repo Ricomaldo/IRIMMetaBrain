@@ -235,10 +235,10 @@ export default function TimeTimer({
       justifyContent: "space-between",
       gap: `${Math.max(4, dimensions.size * 0.015)}px`,
       padding: `${Math.max(8, dimensions.size * 0.03)}px`,
-      backgroundColor: "#F7F4EF",
+      backgroundColor: "#1F2937",
       borderRadius: "16px",
-      border: "2px solid #A0522D",
-      boxShadow: "0 4px 8px rgba(0,0,0,0.15)",
+      border: "1px solid #374151",
+      boxShadow: "0 4px 12px rgba(0,0,0,0.4)",
       width: `${dimensions.size}px`,
       height: `${dimensions.size}px`,
       margin: "0 auto",
@@ -268,7 +268,7 @@ export default function TimeTimer({
       cursor: "pointer",
       padding: 0,
       fontSize: `${Math.max(12, dimensions.size * 0.05)}px`,
-      color: "#A0522D",
+      color: "#9CA3AF",
       transition: "opacity 0.2s ease",
       lineHeight: 0.5,
     },
@@ -300,7 +300,7 @@ export default function TimeTimer({
       width: `${Math.max(18, dimensions.size * 0.07)}px`,
       height: `${Math.max(18, dimensions.size * 0.07)}px`,
       borderRadius: "50%",
-      border: "2px solid #A0522D",
+      border: "2px solid #4B5563",
       cursor: "pointer",
       transition: "transform 0.18s ease",
       flexShrink: 0,
@@ -334,8 +334,8 @@ export default function TimeTimer({
       flexShrink: 0,
     },
     button: {
-      backgroundColor: "#D2B48C",
-      color: "#2F1B14",
+      backgroundColor: "#374151",
+      color: "#E5E7EB",
       border: "none",
       padding: `${Math.max(4, dimensions.size * 0.02)}px ${Math.max(
         8,
@@ -355,7 +355,7 @@ export default function TimeTimer({
     buttonIcon: {
       width: `${Math.max(14, dimensions.size * 0.05)}px`,
       height: `${Math.max(14, dimensions.size * 0.05)}px`,
-      filter: "brightness(0.2)",
+      filter: "brightness(0.9)",
     },
     reverseButton: {
       position: "absolute",
@@ -374,7 +374,7 @@ export default function TimeTimer({
     reverseIcon: {
       width: `${Math.max(24, dimensions.size * 0.08)}px`,
       height: `${Math.max(24, dimensions.size * 0.08)}px`,
-      filter: "brightness(0.4)",
+      filter: "brightness(0.7)",
       transition: "filter 0.2s ease",
     },
   };
@@ -402,7 +402,7 @@ export default function TimeTimer({
               cx={diskSize / 2}
               cy={diskSize / 2}
               r={radius}
-              stroke="#E8E2D6"
+              stroke="#4B5563"
               strokeWidth="2"
               fill="white"
             />
@@ -426,9 +426,9 @@ export default function TimeTimer({
                   y1={y1}
                   x2={x2}
                   y2={y2}
-                  stroke="#A0522D"
+                  stroke="#6B7280"
                   strokeWidth={isHour ? "1.5" : "0.8"}
-                  opacity={isHour ? "0.6" : "0.3"}
+                  opacity={isHour ? "0.8" : "0.4"}
                 />
               );
             })}
@@ -458,11 +458,11 @@ export default function TimeTimer({
                   y={y}
                   textAnchor="middle"
                   dominantBaseline="middle"
-                  fill="#A0522D"
+                  fill="#D1D5DB"
                   fontSize={`${Math.max(9, dimensions.size * 0.035)}px`}
                   fontWeight="500"
                   fontFamily="system-ui, sans-serif"
-                  opacity="0.7"
+                  opacity="0.9"
                 >
                   {minute}
                 </text>
@@ -522,7 +522,7 @@ export default function TimeTimer({
               cx={diskSize / 2}
               cy={diskSize / 2}
               r={radius}
-              stroke="#A0522D"
+              stroke="#6B7280"
               strokeWidth="3"
               fill="none"
             />
@@ -532,7 +532,7 @@ export default function TimeTimer({
               cx={diskSize / 2}
               cy={diskSize / 2}
               r={radius * 0.15}
-              fill="#A0522D"
+              fill="#4B5563"
             />
           </svg>
 
@@ -549,7 +549,7 @@ export default function TimeTimer({
           <button
             style={{
               ...styles.button,
-              backgroundColor: duration === 240 ? "#8B4513" : "#D2B48C",
+              backgroundColor: duration === 240 ? "#1F2937" : "#374151",
             }}
             onClick={() => setPresetDuration(4)}
             onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
@@ -561,7 +561,7 @@ export default function TimeTimer({
           <button
             style={{
               ...styles.button,
-              backgroundColor: duration === 1200 ? "#8B4513" : "#D2B48C",
+              backgroundColor: duration === 1200 ? "#1F2937" : "#374151",
             }}
             onClick={() => setPresetDuration(20)}
             onMouseEnter={(e) => (e.target.style.opacity = "0.8")}
@@ -598,10 +598,10 @@ export default function TimeTimer({
           style={styles.reverseButton}
           onClick={() => setClockwise(!clockwise)}
           onMouseEnter={(e) => {
-            e.currentTarget.querySelector('img').style.filter = "brightness(0.6)";
+            e.currentTarget.querySelector('img').style.filter = "brightness(1)";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.querySelector('img').style.filter = "brightness(0.4)";
+            e.currentTarget.querySelector('img').style.filter = "brightness(0.7)";
           }}
           title={
             clockwise ? "Passer en sens anti-horaire" : "Passer en sens horaire"
