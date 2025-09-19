@@ -260,7 +260,7 @@ export default function TimeTimer({
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      gap: `${Math.max(2, dimensions.size * 0.01)}px`,
+      gap: `${Math.max(8, dimensions.size * 0.03)}px`,
     },
     carouselButton: {
       background: "none",
@@ -279,6 +279,7 @@ export default function TimeTimer({
     colorsWrapper: {
       position: "relative",
       height: `${Math.max(18, dimensions.size * 0.07) * 4 + Math.max(4, dimensions.size * 0.02) * 3}px`,
+      width: `${Math.max(18, dimensions.size * 0.07) * 1.4}px`,
       overflow: "hidden",
     },
     colorsSlider: {
@@ -291,6 +292,7 @@ export default function TimeTimer({
     paletteGroup: {
       display: "flex",
       flexDirection: "column",
+      alignItems: "center",
       gap: `${Math.max(4, dimensions.size * 0.02)}px`,
       height: `${Math.max(18, dimensions.size * 0.07) * 4 + Math.max(4, dimensions.size * 0.02) * 3}px`,
     },
