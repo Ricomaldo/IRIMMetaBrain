@@ -227,8 +227,8 @@ const KanbanView = ({
   };
 
   const handleProjectClick = (projectId) => {
-    const project = projects.find(p => p.id === projectId);
-    setSelectedProject(project);
+    // Stocker seulement l'ID, ProjectDetailsModal récupérera les données fraîches
+    setSelectedProject({ id: projectId });
   };
 
   const DroppableColumn = ({ columnId, children }) => {

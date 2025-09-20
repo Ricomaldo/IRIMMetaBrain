@@ -173,9 +173,12 @@ const Button = styled.button`
   }
 `;
 
-const ProjectDetailsModal = ({ isOpen, onClose, project }) => {
+const ProjectDetailsModal = ({ isOpen, onClose, project: initialProject }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const { categories, updateProjectMeta, deleteProject } = useProjectMetaStore();
+  const { projects, categories, updateProjectMeta, deleteProject } = useProjectMetaStore();
+
+  // Toujours utiliser les données actuelles du store
+  const project = initialProject ? projects[initialProject.id] : null;
 
   if (!project) return null;
 

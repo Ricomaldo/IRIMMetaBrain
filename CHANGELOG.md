@@ -2,6 +2,74 @@
 
 ## [Unreleased]
 
+### Fixed - 2025-09-20 (ProjectOverviewModal)
+
+- **Formulaire de création de projet** : Ajout du champ "Position Kanban"
+  - Sélection de la colonne initiale : Réserve, En Tête, Actif ou Pause
+  - Désactivé automatiquement pour les projets de type Formation
+  - Validation de la limite de 5 projets max pour la colonne "En Tête"
+
+- **Actualisation après création** : Correction du rafraîchissement instantané
+  - Suppression du `useMemo` pour garantir les données fraîches
+  - La liste des projets se met à jour immédiatement après ajout
+  - Plus besoin de recharger la page pour voir les nouveaux projets
+
+- **Modal de détails projet** : Actualisation après modification
+  - Les données sont maintenant récupérées directement du store
+  - L'écran de synthèse affiche toujours les informations à jour
+  - Correction du problème de données obsolètes après édition
+
+### Added - 2025-09-20 (Session MindLog & Lab Testing System)
+
+- **Composant MindLogCompact** : Tracker émotionnel et productivité multi-contexte
+  - 3 modes d'affichage : Compact (sliders), Markdown (notes), Logs (historique)
+  - Double contexte : `diary` (personnel) ou `project` (lié au projet actif)
+  - Sliders visuels pour énergie ⚡ et focus 🎯 avec représentation par répétition d'emojis
+  - Mode markdown avec toggle édition/visualisation (✏️/👁️)
+  - Historique des logs avec suppression individuelle et clear all
+  - Intégration Atelier (context project) et Chambre (context diary)
+  - Design ultra-compact optimisé pour grilles 1×2
+
+- **MindLogToolbar** : Barre d'outils dédiée pour MindLog
+  - 3 boutons : Edit/View, Log avec badge, Change View
+  - Badge dynamique affichant le nombre de logs
+  - Intégration cohérente avec le design system
+
+- **Store useDiaryStore** : Persistance du journal personnel
+  - Gestion de l'état MindLog (mood, energy, focus, notes)
+  - Historique des logs avec limite de 50 entrées
+  - Notes markdown personnelles
+  - Prêt pour futures extensions (entries journal complet)
+
+- **Panel hideHeaderTitleWhenCollapsed** : Nouvelle prop pour optimiser l'espace
+  - Mode ouvert : masque le titre pour afficher la toolbar custom
+  - Mode collapsed : affiche titre complet pour identification
+  - Permet jusqu'à 4 boutons dans la toolbar du header
+
+- **Système de Test Laboratoire** : Architecture scalable pour tests de composants
+  - ComponentToTest avec configuration centralisée (TEST_CONFIGS)
+  - Export getPanelConfig() pour communication bidirectionnelle
+  - Panel dynamique s'adaptant aux besoins du composant testé
+  - Indicateurs visuels : dimensions, warnings min/max, mode debug
+  - Guide d'utilisation intégré en commentaires
+  - Event system pour synchronisation handlers/toolbar
+  - Props calculées selon dimensions (compact, debug, verbose)
+
+### Improved - 2025-09-20
+
+- **Design MindLog** : Optimisations visuelles et UX
+  - Emoji principal avec effet pulse et glow doré quand mood ≥ 4
+  - Sélection emoji avec feedback visuel (scale, shadow, border)
+  - Background gradient stone → secondary (remplace moutarde)
+  - Padding réduit à 6px pour maximiser l'espace utile
+  - Logs affichés avec emojis répétés : `⚡⚡⚡ 🎯🎯` au lieu de `E:3 F:2`
+
+- **Architecture Laboratoire** : Refactoring complet
+  - Séparation config/composant pour meilleure scalabilité
+  - Communication Panel ↔ ComponentToTest via getPanelConfig
+  - Workflow simplifié : changer ACTIVE_TEST suffit
+  - Support multi-dimensions avec adaptation automatique
+
 ### Added - 2025-09-19 (Session Capture d'État & Interface)
 
 - **Bouton Capture d'État** : Nouveau bouton 📷 dans ControlTower
@@ -86,6 +154,12 @@
   - **Thème sombre** : fond gris foncé (#1F2937) pour contraste maximal avec cercle blanc
   - Tous les éléments en nuances de gris cohérentes pour hiérarchie visuelle
   - **Intégration dans la Chambre** : remplace le placeholder Timer Zone (panel 2x2)
+
+- **Corrections Système de Capture** :
+  - Fix du script `update-viewer.js` : création de `captures-index.json` au lieu de `index.json`
+  - Viewer HTML corrigé pour charger correctement les captures existantes
+  - Vérification de la structure complète : 4 captures avec 12 screenshots chacune
+  - Support du serveur HTTP local pour visualisation (Python ou Live Server)
 
 ### Added - 2025-09-19 (Session Kanban & Design System Badges)
 

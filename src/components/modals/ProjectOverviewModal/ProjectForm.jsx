@@ -189,6 +189,7 @@ const ProjectForm = ({ project, categories, onSave, onDelete, onCancel }) => {
     contractType: null,
     deploymentStatus: 'local',
     projectNature: 'speculatif',
+    kanbanColumn: 'inbox',
     technologies: [],
     client: '',
     startDate: '',
@@ -218,6 +219,7 @@ const ProjectForm = ({ project, categories, onSave, onDelete, onCancel }) => {
         contractType: project.contractType || null,
         deploymentStatus: project.deploymentStatus || 'local',
         projectNature: project.projectNature || 'speculatif',
+        kanbanColumn: project.kanbanColumn || 'inbox',
         technologies: project.technologies || [],
         client: project.client || '',
         startDate: project.startDate || '',
@@ -383,6 +385,20 @@ const ProjectForm = ({ project, categories, onSave, onDelete, onCancel }) => {
             <option value="outil_perso">Outil Personnel</option>
             <option value="exercice">Exercice</option>
             <option value="commercial">Commercial</option>
+          </Select>
+        </FormGroup>
+
+        <FormGroup>
+          <Label>Position Kanban</Label>
+          <Select
+            value={formData.kanbanColumn}
+            onChange={(e) => handleChange('kanbanColumn', e.target.value)}
+            disabled={formData.category === 'formation'}
+          >
+            <option value="inbox">📥 Réserve</option>
+            <option value="entete">🎯 En Tête (max 5)</option>
+            <option value="actif">⚡ Actif</option>
+            <option value="pause">⏸️ Pause</option>
           </Select>
         </FormGroup>
 

@@ -39,9 +39,8 @@ const ProjectOverviewModal = ({ isOpen, onClose }) => {
   const [activeId, setActiveId] = useState(null);
 
   // Récupérer les projets triés par ordre
-  const sortedProjects = useMemo(() => {
-    return getProjectsSortedByOrder();
-  }, [projects, getProjectsSortedByOrder]);
+  // Utiliser directement la fonction sans mémorisation pour garantir la fraîcheur
+  const sortedProjects = getProjectsSortedByOrder();
 
   // Filtrer les projets par catégorie
   const projectsByCategory = useMemo(() => {
@@ -76,6 +75,10 @@ const ProjectOverviewModal = ({ isOpen, onClose }) => {
     };
     const projectId = createProject(enrichedData);
     setShowNewProjectForm(false);
+
+    // Forcer la réactualisation des projets
+    // Le store est déjà mis à jour via createProject,
+    // l'interface se rafraîchira automatiquement grâce aux dépendances
   };
 
   const handleUpdateProject = (projectData) => {
